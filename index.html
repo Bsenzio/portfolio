@@ -26,17 +26,31 @@
 
 <header class="hero">
 
-    <h1>
-        Bruno Senzio-Savino
-    </h1>
+	<div class="hero-profile">
 
-    <h2>
-        Digital Twins · XR · Robotics · AI
-    </h2>
+		<img
+			src="assets/images/profile.jpg"
+			alt="Profile"
+			class="profile-image">
 
-    <p>
-        Interactive portfolio and professional journey.
-    </p>
+		<h1>
+			Bruno Senzio-Savino
+		</h1>
+
+		<h2>
+			Digital Twins · XR · Robotics · AI
+		</h2>
+
+		<a
+		  class="cv-button"
+		  href="assets/cv/cv.pdf"
+		  target="_blank">
+
+		  Download CV
+
+		</a>
+
+	</div>
 
 </header>
 
@@ -44,11 +58,11 @@
 
     <h2>Interactive NES Experience</h2>
 
-    <div id="nes-container">
+<div id="nes-container">
 
-        NES Emulator Coming Soon
+    <div id="game"></div>
 
-    </div>
+</div>
 
 </section>
 
@@ -78,26 +92,188 @@
 
 <section id="timeline">
 
-<h2>Career Timeline</h2>
+<h2>Career Journey</h2>
 
 <div class="timeline-item">
-    <span class="year">2026</span>
+    <span class="year">2006-2011</span>
+
     <div class="content">
-        Senior Engineering Projects
+        <h3>B.S. Mechatronics Engineering</h3>
+
+        <p>
+        National Autonomous University of Mexico (UNAM)
+        </p>
+
+        <p>
+        Faculty of Engineering Best Student Award.
+        Research on instrumentation and remote experimentation systems.
+        </p>
     </div>
 </div>
 
 <div class="timeline-item">
-    <span class="year">2025</span>
+    <span class="year">2014</span>
+
     <div class="content">
-        Digital Twin Development
+        <h3>MEXT Scholarship</h3>
+
+        <p>
+        Relocated to Japan through the Japanese Government Scholarship Program.
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <span class="year">2015</span>
+
+    <div class="content">
+        <h3>Brain Computer Interface Research</h3>
+
+        <p>
+        Research on EEG classification,
+        signal processing and machine learning systems.
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <span class="year">2017</span>
+
+    <div class="content">
+        <h3>M.S. Information Engineering</h3>
+
+        <p>
+        University of the Ryukyus.
+        Graduate School Dean Award.
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <span class="year">2017-2018</span>
+
+    <div class="content">
+        <h3>ATR Research Internship</h3>
+
+        <p>
+        Brain signal processing,
+        artificial intelligence and human-machine interaction research.
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <span class="year">2018</span>
+
+    <div class="content">
+        <h3>Patent Granted</h3>
+
+        <p>
+        Biological Signal Processing Device.
+        Mexican Patent No. 388756.
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <span class="year">2019-2020</span>
+
+    <div class="content">
+        <h3>MBA</h3>
+
+        <p>
+        Quantic School of Business and Technology.
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <span class="year">2020-2021</span>
+
+    <div class="content">
+        <h3>Arrow Electronics</h3>
+
+        <p>
+        Dedicated Field Applications Engineer.
+        Semiconductor and embedded systems support.
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <span class="year">2021-2022</span>
+
+    <div class="content">
+        <h3>Specially Appointed Professor</h3>
+
+        <p>
+        Advanced technology research,
+        education and interdisciplinary engineering projects.
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <span class="year">2022-2024</span>
+
+    <div class="content">
+        <h3>Capgemini</h3>
+
+        <p>
+        Senior Hardware Engineer.
+        Automotive and enterprise embedded systems.
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <span class="year">2023</span>
+
+    <div class="content">
+        <h3>Electromagnetic Conversion Patent</h3>
+
+        <p>
+        Patent Application MXa2023002399.
+        </p>
     </div>
 </div>
 
 <div class="timeline-item">
     <span class="year">2024</span>
+
     <div class="content">
-        XR and Industrial Systems
+        <h3>CTO – SenzioTek</h3>
+
+        <p>
+        AI, Mixed Reality,
+        Robotics and Interactive Systems Development.
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <span class="year">2025</span>
+
+    <div class="content">
+        <h3>Mixed Reality Patent</h3>
+
+        <p>
+        Mixed Reality Environment Generation Technology.
+        Patent Application MXa2025009159.
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <span class="year">2026</span>
+
+    <div class="content">
+        <h3>NES Educational AI Publication</h3>
+
+        <p>
+        Vegetables, Enemies and Emergence:
+        A Playable Game of Life on Nintendo.
+        </p>
     </div>
 </div>
 
@@ -163,6 +339,22 @@ Retro gaming hardware development.
 </footer>
 
 <script src="script.js"></script>
+
+<script>
+EJS_player = "#game";
+
+EJS_core = "nes";
+
+EJS_gameUrl = "assets/roms/mario.nes";
+
+EJS_pathtodata =
+"https://cdn.emulatorjs.org/stable/data/";
+</script>
+
+<script src=
+"https://cdn.emulatorjs.org/stable/data/loader.js">
+</script>
+
 
 </body>
 </html>
