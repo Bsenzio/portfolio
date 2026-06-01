@@ -351,12 +351,6 @@ function createSimpleSlider(
 }
 
 createSimpleSlider(
-    ".timeline-slide",
-    "prevTimeline",
-    "nextTimeline"
-);
-
-createSimpleSlider(
     ".project-slide",
     "prevProject",
     "nextProject"

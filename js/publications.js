@@ -629,8 +629,6 @@ function renderPublications() {
 
 	<div class="publication-card">
 
-		<div class="publication-glow"></div>
-
 		<div class="publication-thumbnail">
 
 			<img
@@ -654,15 +652,11 @@ function renderPublications() {
 
 			</div>
 
-			<h3 class="publication-title">
-				${pub.title}
-			</h3>
+			<h3>${pub.title}</h3>
 
-			<p class="publication-authors">
-				${pub.authors}
-			</p>
+			<p>${pub.authors}</p>
 
-			<p class="publication-venue">
+			<p>
 				<em>${pub.venue}</em>
 			</p>
 
