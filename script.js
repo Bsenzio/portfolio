@@ -11,22 +11,30 @@ const profileImages = [
     "assets/images/profile5.jpg"
 ];
 
-let currentProfile = 0;
+const profilePhoto =
+document.getElementById("profile-photo");
 
-const profilePhoto = document.getElementById("profile-photo");
+if(profilePhoto){
 
-setInterval(() => {
+    let currentProfile = 0;
 
-    currentProfile++;
+    setInterval(() => {
 
-    if(currentProfile >= profileImages.length){
-        currentProfile = 0;
-    }
+        currentProfile =
+        (currentProfile + 1)
+        % profileImages.length;
 
-    profilePhoto.src = profileImages[currentProfile];
+        profilePhoto.src =
+        profileImages[currentProfile];
 
-}, 3000); // cambia cada 3 segundos
+    }, 3000);
 
+}
+
+
+// =========================
+// SKILL CAROUSEL
+// =========================
 
 const slides =
 document.querySelectorAll(".skill-slide");
@@ -38,92 +46,143 @@ function updateCarousel(){
     slides.forEach((slide,index)=>{
 
         let offset =
-        index-current;
+        index - current;
 
-        if(offset < -2)
+        const half =
+        Math.floor(slides.length / 2);
+
+        if(offset < -half)
             offset += slides.length;
 
-        if(offset > 2)
+        if(offset > half)
             offset -= slides.length;
+
+        slide.style.transition =
+        "all .6s ease";
+
+        // CENTER
 
         if(offset === 0){
 
-            slide.style.transform =
-            `
-            translate(-50%,-50%)
-            translateX(0px)
-            scale(1)
-            rotateY(0deg)
+            slide.style.transform = `
+                translate(-50%,-50%)
+                translateX(0px)
+                scale(1)
+                rotateY(0deg)
             `;
 
-            slide.style.zIndex = 10;
-            slide.style.opacity = 1;
+            slide.style.zIndex = "10";
+            slide.style.opacity = "1";
         }
+
+        // LEFT
 
         else if(offset === -1){
 
-            slide.style.transform =
-            `
-            translate(-50%,-50%)
-            translateX(-300px)
-            rotateY(45deg)
-            scale(.8)
+            slide.style.transform = `
+                translate(-50%,-50%)
+                translateX(-320px)
+                rotateY(40deg)
+                scale(.82)
             `;
 
-            slide.style.zIndex = 5;
-            slide.style.opacity = .8;
+            slide.style.zIndex = "6";
+            slide.style.opacity = ".85";
         }
+
+        // RIGHT
 
         else if(offset === 1){
 
-            slide.style.transform =
-            `
-            translate(-50%,-50%)
-            translateX(300px)
-            rotateY(-45deg)
-            scale(.8)
+            slide.style.transform = `
+                translate(-50%,-50%)
+                translateX(320px)
+                rotateY(-40deg)
+                scale(.82)
             `;
 
-            slide.style.zIndex = 5;
-            slide.style.opacity = .8;
+            slide.style.zIndex = "6";
+            slide.style.opacity = ".85";
         }
+
+        // FAR LEFT
+
+        else if(offset === -2){
+
+            slide.style.transform = `
+                translate(-50%,-50%)
+                translateX(-600px)
+                rotateY(55deg)
+                scale(.65)
+            `;
+
+            slide.style.zIndex = "2";
+            slide.style.opacity = ".45";
+        }
+
+        // FAR RIGHT
+
+        else if(offset === 2){
+
+            slide.style.transform = `
+                translate(-50%,-50%)
+                translateX(600px)
+                rotateY(-55deg)
+                scale(.65)
+            `;
+
+            slide.style.zIndex = "2";
+            slide.style.opacity = ".45";
+        }
+
+        // HIDDEN
 
         else{
 
-            slide.style.transform =
-            `
-            translate(-50%,-50%)
-            translateX(${offset*450}px)
-            scale(.6)
+            slide.style.transform = `
+                translate(-50%,-50%)
+                translateX(${offset * 900}px)
+                scale(.4)
             `;
 
-            slide.style.zIndex = 1;
-            slide.style.opacity = .2;
+            slide.style.zIndex = "0";
+            slide.style.opacity = "0";
         }
 
     });
 
 }
 
-document
-.getElementById("nextSkill")
-.addEventListener("click",()=>{
 
-    current =
-    (current+1)%slides.length;
+// =========================
+// BUTTONS
+// =========================
+
+const nextBtn =
+document.getElementById("nextSkill");
+
+const prevBtn =
+document.getElementById("prevSkill");
+
+if(nextBtn && prevBtn && slides.length){
+
+    nextBtn.addEventListener("click",()=>{
+
+        current =
+        (current + 1)
+        % slides.length;
+
+        updateCarousel();
+    });
+
+    prevBtn.addEventListener("click",()=>{
+
+        current =
+        (current - 1 + slides.length)
+        % slides.length;
+
+        updateCarousel();
+    });
 
     updateCarousel();
-});
-
-document
-.getElementById("prevSkill")
-.addEventListener("click",()=>{
-
-    current =
-    (current-1+slides.length)
-    %slides.length;
-
-    updateCarousel();
-});
-
-updateCarousel();
+}
