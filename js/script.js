@@ -186,3 +186,184 @@ if(nextBtn && prevBtn && slides.length){
 
     updateCarousel();
 }
+
+const timelineSlides =
+document.querySelectorAll(".timeline-slide");
+
+let timelineCurrent = 0;
+
+function updateTimeline(){
+
+    timelineSlides.forEach((slide,index)=>{
+
+        let offset =
+        index - timelineCurrent;
+
+        if(offset < -7)
+            offset += timelineSlides.length;
+
+        if(offset > 7)
+            offset -= timelineSlides.length;
+
+        if(offset === 0){
+
+            slide.style.transform =
+            `
+            translate(-50%,-50%)
+            translateY(0px)
+            scale(1)
+            `;
+
+            slide.style.opacity = 1;
+            slide.style.zIndex = 10;
+        }
+
+        else if(offset === -1){
+
+            slide.style.transform =
+            `
+            translate(-50%,-50%)
+            translateY(-180px)
+            scale(.8)
+            `;
+
+            slide.style.opacity = .5;
+            slide.style.zIndex = 5;
+        }
+
+        else if(offset === 1){
+
+            slide.style.transform =
+            `
+            translate(-50%,-50%)
+            translateY(180px)
+            scale(.8)
+            `;
+
+            slide.style.opacity = .5;
+            slide.style.zIndex = 5;
+        }
+
+        else{
+
+            slide.style.opacity = 0;
+            slide.style.zIndex = 0;
+
+            slide.style.transform =
+            `
+            translate(-50%,-50%)
+            translateY(${offset*400}px)
+            scale(.5)
+            `;
+        }
+
+    });
+
+}
+
+document
+.getElementById("nextTimeline")
+.addEventListener("click",()=>{
+
+    timelineCurrent =
+    (timelineCurrent+1)
+    % timelineSlides.length;
+
+    updateTimeline();
+});
+
+document
+.getElementById("prevTimeline")
+.addEventListener("click",()=>{
+
+    timelineCurrent =
+    (timelineCurrent-1+timelineSlides.length)
+    % timelineSlides.length;
+
+    updateTimeline();
+});
+
+updateTimeline();
+
+function createSimpleSlider(
+    slideClass,
+    prevBtn,
+    nextBtn
+){
+
+    const slides =
+    document.querySelectorAll(slideClass);
+
+    let current = 0;
+
+    function update(){
+
+        slides.forEach((slide,index)=>{
+
+            if(index === current){
+
+                slide.style.opacity = 1;
+                slide.style.transform =
+                "translateY(0px)";
+
+                slide.style.zIndex = 10;
+            }
+
+            else{
+
+                slide.style.opacity = 0;
+
+                slide.style.transform =
+                "translateY(40px)";
+
+                slide.style.zIndex = 0;
+            }
+
+        });
+
+    }
+
+    document
+    .getElementById(prevBtn)
+    .addEventListener("click",()=>{
+
+        current =
+        (current-1+slides.length)
+        %slides.length;
+
+        update();
+
+    });
+
+    document
+    .getElementById(nextBtn)
+    .addEventListener("click",()=>{
+
+        current =
+        (current+1)
+        %slides.length;
+
+        update();
+
+    });
+
+    update();
+}
+
+createSimpleSlider(
+    ".timeline-slide",
+    "prevTimeline",
+    "nextTimeline"
+);
+
+createSimpleSlider(
+    ".project-slide",
+    "prevProject",
+    "nextProject"
+);
+
+createSimpleSlider(
+    ".blog-slide",
+    "prevBlog",
+    "nextBlog"
+);
