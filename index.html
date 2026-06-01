@@ -18,13 +18,25 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 <nav class="navbar">
 
-    <a href="index.html">Home</a>
+    <a href="index.html" class="nav-btn home-btn">
+        <i class="fas fa-house"></i>
+        Home
+    </a>
 
-    <a href="publications.html">Publications</a>
+    <a href="publications.html" class="nav-btn pub-btn">
+        <i class="fas fa-book"></i>
+        Publications
+    </a>
 
-    <a href="projects.html">Projects</a>
-	
-	<a href="blog.html">Blog</a>
+    <a href="projects.html" class="nav-btn project-btn">
+        <i class="fas fa-code"></i>
+        Projects
+    </a>
+
+    <a href="blog.html" class="nav-btn blog-btn">
+        <i class="fas fa-gamepad"></i>
+        Blog
+    </a>
 
 </nav>
 
@@ -35,7 +47,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     <img
         src="assets/images/profile.jpg"
         alt="Profile"
-        class="profile-image">
+        class="profile-image"
+		id="profile-photo">
 
     <h1>Bruno Senzio-Savino Barzellato</h1>
 
@@ -81,9 +94,22 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 <div class="hero-right">
 
-    <h2>Interactive Gaming Experience</h2>
+    <div class="arcade-cabinet">
 
-    <div id="game"></div>
+        <div class="arcade-marquee">
+            <span>INTERACTIVE GAMING EXPERIENCE</span>
+        </div>
+
+        <div class="arcade-screen-frame">
+            <div id="game"></div>
+        </div>
+
+        <div class="arcade-controls">
+            <span>INSERT COIN</span>
+            <span>PRESS START</span>
+        </div>
+
+    </div>
 
 </div>
 
