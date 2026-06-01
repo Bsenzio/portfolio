@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<title>Publications</title>
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <a href="index.html">Home</a>
+    <a href="publications.html">Publications</a>
+    <a href="projects.html">Projects</a>
+	<a href="blog.html">Blog</a>
+</nav>
+
+<section class="page-header">
+
+    <div class="header-content">
+
+        <img
+            src="assets/images/avatar-publications.png"
+            alt="Research Publications Avatar"
+            class="header-avatar"
+        >
+
+        <div class="header-text">
+
+            <h1>Research Publications</h1>
+
+            <p>
+                Journal Articles, Conference Papers,
+                Theses and Patents
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<div class="results-background">
+
+    <!-- SEARCH BAR -->
+
+    <div class="search-container">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search title, author, keyword..."
+        >
+
+        <button id="searchButton">
+            <i class="fas fa-search"></i>
+            Search
+        </button>
+
+    </div>
+
+    <!-- FILTERS -->
+
+	<div class="filters">
+
+		<select id="yearFilter">
+			<option value="all">All Years</option>
+		</select>
+
+		<select id="typeFilter">
+
+			<option value="all">All Types</option>
+
+			<option value="Journal">Journal</option>
+			<option value="Conference">Conference</option>
+			<option value="Thesis">Thesis</option>
+			<option value="Patent">Patent</option>
+
+		</select>
+
+		<select id="languageFilter">
+			<option value="all">All Languages</option>
+		</select>
+
+		<select id="keywordFilter">
+			
+			<option value="all">All Keywords</option>
+		</select>
+		
+		<div id="selectedKeywords"></div>
+		
+	</div>
+    <!-- RESULTS -->
+
+    <p id="resultCount"></p>
+
+    <div id="publicationsContainer"></div>
+
+</div>
+
+<footer>
+
+    <div class="footer-links">
+
+        <a href="mailto:b.senzio@gmail.com">
+            <i class="fas fa-envelope"></i>
+        </a>
+
+        <a href="https://www.linkedin.com/in/bsenzio/" target="_blank">
+            <i class="fab fa-linkedin"></i>
+        </a>
+
+        <a href="https://github.com/Bsenzio" target="_blank">
+            <i class="fab fa-github"></i>
+        </a>
+
+        <a href="https://www.youtube.com/@Areshiones/videos" target="_blank">
+            <i class="fab fa-youtube"></i>
+        </a>
+
+    </div>
+
+    <p>
+        Edge/AI · Game Development · XR · Robotics
+    </p>
+
+	<p>
+		<script>document.write(new Date().getFullYear())</script>
+		Bruno Senzio-Savino Barzellato
+	</p>
+
+
+</footer>
+
+<script src="js/publications.js"></script>
+
+</body>
+</html>
