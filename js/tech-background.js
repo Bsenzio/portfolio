@@ -423,7 +423,7 @@ function drawVegetables() {
 // ANIMATION LOOP
 // =====================================================
 
-function animate() {
+function animateBackground() {
 
     ctx.clearRect(
         0,
@@ -456,7 +456,9 @@ function animate() {
 
     drawScanner();
 
-    requestAnimationFrame(animate);
+	requestAnimationFrame(
+		animateBackground
+	);
 }
 
 const robots = [];
@@ -632,4 +634,4 @@ function drawScanner(){
     ctx.stroke();
 }
 
-animate();
+animateBackground();
