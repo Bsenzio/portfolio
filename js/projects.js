@@ -7,8 +7,8 @@ const categories = [
 {
     name:"XR",
     color:"#00bfff",
-    radius:220,
-    speed:0.30,
+    orbitRadius:280,
+    orbitSpeed:0.12,
 
     projects:[
 
@@ -30,8 +30,8 @@ const categories = [
 {
     name:"AI",
     color:"#b347ff",
-    radius:320,
-    speed:0.00020,
+    orbitRadius:420,
+    orbitSpeed:0.08,
 
     projects:[
 
@@ -45,10 +45,27 @@ const categories = [
 },
 
 {
+    name:"BCI",
+    color:"#ff9933",
+    orbitRadius:560,
+    orbitSpeed:0.06,
+
+    projects:[
+
+        {
+            title:"Vegetables Here Games There",
+            image:"bci.jpg",
+            url:"bci.html"
+        }
+
+    ]
+},
+
+{
     name:"Games",
     color:"#00ff99",
-    radius:420,
-    speed:0.00015,
+    orbitRadius:700,
+    orbitSpeed:0.04,
 
     projects:[
 
@@ -101,70 +118,93 @@ for(let i=0;i<300;i++){
     document.body.appendChild(
         star
     );
-
 }
 
 // =====================================
-// ORBITS + SATELLITES
+// PLANETS + MOONS
 // =====================================
 
-const satellites = [];
+const planets = [];
+const moons = [];
 
-categories.forEach(category=>{
+categories.forEach(
+(category,index)=>{
 
-    // ORBIT
+    // -------------------
+    // PLANET
+    // -------------------
 
-    const orbit =
+    const planet =
     document.createElement("div");
 
-    orbit.className =
-    "orbit";
+    planet.className =
+    "category-planet";
 
-    orbit.style.width =
-    `${category.radius * 2}px`;
-
-    orbit.style.height =
-    `${category.radius * 2}px`;
-
-    orbit.style.borderColor =
+    planet.style.borderColor =
     category.color;
 
+    planet.innerHTML = `
+
+        <div
+            class="planet-surface"
+            style="
+                background:${category.color};
+            ">
+        </div>
+
+        <div class="planet-label">
+
+            ${category.name}
+
+        </div>
+
+    `;
+
     orbitContainer.appendChild(
-        orbit
+        planet
     );
 
-    // LABEL
+    const planetData = {
 
-    const label =
-    document.createElement("div");
+        element:planet,
 
-    label.className =
-    "orbit-label";
+        radius:
+        category.orbitRadius,
 
-    label.textContent =
-    category.name;
+        speed:
+        category.orbitSpeed,
 
-    label.style.color =
-    category.color;
+        angleOffset:
+        (Math.PI*2 /
+        categories.length)
+        *
+        index,
 
-    orbitContainer.appendChild(
-        label
+        x:0,
+        y:0
+
+    };
+
+    planets.push(
+        planetData
     );
 
-    // PROJECTS
+    // -------------------
+    // MOONS
+    // -------------------
 
     category.projects.forEach(
-    (project,index)=>{
+    (project,pIndex)=>{
 
-        const satellite =
+        const moon =
         document.createElement(
             "div"
         );
 
-        satellite.className =
+        moon.className =
         "satellite";
 
-        satellite.innerHTML = `
+        moon.innerHTML = `
 
             <img
                 src="assets/projects/${project.image}"
@@ -181,44 +221,37 @@ categories.forEach(category=>{
 
         `;
 
-        satellite.addEventListener(
-        "mouseenter",
-        ()=>{
-            satellite.style.zIndex=999;
-        });
-
-        satellite.addEventListener(
-        "mouseleave",
-        ()=>{
-            satellite.style.zIndex=1;
-        });
-
-        satellite.addEventListener(
+        moon.addEventListener(
         "click",
         ()=>{
+
             window.location.href =
             project.url;
+
         });
 
         orbitContainer.appendChild(
-            satellite
+            moon
         );
 
-        satellites.push({
+        moons.push({
 
-            element:satellite,
+            element:moon,
+
+            parent:
+            planetData,
 
             radius:
-            category.radius,
+            110,
 
             speed:
-            category.speed,
+            0.8,
 
             angleOffset:
             (Math.PI*2 /
             category.projects.length)
             *
-            index
+            pIndex
 
         });
 
@@ -238,18 +271,18 @@ document.addEventListener(
 e=>{
 
     const centerX =
-    window.innerWidth/2;
+    window.innerWidth / 2;
 
     const centerY =
-    window.innerHeight/2;
+    window.innerHeight / 2;
 
     rotationY =
     (e.clientX-centerX)
-    * 0.015;
+    * 0.01;
 
     rotationX =
     (e.clientY-centerY)
-    * -0.008;
+    * -0.005;
 
 });
 
@@ -260,50 +293,100 @@ e=>{
 function animateGalaxy(){
 
     const t =
-    performance.now() * 0.001;
+    performance.now()
+    * 0.001;
 
-    satellites.forEach(
-    satellite=>{
+    const centerX = 800;
+    const centerY = 800;
+
+    // -------------------
+    // PLANETS
+    // -------------------
+
+    planets.forEach(
+    planet=>{
 
         const angle =
 
             t *
-            satellite.speed +
+            planet.speed +
 
-            satellite.angleOffset;
+            planet.angleOffset;
 
-        const x =
+        planet.x =
+
+            centerX +
 
             Math.cos(angle)
             *
-            satellite.radius;
+            planet.radius;
 
-        const y =
+        planet.y =
+
+            centerY +
 
             Math.sin(angle)
             *
-            satellite.radius;
+            planet.radius;
 
-        satellite.element.style.left =
+        planet.element.style.left =
 
-            `${600 + x - 60}px`;
+            `${planet.x-50}px`;
 
-        satellite.element.style.top =
+        planet.element.style.top =
 
-            `${600 + y - 60}px`;
+            `${planet.y-50}px`;
 
     });
 
-    solarSystem.style.transform = `
+    // -------------------
+    // MOONS
+    // -------------------
 
-        rotateX(${rotationX}deg)
-        rotateZ(${rotationY}deg)
+    moons.forEach(
+    moon=>{
 
-    `;
+        const angle =
 
-	requestAnimationFrame(
-		animateGalaxy
-	);
+            t *
+            moon.speed +
+
+            moon.angleOffset;
+
+        const x =
+
+            moon.parent.x +
+
+            Math.cos(angle)
+            *
+            moon.radius;
+
+        const y =
+
+            moon.parent.y +
+
+            Math.sin(angle)
+            *
+            moon.radius;
+
+        moon.element.style.left =
+
+            `${x-60}px`;
+
+        moon.element.style.top =
+
+            `${y-60}px`;
+
+    });
+
+    solarSystem.style.transform =
+
+        `rotateX(${rotationX}deg)
+         rotateZ(${rotationY}deg)`;
+
+    requestAnimationFrame(
+        animateGalaxy
+    );
 
 }
 
