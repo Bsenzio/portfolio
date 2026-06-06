@@ -71,6 +71,20 @@ const categories = [
 
 ];
 
+categories.forEach(category=>{
+
+    category.planetRadius =
+    Math.min(
+        140,
+        45 +
+        Math.sqrt(
+            category.projects.length
+        ) * 25
+    );
+
+});
+
+
 // =====================================
 // REFERENCES
 // =====================================
@@ -150,19 +164,19 @@ new THREE.TextureLoader();
 const corePlanet =
 new THREE.Mesh(
 
-new THREE.SphereGeometry(
-120,
-64,
-64
-),
+    new THREE.SphereGeometry(
+        120,
+        64,
+        64
+    ),
 
-new THREE.MeshStandardMaterial({
+    new THREE.MeshStandardMaterial({
 
-map:loader.load(
-"assets/images/planets/planet_texture.jpg"
-)
+        map: loader.load(
+            "assets/images/planets/planet_texture.jpg"
+        )
 
-})
+    })
 
 );
 
@@ -185,14 +199,13 @@ categories.forEach((category,index)=>{
     index % planetsPerRing;
 
     const radius =
-    450 + ring * 250;
+	250 + ring * 350;
 
-    const planetsInThisRing =
-    Math.min(
-        planetsPerRing,
-        categories.length - ring * planetsPerRing
-    );
-
+	const planetsInThisRing =
+	Math.min(
+		planetsPerRing,
+		categories.length - ring * planetsPerRing
+	);
     const angle =
     (Math.PI * 2 / planetsInThisRing)
     * posInRing;
@@ -207,7 +220,7 @@ categories.forEach((category,index)=>{
     new THREE.Mesh(
 
         new THREE.SphereGeometry(
-            55,
+            category.planetRadius,
             64,
             64
         ),
@@ -215,7 +228,7 @@ categories.forEach((category,index)=>{
         new THREE.MeshStandardMaterial({
 
             map: loader.load(
-                `assets//images/planets/${category.texture}`
+                `assets/images/planets/${category.texture}`
             )
 
         })
@@ -230,13 +243,16 @@ categories.forEach((category,index)=>{
 
     scene.add(mesh);
 
-    planets.push({
+	planets.push({
 
-        mesh,
-        x,
-        y
+		mesh,
+		x,
+		y,
 
-    });
+		planetRadius:
+		category.planetRadius
+
+	});
 
 });
 
@@ -283,19 +299,21 @@ moon
 
 moons.push({
 
-element:moon,
+    element:moon,
 
-planetIndex:index,
+    planetIndex:index,
 
-radius:110,
+	radius:
+	category.planetRadius * 1.8 +
+	(pIndex * 60),
 
-speed:0.8,
+    speed:0.8,
 
-angleOffset:
-(Math.PI*2 /
-category.projects.length)
-*
-pIndex
+    angleOffset:
+    (Math.PI*2 /
+    category.projects.length)
+    *
+    pIndex
 
 });
 
@@ -310,6 +328,7 @@ pIndex
 const labels = [];
 
 categories.forEach(category=>{
+
 
 const div =
 document.createElement("div");
@@ -354,11 +373,16 @@ planets.forEach(
     planet.mesh.rotation.y +=
     0.01;
 
-    labels[index].style.left =
-    `${window.innerWidth/2 + planet.x - 20}px`;
+	labels[index].style.left =
+	`${window.innerWidth/2 +
+	planet.x -
+	planet.planetRadius/2}px`;
 
-    labels[index].style.top =
-    `${window.innerHeight/2 + planet.y - 90}px`;
+	labels[index].style.top =
+	`${window.innerHeight/2 +
+	planet.y -
+	planet.planetRadius -
+	25}px`;
 
 });
 
