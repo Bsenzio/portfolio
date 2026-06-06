@@ -159,7 +159,7 @@ new THREE.SphereGeometry(
 new THREE.MeshStandardMaterial({
 
 map:loader.load(
-"assets/projects/planet_texture.jpg"
+"assets/images/planets/planet_texture.jpg"
 )
 
 })
@@ -215,7 +215,7 @@ categories.forEach((category,index)=>{
         new THREE.MeshStandardMaterial({
 
             map: loader.load(
-                `assets/planets/${category.texture}`
+                `assets//images/planets/${category.texture}`
             )
 
         })
