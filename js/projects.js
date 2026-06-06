@@ -1,80 +1,71 @@
 // =====================================
-// PROJECT GALAXY
+// DATA
 // =====================================
 
 const categories = [
 
 {
     name:"XR",
-    color:"#00bfff",
+    texture:"xr.jpg",
     orbitRadius:280,
     orbitSpeed:0.12,
 
     projects:[
-
         {
             title:"XR Interaction System",
             image:"xr_system.jpg",
             url:"xr.html"
         },
-
         {
             title:"MR Patent",
             image:"mixed_reality_patent.jpg",
             url:"mr_patent.html"
         }
-
     ]
 },
 
 {
     name:"AI",
-    color:"#b347ff",
+    texture:"ai.jpg",
     orbitRadius:420,
     orbitSpeed:0.08,
 
     projects:[
-
         {
             title:"Game of Life",
             image:"game_of_life_nintendo.jpg",
             url:"gol.html"
         }
-
     ]
 },
 
 {
     name:"BCI",
-    color:"#ff9933",
+    texture:"bci.jpg",
     orbitRadius:560,
     orbitSpeed:0.06,
 
     projects:[
-
         {
             title:"Vegetables Here Games There",
             image:"bci.jpg",
             url:"bci.html"
         }
-
     ]
 },
 
 {
     name:"Games",
-    color:"#00ff99",
+    texture:"games.jpg",
     orbitRadius:700,
     orbitSpeed:0.04,
 
     projects:[
-
         {
             title:"Arcade Machine",
             image:"arcade.jpg",
             url:"arcade.html"
         }
-
     ]
 }
 
@@ -85,204 +76,235 @@ const categories = [
 // =====================================
 
 const orbitContainer =
-document.getElementById(
-    "orbitContainer"
+document.getElementById("orbitContainer");
+
+// =====================================
+// THREE.JS
+// =====================================
+
+const scene =
+new THREE.Scene();
+
+const camera =
+new THREE.PerspectiveCamera(
+45,
+window.innerWidth/window.innerHeight,
+0.1,
+5000
 );
 
-const solarSystem =
-document.querySelector(
-    ".solar-system"
+camera.position.z = 1200;
+
+const renderer =
+new THREE.WebGLRenderer({
+
+    alpha:true,
+    antialias:true
+
+});
+
+renderer.setSize(
+window.innerWidth,
+window.innerHeight
 );
 
-// =====================================
-// STARS
-// =====================================
-
-for(let i=0;i<300;i++){
-
-    const star =
-    document.createElement("div");
-
-    star.className =
-    "star";
-
-    star.style.left =
-    Math.random()*100 + "vw";
-
-    star.style.top =
-    Math.random()*100 + "vh";
-
-    star.style.opacity =
-    Math.random();
-
-    document.body.appendChild(
-        star
-    );
-}
+document
+.getElementById("galaxy3d")
+.appendChild(renderer.domElement);
 
 // =====================================
-// PLANETS + MOONS
+// LIGHTS
+// =====================================
+
+scene.add(
+new THREE.AmbientLight(
+0xffffff,
+1.8
+));
+
+const pointLight =
+new THREE.PointLight(
+0xffffff,
+2
+);
+
+pointLight.position.set(
+0,
+0,
+500
+);
+
+scene.add(pointLight);
+
+// =====================================
+// TEXTURES
+// =====================================
+
+const loader =
+new THREE.TextureLoader();
+
+// =====================================
+// CENTRAL PLANET
+// =====================================
+
+const corePlanet =
+new THREE.Mesh(
+
+new THREE.SphereGeometry(
+120,
+64,
+64
+),
+
+new THREE.MeshStandardMaterial({
+
+map:loader.load(
+"assets/projects/planet_texture.jpg"
+)
+
+})
+
+);
+
+scene.add(corePlanet);
+
+// =====================================
+// CATEGORY PLANETS
 // =====================================
 
 const planets = [];
+
+categories.forEach(
+(category,index)=>{
+
+const mesh =
+new THREE.Mesh(
+
+new THREE.SphereGeometry(
+55,
+64,
+64
+),
+
+new THREE.MeshStandardMaterial({
+
+map:loader.load(
+`assets/planets/${category.texture}`
+)
+
+})
+
+);
+
+scene.add(mesh);
+
+planets.push({
+
+mesh,
+
+radius:
+category.orbitRadius,
+
+speed:
+category.orbitSpeed,
+
+angleOffset:
+(Math.PI*2 /
+categories.length)
+*
+index
+
+});
+
+});
+
+// =====================================
+// SATELLITES HTML
+// =====================================
+
 const moons = [];
 
 categories.forEach(
 (category,index)=>{
 
-    // -------------------
-    // PLANET
-    // -------------------
+category.projects.forEach(
+(project,pIndex)=>{
 
-    const planet =
-    document.createElement("div");
+const moon =
+document.createElement("div");
 
-    planet.className =
-    "category-planet";
+moon.className =
+"satellite";
 
-    planet.style.borderColor =
-    category.color;
+moon.innerHTML = `
 
-    planet.innerHTML = `
+<img src="assets/projects/${project.image}">
 
-        <div
-            class="planet-surface"
-            style="
-                background:${category.color};
-            ">
-        </div>
+<div class="satellite-info">
 
-        <div class="planet-label">
+<h3>${project.title}</h3>
 
-            ${category.name}
+</div>
 
-        </div>
+`;
 
-    `;
+moon.onclick=()=>{
 
-    orbitContainer.appendChild(
-        planet
-    );
+window.location.href=
+project.url;
 
-    const planetData = {
+};
 
-        element:planet,
+orbitContainer.appendChild(
+moon
+);
 
-        radius:
-        category.orbitRadius,
+moons.push({
 
-        speed:
-        category.orbitSpeed,
+element:moon,
 
-        angleOffset:
-        (Math.PI*2 /
-        categories.length)
-        *
-        index,
+planetIndex:index,
 
-        x:0,
-        y:0
+radius:110,
 
-    };
+speed:0.8,
 
-    planets.push(
-        planetData
-    );
+angleOffset:
+(Math.PI*2 /
+category.projects.length)
+*
+pIndex
 
-    // -------------------
-    // MOONS
-    // -------------------
+});
 
-    category.projects.forEach(
-    (project,pIndex)=>{
-
-        const moon =
-        document.createElement(
-            "div"
-        );
-
-        moon.className =
-        "satellite";
-
-        moon.innerHTML = `
-
-            <img
-                src="assets/projects/${project.image}"
-                alt="${project.title}"
-            >
-
-            <div class="satellite-info">
-
-                <h3>
-                    ${project.title}
-                </h3>
-
-            </div>
-
-        `;
-
-        moon.addEventListener(
-        "click",
-        ()=>{
-
-            window.location.href =
-            project.url;
-
-        });
-
-        orbitContainer.appendChild(
-            moon
-        );
-
-        moons.push({
-
-            element:moon,
-
-            parent:
-            planetData,
-
-            radius:
-            110,
-
-            speed:
-            0.8,
-
-            angleOffset:
-            (Math.PI*2 /
-            category.projects.length)
-            *
-            pIndex
-
-        });
-
-    });
+});
 
 });
 
 // =====================================
-// MOUSE ROTATION
+// LABELS
 // =====================================
 
-let rotationX = 0;
-let rotationY = 0;
+const labels = [];
 
-document.addEventListener(
-"mousemove",
-e=>{
+categories.forEach(category=>{
 
-    const centerX =
-    window.innerWidth / 2;
+const div =
+document.createElement("div");
 
-    const centerY =
-    window.innerHeight / 2;
+div.style.position="absolute";
+div.style.color="white";
+div.style.fontWeight="bold";
+div.style.textShadow="0 0 10px cyan";
 
-    rotationY =
-    (e.clientX-centerX)
-    * 0.01;
+div.innerText =
+category.name;
 
-    rotationX =
-    (e.clientY-centerY)
-    * -0.005;
+orbitContainer.appendChild(
+div
+);
+
+labels.push(div);
 
 });
 
@@ -290,104 +312,126 @@ e=>{
 // ANIMATION
 // =====================================
 
-function animateGalaxy(){
+function animate(){
 
-    const t =
-    performance.now()
-    * 0.001;
+requestAnimationFrame(
+animate
+);
 
-    const centerX = 800;
-    const centerY = 800;
+const t =
+performance.now()*0.001;
 
-    // -------------------
-    // PLANETS
-    // -------------------
+corePlanet.rotation.y +=
+0.002;
 
-    planets.forEach(
-    planet=>{
+// planets
 
-        const angle =
+planets.forEach(
+(planet,index)=>{
 
-            t *
-            planet.speed +
+const angle =
 
-            planet.angleOffset;
+t *
+planet.speed +
 
-        planet.x =
+planet.angleOffset;
 
-            centerX +
+const x =
+Math.cos(angle)
+*
+planet.radius;
 
-            Math.cos(angle)
-            *
-            planet.radius;
+const y =
+Math.sin(angle)
+*
+planet.radius;
 
-        planet.y =
+planet.mesh.position.set(
+x,
+y,
+0
+);
 
-            centerY +
+planet.mesh.rotation.y +=
+0.01;
 
-            Math.sin(angle)
-            *
-            planet.radius;
+// label
 
-        planet.element.style.left =
+labels[index].style.left =
+`${800+x-20}px`;
 
-            `${planet.x-50}px`;
+labels[index].style.top =
+`${800+y-90}px`;
 
-        planet.element.style.top =
+});
 
-            `${planet.y-50}px`;
+// moons
 
-    });
+moons.forEach(
+moon=>{
 
-    // -------------------
-    // MOONS
-    // -------------------
+const parent =
+planets[
+moon.planetIndex
+];
 
-    moons.forEach(
-    moon=>{
+const angle =
 
-        const angle =
+t *
+moon.speed +
 
-            t *
-            moon.speed +
+moon.angleOffset;
 
-            moon.angleOffset;
+const x =
 
-        const x =
+parent.mesh.position.x +
 
-            moon.parent.x +
+Math.cos(angle)
+*
+moon.radius;
 
-            Math.cos(angle)
-            *
-            moon.radius;
+const y =
 
-        const y =
+parent.mesh.position.y +
 
-            moon.parent.y +
+Math.sin(angle)
+*
+moon.radius;
 
-            Math.sin(angle)
-            *
-            moon.radius;
+moon.element.style.left =
+`${800+x-60}px`;
 
-        moon.element.style.left =
+moon.element.style.top =
+`${800+y-60}px`;
 
-            `${x-60}px`;
+});
 
-        moon.element.style.top =
-
-            `${y-60}px`;
-
-    });
-
-    solarSystem.style.transform =
-
-        `rotateX(${rotationX}deg)
-         rotateZ(${rotationY}deg)`;
-
-    requestAnimationFrame(
-        animateGalaxy
-    );
+renderer.render(
+scene,
+camera
+);
 
 }
 
-animateGalaxy();
+animate();
+
+// =====================================
+// RESIZE
+// =====================================
+
+window.addEventListener(
+"resize",
+()=>{
+
+camera.aspect =
+window.innerWidth /
+window.innerHeight;
+
+camera.updateProjectionMatrix();
+
+renderer.setSize(
+window.innerWidth,
+window.innerHeight
+);
+
+});
