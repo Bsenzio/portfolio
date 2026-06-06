@@ -81,7 +81,7 @@ document.getElementById("orbitContainer");
 // =====================================
 // THREE.JS
 // =====================================
-
+const systemRadius = 550;
 const scene =
 new THREE.Scene();
 
@@ -174,47 +174,69 @@ scene.add(corePlanet);
 
 const planets = [];
 
-categories.forEach(
-(category,index)=>{
+const planetsPerRing = 6;
 
-const mesh =
-new THREE.Mesh(
+categories.forEach((category,index)=>{
 
-new THREE.SphereGeometry(
-55,
-64,
-64
-),
+    const ring =
+    Math.floor(index / planetsPerRing);
 
-new THREE.MeshStandardMaterial({
+    const posInRing =
+    index % planetsPerRing;
 
-map:loader.load(
-`assets/planets/${category.texture}`
-)
+    const radius =
+    450 + ring * 250;
 
-})
+    const planetsInThisRing =
+    Math.min(
+        planetsPerRing,
+        categories.length - ring * planetsPerRing
+    );
 
-);
+    const angle =
+    (Math.PI * 2 / planetsInThisRing)
+    * posInRing;
 
-scene.add(mesh);
+    const x =
+    Math.cos(angle) * radius;
 
-planets.push({
+    const y =
+    Math.sin(angle) * radius;
 
-mesh,
+    const mesh =
+    new THREE.Mesh(
 
-radius:
-category.orbitRadius,
+        new THREE.SphereGeometry(
+            55,
+            64,
+            64
+        ),
 
-speed:
-category.orbitSpeed,
+        new THREE.MeshStandardMaterial({
 
-angleOffset:
-(Math.PI*2 /
-categories.length)
-*
-index
+            map: loader.load(
+                `assets/planets/${category.texture}`
+            )
 
-});
+        })
+
+    );
+
+    mesh.position.set(
+        x,
+        y,
+        0
+    );
+
+    scene.add(mesh);
+
+    planets.push({
+
+        mesh,
+        x,
+        y
+
+    });
 
 });
 
@@ -329,39 +351,14 @@ corePlanet.rotation.y +=
 planets.forEach(
 (planet,index)=>{
 
-const angle =
+    planet.mesh.rotation.y +=
+    0.01;
 
-t *
-planet.speed +
+    labels[index].style.left =
+    `${window.innerWidth/2 + planet.x - 20}px`;
 
-planet.angleOffset;
-
-const x =
-Math.cos(angle)
-*
-planet.radius;
-
-const y =
-Math.sin(angle)
-*
-planet.radius;
-
-planet.mesh.position.set(
-x,
-y,
-0
-);
-
-planet.mesh.rotation.y +=
-0.01;
-
-// label
-
-labels[index].style.left =
-`${800+x-20}px`;
-
-labels[index].style.top =
-`${800+y-90}px`;
+    labels[index].style.top =
+    `${window.innerHeight/2 + planet.y - 90}px`;
 
 });
 
@@ -384,7 +381,7 @@ moon.angleOffset;
 
 const x =
 
-parent.mesh.position.x +
+parent.x +
 
 Math.cos(angle)
 *
@@ -392,17 +389,17 @@ moon.radius;
 
 const y =
 
-parent.mesh.position.y +
+parent.y +
 
 Math.sin(angle)
 *
 moon.radius;
 
 moon.element.style.left =
-`${800+x-60}px`;
+`${window.innerWidth/2 + x - 60}px`;
 
 moon.element.style.top =
-`${800+y-60}px`;
+`${window.innerHeight/2 + y - 60}px`;
 
 });
 
