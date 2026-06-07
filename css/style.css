@@ -2018,7 +2018,7 @@ body{
     0 0 10px black;
 }
 
-..orbit{
+.orbit{
 
     position:absolute;
 
@@ -2466,5 +2466,184 @@ body{
     width:70px;
     height:70px;
     border-radius:50%;
+
+}
+
+#projectPanel{
+
+    position:fixed;
+
+    width:420px;
+
+    background:
+    rgba(5,10,20,.95);
+
+    border:
+    1px solid cyan;
+
+    border-radius:20px;
+
+    padding:20px;
+
+    backdrop-filter:
+    blur(15px);
+
+    box-shadow:
+        0 0 40px rgba(0,255,255,.35);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:
+    opacity .35s;
+
+    z-index:99999;
+}
+
+#projectPanel.open{
+
+    opacity:1;
+
+    pointer-events:auto;
+}
+
+.panel-content{
+
+    display:flex;
+
+    gap:20px;
+
+}
+
+.panel-content img{
+
+    width:140px;
+
+    height:140px;
+
+    object-fit:cover;
+
+    border-radius:12px;
+
+}
+
+.panel-close{
+
+    position:absolute;
+
+    right:15px;
+
+    top:10px;
+
+    cursor:pointer;
+
+    font-size:22px;
+
+}
+
+#panelLink{
+
+    display:inline-block;
+
+    margin-top:15px;
+
+    color:cyan;
+
+}
+
+.satellite{
+
+    transition:
+    transform .3s,
+    filter .3s,
+    box-shadow .3s;
+
+}
+
+.satellite.focused{
+
+    transform:
+    translate(-50%,-50%)
+    scale(1.35);
+
+    z-index:999;
+
+    filter:
+    brightness(1.4);
+
+    box-shadow:
+    0 0 35px cyan;
+}
+
+.satellite{
+
+    transition:
+    transform .35s ease,
+    filter .35s ease,
+    box-shadow .35s ease;
+
+}
+
+.satellite.focused{
+
+    transform:
+    translate(-50%,-50%)
+    scale(1.4);
+
+    z-index:9999;
+
+    filter:
+    brightness(1.5);
+
+    box-shadow:
+    0 0 40px cyan,
+    0 0 80px cyan;
+
+}
+
+.satellite{
+
+    transition:
+    transform .35s ease,
+    filter .35s ease,
+    box-shadow .35s ease;
+
+}
+
+.satellite.focused{
+
+    transform:
+    translate(-50%,-50%)
+    scale(1.4);
+
+    z-index:9999;
+
+    filter:
+    brightness(1.5);
+
+    box-shadow:
+    0 0 40px cyan,
+    0 0 80px cyan;
+
+}
+
+
+.project-open .satellite{
+
+    opacity:.3;
+
+}
+
+.project-open .satellite.focused{
+
+    opacity:1;
+
+}
+
+.project-open .category-title,
+.project-open .category-count{
+
+    opacity:.3;
 
 }

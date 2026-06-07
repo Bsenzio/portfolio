@@ -11,15 +11,20 @@ const categories = [
     orbitSpeed:0.1,
 
     projects:[
-        {
-            title:"XR Interaction System",
-            image:"xr_system.jpg",
-            url:"xr.html"
-        },
+		{
+			title:"XR Interaction System",
+			image:"xr_system.jpg",
+			url:"xr.html",
+			description:
+			"A modular interaction framework for XR applications supporting hand tracking, eye tracking and immersive interfaces."
+		},
         {
             title:"MR Patent",
             image:"mixed_reality_patent.jpg",
-            url:"mr_patent.html"
+            url:"mr_patent.html",
+			description:
+			"A modular interaction framework for XR applications supporting hand tracking, eye tracking and immersive interfaces."
+
         }
     ]
 },
@@ -34,7 +39,10 @@ const categories = [
         {
             title:"Game of Life",
             image:"game_of_life_nintendo.jpg",
-            url:"gol.html"
+            url:"gol.html",
+			description:
+			"A modular interaction framework for XR applications supporting hand tracking, eye tracking and immersive interfaces."
+
         }
     ]
 },
@@ -49,7 +57,10 @@ const categories = [
         {
             title:"Vegetables Here Games There",
             image:"bci.jpg",
-            url:"bci.html"
+            url:"bci.html",
+			description:
+			"A modular interaction framework for XR applications supporting hand tracking, eye tracking and immersive interfaces."
+
         }
     ]
 },
@@ -64,7 +75,10 @@ const categories = [
         {
             title:"Arcade Machine",
             image:"arcade.jpg",
-            url:"arcade.html"
+            url:"arcade.html",
+			description:
+			"A modular interaction framework for XR applications supporting hand tracking, eye tracking and immersive interfaces."
+
         }
     ]
 }
@@ -91,6 +105,62 @@ categories.forEach(category=>{
 
 const orbitContainer =
 document.getElementById("orbitContainer");
+
+const projectPanel =
+document.createElement("div");
+
+projectPanel.id = "projectPanel";
+
+projectPanel.innerHTML = `
+
+<div class="panel-close">✕</div>
+
+<div class="panel-content">
+
+    <img id="panelImage">
+
+    <div>
+
+        <h2 id="panelTitle"></h2>
+
+        <p id="panelDescription"></p>
+
+	<a
+		id="panelLink"
+		target="_blank"
+	>
+		Open Project
+	</a>
+
+    </div>
+
+</div>
+
+`;
+
+document.body.appendChild(
+    projectPanel
+);
+
+projectPanel
+.querySelector(".panel-close")
+.onclick = ()=>{
+
+    selectedMoon = null;
+
+    document
+    .querySelectorAll(".satellite")
+    .forEach(m=>m.classList.remove("focused"));
+
+    projectPanel.classList.remove(
+        "open"
+    );
+
+    document.body.classList.remove(
+        "project-open"
+    );
+
+};
 
 // =====================================
 // THREE.JS
@@ -254,9 +324,7 @@ categories.forEach((category,index)=>{
     index % planetsPerRing;
 
 	const radius =
-	largestPlanetRadius * 4
-	+
-	ring * 220;
+	category.orbitRadius;
 
 	const planetsInThisRing =
 	Math.min(
@@ -354,8 +422,41 @@ moon.innerHTML = `
 
 moon.onclick=()=>{
 
-window.location.href=
-project.url;
+    selectedMoon = moon;
+
+    document
+    .querySelectorAll(".satellite")
+    .forEach(m=>m.classList.remove("focused"));
+
+    moon.classList.add("focused");
+
+    document
+    .getElementById("panelImage")
+    .src =
+    `assets/images/projects/${project.image}`;
+
+    document
+    .getElementById("panelTitle")
+    .textContent =
+    project.title;
+
+    document
+    .getElementById("panelDescription")
+    .textContent =
+    project.description;
+
+    document
+    .getElementById("panelLink")
+    .href =
+    project.url;
+
+    document.body.classList.add(
+        "project-open"
+    );
+
+    projectPanel.classList.add(
+        "open"
+    );
 
 };
 
@@ -367,21 +468,43 @@ moons.push({
 
     element: moon,
 
+    project,
+
     planetIndex: index,
 
     radius:
     category.planetRadius * 1.8 +
     (pIndex * 60),
 
-    speed:
-    category.orbitSpeed,
-
     angleOffset:
     (Math.PI * 2 /
     category.projects.length)
-    * pIndex
+    * pIndex,
+
+    orbitSpeed: 0.8
 
 });
+
+moon.addEventListener(
+"mouseenter",
+()=>{
+
+    moon.classList.add(
+        "focused"
+    );
+
+});
+
+moon.addEventListener(
+"mouseleave",
+()=>{
+
+    moon.classList.remove(
+        "focused"
+    );
+
+});
+
 
 });
 
@@ -432,6 +555,7 @@ labels.push(div);
 // =====================================
 // ANIMATION
 // =====================================
+let selectedMoon = null;
 
 function animate(){
 
@@ -458,12 +582,9 @@ coreLabel.style.top =
 planets.forEach(
 (planet,index)=>{
 
-    const orbitAngle =
-
-    t *
-    planet.orbitSpeed +
-
-    planet.angleOffset;
+	const orbitAngle =
+	(t * planet.orbitSpeed) +
+	planet.angleOffset;
 
     const x =
     Math.cos(
@@ -471,14 +592,14 @@ planets.forEach(
     )
     *
     planet.orbitRadius;
-
+	
     const y =
     Math.sin(
         orbitAngle
     )
     *
     planet.orbitRadius;
-
+	planet.currentAngle = orbitAngle;
     planet.x = x;
     planet.y = y;
 
@@ -492,16 +613,17 @@ planets.forEach(
     planet.mesh.rotation.y +=
     0.01;
 
-    labels[index].style.left =
-    `${window.innerWidth/2 +
-    x -
-    planet.planetRadius/2}px`;
+	labels[index].style.left =
+	`${window.innerWidth/2 + x}px`;
 
-    labels[index].style.top =
-    `${window.innerHeight/2 +
-    y -
-    planet.planetRadius -
-    25}px`;
+	labels[index].style.top =
+	`${window.innerHeight/2 -
+	y -
+	planet.planetRadius -
+	40}px`;
+
+	labels[index].style.transform =
+	"translateX(-50%)";
 	
 	
 
@@ -511,44 +633,88 @@ planets.forEach(
 
 moons.forEach(moon=>{
 
+    if(
+        selectedMoon === moon.element &&
+        moon.frozenX !== undefined
+    ){
+
+        moon.element.style.left =
+        `${moon.frozenX}px`;
+
+        moon.element.style.top =
+        `${moon.frozenY}px`;
+
+        return;
+    }
+
     const parent =
     planets[moon.planetIndex];
 
-	const angle =
-	t * moon.speed +
-	moon.angleOffset;
-
-    const orbitRadius =
-    moon.radius;
+    const angle =
+    (t * moon.orbitSpeed) +
+    moon.angleOffset;
 
     const x =
     parent.x +
     Math.cos(angle) *
-    orbitRadius;
+    moon.radius;
 
     const y =
     parent.y +
     Math.sin(angle) *
-    orbitRadius;
+    moon.radius;
 
-    moon.element.style.display =
-    "block";
+    const screenX =
+    window.innerWidth/2 + x;
 
-    moon.element.style.opacity =
-    1;
-
-    moon.element.style.transform =
-    "translate(-50%,-50%)";
+    const screenY =
+    window.innerHeight/2 - y;
 
     moon.element.style.left =
-    `${window.innerWidth/2 + x}px`;
+    `${screenX}px`;
 
     moon.element.style.top =
-    `${window.innerHeight/2 + y}px`;
+    `${screenY}px`;
+
+    moon.frozenX = screenX;
+    moon.frozenY = screenY;
+
+    if(
+        moon.element.classList.contains(
+            "focused"
+        )
+    ){
+
+        moon.element.style.transform =
+        "translate(-50%,-50%) scale(1.4)";
+
+    }else{
+
+        moon.element.style.transform =
+        "translate(-50%,-50%)";
+    }
 
 });
 
+if(
+    selectedMoon &&
+    projectPanel.classList.contains(
+        "open"
+    )
+){
 
+    const moonRect =
+    selectedMoon.getBoundingClientRect();
+
+    projectPanel.style.left =
+    `${moonRect.right + 25}px`;
+
+    projectPanel.style.top =
+    `${moonRect.top - 40}px`;
+
+    projectPanel.style.transform =
+    "none";
+}
 
 renderer.render(
 scene,
