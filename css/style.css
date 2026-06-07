@@ -2453,3 +2453,18 @@ body{
 
     margin-top:3px;
 }
+
+.satellite{
+
+    width:70px;
+    height:70px;
+
+}
+
+.satellite img{
+
+    width:70px;
+    height:70px;
+    border-radius:50%;
+
+}

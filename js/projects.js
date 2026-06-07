@@ -256,7 +256,7 @@ categories.forEach((category,index)=>{
 	const radius =
 	largestPlanetRadius * 4
 	+
-	ring * 350;
+	ring * 220;
 
 	const planetsInThisRing =
 	Math.min(
@@ -569,98 +569,102 @@ planets.forEach(
 
 // moons
 
-moons.forEach(
-moon=>{
+moons.forEach(moon=>{
 
-const parent =
-planets[
-moon.planetIndex
-];
+    const parent =
+    planets[moon.planetIndex];
 
-const depthScale =
-THREE.MathUtils.mapLinear(
+    const angle =
 
-    parent.z,
+    t *
+    moon.speed +
 
-    -400,
-    400,
+    moon.angleOffset;
 
-    0.5,
-    1.2
+    const moonOrbitX =
+    moon.radius;
 
-);
+    const moonOrbitY =
+    moon.radius * 0.45;
 
-moon.element.style.opacity =
-THREE.MathUtils.mapLinear(
+    const x =
 
-    parent.z,
+    parent.x +
 
-    -400,
-    400,
+    Math.cos(angle)
+    *
+    moonOrbitX;
 
-    0.2,
-    1
+    const y =
 
-);
+    parent.y +
 
+    Math.sin(angle)
+    *
+    moonOrbitY;
 
-moon.element.style.transform =
-`scale(${depthScale})`;
+    const z =
 
-const angle =
+    parent.z +
 
-t *
-moon.speed +
+    Math.sin(angle)
+    *
+    80;
 
-moon.angleOffset;
+    const depthScale =
+    THREE.MathUtils.mapLinear(
 
-const x =
+        z,
 
-parent.x +
+        -500,
+        500,
 
-Math.cos(angle)
-*
-moon.radius;
+        0.4,
+        1.1
 
-const y =
+    );
 
-parent.y +
+    moon.element.style.opacity =
+    THREE.MathUtils.mapLinear(
 
-Math.sin(angle)
-*
-moon.radius;
+        z,
 
-const distanceToCenter =
+        -500,
+        500,
 
-Math.sqrt(
-    x*x +
-    y*y
-);
+        0.15,
+        1
 
-if(
-    parent.z < 0 &&
-    distanceToCenter <
-    largestPlanetRadius * 2.2
-){
+    );
 
-    moon.element.style.display =
-    "none";
+    moon.element.style.transform =
+    `scale(${depthScale})`;
 
-}
-else{
+    if(
+        z < parent.z &&
+        z < 0
+    ){
 
-    moon.element.style.display =
-    "block";
+        moon.element.style.display =
+        "none";
 
-}
+    }
+    else{
 
-moon.element.style.left =
-`${window.innerWidth/2 + x - 60}px`;
+        moon.element.style.display =
+        "block";
 
-moon.element.style.top =
-`${window.innerHeight/2 + y - 60}px`;
+    }
+
+    moon.element.style.left =
+    `${window.innerWidth/2 + x - 40}px`;
+
+    moon.element.style.top =
+    `${window.innerHeight/2 + y - 40}px`;
 
 });
+
+
 
 renderer.render(
 scene,
