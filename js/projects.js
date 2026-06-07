@@ -578,70 +578,27 @@ moons.forEach(moon=>{
     t * moon.speed +
     moon.angleOffset;
 
-    const moonOrbitX =
+    const orbitRadius =
     moon.radius;
-
-    const moonOrbitY =
-    moon.radius * 0.45;
-
-    const z =
-    parent.z +
-    Math.sin(angle) * 120;
-
-    const depthScale =
-    THREE.MathUtils.mapLinear(
-
-        z,
-
-        -500,
-        500,
-
-        0.6,
-        1.3
-
-    );
-
-    const perspectiveScale =
-    1 + z / 1000;
 
     const x =
     parent.x +
     Math.cos(angle) *
-    moonOrbitX *
-    perspectiveScale;
+    orbitRadius;
 
     const y =
     parent.y +
     Math.sin(angle) *
-    moonOrbitY;
-
-    moon.element.style.opacity =
-    THREE.MathUtils.mapLinear(
-
-        z,
-
-        -500,
-        500,
-
-        0.15,
-        1
-
-    );
-
-    moon.element.style.transform =
-    `translate(-50%,-50%)
-     scale(${depthScale})`;
-
-    if(
-        z < parent.z
-    ){
-
-        moon.element.style.opacity *= 0.3;
-
-    }
+    orbitRadius;
 
     moon.element.style.display =
     "block";
+
+    moon.element.style.opacity =
+    1;
+
+    moon.element.style.transform =
+    "translate(-50%,-50%)";
 
     moon.element.style.left =
     `${window.innerWidth/2 + x}px`;
