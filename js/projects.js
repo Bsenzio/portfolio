@@ -8,7 +8,7 @@ const categories = [
     name:"XR",
     texture:"xr.jpg",
     orbitRadius:280,
-    orbitSpeed:0.12,
+    orbitSpeed:0.1,
 
     projects:[
         {
@@ -28,7 +28,7 @@ const categories = [
     name:"AI",
     texture:"ai.jpg",
     orbitRadius:280,
-    orbitSpeed:0.08,
+    orbitSpeed:0.1,
 
     projects:[
         {
@@ -43,7 +43,7 @@ const categories = [
     name:"BCI",
     texture:"bci.jpg",
     orbitRadius:280,
-    orbitSpeed:0.06,
+    orbitSpeed:0.1,
 
     projects:[
         {
@@ -58,7 +58,7 @@ const categories = [
     name:"Games",
     texture:"games.jpg",
     orbitRadius:280,
-    orbitSpeed:0.04,
+    orbitSpeed:0.1,
 
     projects:[
         {
