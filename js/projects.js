@@ -158,6 +158,21 @@ const loader =
 new THREE.TextureLoader();
 
 // =====================================
+// GLOBAL STATS
+// =====================================
+
+const totalCategories =
+categories.length;
+
+const totalProjects =
+categories.reduce(
+    (sum,category)=>
+    sum + category.projects.length,
+    0
+);
+
+
+// =====================================
 // CENTRAL PLANET
 // =====================================
 
@@ -182,6 +197,39 @@ new THREE.Mesh(
 
 scene.add(corePlanet);
 
+const coreLabel =
+document.createElement("div");
+
+coreLabel.className =
+"core-label";
+
+coreLabel.innerHTML = `
+
+    <div class="core-title">
+
+        PROJECT GALAXY
+
+    </div>
+
+    <div class="core-stats">
+
+        ${totalCategories}
+        Categories
+
+        <br>
+
+        ${totalProjects}
+        Projects
+
+    </div>
+
+`;
+
+orbitContainer.appendChild(
+    coreLabel
+);
+
+
 // =====================================
 // CATEGORY PLANETS
 // =====================================
@@ -199,7 +247,7 @@ categories.forEach((category,index)=>{
     index % planetsPerRing;
 
     const radius =
-	250 + ring * 350;
+	200 + ring * 350;
 
 	const planetsInThisRing =
 	Math.min(
@@ -338,8 +386,22 @@ div.style.color="white";
 div.style.fontWeight="bold";
 div.style.textShadow="0 0 10px cyan";
 
-div.innerText =
-category.name;
+div.innerHTML = `
+
+    <div class="category-title">
+
+        ${category.name}
+
+    </div>
+
+    <div class="category-count">
+
+        ${category.projects.length}
+        Projects
+
+    </div>
+
+`;
 
 orbitContainer.appendChild(
 div
@@ -364,6 +426,12 @@ performance.now()*0.001;
 
 corePlanet.rotation.y +=
 0.002;
+
+coreLabel.style.left =
+`${window.innerWidth/2 - 120}px`;
+
+coreLabel.style.top =
+`${window.innerHeight/2 - 60}px`;
 
 // planets
 
