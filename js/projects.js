@@ -5,36 +5,9 @@
 const categories = [
 
 {
-    name:"XR",
-    texture:"xr.jpg",
-    orbitRadius:280,
-    orbitSpeed:0.1,
-
-    projects:[
-		{
-			title:"XR Interaction System",
-			year:"2025",
-			image:"xr_system.jpg",
-			url:"xr.html",
-			description:
-			"A modular interaction framework for XR applications supporting hand tracking, eye tracking and immersive interfaces."
-		},
-        {
-            title:"MR Patent",
-			year:"2025",
-            image:"mixed_reality_patent.jpg",
-            url:"mr_patent.html",
-			description:
-			"A modular interaction framework for XR applications supporting hand tracking, eye tracking and immersive interfaces."
-
-        }
-    ]
-},
-
-{
     name:"AI",
     texture:"ai.jpg",
-    orbitRadius:280,
+    orbitRadius:400,
     orbitSpeed:0.1,
 
     projects:[
@@ -53,7 +26,7 @@ const categories = [
 {
     name:"Robotics",
     texture:"ai.jpg",
-    orbitRadius:280,
+    orbitRadius:600,
     orbitSpeed:0.1,
 
     projects:[
@@ -123,17 +96,42 @@ const categories = [
             url:"https://youtu.be/OCTTJRChK8Y?si=2u_pgF-JXPdkFs7R",
 			description:
 			"A BCI car prototype to be used from PET recycling funding to help handicap."
-        }
+        },
+		
     ]
 },
 
 {
     name:"Products",
     texture:"bci.jpg",
-    orbitRadius:280,
+    orbitRadius:400,
     orbitSpeed:0.1,
 
     projects:[
+        {
+            title:"Laser Engravings",
+			year:"2012",
+            image:"mabe5.jpg",
+            url:"",
+			description:
+			"Special Engravings and fabrications"
+        },
+        {
+            title:"AoLDC Apparrel",
+			year:"2012",
+            image:"fotl1.jpg",
+            url:"",
+			description:
+			"One layer of different acrylic products Light Displays"
+        },
+        {
+            title:"AoLDC",
+			year:"2011",
+            image:"aoldc1_small.jpg",
+            url:"",
+			description:
+			"One layer of different acrylic products"
+        },
         {
             title:"VaSenzios",
 			year:"2023",
@@ -149,7 +147,23 @@ const categories = [
             url:"https://youtu.be/lZagQIphQ3U",
 			description:
 			"A dynamic Braille proposed"
-        }
+        },
+		{
+			title:"XR Interaction System",
+			year:"2025",
+			image:"aruco.jpg",
+			url:"https://youtu.be/JOJYk69uOSQ",
+			description:
+			"A modular interaction framework for XR applications supporting hand tracking, eye tracking and immersive interfaces."
+		},		
+		{
+			title:"Interative Arcade Machine",
+			year:"2026",
+			image:"arcade.jpg",
+			url:"",
+			description:
+			"An interactive Arcade machine with AI and custom games"
+		}
     ]
 },
 
@@ -157,7 +171,7 @@ const categories = [
 {
     name:"Social Causes",
     texture:"bci.jpg",
-    orbitRadius:280,
+    orbitRadius:400,
     orbitSpeed:0.1,
 
     projects:[
@@ -176,14 +190,41 @@ const categories = [
 {
     name:"Games",
     texture:"games.jpg",
-    orbitRadius:280,
+    orbitRadius:400,
     orbitSpeed:0.1,
 
     projects:[
 	    {
+            title:"Okinawa Adventure 3D",
+			year:"2026",
+            image:"okadv3d.jpg",
+            url:"",
+			description:
+			"Okinawa culture 3D Experience"
+
+        },		
+	    {
+            title:"Okinawa Adventure 2D",
+			year:"2026",
+            image:"okadv.jpg",
+            url:"https://youtu.be/T-jyL2qHiG4?si=omZ6Z8QPk8VnF5wB",
+			description:
+			"Okinawa culture 2D Retro NES Game"
+
+        },		
+	    {
+            title:"Where Are my Veggies",
+			year:"2025",
+            image:"wamg.jpg",
+            url:"https://youtu.be/rOK47AQa050?si=SvaBNDeiUAVHA6ar",
+			description:
+			"GoL NES Implementation"
+
+        },	
+	    {
             title:"PDO 3D",
 			year:"2023",
-            image:"pdo.jpg",
+            image:"pdo3d.jpg",
             url:"https://youtu.be/rOK47AQa050?si=SvaBNDeiUAVHA6ar",
 			description:
 			"Mexican 2D retro type game"
@@ -423,7 +464,7 @@ coreLabel.innerHTML = `
 
     <div class="core-title">
 
-        PROJECT GALAXY
+        PROJECT SYSTEM
 
     </div>
 
@@ -619,8 +660,7 @@ moons.push({
     planetIndex: index,
 
     radius:
-    category.planetRadius * 1.15 +
-    (pIndex * 25),
+    category.planetRadius * 1.15,
 
     angleOffset:
     (Math.PI * 2 /
