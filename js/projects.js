@@ -13,12 +13,12 @@ const categories = [
     projects:[
         {
             title:"XR Interaction System",
-            image:"xr_system.jpg",
+            image:"assets/projects/xr_system.jpg",
             url:"xr.html"
         },
         {
             title:"MR Patent",
-            image:"mixed_reality_patent.jpg",
+            image:"assets/projects/mixed_reality_patent.jpg",
             url:"mr_patent.html"
         }
     ]
@@ -48,7 +48,7 @@ const categories = [
     projects:[
         {
             title:"Vegetables Here Games There",
-            image:"bci.jpg",
+            image:"assets/projects/bci.jpg",
             url:"bci.html"
         }
     ]
@@ -63,7 +63,7 @@ const categories = [
     projects:[
         {
             title:"Arcade Machine",
-            image:"arcade.jpg",
+            image:"assets/projects/arcade.jpg",
             url:"arcade.html"
         }
     ]
