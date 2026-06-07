@@ -27,7 +27,7 @@ const categories = [
 {
     name:"AI",
     texture:"ai.jpg",
-    orbitRadius:420,
+    orbitRadius:280,
     orbitSpeed:0.08,
 
     projects:[
@@ -42,7 +42,7 @@ const categories = [
 {
     name:"BCI",
     texture:"bci.jpg",
-    orbitRadius:560,
+    orbitRadius:280,
     orbitSpeed:0.06,
 
     projects:[
@@ -57,7 +57,7 @@ const categories = [
 {
     name:"Games",
     texture:"games.jpg",
-    orbitRadius:700,
+    orbitRadius:280,
     orbitSpeed:0.04,
 
     projects:[
