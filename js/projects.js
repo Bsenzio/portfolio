@@ -176,14 +176,21 @@ categories.reduce(
 // CENTRAL PLANET
 // =====================================
 
+const largestPlanetRadius =
+Math.max(
+    ...categories.map(
+        c => c.planetRadius
+    )
+);
+
 const corePlanet =
 new THREE.Mesh(
 
-    new THREE.SphereGeometry(
-        120,
-        64,
-        64
-    ),
+	new THREE.SphereGeometry(
+		largestPlanetRadius * 2.2,
+		64,
+		64
+	),
 
     new THREE.MeshStandardMaterial({
 
@@ -246,8 +253,10 @@ categories.forEach((category,index)=>{
     const posInRing =
     index % planetsPerRing;
 
-    const radius =
-	200 + ring * 350;
+	const radius =
+	largestPlanetRadius * 4
+	+
+	ring * 350;
 
 	const planetsInThisRing =
 	Math.min(
@@ -299,7 +308,7 @@ categories.forEach((category,index)=>{
 		radius,
 
 		orbitRadiusY:
-		radius * 0.55,
+		radius * 0.35,
 
 		orbitSpeed:
 		0.05 +
@@ -480,16 +489,18 @@ planets.forEach(
         orbitAngle
     )
     *
-    250;
+    400;
 
     planet.x = x;
     planet.y = y;
 
-    planet.mesh.position.set(
-        x,
-        y,
-        z
-    );
+	planet.z = z;
+
+	planet.mesh.position.set(
+		x,
+		y,
+		z
+	);
 
     const scale =
     THREE.MathUtils.mapLinear(
@@ -539,6 +550,20 @@ planets.forEach(
     y -
     planet.planetRadius -
     25}px`;
+	
+	labels[index].style.opacity =
+	THREE.MathUtils.mapLinear(
+
+		z,
+
+		-400,
+		400,
+
+		0.2,
+		1
+
+	);	
+	
 
 });
 
@@ -551,6 +576,36 @@ const parent =
 planets[
 moon.planetIndex
 ];
+
+const depthScale =
+THREE.MathUtils.mapLinear(
+
+    parent.z,
+
+    -400,
+    400,
+
+    0.5,
+    1.2
+
+);
+
+moon.element.style.opacity =
+THREE.MathUtils.mapLinear(
+
+    parent.z,
+
+    -400,
+    400,
+
+    0.2,
+    1
+
+);
+
+
+moon.element.style.transform =
+`scale(${depthScale})`;
 
 const angle =
 
@@ -574,6 +629,30 @@ parent.y +
 Math.sin(angle)
 *
 moon.radius;
+
+const distanceToCenter =
+
+Math.sqrt(
+    x*x +
+    y*y
+);
+
+if(
+    parent.z < 0 &&
+    distanceToCenter <
+    largestPlanetRadius * 2.2
+){
+
+    moon.element.style.display =
+    "none";
+
+}
+else{
+
+    moon.element.style.display =
+    "block";
+
+}
 
 moon.element.style.left =
 `${window.innerWidth/2 + x - 60}px`;
