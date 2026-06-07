@@ -304,15 +304,10 @@ categories.forEach((category,index)=>{
 
 		mesh,
 
-		orbitRadiusX:
-		radius,
-
-		orbitRadiusY:
-		radius * 0.35,
+		orbitRadius: radius,
 
 		orbitSpeed:
-		0.05 +
-		index * 0.01,
+		category.orbitSpeed,
 
 		angleOffset:
 		angle,
@@ -370,21 +365,21 @@ moon
 
 moons.push({
 
-    element:moon,
+    element: moon,
 
-    planetIndex:index,
+    planetIndex: index,
 
-	radius:
-	category.planetRadius * 1.8 +
-	(pIndex * 60),
+    radius:
+    category.planetRadius * 1.8 +
+    (pIndex * 60),
 
-    speed:0.8,
+    speed:
+    category.orbitSpeed,
 
     angleOffset:
-    (Math.PI*2 /
+    (Math.PI * 2 /
     category.projects.length)
-    *
-    pIndex
+    * pIndex
 
 });
 
@@ -475,67 +470,24 @@ planets.forEach(
         orbitAngle
     )
     *
-    planet.orbitRadiusX;
+    planet.orbitRadius;
 
     const y =
     Math.sin(
         orbitAngle
     )
     *
-    planet.orbitRadiusY;
-
-    const z =
-    Math.sin(
-        orbitAngle
-    )
-    *
-    400;
+    planet.orbitRadius;
 
     planet.x = x;
     planet.y = y;
 
-	planet.z = z;
 
 	planet.mesh.position.set(
 		x,
 		y,
-		z
+		0
 	);
-
-    const scale =
-    THREE.MathUtils.mapLinear(
-
-        z,
-
-        -250,
-        250,
-
-        0.75,
-        1.25
-
-    );
-
-    planet.mesh.scale.set(
-        scale,
-        scale,
-        scale
-    );
-	
-	planet.mesh.material.transparent =
-	true;
-
-	planet.mesh.material.opacity =
-	THREE.MathUtils.mapLinear(
-
-		z,
-
-		-250,
-		250,
-
-		0.45,
-		1
-
-	);	
 
     planet.mesh.rotation.y +=
     0.01;
@@ -551,18 +503,6 @@ planets.forEach(
     planet.planetRadius -
     25}px`;
 	
-	labels[index].style.opacity =
-	THREE.MathUtils.mapLinear(
-
-		z,
-
-		-400,
-		400,
-
-		0.2,
-		1
-
-	);	
 	
 
 });
@@ -574,9 +514,9 @@ moons.forEach(moon=>{
     const parent =
     planets[moon.planetIndex];
 
-    const angle =
-    t * moon.speed +
-    moon.angleOffset;
+	const angle =
+	t * moon.speed +
+	moon.angleOffset;
 
     const orbitRadius =
     moon.radius;
