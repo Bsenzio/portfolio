@@ -13,12 +13,12 @@ const categories = [
     projects:[
         {
             title:"XR Interaction System",
-            image:"assets/images/projects/xr_system.jpg",
+            image:"xr_system.jpg",
             url:"xr.html"
         },
         {
             title:"MR Patent",
-            image:"assets/images/projects/mixed_reality_patent.jpg",
+            image:"mixed_reality_patent.jpg",
             url:"mr_patent.html"
         }
     ]
@@ -33,7 +33,7 @@ const categories = [
     projects:[
         {
             title:"Game of Life",
-            image:"assets/images/projects/game_of_life_nintendo.jpg",
+            image:"game_of_life_nintendo.jpg",
             url:"gol.html"
         }
     ]
@@ -48,7 +48,7 @@ const categories = [
     projects:[
         {
             title:"Vegetables Here Games There",
-            image:"assets/images/projects/bci.jpg",
+            image:"bci.jpg",
             url:"bci.html"
         }
     ]
@@ -63,7 +63,7 @@ const categories = [
     projects:[
         {
             title:"Arcade Machine",
-            image:"assets/images/projects/arcade.jpg",
+            image:"arcade.jpg",
             url:"arcade.html"
         }
     ]
@@ -347,7 +347,7 @@ moon.className =
 
 moon.innerHTML = `
 
-<img src="assets/projects/${project.image}">
+<img src="assets/images/projects/${project.image}">
 
 <div class="satellite-info">
 
