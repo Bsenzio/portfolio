@@ -2647,3 +2647,11 @@ body{
     opacity:.3;
 
 }
+
+.project-year{
+    display:block;
+    margin-top:4px;
+    font-size:12px;
+    opacity:.7;
+    color:#8ff;
+}

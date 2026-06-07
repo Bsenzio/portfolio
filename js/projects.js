@@ -13,6 +13,7 @@ const categories = [
     projects:[
 		{
 			title:"XR Interaction System",
+			year:"2025",
 			image:"xr_system.jpg",
 			url:"xr.html",
 			description:
@@ -20,6 +21,7 @@ const categories = [
 		},
         {
             title:"MR Patent",
+			year:"2025",
             image:"mixed_reality_patent.jpg",
             url:"mr_patent.html",
 			description:
@@ -38,6 +40,7 @@ const categories = [
     projects:[
         {
             title:"Game of Life",
+			year:"2025",
             image:"game_of_life_nintendo.jpg",
             url:"gol.html",
 			description:
@@ -48,18 +51,123 @@ const categories = [
 },
 
 {
+    name:"Robotics",
+    texture:"ai.jpg",
+    orbitRadius:280,
+    orbitSpeed:0.1,
+
+    projects:[
+        {
+            title:"Wiimote SCARA Arm",
+			year:"2009",
+            image:"scara_wii.jpg",
+            url:"https://youtu.be/SX0WJOZMdzA",
+			description:
+			"A pioneer SCARA arm prototype controlled with Wiimote"
+        },
+        {
+            title:"Bruno Kart",
+			year:"2010",
+            image:"mobile_wii.jpg",
+            url:"https://youtu.be/qE38qtjhbLs",
+			description:
+			"A pioneer Wiimote Controlled Mobile Robot"
+        },
+        {
+            title:"Cannonball",
+			year:"2010",
+            image:"cannonball.jpg",
+            url:"https://youtu.be/qE38qtjhbLs",
+			description:
+			"A pioneer Wiimote Controlled Mobile Robot"
+        },
+        {
+            title:"Hand Augmentation",
+			year:"2016",
+            image:"supernumerary.jpg",
+            url:"https://www.youtube.com/watch?v=GYFfOJpuJHk",
+			description:
+			"A supernumerary robotic limb hand robot"
+        },
+        {
+            title:"Verdopplerbot AI V1",
+			year:"2023",
+            image:"verdopplerbotai.jpg",
+            url:"https://youtu.be/AARts_NJcPw?si=C4CtIP4Z2qYBD8ji",
+			description:
+			"Archwire bending Robot Machine"
+        }		
+    ]
+},
+
+
+{
     name:"BCI",
+    texture:"bci.jpg",
+    orbitRadius:400,
+    orbitSpeed:0.1,
+
+    projects:[
+        {
+            title:"Vegetables Here Games There",
+			year:"2025",
+            image:"bci.jpg",
+            url:"bci.html",
+			description:
+			"A modular inting and immersive interfaces."
+        },
+        {
+            title:"Vegetables Here Games There",
+			year:"2012",
+            image:"bcicar.jpg",
+            url:"https://youtu.be/OCTTJRChK8Y?si=2u_pgF-JXPdkFs7R",
+			description:
+			"A BCI car prototype to be used from PET recycling funding to help handicap."
+        }
+    ]
+},
+
+{
+    name:"Products",
     texture:"bci.jpg",
     orbitRadius:280,
     orbitSpeed:0.1,
 
     projects:[
         {
-            title:"Vegetables Here Games There",
+            title:"VaSenzios",
+			year:"2023",
+            image:"glass.jpg",
+            url:"https://youtu.be/Q50DDXVfSDA",
+			description:
+			"An interactive inductive glass prototype"
+        },
+        {
+            title:"Inductive Braille",
+			year:"2023",
+            image:"braille.jpg",
+            url:"https://youtu.be/lZagQIphQ3U",
+			description:
+			"A dynamic Braille proposed"
+        }
+    ]
+},
+
+
+{
+    name:"Social Causes",
+    texture:"bci.jpg",
+    orbitRadius:280,
+    orbitSpeed:0.1,
+
+    projects:[
+        {
+            title:"Recicla para Ayudar",
+			year:"2012",
             image:"bci.jpg",
             url:"bci.html",
 			description:
-			"A modular interaction framework for XR applications supporting hand tracking, eye tracking and immersive interfaces."
+			"A social cause project PET recycling to support lighting marginalized communities"
 
         }
     ]
@@ -72,12 +180,41 @@ const categories = [
     orbitSpeed:0.1,
 
     projects:[
-        {
-            title:"Arcade Machine",
-            image:"arcade.jpg",
-            url:"arcade.html",
+	    {
+            title:"PDO 3D",
+			year:"2023",
+            image:"pdo.jpg",
+            url:"https://youtu.be/rOK47AQa050?si=SvaBNDeiUAVHA6ar",
 			description:
-			"A modular interaction framework for XR applications supporting hand tracking, eye tracking and immersive interfaces."
+			"Mexican 2D retro type game"
+
+        },	
+	
+	    {
+            title:"PDO 2D",
+			year:"2023",
+            image:"pdo.jpg",
+            url:"https://www.youtube.com/watch?v=BKFJajgmsUY",
+			description:
+			"Mexican 2D retro type game"
+
+        },
+        {
+            title:"Ganbare Shisa",
+			year:"2015",
+            image:"shisablender.jpg",
+            url:"https://youtu.be/ENqnNoTl6a4",
+			description:
+			"Small Blender Animation Drafting"
+
+        },
+        {
+            title:"8-bit Trouble",
+			year:"2025",
+            image:"8_bit_trouble.jpg",
+            url:"https://youtu.be/TFJNJK4z_fE?si=UcRHCHUPbZp82q-7",
+			description:
+			"Fusion begins 2012, all your base are belong to us!!"
 
         }
     ]
@@ -121,16 +258,18 @@ projectPanel.innerHTML = `
 
     <div>
 
+        <div id="panelYear"></div>
+
         <h2 id="panelTitle"></h2>
 
         <p id="panelDescription"></p>
 
-	<a
-		id="panelLink"
-		target="_blank"
-	>
-		Open Project
-	</a>
+        <a
+            id="panelLink"
+            target="_blank"
+        >
+            See more...
+        </a>
 
     </div>
 
@@ -440,6 +579,13 @@ moon.onclick=()=>{
     .textContent =
     project.title;
 
+	document
+	.getElementById(
+		"panelYear"
+	)
+	.textContent =
+	project.year;
+
     document
     .getElementById("panelDescription")
     .textContent =
@@ -473,8 +619,8 @@ moons.push({
     planetIndex: index,
 
     radius:
-    category.planetRadius * 1.8 +
-    (pIndex * 60),
+    category.planetRadius * 1.15 +
+    (pIndex * 25),
 
     angleOffset:
     (Math.PI * 2 /
