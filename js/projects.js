@@ -294,6 +294,20 @@ categories.forEach((category,index)=>{
 	planets.push({
 
 		mesh,
+
+		orbitRadiusX:
+		radius,
+
+		orbitRadiusY:
+		radius * 0.55,
+
+		orbitSpeed:
+		0.05 +
+		index * 0.01,
+
+		angleOffset:
+		angle,
+
 		x,
 		y,
 
@@ -435,22 +449,96 @@ coreLabel.style.top =
 
 // planets
 
+// planets
+
 planets.forEach(
 (planet,index)=>{
+
+    const orbitAngle =
+
+    t *
+    planet.orbitSpeed +
+
+    planet.angleOffset;
+
+    const x =
+    Math.cos(
+        orbitAngle
+    )
+    *
+    planet.orbitRadiusX;
+
+    const y =
+    Math.sin(
+        orbitAngle
+    )
+    *
+    planet.orbitRadiusY;
+
+    const z =
+    Math.sin(
+        orbitAngle
+    )
+    *
+    250;
+
+    planet.x = x;
+    planet.y = y;
+
+    planet.mesh.position.set(
+        x,
+        y,
+        z
+    );
+
+    const scale =
+    THREE.MathUtils.mapLinear(
+
+        z,
+
+        -250,
+        250,
+
+        0.75,
+        1.25
+
+    );
+
+    planet.mesh.scale.set(
+        scale,
+        scale,
+        scale
+    );
+	
+	planet.mesh.material.transparent =
+	true;
+
+	planet.mesh.material.opacity =
+	THREE.MathUtils.mapLinear(
+
+		z,
+
+		-250,
+		250,
+
+		0.45,
+		1
+
+	);	
 
     planet.mesh.rotation.y +=
     0.01;
 
-	labels[index].style.left =
-	`${window.innerWidth/2 +
-	planet.x -
-	planet.planetRadius/2}px`;
+    labels[index].style.left =
+    `${window.innerWidth/2 +
+    x -
+    planet.planetRadius/2}px`;
 
-	labels[index].style.top =
-	`${window.innerHeight/2 +
-	planet.y -
-	planet.planetRadius -
-	25}px`;
+    labels[index].style.top =
+    `${window.innerHeight/2 +
+    y -
+    planet.planetRadius -
+    25}px`;
 
 });
 
