@@ -575,54 +575,18 @@ moons.forEach(moon=>{
     planets[moon.planetIndex];
 
     const angle =
-
-    t *
-    moon.speed +
-
+    t * moon.speed +
     moon.angleOffset;
 
-	const parentScale =
-	THREE.MathUtils.mapLinear(
-
-		parent.z,
-
-		-400,
-		400,
-
-		0.75,
-		1.25
-
-	);    
-	
-	const moonOrbitX =
+    const moonOrbitX =
     moon.radius;
 
     const moonOrbitY =
     moon.radius * 0.45;
 
-	const x =
-
-	parent.x +
-
-	Math.cos(angle)
-	*
-	moonOrbitX;
-
-	const y =
-
-	parent.y +
-
-	Math.sin(angle)
-	*
-	moonOrbitY;
-
     const z =
-
     parent.z +
-
-    Math.sin(angle)
-    *
-    80;
+    Math.sin(angle) * 120;
 
     const depthScale =
     THREE.MathUtils.mapLinear(
@@ -632,10 +596,24 @@ moons.forEach(moon=>{
         -500,
         500,
 
-        0.4,
-        1.1
+        0.6,
+        1.3
 
     );
+
+    const perspectiveScale =
+    1 + z / 1000;
+
+    const x =
+    parent.x +
+    Math.cos(angle) *
+    moonOrbitX *
+    perspectiveScale;
+
+    const y =
+    parent.y +
+    Math.sin(angle) *
+    moonOrbitY;
 
     moon.element.style.opacity =
     THREE.MathUtils.mapLinear(
@@ -650,32 +628,26 @@ moons.forEach(moon=>{
 
     );
 
-	moon.element.style.transform =
-
-	`translate(-50%,-50%)
-	 scale(${depthScale})`;
+    moon.element.style.transform =
+    `translate(-50%,-50%)
+     scale(${depthScale})`;
 
     if(
-        z < parent.z &&
-        z < 0
+        z < parent.z
     ){
 
-        moon.element.style.display =
-        "none";
+        moon.element.style.opacity *= 0.3;
 
     }
-    else{
 
-        moon.element.style.display =
-        "block";
-
-    }
+    moon.element.style.display =
+    "block";
 
     moon.element.style.left =
-    `${window.innerWidth/2 + x - 40}px`;
+    `${window.innerWidth/2 + x}px`;
 
     moon.element.style.top =
-    `${window.innerHeight/2 + y - 40}px`;
+    `${window.innerHeight/2 + y}px`;
 
 });
 
