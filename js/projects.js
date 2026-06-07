@@ -13,11 +13,11 @@ const categories = [
     projects:[
         {
             title:"Game of Life",
-			year:"2025",
-            image:"game_of_life_nintendo.jpg",
-            url:"gol.html",
+			year:"2018",
+            image:"prescriptionai.jpg",
+            url:"",
 			description:
-			"A modular interaction framework for XR applications supporting hand tracking, eye tracking and immersive interfaces."
+			"An AI OCR recognition platform for medical prescriptions"
 
         }
     ]
@@ -90,7 +90,7 @@ const categories = [
 			"An EEG Reading Harwdare Device"
         },
         {
-            title:"Vegetables Here Games There",
+            title:"3D Mindwave Unity Environment",
 			year:"2014",
             image:"bci_env.jpg",
             url:"https://youtu.be/FN6Tui_sEzo",
@@ -98,14 +98,29 @@ const categories = [
 			"A 3D Interactive BCI Environment"
         },
         {
-            title:"Vegetables Here Games There",
+            title:"BCI Neurocar",
 			year:"2012",
             image:"bcicar.jpg",
             url:"https://youtu.be/OCTTJRChK8Y?si=2u_pgF-JXPdkFs7R",
 			description:
 			"A BCI car prototype to be used from PET recycling funding to help handicap."
         },
-		
+        {
+            title:"BMI for Supernumerary",
+			year:"2018",
+            image:"bcinature.jpg",
+            url:"https://www.science.org/doi/10.1126/scirobotics.aat1228?ijkey=jgzH2rMiJdja6&keytype=ref&siteid=robotics",
+			description:
+			"BMI to perform a goal-oriented task while simultaneously using their own arms to do a different task."
+        },
+        {
+            title:"BCI e-Textile",
+			year:"2019",
+            image:"bcipatent.jpg",
+            url:"",
+			description:
+			"BMI Headset with e-textiles and use of wearable neurofeedback"
+        }		
     ]
 },
 
@@ -206,13 +221,12 @@ const categories = [
             url:"https://www.youtube.com/live/QoZwG4V6CVw?si=o_C43iGD-uhwwK3-",
 			description:
 			"Spreading AI and AL through gaming experiences"
-
         },
         {
             title:"BCI and Robotics for Schools",
 			year:"2012",
             image:"bci_schools.jpg",
-            url:"l",
+            url:"",
 			description:
 			"Trading PET for BCI Robotics education at schools"
 
@@ -221,7 +235,7 @@ const categories = [
             title:"Recicla para Ayudar",
 			year:"2012",
             image:"social8.jpg",
-            url:"l",
+            url:"",
 			description:
 			"A social cause project PET recycling to support lighting marginalized communities"
 
@@ -234,7 +248,16 @@ const categories = [
 			description:
 			"PET Gathering at schools"
 
-        }
+        },
+        {
+            title:"Senior People Manufacturing",
+			year:"2023",
+            image:"oldmanufacture.jpg",
+            url:"l",
+			description:
+			"Senior people employment for electronics assembly program"
+
+        }			
     ]
 },
 
