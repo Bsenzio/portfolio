@@ -13,12 +13,12 @@ const categories = [
     projects:[
         {
             title:"XR Interaction System",
-            image:"assets/projects/xr_system.jpg",
+            image:"assets/images/projects/xr_system.jpg",
             url:"xr.html"
         },
         {
             title:"MR Patent",
-            image:"assets/projects/mixed_reality_patent.jpg",
+            image:"assets/images/projects/mixed_reality_patent.jpg",
             url:"mr_patent.html"
         }
     ]
@@ -33,7 +33,7 @@ const categories = [
     projects:[
         {
             title:"Game of Life",
-            image:"game_of_life_nintendo.jpg",
+            image:"assets/images/projects/game_of_life_nintendo.jpg",
             url:"gol.html"
         }
     ]
@@ -48,7 +48,7 @@ const categories = [
     projects:[
         {
             title:"Vegetables Here Games There",
-            image:"assets/projects/bci.jpg",
+            image:"assets/images/projects/bci.jpg",
             url:"bci.html"
         }
     ]
@@ -63,7 +63,7 @@ const categories = [
     projects:[
         {
             title:"Arcade Machine",
-            image:"assets/projects/arcade.jpg",
+            image:"assets/images/projects/arcade.jpg",
             url:"arcade.html"
         }
     ]
