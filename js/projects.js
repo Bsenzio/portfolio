@@ -82,12 +82,20 @@ const categories = [
 
     projects:[
         {
-            title:"Vegetables Here Games There",
-			year:"2025",
-            image:"bci.jpg",
-            url:"bci.html",
+            title:"Aura EEG Device",
+			year:"2017",
+            image:"aura.jpg",
+            url:"https://www.mirai-innovation-lab.com/aura-through-time/",
 			description:
-			"A modular inting and immersive interfaces."
+			"An EEG Reading Harwdare Device"
+        },
+        {
+            title:"Vegetables Here Games There",
+			year:"2014",
+            image:"bci_env.jpg",
+            url:"https://youtu.be/FN6Tui_sEzo",
+			description:
+			"A 3D Interactive BCI Environment"
         },
         {
             title:"Vegetables Here Games There",
@@ -108,6 +116,22 @@ const categories = [
     orbitSpeed:0.1,
 
     projects:[
+        {
+            title:"Bus Tracking Device",
+			year:"2022",
+            image:"products1.jpg",
+            url:"",
+			description:
+			"Bus GPS and GPRS Tracker"
+        },
+        {
+            title:"Electric Fence",
+			year:"2013",
+            image:"Y2.jpg",
+            url:"",
+			description:
+			"Electric Fence and Gate controllers"
+        },
         {
             title:"Laser Engravings",
 			year:"2012",
@@ -176,12 +200,39 @@ const categories = [
 
     projects:[
         {
+            title:"Vegetables here, games there...",
+			year:"2025",
+            image:"vegetables.jpg",
+            url:"https://www.youtube.com/live/QoZwG4V6CVw?si=o_C43iGD-uhwwK3-",
+			description:
+			"Spreading AI and AL through gaming experiences"
+
+        },
+        {
+            title:"BCI and Robotics for Schools",
+			year:"2012",
+            image:"bci_schools.jpg",
+            url:"l",
+			description:
+			"Trading PET for BCI Robotics education at schools"
+
+        },
+        {
             title:"Recicla para Ayudar",
 			year:"2012",
-            image:"bci.jpg",
-            url:"bci.html",
+            image:"social8.jpg",
+            url:"l",
 			description:
 			"A social cause project PET recycling to support lighting marginalized communities"
+
+        },
+        {
+            title:"Local PET Gathering",
+			year:"2012",
+            image:"social16.jpg",
+            url:"l",
+			description:
+			"PET Gathering at schools"
 
         }
     ]
@@ -227,7 +278,7 @@ const categories = [
             image:"pdo3d.jpg",
             url:"https://youtu.be/rOK47AQa050?si=SvaBNDeiUAVHA6ar",
 			description:
-			"Mexican 2D retro type game"
+			"Mexican 3D Politics game"
 
         },	
 	
