@@ -577,6 +577,21 @@ footer p{
     overflow:hidden;
 }
 
+.page-header-blogs{
+    background-image:url("../assets/bg-images/bgblogs.png");
+    background-size:cover;
+    background-position:center;
+
+    min-height:350px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+}
+
+
 .header-content{
     display:flex;
     align-items:center;
