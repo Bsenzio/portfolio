@@ -12,12 +12,12 @@ const categories = [
 
     projects:[
         {
-            title:"Game of Life",
+            title:"OCR Pharmacy Prescription for Fillers",
 			year:"2018",
             image:"prescriptionai.jpg",
             url:"",
 			description:
-			"An AI OCR recognition platform for medical prescriptions"
+			"An AI OCR recognition platform for medical prescription filling machines"
 
         }
     ]
@@ -132,6 +132,14 @@ const categories = [
 
     projects:[
         {
+            title:"Touch Water Dispenser",
+			year:"2022",
+            image:"touchwaterdispenser.jpg",
+            url:"",
+			description:
+			"Touch panel water dispensing machine with RFID"
+        },
+        {
             title:"Bus Tracking Device",
 			year:"2022",
             image:"products1.jpg",
@@ -178,6 +186,14 @@ const categories = [
             url:"https://youtu.be/Q50DDXVfSDA",
 			description:
 			"An interactive inductive glass prototype"
+        },
+        {
+            title:"Retail Level RGB LED Lamp",
+			year:"2023",
+            image:"led_lamp.jpg",
+            url:"",
+			description:
+			"An IR remote RGB Commercial Level Lamp"
         },
         {
             title:"Inductive Braille",
