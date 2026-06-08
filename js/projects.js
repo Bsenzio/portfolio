@@ -40,7 +40,7 @@ const categories = [
 
 {
     name:"Robotics",
-    texture:"ai.jpg",
+    texture:"robotics.jpg",
     orbitRadius:450,
     orbitSpeed:0.1,
 
@@ -149,7 +149,7 @@ const categories = [
 
 {
     name:"Products",
-    texture:"bci.jpg",
+    texture:"product.jpg",
     orbitRadius:450,
     orbitSpeed:0.1,
 
