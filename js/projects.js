@@ -12,13 +12,28 @@ const categories = [
 
     projects:[
         {
+            title:"Face Mask Detection",
+			year:"2016",
+            image:"npu_ai.jpg",
+            url:"",
+			description:
+			"Edge AI Implementation on NPU"
+        },
+        {
+            title:"Machine Learning for BCI",
+			year:"2016",
+            image:"som_bci.jpg",
+            url:"",
+			description:
+			"Unsupervised and Supervised Learning for BCI"
+        },
+        {
             title:"OCR Pharmacy Prescription for Fillers",
 			year:"2018",
             image:"prescriptionai.jpg",
             url:"",
 			description:
 			"An AI OCR recognition platform for medical prescription filling machines"
-
         }
     ]
 },
@@ -30,6 +45,14 @@ const categories = [
     orbitSpeed:0.1,
 
     projects:[
+        {
+            title:"Mobile Robot Development",
+			year:"2009",
+            image:"zmpbot.jpg",
+            url:"https://youtu.be/xXTng9gSrDU?si=ELs3buI4AdGuYo3N",
+			description:
+			"Autonomous Robot Hardware Development and Deployment"
+        },
         {
             title:"Wiimote SCARA Arm",
 			year:"2009",
