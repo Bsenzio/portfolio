@@ -7,7 +7,7 @@ const categories = [
 {
     name:"AI",
     texture:"ai.jpg",
-    orbitRadius:400,
+    orbitRadius:450,
     orbitSpeed:0.1,
 
     projects:[
@@ -41,7 +41,7 @@ const categories = [
 {
     name:"Robotics",
     texture:"ai.jpg",
-    orbitRadius:600,
+    orbitRadius:450,
     orbitSpeed:0.1,
 
     projects:[
@@ -100,7 +100,7 @@ const categories = [
 {
     name:"BCI",
     texture:"bci.jpg",
-    orbitRadius:400,
+    orbitRadius:450,
     orbitSpeed:0.1,
 
     projects:[
@@ -150,7 +150,7 @@ const categories = [
 {
     name:"Products",
     texture:"bci.jpg",
-    orbitRadius:400,
+    orbitRadius:450,
     orbitSpeed:0.1,
 
     projects:[
@@ -249,7 +249,7 @@ const categories = [
 {
     name:"Social Causes",
     texture:"bci.jpg",
-    orbitRadius:400,
+    orbitRadius:450,
     orbitSpeed:0.1,
 
     projects:[
@@ -303,7 +303,7 @@ const categories = [
 {
     name:"Games",
     texture:"games.jpg",
-    orbitRadius:400,
+    orbitRadius:450,
     orbitSpeed:0.1,
 
     projects:[
@@ -578,6 +578,7 @@ coreLabel.innerHTML = `
     <div class="core-title">
 
         PROJECT SYSTEM
+		Selected picks
 
     </div>
 
