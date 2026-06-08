@@ -273,7 +273,7 @@ const categories = [
         {
             title:"Recicla para Ayudar",
 			year:"2012",
-            image:"social8.jpg",
+            image:"social8.JPG",
             url:"",
 			description:
 			"A social cause project PET recycling to support lighting marginalized communities"
