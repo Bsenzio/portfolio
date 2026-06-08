@@ -181,7 +181,7 @@ const categories = [
         {
             title:"Laser Engravings",
 			year:"2012",
-            image:"mabe5.jpg",
+            image:"mabe5.JPG",
             url:"",
 			description:
 			"Special Engravings and fabrications"
