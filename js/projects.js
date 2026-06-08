@@ -496,13 +496,13 @@ document
 scene.add(
 new THREE.AmbientLight(
 0xffffff,
-1.8
+1.2
 ));
 
 const pointLight =
 new THREE.PointLight(
 0xffffff,
-2
+0.8
 );
 
 pointLight.position.set(
