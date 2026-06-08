@@ -2410,7 +2410,7 @@ body{
 
     text-align:center;
 
-    color:black;
+    color:white;
 
     z-index:100;
 
@@ -2438,7 +2438,7 @@ body{
 
     font-size:.95rem;
 
-    color:#black;
+    color:white;
 
     line-height:1.6;
 }
