@@ -561,7 +561,6 @@ new THREE.Mesh(
             "assets/images/planets/planet_texture.jpg"
         )
 		
-		color:0x666666;
 
     })
 
