@@ -438,7 +438,7 @@ document.body.appendChild(
 projectPanel
 .querySelector(".panel-close")
 .onclick = ()=>{
-
+	playClickSound();
     selectedMoon = null;
 
     document
@@ -533,6 +533,35 @@ categories.reduce(
     sum + category.projects.length,
     0
 );
+
+// =====================================
+// SOUND EFFECTS
+// =====================================
+
+const hoverSfx = new Audio(
+    "assets/audio/sfxhover.mp3"
+);
+
+const clickSfx = new Audio(
+    "assets/audio/sfxclick.mp3"
+);
+
+hoverSfx.volume = 0.2;
+clickSfx.volume = 0.3;
+
+function playHoverSound(){
+
+    hoverSfx.currentTime = 0;
+    hoverSfx.play().catch(()=>{});
+
+}
+
+function playClickSound(){
+
+    clickSfx.currentTime = 0;
+    clickSfx.play().catch(()=>{});
+
+}
 
 
 // =====================================
@@ -716,7 +745,7 @@ moon.innerHTML = `
 `;
 
 moon.onclick=()=>{
-
+    playClickSound();
     selectedMoon = moon;
 
     document
@@ -789,6 +818,8 @@ moons.push({
 moon.addEventListener(
 "mouseenter",
 ()=>{
+
+    playHoverSound();
 
     moon.classList.add(
         "focused"
