@@ -248,7 +248,7 @@ const categories = [
 
 {
     name:"Social Causes",
-    texture:"bci.jpg",
+    texture:"social.jpg",
     orbitRadius:450,
     orbitSpeed:0.1,
 
