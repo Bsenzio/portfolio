@@ -496,13 +496,13 @@ document
 scene.add(
 new THREE.AmbientLight(
 0xffffff,
-1.2
+0.6
 ));
 
 const pointLight =
 new THREE.PointLight(
 0xffffff,
-0.8
+0.4
 );
 
 pointLight.position.set(
@@ -561,6 +561,7 @@ new THREE.Mesh(
             "assets/images/planets/planet_texture.jpg"
         )
 		
+		color:0x666666
 
     })
 
