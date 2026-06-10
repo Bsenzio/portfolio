@@ -122,20 +122,45 @@ rel="stylesheet">
 
 </footer>
 
-<audio id="bgm" loop>
+<audio id="bgm" loop autoplay>
     <source src="assets/audio/space_bgm.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-const bgm = document.getElementById("bgm");
-bgm.volume = 0.05; 
 
-function startBGM() {
-    bgm.play().catch(() => {});
-    document.removeEventListener("click", startBGM);
+const bgm = document.getElementById("bgm");
+
+bgm.volume = 0.05;
+
+let started = false;
+
+function startBGM(){
+
+    if(started) return;
+
+    bgm.play()
+    .then(() => {
+
+        started = true;
+
+    })
+    .catch(() => {
+
+        // El navegador bloqueó autoplay
+        // Esperar interacción del usuario
+
+    });
+
 }
 
+// Intentar autoplay cuando cargue la página
+window.addEventListener("load", startBGM);
+
+// Intentar nuevamente en la primera interacción
 document.addEventListener("click", startBGM);
+document.addEventListener("keydown", startBGM);
+document.addEventListener("touchstart", startBGM);
+
 </script>
 
 
