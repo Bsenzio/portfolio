@@ -1077,3 +1077,31 @@ window.innerHeight
 );
 
 });
+
+function getAllProjects() {
+    const allProjects = [];
+
+    categories.forEach(category => {
+
+        category.projects.forEach(project => {
+
+            allProjects.push({
+                ...project,
+                category: category.name
+            });
+
+        });
+
+    });
+
+    return allProjects;
+}
+
+function getRandomProjects(count = 3) {
+
+    const shuffled =
+    [...getAllProjects()]
+    .sort(() => Math.random() - 0.5);
+
+    return shuffled.slice(0, count);
+}

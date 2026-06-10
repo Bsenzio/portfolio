@@ -283,7 +283,9 @@ document
     updateTimeline();
 });
 
-updateTimeline();
+
+
+
 
 function createSimpleSlider(
     slideClass,
@@ -349,6 +351,85 @@ function createSimpleSlider(
 
     update();
 }
+
+function getAllProjects() {
+
+    const allProjects = [];
+
+    categories.forEach(category => {
+
+        category.projects.forEach(project => {
+
+            allProjects.push({
+                ...project,
+                category: category.name
+            });
+
+        });
+
+    });
+
+    return allProjects;
+}
+
+function getRandomProjects(count = 3) {
+
+    const projects =
+    [...getAllProjects()];
+
+    for(
+        let i = projects.length - 1;
+        i > 0;
+        i--
+    ){
+
+        const j =
+        Math.floor(
+            Math.random() * (i + 1)
+        );
+
+        [projects[i], projects[j]] =
+        [projects[j], projects[i]];
+    }
+
+    return projects.slice(0, count);
+}
+
+function loadFeaturedProjects() {
+
+    const container =
+    document.getElementById(
+        "featuredProjects"
+    );
+
+    if(!container) return;
+
+    const featured =
+    getRandomProjects(3);
+
+	container.innerHTML =
+	featured.map(project => `
+
+		<div class="project-slide">
+
+			<img
+				src="assets/images/projects/${project.image}"
+				alt="${project.title}"
+				class="featured-project-image"
+			>
+
+			<h3 class="featured-project-title">
+				${project.title}
+			</h3>
+
+		</div>
+
+	`).join("");
+}
+
+updateTimeline();
+
+loadFeaturedProjects();
 
 createSimpleSlider(
     ".project-slide",
