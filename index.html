@@ -104,10 +104,33 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
             <div id="game"></div>
         </div>
 
-        <div class="arcade-controls">
-            <span>INSERT COIN</span>
-            <span>PRESS START</span>
-        </div>
+		<div class="arcade-controls">
+
+			<span>INSERT COIN</span>
+			<span>PRESS START</span>
+
+			<div class="game-selector">
+
+				<select id="romSelector">
+
+					<option value="assets/roms/wamg.nes">
+						WAMG
+					</option>
+
+					<option value="assets/roms/okadv.nes">
+						Okinawa Adventure
+					</option>
+
+
+				</select>
+
+				<button id="loadGameBtn">
+					LOAD GAME
+				</button>
+
+			</div>
+
+		</div>
 
     </div>
 
@@ -273,19 +296,44 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 <script>
 
+const params =
+    new URLSearchParams(window.location.search);
+
 window.EJS_player = "#game";
-
 window.EJS_core = "nes";
-
-window.EJS_gameUrl = "assets/roms/wamg.nes";
-
-window.EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
+window.EJS_pathtodata =
+    "https://cdn.emulatorjs.org/stable/data/";
 
 window.EJS_startOnLoaded = true;
+
+window.EJS_gameUrl =
+    params.get("rom") ||
+    "assets/roms/wamg.nes";
+
+document.addEventListener("DOMContentLoaded", () =>
+{
+    const selector =
+        document.getElementById("romSelector");
+
+    selector.value =
+        window.EJS_gameUrl;
+
+    document
+        .getElementById("loadGameBtn")
+        .addEventListener("click", () =>
+        {
+            const rom = selector.value;
+
+            window.location.href =
+                "?rom=" +
+                encodeURIComponent(rom);
+        });
+});
 
 </script>
 
 <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
+
 
 <script src="js/tech-background.js"></script>
 

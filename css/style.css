@@ -2751,3 +2751,36 @@ body{
 
     object-fit:contain;
 }
+
+.game-selector
+{
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-selector select
+{
+    background: #111;
+    color: #00ffcc;
+    border: 2px solid #00ffcc;
+    padding: 5px 10px;
+    font-family: monospace;
+}
+
+.game-selector button
+{
+    background: #00ffcc;
+    color: #111;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.game-selector button:hover
+{
+    transform: scale(1.05);
+}
