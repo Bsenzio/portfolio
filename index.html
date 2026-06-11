@@ -106,29 +106,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 		<div class="arcade-controls">
 
-			<span>INSERT COIN</span>
-			<span>PRESS START</span>
+		<div class="game-cartridge-selector">
 
-			<div class="game-selector">
+				<img
+					src="assets/images/cartridges/wamv.png"
+					class="game-cartridge"
+					data-rom="assets/roms/wamg.nes"
+					alt="WAMG">
 
-				<select id="romSelector">
+				<img
+					src="assets/images/cartridges/okadv.png"
+					class="game-cartridge"
+					data-rom="assets/roms/okadv.nes"
+					alt="OK Adventure">
 
-					<option value="assets/roms/wamg.nes">
-						Bald B in Where are my veggies?
-					</option>
-
-					<option value="assets/roms/okadv.nes">
-						Okinawa Adventure
-					</option>
-
-
-				</select>
-
-				<button id="loadGameBtn">
-					LOAD GAME
-				</button>
-
-			</div>
+				</div>
 
 		</div>
 
@@ -312,21 +304,34 @@ window.EJS_gameUrl =
 
 document.addEventListener("DOMContentLoaded", () =>
 {
-    const selector =
-        document.getElementById("romSelector");
+    document
+        .querySelectorAll(".game-cartridge")
+        .forEach(cartridge =>
+        {
+            cartridge.addEventListener("click", () =>
+            {
+                const rom =
+                    cartridge.dataset.rom;
 
-    selector.value =
-        window.EJS_gameUrl;
+                window.location.href =
+                    "?rom=" +
+                    encodeURIComponent(rom);
+            });
+        });
 
     document
-        .getElementById("loadGameBtn")
-        .addEventListener("click", () =>
+        .querySelectorAll(".game-cartridge")
+        .forEach(cartridge =>
         {
-            const rom = selector.value;
-
-            window.location.href =
-                "?rom=" +
-                encodeURIComponent(rom);
+            if (
+                cartridge.dataset.rom ===
+                window.EJS_gameUrl
+            )
+            {
+                cartridge.classList.add(
+                    "selected-cartridge"
+                );
+            }
         });
 });
 

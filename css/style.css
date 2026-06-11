@@ -2740,36 +2740,36 @@ body{
 
     object-fit:contain;
 }
-
-.game-selector
+.game-cartridge-selector
 {
-    margin-top: 10px;
     display: flex;
-    gap: 8px;
     justify-content: center;
     align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+    flex-wrap: wrap;
 }
 
-.game-selector select
+.game-cartridge
 {
-    background: #111;
-    color: #00ffcc;
-    border: 2px solid #00ffcc;
-    padding: 5px 10px;
-    font-family: monospace;
-}
+    width: 100px;
+    height: 100px;
 
-.game-selector button
-{
-    background: #00ffcc;
-    color: #111;
-    border: none;
-    padding: 6px 12px;
+    object-fit: contain;
+
     cursor: pointer;
-    font-weight: bold;
+
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease;
 }
 
-.game-selector button:hover
+.game-cartridge:hover
 {
-    transform: scale(1.05);
+    transform: scale(1.08);
+}
+
+.selected-cartridge
+{
+    transform: scale(1.1);
 }
