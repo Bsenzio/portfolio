@@ -539,11 +539,11 @@ categories.reduce(
 // =====================================
 
 const hoverSfx = new Audio(
-    "assets/audio/sfxhover.mp3"
+    "assets/audio/sfx/sfxhover.mp3"
 );
 
 const clickSfx = new Audio(
-    "assets/audio/sfxclick.mp3"
+    "assets/audio/sfx/sfxclick.mp3"
 );
 
 hoverSfx.volume = 0.2;
