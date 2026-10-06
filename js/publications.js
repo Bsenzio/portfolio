@@ -13,11 +13,9 @@ year:2026,
 type:"Patent",
 image:"liquid_container.jpg",
 link:"assets/pdf/Patents/liquid_container.pdf",
-youtube:"https://youtu.be/6K8MLqRcPp8",
-github:"https://github.com/Bsenzio/wamg",
-language:["English"],
-keywords:["NES","CA065","Game Based Learning","Artificial Life"],
-abstract:"Educational implementation of Conway's Game of Life on Nintendo hardware for machine intelligence teaching."
+language:["English", "Japanese"],
+keywords:["Holographic Glass","Projection Module"],
+abstract:"Liquid container assembly that produces pseudo-holographic effect wit a projection base module."
 },
 
 {
