@@ -6,6 +6,22 @@ const publications = [
 
 {
 id:1,
+title:"Liquid container sssembly with removable optical projection base, and projection base module",
+authors:"<strong>Bruno Senzio-Savino</strong>, Jason Noble",
+venue:"100233478",
+year:2026,
+type:"Patent",
+image:"liquid_container.jpg",
+link:"assets/pdf/Patents/liquid_container.pdf",
+youtube:"https://youtu.be/6K8MLqRcPp8",
+github:"https://github.com/Bsenzio/wamg",
+language:["English"],
+keywords:["NES","CA065","Game Based Learning","Artificial Life"],
+abstract:"Educational implementation of Conway's Game of Life on Nintendo hardware for machine intelligence teaching."
+},
+
+{
+id:2,
 title:"Vegetables, Enemies, and Emergence: A Playable Game of Life on Nintendo for Educational Purposes",
 authors:"<strong>Bruno Senzio-Savino</strong>, F. Alsharif",
 venue:"Innovations in Machine Intelligence",
@@ -21,7 +37,7 @@ abstract:"Educational implementation of Conway's Game of Life on Nintendo hardwa
 },
 
 {
-id:2,
+id:3,
 title:"An Online Synchronous Brain Wave Signal Pattern Classifier with Parallel Processing Optimization for Embedded System Implementation",
 authors:"<strong>Bruno Senzio-Savino</strong>, M.R. Alsharif, C.E. Gutierrez, K. Setarehdan",
 venue:"International Journal of Advanced Computer Science and Applications",
@@ -37,7 +53,7 @@ abstract:"Online EEG pattern classifier using parallel processing and embedded i
 },
 
 {
-id:3,
+id:4,
 title:"Brain Wave Pattern Classification: Towards the Design of an Effective Online Classifier",
 authors:"<strong>Bruno Senzio-Savino</strong>, M.R. Alsharif et al.",
 venue:"European Journal of Information Science and Technology",
@@ -52,7 +68,7 @@ abstract:"EEG attention and meditation signal classification for online systems.
 },
 
 {
-id:4,
+id:5,
 title:"Path Detection in Virtual Environment for Synchronous EEG by Density-Based Support Vector Machine",
 authors:"<strong>Bruno Senzio-Savino</strong>, M.R. Alsharif et al.",
 venue:"Journal of Information and Communications Engineering",
@@ -67,7 +83,7 @@ abstract:"DBSVM-based path detection in virtual EEG environments."
 },
 
 {
-id:5,
+id:6,
 title:"BrainWave Processing Modular System",
 authors:"<strong>Bruno Senzio-Savino</strong>",
 venue:"Master Thesis",
@@ -82,7 +98,7 @@ abstract:"Modular architecture for EEG processing and low-cost BCI systems."
 },
 
 {
-id:6,
+id:7,
 title:"Non-Linear EEG Signal Feature Extraction and Healthy or Epileptic User Seizure Discrimination",
 authors:"<strong>Bruno Senzio-Savino</strong> et al.",
 venue:"ICTES",
@@ -95,7 +111,7 @@ link:"assets/pdf/International_First_Author/Non_linear_Epilepsy.pdf"
 },
 
 {
-id:7,
+id:8,
 title:"Implementation of a Cloud Processing Based Voice Communication and Noise Reduction Embedded System Network",
 authors:"<strong>Bruno Senzio-Savino</strong>, M.R. Alsharif, Y. Yabiku",
 venue:"ICTES",
@@ -109,7 +125,7 @@ link:"assets/pdf/International_First_Author/Cloud_NR_System.pdf"
 },
 
 {
-id:8,
+id:9,
 title:"Brain Wave Pattern Classification from Virtual Training Environment by Self-Organizing Maps",
 authors:"<strong>Bruno Senzio-Savino</strong> et al.",
 venue:"ITC-CSCC",
@@ -123,7 +139,7 @@ link:"assets/pdf/International_First_Author/Brain_Wave_Pattern_Classification_fr
 },
 
 {
-id:9,
+id:10,
 title:"Disturbance Response and Stability Analysis of Wireless Tele-Control System for MIMO Plant",
 authors:"F. Alsharif et al., <strong>Bruno Senzio-Savino</strong>",
 venue:"ITC-CSCC",
@@ -136,7 +152,7 @@ link:"assets/pdf/International_Coauthor/Disturbance_Response_and_Stability_Analy
 },
 
 {
-id:10,
+id:11,
 title:"On the Effect of Informed Nodes on Learning over Complex Adaptive Networks",
 authors:"M. Farhid et al., <strong>Bruno Senzio-Savino</strong>",
 venue:"ITC-CSCC",
@@ -149,7 +165,7 @@ link:"assets/pdf/International_Coauthor/On_the_Effect_of_Informed_Nodes_on_Learn
 },
 
 {
-id:11,
+id:12,
 title:"A New Double Adaptation Algorithm for Acoustic Noise Control",
 authors:"M.R. Alsharif et al., <strong>Bruno Senzio-Savino</strong>",
 venue:"ITC-CSCC",
@@ -162,7 +178,7 @@ link:"assets/pdf/International_Coauthor/A_New_Double_Adaptation_Algorithm_for_Ac
 },
 
 {
-id:12,
+id:13,
 title:"Classification of Attention Deficit Hyperactivity Disorder (ADHD) Using Non-Linear EEG Features",
 authors:"A. Heidarpour et al., <strong>Bruno Senzio-Savino</strong>",
 venue:"ITC-CSCC",
@@ -175,7 +191,7 @@ link:"assets/pdf/International_Coauthor/Classification_of_Attention_deficit_hype
 },
 
 {
-id:13,
+id:14,
 title:"Tractor Oil Pump Fault Diagnosis by Pseudo-Spectrum Analysis",
 authors:"S. Gupta et al., <strong>Bruno Senzio-Savino</strong>",
 venue:"ITC-CSCC",
@@ -188,7 +204,7 @@ link:"assets/pdf/International_Coauthor/Tractor_Oil_Pump_Fault_Diagnosis_by_Pseu
 },
 
 {
-id:14,
+id:15,
 title:"Density Based Support Vector Machine Classification for a Synchronous EEG Path Tracing Virtual Environment",
 authors:"<strong>Bruno Senzio-Savino</strong> et al.",
 venue:"ICIIBMS",
@@ -203,7 +219,7 @@ link:"assets/pdf/International_First_Author/EEGSVMBrunoT2-20822.pdf"
 },
 
 {
-id:15,
+id:16,
 title:"Synchronous Emotion Pattern Recognition with a Virtual Training Environment",
 authors:"<strong>Bruno Senzio-Savino</strong>",
 venue:"ICAI",
@@ -217,7 +233,7 @@ link:"assets/pdf/International_First_Author/ICA2627.pdf"
 },
 
 {
-id:16,
+id:17,
 title:"Stability and Performance Evaluation of Wireless Tele-Control System for MIMO Plant",
 authors:"F. Alsharif et al., <strong>Bruno Senzio-Savino</strong>",
 venue:"ICWN",
@@ -230,7 +246,7 @@ link:"assets/pdf/International_Coauthor/ICW2737.pdf"
 },
 
 {
-id:17,
+id:18,
 title:"Test and Development of a Brainwave Password Application",
 authors:"<strong>Bruno Senzio-Savino</strong>, K. Yamada",
 venue:"IEEE/SICE",
@@ -243,7 +259,7 @@ link:"assets/pdf/International_First_Author/SIP2014.pdf"
 },
 
 {
-id:18,
+id:19,
 title:"Remote Operation of a Parabolic Motion and Free Fall Experiment",
 authors:"<strong>Bruno Senzio-Savino</strong>",
 venue:"ICIAS",
@@ -257,7 +273,7 @@ link:"https://www.researchgate.net/publication/280599430_Remote_operation_of_a_p
 },
 
 {
-id:19,
+id:20,
 title:"Instrumentation and Control for the Remote Operation of the Projectile Motion and Free-Fall Experiment",
 authors:"<strong>Bruno Senzio-Savino</strong>",
 venue:"Bachelor Thesis",
@@ -271,7 +287,7 @@ link:"assets/pdf/Thesis/BS_Thesis.pdf"
 },
 
 {
-id:20,
+id:21,
 title:"Experimental Determination of an Irregular Object's Moment of Inertia",
 authors:"Y. Minami Koyama et al., <strong>Bruno Senzio-Savino</strong>",
 venue:"ICIAS",
@@ -284,7 +300,7 @@ link:"https://www.researchgate.net/publication/267379166_EXPERIMENTAL_DETERMINAT
 },
 
 {
-id:21,
+id:22,
 title:"Mobile Robot Navigation with a Wiimote",
 authors:"<strong>Bruno Senzio-Savino</strong>",
 venue:"ICIAS",
@@ -298,7 +314,7 @@ link:"https://www.researchgate.net/publication/269278243_Mobile_robot_navigation
 },
 
 {
-id:22,
+id:23,
 title:"Feature Extraction and Classification of Attention and Meditation EEG Signals Using Moving Average Methods",
 authors:"H. Takahashi et al., <strong>Bruno Senzio-Savino</strong>",
 venue:"IEEJ",
@@ -311,7 +327,7 @@ link:"assets/pdf/National_Coauthor/16-19.pdf"
 },
 
 {
-id:23,
+id:24,
 title:"Mixed Reality Environment Generation Technology",
 authors:"<strong>Bruno Senzio-Savino</strong>, Alfredo Gilbert",
 venue:"Patent MXa2025009159",
@@ -325,7 +341,7 @@ link:"assets/pdf/Patents/mixed_reality_patent.pdf"
 },
 
 {
-id:24,
+id:25,
 title:"Matrix Electromagnetic Transduction System",
 authors:"<strong>Bruno Senzio-Savino</strong>",
 venue:"Patent MXa2023002399",
@@ -339,7 +355,7 @@ link:"assets/pdf/Patents/electromagnetic_transduction.pdf"
 },
 
 {
-id:25,
+id:26,
 title:"Interactive Biosignal Processing System with Sensor Feedback",
 authors:"<strong>Bruno Senzio-Savino</strong>",
 venue:"Patent 388756",
