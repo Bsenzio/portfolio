@@ -137,6 +137,14 @@ const categories = [
 			"BMI to perform a goal-oriented task while simultaneously using their own arms to do a different task."
         },
         {
+            title:"ALIFE26 BMI/AL Tutorial",
+			year:"2026",
+            image:"alifetutorial.jpg",
+            url:"https://bsenzio.github.io/bmitutorialALIFE26/",
+			description:
+			"From neural signals to AL interactive systems."
+        },
+        {
             title:"BCI e-Textile",
 			year:"2019",
             image:"bcipatent.jpg",
@@ -341,6 +349,15 @@ const categories = [
             url:"https://bsenzio.github.io/TestStayGood/",
 			description:
 			"WebGL Implementation"
+
+        },	
+	    {
+            title:"Nara Adventure",
+			year:"2026",
+            image:"naraadventure.jpg",
+			url:"https://bsenzio.github.io/portfolio/projects.html",
+			description:
+			"Game of Nara Prefecture for Local Festivals"
 
         },	
 	    {
