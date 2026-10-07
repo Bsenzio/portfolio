@@ -335,6 +335,15 @@ const categories = [
 
         },	
 	    {
+            title:"Stay Good: Barber Assault",
+			year:"2026",
+            image:"sgba.jpg",
+            url:"https://bsenzio.github.io/TestStayGood/",
+			description:
+			"WebGL Implementation"
+
+        },	
+	    {
             title:"PDO 3D",
 			year:"2023",
             image:"pdo3d.jpg",
