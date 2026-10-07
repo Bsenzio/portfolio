@@ -395,12 +395,17 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                     alt="OK Adventure"
                 >
 
-
+<img
+    src="assets/images/cartridges/sgba.png"
+    class="game-cartridge"
+    data-link="https://bsenzio.github.io/TestStayGood/"
+    alt="Stay Good: Barber Assault"
+>
             </div>
 
 
             <span>
-                More coming up...
+                Picky pick a game!
             </span>
 
 
@@ -739,48 +744,58 @@ document.addEventListener(
     () =>
     {
 
-        document
-            .querySelectorAll(".game-cartridge")
-            .forEach(cartridge =>
-            {
+		document
+			.querySelectorAll(".game-cartridge")
+			.forEach(cartridge =>
+			{
+				cartridge.addEventListener(
+					"click",
+					() =>
+					{
 
-                cartridge.addEventListener(
-                    "click",
-                    () =>
-                    {
+						/* External project */
+						if (cartridge.dataset.link)
+						{
+							window.open(
+								cartridge.dataset.link,
+								"_blank"
+							);
 
-                        const rom =
-                            cartridge.dataset.rom;
-
-
-                        window.location.href =
-                            "?rom=" +
-                            encodeURIComponent(rom);
-
-                    }
-                );
-
-            });
+							return;
+						}
 
 
-        document
-            .querySelectorAll(".game-cartridge")
-            .forEach(cartridge =>
-            {
+						/* NES game */
+						if (cartridge.dataset.rom)
+						{
+							const rom =
+								cartridge.dataset.rom;
 
-                if (
-                    cartridge.dataset.rom ===
-                    window.EJS_gameUrl
-                )
-                {
+							window.location.href =
+								"?rom=" +
+								encodeURIComponent(rom);
+						}
 
-                    cartridge.classList.add(
-                        "selected-cartridge"
-                    );
+					}
+				);
+			});
 
-                }
 
-            });
+		document
+			.querySelectorAll(".game-cartridge")
+			.forEach(cartridge =>
+			{
+				if (
+					cartridge.dataset.rom &&
+					cartridge.dataset.rom ===
+					window.EJS_gameUrl
+				)
+				{
+					cartridge.classList.add(
+						"selected-cartridge"
+					);
+				}
+			});
 
     }
 );
