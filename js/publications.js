@@ -536,6 +536,9 @@ function renderPublications() {
     filtered.sort(
         (a,b) => b.year - a.year
     );
+	
+	// Store the publications currently displayed
+	window.filteredPublications = [...filtered];
 
     document
     .getElementById("resultCount")

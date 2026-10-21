@@ -20,6 +20,15 @@ function generatePublicationsPDF() {
 
     const { jsPDF } = window.jspdf;
 
+	// Get only the currently filtered publications
+	const publicationsToExport = window.filteredPublications || [];
+
+	// Prevent empty PDF downloads
+	if (publicationsToExport.length === 0) {
+		alert("No publications match the current filters.");
+		return;
+	}
+
     const doc = new jsPDF({
         orientation: "portrait",
         unit: "mm",
@@ -93,7 +102,7 @@ function generatePublicationsPDF() {
     y += 6;
 
     doc.text(
-        "Total records: " + publications.length,
+        "Total records: " + publicationsToExport.length,
         margin,
         y
     );
@@ -117,7 +126,7 @@ function generatePublicationsPDF() {
 
     categories.forEach(category => {
 
-        const records = publications
+        const records = publicationsToExport
             .filter(pub => pub.type === category.type)
             .sort((a, b) => b.year - a.year);
 
@@ -272,7 +281,13 @@ function generatePublicationsPDF() {
 
     }
 
-    // Download PDF
-    doc.save("Bruno_Senzio_Savino_Publications.pdf");
+	const isFiltered =
+		publicationsToExport.length !== publications.length;
+
+	const filename = isFiltered
+		? "Bruno_Senzio_Savino_Filtered_Publications.pdf"
+		: "Bruno_Senzio_Savino_Publications.pdf";
+
+	doc.save(filename);
 
 }

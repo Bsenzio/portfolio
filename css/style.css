@@ -2773,76 +2773,9 @@ body{
 {
     transform: scale(1.1);
 }
-
 /* =================================
-   PUBLICATIONS DOWNLOAD TOOLBAR
+   SEARCH BAR + DOWNLOAD BUTTON
 ================================= */
-
-.results-toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin: 20px 0 25px;
-}
-
-.results-toolbar #resultCount {
-    margin: 0;
-}
-
-.download-publications-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-
-    background: #243b55;
-    color: #ffffff;
-
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 8px;
-
-    padding: 12px 20px;
-
-    font-family: "DM Sans", sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-
-    cursor: pointer;
-
-    transition:
-        background 0.3s ease,
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-.download-publications-btn:hover {
-    background: #345d83;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-}
-
-.download-publications-btn i {
-    font-size: 17px;
-}
-
-/* Mobile responsiveness */
-
-@media (max-width: 768px) {
-
-    .results-toolbar {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .download-publications-btn {
-        width: 100%;
-    }
-
-}
-
-/* SEARCH BAR + DOWNLOAD BUTTON */
 
 .search-container {
     display: flex;
@@ -2857,6 +2790,8 @@ body{
     min-width: 0;
 }
 
+/* DOWNLOAD BUTTON */
+
 .download-publications-btn {
     display: inline-flex;
     align-items: center;
@@ -2865,10 +2800,10 @@ body{
 
     padding: 12px 18px;
 
-    background: #243b55;
-    color: white;
+    background: #243b21;
+    color: #33ff11;
 
-    border: none;
+    border: 1px solid #33ff11;
     border-radius: 8px;
 
     font-family: "DM Sans", sans-serif;
@@ -2881,14 +2816,34 @@ body{
     position: relative;
     z-index: 10;
 
-    transition: background 0.3s ease;
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
+
+/* HOVER EFFECT */
 
 .download-publications-btn:hover {
-    background: #345d83;
+    background: #33ff11;
+    color: #152b12;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 5px 15px rgba(51,255,17,0.3);
 }
 
+/* PDF ICON */
+
+.download-publications-btn i {
+    font-size: 17px;
+}
+
+/* MOBILE RESPONSIVENESS */
+
 @media (max-width: 768px) {
+
     .search-container #searchInput {
         flex-basis: 100%;
     }
@@ -2896,4 +2851,21 @@ body{
     .download-publications-btn {
         flex: 1;
     }
+
+}
+
+/* FORCE DOWNLOAD BUTTON COLORS */
+
+.search-container button#downloadPublicationsBtn {
+    background-color: #243b21;
+    color: #33ff11;
+    border: 1px solid #33ff11;
+}
+
+.search-container button#downloadPublicationsBtn:hover {
+    background-color: #33ff11;
+    color: #152b12;
+    border-color: #33ff11;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(51, 255, 17, 0.3);
 }
