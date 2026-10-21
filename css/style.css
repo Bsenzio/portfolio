@@ -2869,3 +2869,59 @@ body{
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(51, 255, 17, 0.3);
 }
+
+/* =================================
+   JAPANESE PUBLICATION LIST BUTTON
+================================= */
+
+.search-container .download-japanese-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 12px 18px;
+
+    background-color: #183A64;
+    color: #FFFFFF;
+
+    border: 1px solid #4A90E2;
+    border-radius: 8px;
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+
+    position: relative;
+    z-index: 10;
+
+    transition:
+        background-color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.search-container .download-japanese-btn:hover {
+    background-color: #2B65A5;
+    color: #FFFFFF;
+    text-decoration: none;
+
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(43, 101, 165, 0.3);
+}
+
+.download-japanese-btn i {
+    font-size: 17px;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+    .search-container .download-japanese-btn {
+        flex: 1;
+    }
+}

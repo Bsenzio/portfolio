@@ -1,33 +1,32 @@
 
 document.addEventListener("DOMContentLoaded", () => {
+    const button = document.getElementById("downloadPublicationsBtn");
 
-    const downloadButton = document.getElementById(
-        "downloadPublicationsBtn"
-    );
-
-    if (!downloadButton) return;
-
-    downloadButton.addEventListener("click", generatePublicationsPDF);
-
+    if (button) {
+        button.addEventListener("click", generatePublicationsPDF);
+    }
 });
 
 function generatePublicationsPDF() {
 
     if (!window.jspdf) {
-        alert("PDF library could not be loaded.");
+        alert("Unable to load PDF generation library.");
+        return;
+    }
+
+    const records = window.filteredPublications;
+
+    if (!Array.isArray(records)) {
+        alert("Publication data is not ready.");
+        return;
+    }
+
+    if (records.length === 0) {
+        alert("No publications match the current filters.");
         return;
     }
 
     const { jsPDF } = window.jspdf;
-
-	// Get only the currently filtered publications
-	const publicationsToExport = window.filteredPublications || [];
-
-	// Prevent empty PDF downloads
-	if (publicationsToExport.length === 0) {
-		alert("No publications match the current filters.");
-		return;
-	}
 
     const doc = new jsPDF({
         orientation: "portrait",
@@ -35,259 +34,337 @@ function generatePublicationsPDF() {
         format: "a4"
     });
 
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const pageHeight = doc.internal.pageSize.getHeight();
+    const W = doc.internal.pageSize.getWidth();
+    const H = doc.internal.pageSize.getHeight();
+    const M = 18;
+    const CW = W - M * 2;
 
-    const margin = 20;
-    const contentWidth = pageWidth - margin * 2;
+    const navy = [36, 59, 85];
+    const gray = [90, 105, 120];
+    const blue = [35, 100, 170];
 
-    let y = 25;
+    let y = 20;
+    let number = 1;
 
-    const authorName = "Bruno Senzio-Savino Barzellato";
+    // ----------------------------------
+    // FILTER INFORMATION
+    // ----------------------------------
 
-    // Remove HTML tags from author strings
-    function cleanText(value) {
-        const element = document.createElement("div");
-        element.innerHTML = value || "";
-        return element.textContent || "";
+    const getValue = id => {
+        const el = document.getElementById(id);
+        return el ? el.value : "all";
+    };
+
+    const filters = {
+        search: getValue("searchInput").trim(),
+        year: getValue("yearFilter"),
+        type: getValue("typeFilter"),
+        language: getValue("languageFilter"),
+        keywords: Array.isArray(window.selectedKeywords)
+            ? window.selectedKeywords
+            : []
+    };
+
+    // If selectedKeywords is declared with let in
+    // publications.js, read it directly when available.
+    if (typeof selectedKeywords !== "undefined") {
+        filters.keywords = [...selectedKeywords];
     }
 
-    // New page when content exceeds available space
-    function checkPageSpace(requiredHeight) {
+    const activeFilters = [];
 
-        if (y + requiredHeight > pageHeight - 22) {
+    if (filters.search) {
+        activeFilters.push(["Search", filters.search]);
+    }
+
+    if (filters.year !== "all") {
+        activeFilters.push(["Year", filters.year]);
+    }
+
+    if (filters.type !== "all") {
+        activeFilters.push(["Type", filters.type]);
+    }
+
+    if (filters.language !== "all") {
+        activeFilters.push(["Language", filters.language]);
+    }
+
+    if (filters.keywords.length) {
+        activeFilters.push([
+            "Keywords",
+            filters.keywords.join(", ")
+        ]);
+    }
+
+    // ----------------------------------
+    // HELPERS
+    // ----------------------------------
+
+    function clean(value) {
+        const div = document.createElement("div");
+        div.innerHTML = value || "";
+        return div.textContent || "";
+    }
+
+    function newPageIfNeeded(height) {
+        if (y + height > H - 23) {
             doc.addPage();
-            y = 25;
+            y = 22;
         }
-
     }
 
-    // Header
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(21);
-    doc.setTextColor(30, 45, 65);
+    function writeWrapped(text, x, fontSize, color, style = "normal") {
+        doc.setFont("helvetica", style);
+        doc.setFontSize(fontSize);
+        doc.setTextColor(...color);
 
-    doc.text("Research Publications", margin, y);
+        const lines = doc.splitTextToSize(clean(text), CW - 3);
+        const lineHeight = fontSize * 0.46;
 
-    y += 10;
+        doc.text(lines, x, y);
+        y += lines.length * lineHeight + 2;
+    }
+
+    // ----------------------------------
+    // COVER HEADER
+    // ----------------------------------
+
+    doc.setFillColor(...navy);
+    doc.rect(0, 0, W, 49, "F");
 
     doc.setFont("helvetica", "normal");
-    doc.setFontSize(12);
-    doc.setTextColor(65, 75, 85);
+    doc.setFontSize(9);
+    doc.setTextColor(190, 215, 235);
+    doc.text("ACADEMIC RESEARCH PORTFOLIO", M, 14);
 
-    doc.text(authorName, margin, y);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(21);
+    doc.setTextColor(255, 255, 255);
+    doc.text("Research Publications", M, 27);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(11);
+    doc.text("Bruno Senzio-Savino Barzellato", M, 36);
+
+    doc.setFontSize(8);
+    doc.text(
+        "Generated: " + new Date().toLocaleDateString("en-US"),
+        M,
+        43
+    );
+
+    y = 59;
+
+    // ----------------------------------
+    // FILTER SUMMARY
+    // ----------------------------------
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(12);
+    doc.setTextColor(...navy);
+    doc.text("Applied Filters", M, y);
 
     y += 7;
 
-    doc.setFontSize(9);
+    if (activeFilters.length === 0) {
+        activeFilters.push(["Selection", "All Publications"]);
+    }
+
+    const filterRows = activeFilters.map(([label, value]) => {
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(9);
+        const lines = doc.splitTextToSize(
+            clean(value),
+            CW - 46
+        );
+        return { label, lines };
+    });
+
+    const boxHeight = 10 + filterRows.reduce(
+        (sum, row) => sum + Math.max(6, row.lines.length * 4.5),
+        0
+    );
+
+    newPageIfNeeded(boxHeight + 18);
+
+    doc.setFillColor(241, 245, 249);
+    doc.roundedRect(M, y - 3, CW, boxHeight, 2, 2, "F");
+
+    let fy = y + 4;
+
+    filterRows.forEach(row => {
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(9);
+        doc.setTextColor(...navy);
+        doc.text(row.label + ":", M + 5, fy);
+
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(...gray);
+        doc.text(row.lines, M + 42, fy);
+
+        fy += Math.max(6, row.lines.length * 4.5);
+    });
+
+    y += boxHeight + 7;
+
+    // ----------------------------------
+    // RESULTS SUMMARY
+    // ----------------------------------
+
+    newPageIfNeeded(25);
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(11);
+    doc.setTextColor(...navy);
+
     doc.text(
-        "Journal Articles | Conference Papers | Theses | Patents",
-        margin,
+        "Matching Publications: " + records.length,
+        M,
         y
     );
 
-    y += 8;
-
-    const today = new Date();
-
-    doc.setFontSize(9);
-    doc.setTextColor(110, 110, 110);
-
     doc.text(
-        "Generated: " + today.toLocaleDateString("en-US"),
-        margin,
-        y
+        "Database Total: " + publications.length,
+        W - M,
+        y,
+        { align: "right" }
     );
 
-    y += 6;
+    y += 7;
 
-    doc.text(
-        "Total records: " + publicationsToExport.length,
-        margin,
-        y
-    );
-
-    y += 10;
-
-    doc.setDrawColor(190, 200, 210);
-    doc.line(margin, y, pageWidth - margin, y);
+    doc.setDrawColor(200, 210, 220);
+    doc.line(M, y, W - M, y);
 
     y += 12;
 
-    // Group publications by type
+    // ----------------------------------
+    // PUBLICATION CATEGORIES
+    // ----------------------------------
+
     const categories = [
-        { type: "Journal", heading: "Journal Articles" },
-        { type: "Conference", heading: "Conference Papers" },
-        { type: "Thesis", heading: "Theses" },
-        { type: "Patent", heading: "Patents" }
+        ["Journal", "Journal Articles"],
+        ["Conference", "Conference Papers"],
+        ["Thesis", "Theses"],
+        ["Patent", "Patents"]
     ];
 
-    let publicationNumber = 1;
+    categories.forEach(([type, heading]) => {
 
-    categories.forEach(category => {
-
-        const records = publicationsToExport
-            .filter(pub => pub.type === category.type)
+        const group = records
+            .filter(p => p.type === type)
             .sort((a, b) => b.year - a.year);
 
-        if (records.length === 0) return;
+        if (!group.length) return;
 
-        checkPageSpace(20);
+        newPageIfNeeded(18);
 
         doc.setFont("helvetica", "bold");
         doc.setFontSize(14);
-        doc.setTextColor(25, 65, 100);
-
-        doc.text(category.heading, margin, y);
-
-        y += 9;
-
-        records.forEach(pub => {
-
-            const title = cleanText(pub.title);
-            const authors = cleanText(pub.authors);
-            const venue = cleanText(pub.venue);
-
-            const titleLines = doc.splitTextToSize(
-                publicationNumber + ". " + title,
-                contentWidth
-            );
-
-            doc.setFont("helvetica", "normal");
-            doc.setFontSize(9);
-
-            const authorLines = doc.splitTextToSize(
-                authors,
-                contentWidth
-            );
-
-            const venueLines = doc.splitTextToSize(
-                venue + " (" + pub.year + ")",
-                contentWidth
-            );
-
-            const requiredHeight =
-                titleLines.length * 5 +
-                authorLines.length * 4.5 +
-                venueLines.length * 4.5 +
-                (pub.doi ? 5 : 0) +
-                (pub.link ? 5 : 0) +
-                8;
-
-            checkPageSpace(requiredHeight);
-
-            // Publication title
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(10);
-            doc.setTextColor(35, 45, 60);
-
-            doc.text(titleLines, margin, y);
-
-            y += titleLines.length * 5 + 2;
-
-            // Authors
-            doc.setFont("helvetica", "normal");
-            doc.setFontSize(9);
-            doc.setTextColor(65, 65, 65);
-
-            doc.text(authorLines, margin, y);
-
-            y += authorLines.length * 4.5 + 1;
-
-            // Venue and year
-            doc.setFont("helvetica", "italic");
-            doc.setTextColor(90, 90, 90);
-
-            doc.text(venueLines, margin, y);
-
-            y += venueLines.length * 4.5 + 1;
-
-            // DOI
-            if (pub.doi) {
-
-                doc.setFont("helvetica", "normal");
-                doc.setFontSize(8);
-                doc.setTextColor(40, 90, 150);
-
-                doc.text("DOI: " + pub.doi, margin, y);
-
-                y += 5;
-            }
-
-            // Publication hyperlink
-            if (pub.link) {
-
-                const url = new URL(
-                    pub.link,
-                    window.location.href
-                ).href;
-
-                doc.setFont("helvetica", "normal");
-                doc.setFontSize(8);
-                doc.setTextColor(25, 100, 170);
-
-                doc.textWithLink(
-                    "View Publication",
-                    margin,
-                    y,
-                    { url: url }
-                );
-
-                y += 5;
-            }
-
-            y += 7;
-
-            publicationNumber++;
-
-        });
+        doc.setTextColor(...navy);
+        doc.text(heading, M, y);
 
         y += 5;
 
+        doc.setDrawColor(180, 195, 210);
+        doc.line(M, y, W - M, y);
+
+        y += 9;
+
+        group.forEach(pub => {
+
+            const title = number + ". " + clean(pub.title);
+            const authors = clean(pub.authors);
+            const venue = clean(pub.venue) + " (" + pub.year + ")";
+
+            doc.setFontSize(10);
+            const titleLines = doc.splitTextToSize(title, CW - 3);
+
+            doc.setFontSize(9);
+            const authorLines = doc.splitTextToSize(authors, CW - 3);
+            const venueLines = doc.splitTextToSize(venue, CW - 3);
+
+            const height =
+                titleLines.length * 4.6 +
+                authorLines.length * 4.2 +
+                venueLines.length * 4.2 +
+                (pub.doi ? 5 : 0) +
+                (pub.link ? 6 : 0) +
+                10;
+
+            newPageIfNeeded(height);
+
+            writeWrapped(title, M, 10, navy, "bold");
+            writeWrapped(authors, M, 9, gray);
+            writeWrapped(venue, M, 9, gray, "italic");
+
+            if (pub.doi) {
+                writeWrapped("DOI: " + pub.doi, M, 8, blue);
+            }
+
+            if (pub.link) {
+                const url = new URL(pub.link, window.location.href).href;
+
+                doc.setFont("helvetica", "normal");
+                doc.setFontSize(8);
+                doc.setTextColor(...blue);
+
+                doc.textWithLink(
+                    "View Publication",
+                    M,
+                    y,
+                    { url }
+                );
+
+                y += 6;
+            }
+
+            y += 5;
+            number++;
+        });
+
+        y += 5;
     });
 
-    // Footer on all pages
-    const totalPages = doc.internal.getNumberOfPages();
+    // ----------------------------------
+    // PAGE FOOTERS
+    // ----------------------------------
 
-    for (let page = 1; page <= totalPages; page++) {
+    const pages = doc.internal.getNumberOfPages();
+
+    for (let page = 1; page <= pages; page++) {
 
         doc.setPage(page);
 
-        doc.setDrawColor(210, 210, 210);
-
-        doc.line(
-            margin,
-            pageHeight - 17,
-            pageWidth - margin,
-            pageHeight - 17
-        );
+        doc.setDrawColor(205, 215, 225);
+        doc.line(M, H - 18, W - M, H - 18);
 
         doc.setFont("helvetica", "normal");
         doc.setFontSize(8);
-        doc.setTextColor(130, 130, 130);
+        doc.setTextColor(120, 130, 140);
 
         doc.text(
-            authorName + " | Research Publications",
-            margin,
-            pageHeight - 12
+            "Bruno Senzio-Savino | Research Publications",
+            M,
+            H - 12
         );
 
         doc.text(
-            "Page " + page + " of " + totalPages,
-            pageWidth - margin,
-            pageHeight - 12,
+            "Page " + page + " of " + pages,
+            W - M,
+            H - 12,
             { align: "right" }
         );
-
     }
 
-	const isFiltered =
-		publicationsToExport.length !== publications.length;
+    // ----------------------------------
+    // DOWNLOAD
+    // ----------------------------------
 
-	const filename = isFiltered
-		? "Bruno_Senzio_Savino_Filtered_Publications.pdf"
-		: "Bruno_Senzio_Savino_Publications.pdf";
+    const suffix = activeFilters.some(
+        ([label]) => label !== "Selection"
+    ) ? "_Filtered" : "";
 
-	doc.save(filename);
-
+    doc.save(
+        "Bruno_Senzio_Savino_Publications" + suffix + ".pdf"
+    );
 }
