@@ -2773,3 +2773,127 @@ body{
 {
     transform: scale(1.1);
 }
+
+/* =================================
+   PUBLICATIONS DOWNLOAD TOOLBAR
+================================= */
+
+.results-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 20px 0 25px;
+}
+
+.results-toolbar #resultCount {
+    margin: 0;
+}
+
+.download-publications-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    background: #243b55;
+    color: #ffffff;
+
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+
+    padding: 12px 20px;
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.download-publications-btn:hover {
+    background: #345d83;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.download-publications-btn i {
+    font-size: 17px;
+}
+
+/* Mobile responsiveness */
+
+@media (max-width: 768px) {
+
+    .results-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .download-publications-btn {
+        width: 100%;
+    }
+
+}
+
+/* SEARCH BAR + DOWNLOAD BUTTON */
+
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.search-container #searchInput {
+    flex: 1 1 250px;
+    min-width: 0;
+}
+
+.download-publications-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 12px 18px;
+
+    background: #243b55;
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+    white-space: nowrap;
+
+    position: relative;
+    z-index: 10;
+
+    transition: background 0.3s ease;
+}
+
+.download-publications-btn:hover {
+    background: #345d83;
+}
+
+@media (max-width: 768px) {
+    .search-container #searchInput {
+        flex-basis: 100%;
+    }
+
+    .download-publications-btn {
+        flex: 1;
+    }
+}

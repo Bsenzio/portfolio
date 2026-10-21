@@ -43,7 +43,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 </nav>
 
-<section class="page-header-publications"">
+<section class="page-header-publications">
 
     <div class="header-content">
 
@@ -70,24 +70,33 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 <div class="results-background">
 
-    <!-- SEARCH BAR -->
+	<!-- SEARCH BAR -->
 
-    <div class="search-container">
+	<div class="search-container">
 
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Search title, author, keyword..."
-        >
+		<input
+			type="text"
+			id="searchInput"
+			placeholder="Search title, author, keyword..."
+		>
 
-        <button id="searchButton">
-            <i class="fas fa-search"></i>
-            Search
-        </button>
+		<button id="searchButton">
+			<i class="fas fa-search"></i>
+			Search
+		</button>
 
-    </div>
+		<button
+			id="downloadPublicationsBtn"
+			class="download-publications-btn"
+			type="button"
+		>
+			<i class="fas fa-file-pdf"></i>
+			Download Publication List
+		</button>
 
-    <!-- FILTERS -->
+	</div>
+
+	<!-- FILTERS -->
 
 	<div class="filters">
 
@@ -96,14 +105,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 		</select>
 
 		<select id="typeFilter">
-
 			<option value="all">All Types</option>
-
 			<option value="Journal">Journal</option>
 			<option value="Conference">Conference</option>
 			<option value="Thesis">Thesis</option>
 			<option value="Patent">Patent</option>
-
 		</select>
 
 		<select id="languageFilter">
@@ -111,18 +117,18 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 		</select>
 
 		<select id="keywordFilter">
-			
 			<option value="all">All Keywords</option>
 		</select>
-		
+
 		<div id="selectedKeywords"></div>
-		
+
 	</div>
-    <!-- RESULTS -->
 
-    <p id="resultCount"></p>
+	<!-- RESULTS COUNT -->
 
-   
+	<p id="resultCount"></p>
+
+	<!-- PUBLICATIONS CAROUSEL -->
 
 	<div class="carousel-wrapper">
 
@@ -138,8 +144,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 		</button>
 
 	</div>
-
-
+<!-- CLOSE RESULTS BACKGROUND -->
 
 </div>
 
@@ -177,7 +182,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 </footer>
 
+<!-- PDF Generation Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- Publications Database -->
 <script src="js/publications.js"></script>
+
+<!-- PDF Export -->
+<script src="js/publications-pdf.js"></script>
+
 <!-- Fondo tecnológico -->
 <script src="js/tech-background.js"></script>
 </body>
