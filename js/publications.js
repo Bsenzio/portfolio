@@ -363,7 +363,46 @@ link:"assets/pdf/Patents/liquid_container.pdf",
 language:["English", "Japanese"],
 keywords:["Holographic Glass","Projection Module"],
 abstract:"Liquid container assembly that produces pseudo-holographic effect wit a projection base module."
+},
+
+{
+    id:27,
+    title:"Arduino and Applications in the Industry",
+    authors:"<strong>Bruno Senzio-Savino</strong>",
+    venue:"Instituto Politécnico Nacional — Speaker",
+    year:2012,
+    type:"Presentation",
+    image:"arduino_industry.jpg",
+    keywords:["Arduino", "Embedded Systems", "Industry", "Education"],
+    abstract:"Talk delivered in March 2012, featuring demonstrations and hands-on exploration of Arduino applications in academic and industrial environments and the connections between them."
+},
+
+{
+    id:28,
+    title:"Hands-on Tutorial on Brain–Computer Interfaces (BCI)",
+    authors:"<strong>Bruno Senzio-Savino</strong>, M. Khosravy, A. Adams, O. Witkowsky",
+    venue:"ALIFE26 — Co-organizer",
+    year:2026,
+    type:"Workshop-Tutorial",
+    image:"alife26_bci_workshop.jpg",
+	github:"https://bsenzio.github.io/bmitutorialALIFE26/",
+    keywords:["BCI", "Artificial Life", "Adaptive Systems", "Embedded Systems"],
+    abstract:"Hands-on tutorial organized for ALIFE26 in August 2026, exploring how neural signals can be integrated into adaptive and evolving systems. Topics include embodied artificial agents, hybrid biological–digital systems, and interactive evolutionary environments."
+},
+
+{
+    id:29,
+    title:"Vegetables Here, Games There: BCI and New Horizons",
+    authors:"A. Adam, <strong>Bruno Senzio-Savino</strong>",
+    venue:"Cross Labs — YouTube Interview",
+    year:2026,
+    type:"Interview",
+    image:"cross_labs_interview.jpg",
+	youtube:"https://www.youtube.com/live/QoZwG4V6CVw?si=so2k_09jyvl0jWI-",
+    keywords:["BCI", "Artificial Life", "Unconventional Computing", "Embedded Systems", "Edge AI"],
+    abstract:"Interview in May 2026 exploring the journey from Artificial Life experiments on modified gaming hardware and low-cost computing platforms to practical BCI applications, connecting embedded systems, signal processing, and edge AI."
 }
+
 
 ];
 // =========================
@@ -744,6 +783,25 @@ document.addEventListener(
         );
 
     });
+
+	// TYPES
+	const typeSelect = document.getElementById("typeFilter");
+
+	const types = [...new Set(
+		publications.map(pub => pub.type)
+	)].sort();
+
+	types.forEach(type => {
+		// Avoid duplicating options already defined in the HTML.
+		if ([...typeSelect.options].some(option => option.value === type)) {
+			return;
+		}
+
+		const option = document.createElement("option");
+		option.value = type;
+		option.textContent = type;
+		typeSelect.appendChild(option);
+	});
 
     // LANGUAGES
 

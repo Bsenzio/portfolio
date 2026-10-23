@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
     const button = document.getElementById("downloadPublicationsBtn");
 
@@ -8,8 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function generatePublicationsPDF() {
-
-    if (!window.jspdf) {
+    if (!window.jspdf || !window.jspdf.jsPDF) {
         alert("Unable to load PDF generation library.");
         return;
     }
@@ -22,7 +20,7 @@ function generatePublicationsPDF() {
     }
 
     if (records.length === 0) {
-        alert("No publications match the current filters.");
+        alert("No records match the current filters.");
         return;
     }
 
@@ -50,24 +48,25 @@ function generatePublicationsPDF() {
     // FILTER INFORMATION
     // ----------------------------------
 
-    const getValue = id => {
-        const el = document.getElementById(id);
-        return el ? el.value : "all";
+    const getValue = (id, fallback = "all") => {
+        const element = document.getElementById(id);
+        return element ? element.value : fallback;
     };
 
     const filters = {
-        search: getValue("searchInput").trim(),
+        search: getValue("searchInput", "").trim(),
         year: getValue("yearFilter"),
         type: getValue("typeFilter"),
         language: getValue("languageFilter"),
         keywords: Array.isArray(window.selectedKeywords)
-            ? window.selectedKeywords
+            ? [...window.selectedKeywords]
             : []
     };
 
-    // If selectedKeywords is declared with let in
-    // publications.js, read it directly when available.
-    if (typeof selectedKeywords !== "undefined") {
+    if (
+        typeof selectedKeywords !== "undefined" &&
+        Array.isArray(selectedKeywords)
+    ) {
         filters.keywords = [...selectedKeywords];
     }
 
@@ -96,13 +95,16 @@ function generatePublicationsPDF() {
         ]);
     }
 
+    const hasActiveFilters = activeFilters.length > 0;
+
     // ----------------------------------
     // HELPERS
     // ----------------------------------
 
     function clean(value) {
         const div = document.createElement("div");
-        div.innerHTML = value || "";
+        div.innerHTML = String(value ?? "");
+
         return div.textContent || "";
     }
 
@@ -113,16 +115,59 @@ function generatePublicationsPDF() {
         }
     }
 
-    function writeWrapped(text, x, fontSize, color, style = "normal") {
+    function getLines(text, fontSize, style = "normal") {
         doc.setFont("helvetica", style);
         doc.setFontSize(fontSize);
-        doc.setTextColor(...color);
 
-        const lines = doc.splitTextToSize(clean(text), CW - 3);
+        return doc.splitTextToSize(clean(text), CW - 3);
+    }
+
+    function getTextHeight(text, fontSize, style = "normal") {
+        const lines = getLines(text, fontSize, style);
+        return lines.length * fontSize * 0.46 + 2;
+    }
+
+    function writeWrapped(
+        text,
+        x,
+        fontSize,
+        color,
+        style = "normal"
+    ) {
+        const lines = getLines(text, fontSize, style);
         const lineHeight = fontSize * 0.46;
 
-        doc.text(lines, x, y);
-        y += lines.length * lineHeight + 2;
+        doc.setTextColor(...color);
+
+        lines.forEach(line => {
+            newPageIfNeeded(lineHeight);
+
+            doc.text(line, x, y);
+            y += lineHeight;
+        });
+
+        y += 2;
+    }
+
+    function getRecordLinks(record) {
+        const activityTypes = ["Talk", "Workshop", "Interview"];
+
+        return [
+            {
+                value: record.link,
+                label: activityTypes.includes(record.type)
+                    ? "View Details"
+                    : "View Publication"
+            },
+            {
+                value: record.youtube,
+                label: "Watch Video"
+            },
+            {
+                value: record.github,
+                label: "View Repository"
+            }
+        ].filter(item => item.value);
     }
 
     // ----------------------------------
@@ -138,9 +183,9 @@ function generatePublicationsPDF() {
     doc.text("ACADEMIC RESEARCH PORTFOLIO", M, 14);
 
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(21);
+    doc.setFontSize(17);
     doc.setTextColor(255, 255, 255);
-    doc.text("Research Publications", M, 27);
+    doc.text("Publications and Academic Activities", M, 27);
 
     doc.setFont("helvetica", "normal");
     doc.setFontSize(11);
@@ -166,46 +211,70 @@ function generatePublicationsPDF() {
 
     y += 7;
 
-    if (activeFilters.length === 0) {
-        activeFilters.push(["Selection", "All Publications"]);
-    }
+    const summaryFilters = hasActiveFilters
+        ? activeFilters
+        : [["Selection", "All Records"]];
 
-    const filterRows = activeFilters.map(([label, value]) => {
+    summaryFilters.forEach(([label, value]) => {
         doc.setFont("helvetica", "normal");
         doc.setFontSize(9);
+
         const lines = doc.splitTextToSize(
             clean(value),
             CW - 46
         );
-        return { label, lines };
+
+        // Render long filter values in chunks across pages.
+        let index = 0;
+
+        while (index < lines.length) {
+            newPageIfNeeded(12);
+
+            const availableLines = Math.max(
+                1,
+                Math.floor((H - 23 - y - 7) / 4.5)
+            );
+
+            const chunk = lines.slice(
+                index,
+                index + availableLines
+            );
+
+            const rowHeight = Math.max(
+                10,
+                chunk.length * 4.5 + 5
+            );
+
+            doc.setFillColor(241, 245, 249);
+            doc.roundedRect(
+                M,
+                y - 3,
+                CW,
+                rowHeight,
+                2,
+                2,
+                "F"
+            );
+
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(9);
+            doc.setTextColor(...navy);
+            doc.text(
+                index === 0 ? label + ":" : "Continued:",
+                M + 5,
+                y + 2
+            );
+
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(...gray);
+            doc.text(chunk, M + 42, y + 2);
+
+            y += rowHeight + 2;
+            index += chunk.length;
+        }
     });
 
-    const boxHeight = 10 + filterRows.reduce(
-        (sum, row) => sum + Math.max(6, row.lines.length * 4.5),
-        0
-    );
-
-    newPageIfNeeded(boxHeight + 18);
-
-    doc.setFillColor(241, 245, 249);
-    doc.roundedRect(M, y - 3, CW, boxHeight, 2, 2, "F");
-
-    let fy = y + 4;
-
-    filterRows.forEach(row => {
-        doc.setFont("helvetica", "bold");
-        doc.setFontSize(9);
-        doc.setTextColor(...navy);
-        doc.text(row.label + ":", M + 5, fy);
-
-        doc.setFont("helvetica", "normal");
-        doc.setTextColor(...gray);
-        doc.text(row.lines, M + 42, fy);
-
-        fy += Math.max(6, row.lines.length * 4.5);
-    });
-
-    y += boxHeight + 7;
+    y += 5;
 
     // ----------------------------------
     // RESULTS SUMMARY
@@ -213,22 +282,32 @@ function generatePublicationsPDF() {
 
     newPageIfNeeded(25);
 
+    const databaseTotal =
+        typeof publications !== "undefined" &&
+        Array.isArray(publications)
+            ? publications.length
+            : Array.isArray(window.publications)
+                ? window.publications.length
+                : null;
+
     doc.setFont("helvetica", "bold");
     doc.setFontSize(11);
     doc.setTextColor(...navy);
 
     doc.text(
-        "Matching Publications: " + records.length,
+        "Matching Records: " + records.length,
         M,
         y
     );
 
-    doc.text(
-        "Database Total: " + publications.length,
-        W - M,
-        y,
-        { align: "right" }
-    );
+    if (databaseTotal !== null) {
+        doc.text(
+            "Database Total: " + databaseTotal,
+            W - M,
+            y,
+            { align: "right" }
+        );
+    }
 
     y += 7;
 
@@ -238,30 +317,49 @@ function generatePublicationsPDF() {
     y += 12;
 
     // ----------------------------------
-    // PUBLICATION CATEGORIES
+    // CATEGORIES
     // ----------------------------------
 
     const categories = [
         ["Journal", "Journal Articles"],
         ["Conference", "Conference Papers"],
         ["Thesis", "Theses"],
-        ["Patent", "Patents"]
+        ["Patent", "Patents"],
+        ["Talk", "Talks"],
+        ["Workshop", "Workshops and Tutorials"],
+        ["Interview", "Interviews"]
     ];
 
-    categories.forEach(([type, heading]) => {
+    // Include any additional record types automatically.
+    const knownTypes = new Set(
+        categories.map(([type]) => type)
+    );
 
+    records.forEach(record => {
+        if (!knownTypes.has(record.type)) {
+            knownTypes.add(record.type);
+
+            categories.push([
+                record.type,
+                record.type || "Other Activities"
+            ]);
+        }
+    });
+
+    categories.forEach(([type, heading]) => {
         const group = records
-            .filter(p => p.type === type)
-            .sort((a, b) => b.year - a.year);
+            .filter(record => record.type === type)
+            .sort((a, b) => Number(b.year) - Number(a.year));
 
         if (!group.length) return;
 
-        newPageIfNeeded(18);
+        // Reserve space for the heading and the start of a record.
+        newPageIfNeeded(40);
 
         doc.setFont("helvetica", "bold");
         doc.setFontSize(14);
         doc.setTextColor(...navy);
-        doc.text(heading, M, y);
+        doc.text(clean(heading), M, y);
 
         y += 5;
 
@@ -270,26 +368,25 @@ function generatePublicationsPDF() {
 
         y += 9;
 
-        group.forEach(pub => {
+        group.forEach(record => {
+            const title = number + ". " + clean(record.title);
+            const authors = clean(record.authors);
+            const venue =
+                clean(record.venue) + " (" + record.year + ")";
 
-            const title = number + ". " + clean(pub.title);
-            const authors = clean(pub.authors);
-            const venue = clean(pub.venue) + " (" + pub.year + ")";
-
-            doc.setFontSize(10);
-            const titleLines = doc.splitTextToSize(title, CW - 3);
-
-            doc.setFontSize(9);
-            const authorLines = doc.splitTextToSize(authors, CW - 3);
-            const venueLines = doc.splitTextToSize(venue, CW - 3);
+            const links = getRecordLinks(record);
 
             const height =
-                titleLines.length * 4.6 +
-                authorLines.length * 4.2 +
-                venueLines.length * 4.2 +
-                (pub.doi ? 5 : 0) +
-                (pub.link ? 6 : 0) +
-                10;
+                getTextHeight(title, 10, "bold") +
+                getTextHeight(authors, 9) +
+                getTextHeight(venue, 9, "italic") +
+                (
+                    record.doi
+                        ? getTextHeight("DOI: " + record.doi, 8)
+                        : 0
+                ) +
+                links.length * 6 +
+                5;
 
             newPageIfNeeded(height);
 
@@ -297,26 +394,37 @@ function generatePublicationsPDF() {
             writeWrapped(authors, M, 9, gray);
             writeWrapped(venue, M, 9, gray, "italic");
 
-            if (pub.doi) {
-                writeWrapped("DOI: " + pub.doi, M, 8, blue);
+            if (record.doi) {
+                writeWrapped(
+                    "DOI: " + record.doi,
+                    M,
+                    8,
+                    blue
+                );
             }
 
-            if (pub.link) {
-                const url = new URL(pub.link, window.location.href).href;
+            links.forEach(({ value, label }) => {
+                let url;
+
+                try {
+                    url = new URL(
+                        value,
+                        window.location.href
+                    ).href;
+                } catch {
+                    return;
+                }
+
+                newPageIfNeeded(6);
 
                 doc.setFont("helvetica", "normal");
                 doc.setFontSize(8);
                 doc.setTextColor(...blue);
 
-                doc.textWithLink(
-                    "View Publication",
-                    M,
-                    y,
-                    { url }
-                );
+                doc.textWithLink(label, M, y, { url });
 
                 y += 6;
-            }
+            });
 
             y += 5;
             number++;
@@ -332,7 +440,6 @@ function generatePublicationsPDF() {
     const pages = doc.internal.getNumberOfPages();
 
     for (let page = 1; page <= pages; page++) {
-
         doc.setPage(page);
 
         doc.setDrawColor(205, 215, 225);
@@ -343,7 +450,7 @@ function generatePublicationsPDF() {
         doc.setTextColor(120, 130, 140);
 
         doc.text(
-            "Bruno Senzio-Savino | Research Publications",
+            "Bruno Senzio-Savino | Publications and Academic Activities",
             M,
             H - 12
         );
@@ -360,11 +467,11 @@ function generatePublicationsPDF() {
     // DOWNLOAD
     // ----------------------------------
 
-    const suffix = activeFilters.some(
-        ([label]) => label !== "Selection"
-    ) ? "_Filtered" : "";
+    const suffix = hasActiveFilters ? "_Filtered" : "";
 
     doc.save(
-        "Bruno_Senzio_Savino_Publications" + suffix + ".pdf"
+        "Bruno_Senzio_Savino_Publications_and_Activities" +
+        suffix +
+        ".pdf"
     );
 }
