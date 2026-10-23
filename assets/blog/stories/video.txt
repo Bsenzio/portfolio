@@ -1,0 +1,11 @@
+## Mi proyecto
+
+Aquí explico la idea.
+
+![Mi prototipo](assets/blog/images/conexiones.jpg "Primera versión.")
+
+## Video de demostración
+
+https://youtu.be/6W_4gmkHceM?si=egscsdKwlOn2n-IX
+
+Aquí continúa la historia.
