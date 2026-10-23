@@ -126,6 +126,52 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 }
 
+
+/* Navigation shared visually with Projects and Publications */
+.navbar {
+    position:sticky;
+    top:0;
+    z-index:1000;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    padding:14px 20px;
+    background:rgba(8,14,25,.92);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid #203049;
+}
+.navbar .nav-btn {
+    min-width:0;
+    padding:10px 18px;
+    border:1px solid transparent;
+    border-radius:10px;
+    background:transparent;
+    box-shadow:none;
+    color:#a8b7cd;
+    font-family:'DM Sans',sans-serif;
+    font-size:12px;
+    font-weight:600;
+    text-transform:none;
+    letter-spacing:.2px;
+}
+.navbar .nav-btn:hover,
+.navbar .nav-btn[aria-current="page"] {
+    background:#15283a;
+    border-color:#2c5865;
+    color:#8debdc;
+    transform:none;
+}
+.navbar .nav-btn:focus-visible {
+    outline:2px solid #80e7d5;
+    outline-offset:5px;
+}
+@media(max-width:520px) {
+    .navbar { gap:3px; padding:10px 6px; }
+    .navbar .nav-btn { padding:9px 10px; font-size:11px; }
+    .navbar .nav-btn i { margin-right:4px; }
+}
+
 </style>
 
 </head>
@@ -138,10 +184,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
      NAVIGATION
      ========================================================= -->
 
-<nav class="navbar">
+<nav class="navbar" aria-label="Main navigation">
 
 
-<a href="index.html" class="nav-btn home-btn">
+<a href="index.html" class="nav-btn home-btn" aria-current="page">
     <i class="fas fa-house"></i>
     Home
 </a>
