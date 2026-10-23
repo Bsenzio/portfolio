@@ -3,6 +3,8 @@
 // The dates below are examples: replace them with your actual dates.
 // In .txt files, separate paragraphs with a blank line.
 // Optional: start a subtitle with ## followed by a space.
+// Images in TXT: ![Description](assets/blog/photo.jpg "Optional caption")
+// Image paths are relative to blog.html, not the TXT file.
 // Existing content arrays and JSON contentUrl files remain supported.
 const blogPosts = [
     {
@@ -99,8 +101,20 @@ const blogPosts = [
                 }
             }
             normalized.split("\n").forEach(line => {
-                if (!line.trim()) flush();
-                else if (/^#{1,3}\s+/.test(line)) {
+                const trimmed = line.trim();
+                // One image per line: ![Description](path "Optional caption")
+                // Use <path> if a filename contains spaces or parentheses.
+                const image = trimmed.match(/^!\[([^\]]*)\]\(\s*(?:<([^>]+)>|([^\s]+?))(?:\s+"([^"]*)")?\s*\)$/);
+                if (!trimmed) flush();
+                else if (image) {
+                    flush();
+                    blocks.push({
+                        type: "image",
+                        src: image[2] || image[3],
+                        alt: image[1],
+                        caption: image[4] || ""
+                    });
+                } else if (/^#{1,3}\s+/.test(line)) {
                     flush();
                     blocks.push({ type: "heading", text: line.replace(/^#{1,3}\s+/, "") });
                 } else paragraph.push(line);
