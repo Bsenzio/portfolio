@@ -366,41 +366,55 @@ abstract:"Liquid container assembly that produces pseudo-holographic effect wit 
 },
 
 {
-    id:27,
-    title:"Arduino and Applications in the Industry",
-    authors:"<strong>Bruno Senzio-Savino</strong>",
-    venue:"Instituto Politécnico Nacional — Speaker",
-    year:2012,
-    type:"Presentation",
-    image:"arduino_industry.jpg",
-    keywords:["Arduino", "Embedded Systems", "Industry", "Education"],
-    abstract:"Talk delivered in March 2012, featuring demonstrations and hands-on exploration of Arduino applications in academic and industrial environments and the connections between them."
+id:27,
+title:"Arduino and Applications in the Industry",
+authors:"<strong>Bruno Senzio-Savino</strong>",
+venue:"Instituto Politécnico Nacional — Speaker",
+year:2012,
+type:"Presentation",
+image:"arduino_industry.jpg",
+keywords:["Arduino", "Embedded Systems", "Industry", "Education"],
+abstract:"Talk delivered in March 2012, featuring demonstrations and hands-on exploration of Arduino applications in academic and industrial environments and the connections between them."
 },
 
 {
-    id:28,
-    title:"Hands-on Tutorial on Brain–Computer Interfaces (BCI)",
-    authors:"<strong>Bruno Senzio-Savino</strong>, M. Khosravy, A. Adams, O. Witkowsky",
-    venue:"ALIFE26 — Co-organizer",
-    year:2026,
-    type:"Workshop-Tutorial",
-    image:"alife26_bci_workshop.jpg",
-	github:"https://bsenzio.github.io/bmitutorialALIFE26/",
-    keywords:["BCI", "Artificial Life", "Adaptive Systems", "Embedded Systems"],
-    abstract:"Hands-on tutorial organized for ALIFE26 in August 2026, exploring how neural signals can be integrated into adaptive and evolving systems. Topics include embodied artificial agents, hybrid biological–digital systems, and interactive evolutionary environments."
+id:28,
+title:"Hands-on Tutorial on Brain–Computer Interfaces (BCI)",
+authors:"<strong>Bruno Senzio-Savino</strong>, M. Khosravy, A. Adams, O. Witkowsky",
+venue:"ALIFE26 — Co-organizer",
+year:2026,
+type:"Workshop-Tutorial",
+image:"alife26_bci_workshop.jpg",
+github:"https://bsenzio.github.io/bmitutorialALIFE26/",
+keywords:["BCI", "Artificial Life", "Adaptive Systems", "Embedded Systems"],
+abstract:"Hands-on tutorial organized for ALIFE26 in August 2026, exploring how neural signals can be integrated into adaptive and evolving systems. Topics include embodied artificial agents, hybrid biological–digital systems, and interactive evolutionary environments."
 },
 
 {
-    id:29,
-    title:"Vegetables Here, Games There: BCI and New Horizons",
-    authors:"A. Adam, <strong>Bruno Senzio-Savino</strong>",
-    venue:"Cross Labs — YouTube Interview",
-    year:2026,
-    type:"Interview",
-    image:"cross_labs_interview.jpg",
-	youtube:"https://www.youtube.com/live/QoZwG4V6CVw?si=so2k_09jyvl0jWI-",
-    keywords:["BCI", "Artificial Life", "Unconventional Computing", "Embedded Systems", "Edge AI"],
-    abstract:"Interview in May 2026 exploring the journey from Artificial Life experiments on modified gaming hardware and low-cost computing platforms to practical BCI applications, connecting embedded systems, signal processing, and edge AI."
+id:29,
+title:"Vegetables Here, Games There: BCI and New Horizons",
+authors:"A. Adam, <strong>Bruno Senzio-Savino</strong>",
+venue:"Cross Labs — YouTube Interview",
+year:2026,
+type:"Interview",
+image:"cross_labs_interview.jpg",
+youtube:"https://www.youtube.com/live/QoZwG4V6CVw?si=so2k_09jyvl0jWI-",
+keywords:["BCI", "Artificial Life", "Unconventional Computing", "Embedded Systems", "Edge AI"],
+abstract:"Interview in May 2026 exploring the journey from Artificial Life experiments on modified gaming hardware and low-cost computing platforms to practical BCI applications, connecting embedded systems, signal processing, and edge AI."
+},
+
+{
+id:30,
+title:"Modular interface for controlling devices and actuators via mind control",
+authors:"<strong>Bruno Senzio-Savino</strong>, Ivan Macias, Stephanie Davalos",
+venue:"Pat. Pend. Application 100233478",
+year:2012,
+type:"Patent",
+image:"bmi_module.jpg",
+link:"assets/pdf/Patents/modular_bmi.pdf",
+language:["Spanish"],
+keywords:["BCI","Modularity"],
+abstract:"BMI Modular interface with smart interdependency"
 }
 
 
