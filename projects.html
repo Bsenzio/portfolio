@@ -71,7 +71,90 @@
     @media(prefers-reduced-motion:reduce) {
       .projects-page *, .projects-page *::before, .projects-page *::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; }
     }
-  </style>
+  /* PROJECT OBSERVATORY — contained, responsive exploration */
+.projects-page .explore-section { max-width:1320px; }
+.projects-page .observatory { --obs-accent:#8debdc; position:relative; isolation:isolate; border:1px solid #2b4055; border-radius:22px; overflow:hidden; background:#09121f; box-shadow:0 30px 70px #0005; }
+.projects-page .observatory button { font-family:inherit; cursor:pointer; }
+.projects-page .observatory [hidden] { display:none !important; }
+.obs-toolbar,.obs-controls,.obs-filters { display:flex; align-items:center; flex-wrap:wrap; gap:10px; padding:15px 22px; }
+.obs-toolbar { justify-content:space-between; border-bottom:1px solid #243349; background:linear-gradient(90deg,#132234,#0e1a29); }
+.obs-brand { display:flex; align-items:center; gap:9px; font-size:10px; letter-spacing:2px; color:#c7d8ea; }
+.obs-dot { width:6px; height:6px; border-radius:50%; background:#8debdc; box-shadow:0 0 15px #8debdc; }
+.obs-version { color:#647c96; }
+.obs-views { display:flex; gap:3px; padding:3px; background:#07111d; border:1px solid #293e53; border-radius:9px; }
+.obs-views button { border:0; border-radius:6px; padding:7px 11px; color:#91a6c0; background:transparent; font-size:11px; }
+.obs-views button[aria-pressed=true] { background:#233c4b; color:#c7f9ed; }
+.obs-controls { padding-bottom:8px; }
+.obs-search { display:flex; align-items:center; gap:9px; flex:1 1 240px; padding:10px 12px; border:1px solid #2b3c51; border-radius:9px; background:#0b1827; color:#82a0b6; }
+.obs-search input { min-width:0; width:100%; background:transparent; border:0; outline:none; color:#e1edfb; font:inherit; font-size:12px; }
+.obs-search:focus-within { border-color:#8debdc; }
+.obs-reset { padding:9px 11px; border:1px solid #2b4055; border-radius:8px; background:#112235; color:#afc4da; font-size:11px; }
+.obs-filters { gap:7px; padding-top:7px; padding-bottom:18px; }
+.obs-filter { display:flex; align-items:center; gap:7px; padding:6px 10px; border:1px solid #2a3b51; border-radius:30px; background:#101d2d; color:#a6bad2; font-size:11px; }
+.obs-filter i { width:5px; height:5px; background:var(--world-color,#8debdc); border-radius:50%; }
+.obs-filter[aria-pressed=true] { color:#e5fff7; border-color:var(--world-color,#8debdc); background:#18313b; }
+.obs-filter span { color:#7891aa; font-size:10px; }
+.obs-layout { display:grid; grid-template-columns:minmax(0,1fr) 310px; border-top:1px solid #243349; }
+.obs-universe { min-width:0; background:radial-gradient(ellipse at 50% 48%,#14283e 0%,#0a1526 40%,#070e1a 80%); }
+.obs-map { position:relative; height:620px; overflow:hidden; }
+#starCanvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; opacity:.8; }
+.obs-orbits { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+.obs-orbits ellipse { fill:none; stroke:#83b4d3; stroke-opacity:.12; stroke-width:1; stroke-dasharray:3 7; }
+.obs-orbits ellipse:nth-child(2) { stroke-opacity:.07; stroke-dasharray:none; }
+.obs-orbits path { stroke:#5e8bab; stroke-opacity:.08; stroke-dasharray:2 8; }
+.obs-map-top { position:absolute; top:20px; left:22px; right:22px; display:flex; justify-content:space-between; gap:10px; font-size:8px; letter-spacing:1.5px; color:#7995b2; pointer-events:none; }
+.obs-coordinate { position:absolute; bottom:20px; width:100%; text-align:center; color:#536e89; font-size:8px; letter-spacing:3px; pointer-events:none; }
+.obs-core { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:134px; height:134px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; border:1px solid #92ecdc55; border-radius:50%; background:radial-gradient(circle at 30% 25%,#3b7e8f,#19394d 40%,#071221 80%); color:#eefdfb; box-shadow:inset -15px -10px 25px #0008,0 0 60px #67cdbb18; text-align:center; }
+.obs-core::before,.obs-core::after { content:''; position:absolute; inset:-12px; border:1px solid #8debdc30; border-radius:50%; }
+.obs-core::after { inset:-24px; border-style:dashed; border-color:#8debdc18; animation:obs-turn 100s linear infinite; }
+.obs-core strong { font-family:'Playfair Display',serif; font-weight:400; font-size:27px; line-height:1.1; max-width:115px; }
+.obs-core small { font-size:8px; color:#a2d8dd; letter-spacing:1px; text-transform:uppercase; }
+.obs-world { position:absolute; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; width:124px; padding:0; border:0; background:transparent; color:#d5e4f4; }
+.obs-globe { position:relative; display:block; width:78px; height:78px; border-radius:50%; border:1px solid var(--world-color); background:radial-gradient(circle at 30% 20%,var(--world-color),#102037 75%); box-shadow:0 0 28px color-mix(in srgb,var(--world-color) 16%,transparent); transition:transform .25s; }
+.obs-globe::after { content:''; position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 28% 20%,#ffffff25,transparent 42%),linear-gradient(130deg,transparent 25%,#000c 90%); box-shadow:inset -8px -7px 15px #0008; pointer-events:none; }
+.obs-globe img { width:100%; height:100%; border-radius:50%; object-fit:cover; opacity:.7; }
+.obs-world:nth-of-type(even) .obs-globe::before { content:''; position:absolute; inset:25px -16px; border:2px solid var(--world-color); border-radius:50%; transform:rotate(-25deg); opacity:.6; }
+.obs-world:hover .obs-globe,.obs-world:focus-visible .obs-globe { transform:scale(1.13); }
+.obs-world-label { font-size:12px; font-weight:500; margin-top:10px; text-shadow:0 2px 5px #000; }
+.obs-world-count { font-size:9px; color:#7e9ab6; margin-top:2px; }
+.obs-project-node { position:absolute; width:62px; padding:0; transform:translate(-50%,-50%); background:transparent; border:0; color:#c4d7ec; }
+.obs-project-node img { width:48px; height:48px; object-fit:cover; border-radius:13px; border:1px solid #6796b4; box-shadow:0 5px 20px #0007; background:#1b3349; transition:transform .2s; }
+.obs-project-node[aria-pressed=true] img,.obs-project-node:hover img { transform:scale(1.12); border:2px solid var(--obs-accent); box-shadow:0 0 20px #8debdc33; }
+.obs-node-number { display:block; margin-top:6px; font-size:9px; color:#85a1bd; }
+.obs-status { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:13px 20px; border-top:1px solid #243349; font-size:10px; color:#8ca6c2; }
+.obs-legend { display:flex; align-items:center; gap:6px; white-space:nowrap; font-size:9px; }
+.obs-legend i { width:5px; height:5px; border-radius:50%; background:#8debdc; }
+.obs-legend i:last-child { background:#647f9a; margin-left:5px; }
+.obs-inspector { min-width:0; border-left:1px solid #243349; padding:24px; background:linear-gradient(160deg,#132135,#0a1422); }
+.obs-kicker { color:var(--obs-accent); font-size:9px; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; }
+.obs-inspector h3 { font-family:'Playfair Display',serif; font-size:29px; line-height:1.2; font-weight:400; color:#e3eefb; margin:0 0 14px; }
+.obs-inspector p { font-size:12px; line-height:1.8; color:#9fb5ce; margin:0 0 18px; }
+.obs-inspector-image { width:100%; height:170px; display:block; object-fit:cover; border-radius:12px; border:1px solid #31475e; margin:0 0 20px; background:#12263a; }
+.obs-facts { display:flex; gap:20px; padding:16px 0; margin-bottom:20px; border-top:1px solid #2a3c51; border-bottom:1px solid #2a3c51; }
+.obs-facts strong { display:block; color:#deebf9; font-size:23px; font-weight:400; }
+.obs-facts span { color:#8da6c0; font-size:9px; text-transform:uppercase; letter-spacing:1px; }
+.obs-open-link { display:inline-flex; gap:8px; align-items:center; padding:10px 14px; background:#1e414a; color:#b3f4e5; border:1px solid #3d6970; border-radius:8px; font-size:11px; margin-bottom:20px; }
+.obs-next-label { font-size:9px; letter-spacing:1.5px; color:#738da8; margin:15px 0 10px; }
+.obs-project-list { display:flex; flex-direction:column; gap:5px; max-height:260px; overflow:auto; scrollbar-width:thin; }
+.obs-list-item { display:flex; align-items:center; gap:10px; text-align:left; width:100%; padding:8px; border:1px solid transparent; border-radius:9px; background:transparent; color:#a8bed7; }
+.obs-list-item[aria-pressed=true] { border-color:#3b6571; background:#18303e; color:#e5fff9; }
+.obs-list-item:hover { background:#172d40; }
+.obs-list-item img { width:34px; height:34px; border-radius:7px; object-fit:cover; flex:none; }
+.obs-list-item span { font-size:11px; line-height:1.4; }
+.obs-collection { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,190px),1fr)); gap:14px; padding:22px; min-height:620px; align-content:start; }
+.obs-mini-card { text-align:left; border:1px solid #2c4258; background:#112136; padding:0; border-radius:12px; overflow:hidden; color:#dceafa; }
+.obs-mini-card[aria-pressed=true] { border-color:#8debdc; }
+.obs-mini-card img { display:block; width:100%; height:115px; object-fit:cover; background:#18334a; }
+.obs-mini-card strong { display:block; font-size:13px; font-weight:500; padding:0 12px 14px; line-height:1.4; }
+.obs-mini-card small { display:block; color:#8ba9c6; padding:12px 12px 7px; font-size:9px; }
+.obs-no-results { padding:30px; color:#a0b6cd; font-size:13px; }
+.observatory.obs-paused *::after { animation-play-state:paused; }
+@keyframes obs-turn { to { transform:rotate(360deg); } }
+@media(max-width:1000px) { .obs-layout { grid-template-columns:minmax(0,1fr) 270px; } .obs-inspector { padding:20px; } .obs-world { width:95px; } .obs-globe { width:66px; height:66px; } }
+@media(max-width:760px) { .obs-layout { grid-template-columns:1fr; } .obs-inspector { border-left:0; border-top:1px solid #243349; } .obs-map { height:520px; } .obs-collection { min-height:0; } .obs-project-list { max-height:200px; } .obs-inspector-image { height:210px; } .obs-map-top { font-size:7px; letter-spacing:1px; } }
+@media(max-width:430px) { .obs-toolbar,.obs-controls,.obs-filters { padding-left:14px; padding-right:14px; } .obs-map { height:480px; } .obs-globe { width:56px; height:56px; } .obs-world-label { font-size:10px; } .obs-world { width:86px; } .obs-core { width:100px; height:100px; } .obs-core strong { font-size:22px; } .obs-core small { font-size:7px; } .obs-project-node { width:46px; } .obs-project-node img { width:36px; height:36px; border-radius:10px; } .obs-legend { display:none; } }
+
+</style>
 </head>
 <body class="projects-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -99,17 +182,34 @@
     </header>
     <section class="explore-section" id="explore" aria-labelledby="explore-title">
       <div class="section-toolbar">
-        <div><h2 id="explore-title">An interconnected universe</h2><p>Explore the project planets and their connections.</p></div>
+        <div><h2 id="explore-title">Your next discovery starts here</h2><p>Choose a world. Follow an idea. Discover what connects them.</p></div>
         <button class="sound-button" id="soundToggle" type="button" aria-pressed="false" aria-label="Play background music"><i class="fas fa-volume-xmark" aria-hidden="true"></i><span>Sound off</span></button>
       </div>
-      <div class="galaxy-shell">
-        <section class="solar-system-section" tabindex="0" aria-label="Interactive project galaxy. Scroll horizontally to explore on smaller screens.">
-          <div class="solar-system">
-            <div id="galaxy3d"></div>
-            <div id="orbitContainer"></div>
+      <div class="observatory" id="projectObservatory">
+        <div class="obs-toolbar">
+          <div class="obs-brand"><span class="obs-dot"></span> PROJECT OBSERVATORY <span class="obs-version">/ 01</span></div>
+          <div class="obs-views" aria-label="Project view"><button type="button" id="mapView" aria-pressed="true">Orbit map</button><button type="button" id="cardsView" aria-pressed="false">Collection</button></div>
+        </div>
+        <div class="obs-controls">
+          <label class="obs-search"><i class="fas fa-magnifying-glass" aria-hidden="true"></i><input type="search" id="projectSearch" placeholder="Find an idea, project or year…" aria-label="Search projects"></label>
+          <button type="button" id="resetOrbit" class="obs-reset">↺ All worlds</button>
+          <button type="button" id="motionToggle" class="obs-reset" aria-pressed="false">Pause motion</button>
+        </div>
+        <div id="categoryFilters" class="obs-filters" aria-label="Project categories"></div>
+        <div class="obs-layout">
+          <div class="obs-universe">
+            <div class="obs-map" id="orbitMap" aria-label="Interactive map of project categories">
+              <canvas id="starCanvas" aria-hidden="true"></canvas>
+              <svg class="obs-orbits" viewBox="0 0 800 640" preserveAspectRatio="none" aria-hidden="true"><ellipse cx="400" cy="320" rx="270" ry="210"/><ellipse cx="400" cy="320" rx="310" ry="250"/><ellipse cx="400" cy="320" rx="190" ry="145"/><path d="M400 30V610 M40 320H760"/></svg>
+              <div class="obs-map-top"><span id="mapBreadcrumb">THE COMPLETE SYSTEM</span><span>SELECT A WORLD</span></div>
+              <div id="mapNodes"></div>
+              <div class="obs-coordinate" aria-hidden="true">RESEARCH × ENGINEERING × PLAY</div>
+            </div>
+            <div id="projectCollection" class="obs-collection" hidden></div>
+            <div class="obs-status"><span id="projectStatus" role="status" aria-live="polite"></span><span class="obs-legend"><i></i> Selected <i></i> Explore</span></div>
           </div>
-        </section>
-        <div class="galaxy-caption"><span><i class="fas fa-circle-nodes" aria-hidden="true"></i> Research · Development · Experimentation</span><span>Scroll to explore on smaller screens <i class="fas fa-arrows-left-right" aria-hidden="true"></i></span></div>
+          <aside class="obs-inspector" id="projectInspector" style="scroll-margin-top:90px" aria-label="Project details"></aside>
+        </div>
       </div>
       <noscript><p>Enable JavaScript to explore the interactive galaxy. You can also visit <a href="https://github.com/Bsenzio">my GitHub projects</a>.</p></noscript>
     </section>
@@ -148,8 +248,8 @@
       });
     })();
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="js/projects.js"></script>
-  <script src="js/tech-background.js"></script>
+  
+  <script src="js/projects.js?v=observatory-1"></script>
+  
 </body>
 </html>

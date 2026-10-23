@@ -402,732 +402,205 @@ const categories = [
 
 ];
 
-categories.forEach(category=>{
 
-    category.planetRadius =
-    Math.min(
-        140,
-        45 +
-        Math.sqrt(
-            category.projects.length
-        ) * 25
-    );
-
-});
-
-
-// =====================================
-// REFERENCES
-// =====================================
-
-const orbitContainer =
-document.getElementById("orbitContainer");
-
-const projectPanel =
-document.createElement("div");
-
-projectPanel.id = "projectPanel";
-
-projectPanel.innerHTML = `
-
-<div class="panel-close">✕</div>
-
-<div class="panel-content">
-
-    <img id="panelImage">
-
-    <div>
-
-        <div id="panelYear"></div>
-
-        <h2 id="panelTitle"></h2>
-
-        <p id="panelDescription"></p>
-
-        <a
-            id="panelLink"
-            target="_blank"
-        >
-            See more...
-        </a>
-
-    </div>
-
-</div>
-
-`;
-
-document.body.appendChild(
-    projectPanel
-);
-
-projectPanel
-.querySelector(".panel-close")
-.onclick = ()=>{
-	playClickSound();
-    selectedMoon = null;
-
-    document
-    .querySelectorAll(".satellite")
-    .forEach(m=>m.classList.remove("focused"));
-
-    projectPanel.classList.remove(
-        "open"
-    );
-
-    document.body.classList.remove(
-        "project-open"
-    );
-
-};
-
-// =====================================
-// THREE.JS
-// =====================================
-const systemRadius = 550;
-const scene =
-new THREE.Scene();
-
-const camera =
-new THREE.PerspectiveCamera(
-45,
-window.innerWidth/window.innerHeight,
-0.1,
-5000
-);
-
-camera.position.z = 1200;
-
-const renderer =
-new THREE.WebGLRenderer({
-
-    alpha:true,
-    antialias:true
-
-});
-
-renderer.setSize(
-window.innerWidth,
-window.innerHeight
-);
-
-document
-.getElementById("galaxy3d")
-.appendChild(renderer.domElement);
-
-// =====================================
-// LIGHTS
-// =====================================
-
-scene.add(
-new THREE.AmbientLight(
-0xffffff,
-0.6
-));
-
-const pointLight =
-new THREE.PointLight(
-0xffffff,
-0.4
-);
-
-pointLight.position.set(
-0,
-0,
-500
-);
-
-scene.add(pointLight);
-
-// =====================================
-// TEXTURES
-// =====================================
-
-const loader =
-new THREE.TextureLoader();
-
-// =====================================
-// GLOBAL STATS
-// =====================================
-
-const totalCategories =
-categories.length;
-
-const totalProjects =
-categories.reduce(
-    (sum,category)=>
-    sum + category.projects.length,
-    0
-);
-
-// =====================================
-// SOUND EFFECTS
-// =====================================
-
-const hoverSfx = new Audio(
-    "assets/audio/sfx/sfxhover.mp3"
-);
-
-const clickSfx = new Audio(
-    "assets/audio/sfx/sfxclick.mp3"
-);
-
-hoverSfx.volume = 0.2;
-clickSfx.volume = 0.3;
-
-function playHoverSound(){
-
-    hoverSfx.currentTime = 0;
-    hoverSfx.play().catch(()=>{});
-
-}
-
-function playClickSound(){
-
-    clickSfx.currentTime = 0;
-    clickSfx.play().catch(()=>{});
-
-}
-
-
-// =====================================
-// CENTRAL PLANET
-// =====================================
-
-const largestPlanetRadius =
-Math.max(
-    ...categories.map(
-        c => c.planetRadius
-    )
-);
-
-const corePlanet =
-new THREE.Mesh(
-
-	new THREE.SphereGeometry(
-		largestPlanetRadius * 2.2,
-		64,
-		64
-	),
-
-    new THREE.MeshStandardMaterial({
-
-        map: loader.load(
-            "assets/images/planets/planet_texture.jpg"
-        )
-		
-
-    })
-
-);
-
-scene.add(corePlanet);
-
-const coreLabel =
-document.createElement("div");
-
-coreLabel.className =
-"core-label";
-
-coreLabel.innerHTML = `
-
-    <div class="core-title">
-
-        PROJECT SYSTEM
-		Selected picks
-
-    </div>
-
-    <div class="core-stats">
-
-        ${totalCategories}
-        Categories
-
-        <br>
-
-        ${totalProjects}
-        Projects
-
-    </div>
-
-`;
-
-orbitContainer.appendChild(
-    coreLabel
-);
-
-
-// =====================================
-// CATEGORY PLANETS
-// =====================================
-
-const planets = [];
-
-const planetsPerRing = 6;
-
-categories.forEach((category,index)=>{
-
-    const ring =
-    Math.floor(index / planetsPerRing);
-
-    const posInRing =
-    index % planetsPerRing;
-
-	const radius =
-	category.orbitRadius;
-
-	const planetsInThisRing =
-	Math.min(
-		planetsPerRing,
-		categories.length - ring * planetsPerRing
-	);
-    const angle =
-    (Math.PI * 2 / planetsInThisRing)
-    * posInRing;
-
-    const x =
-    Math.cos(angle) * radius;
-
-    const y =
-    Math.sin(angle) * radius;
-
-    const mesh =
-    new THREE.Mesh(
-
-        new THREE.SphereGeometry(
-            category.planetRadius,
-            64,
-            64
-        ),
-
-        new THREE.MeshStandardMaterial({
-
-            map: loader.load(
-                `assets/images/planets/${category.texture}`
-            )
-
-        })
-
-    );
-
-    mesh.position.set(
-        x,
-        y,
-        0
-    );
-
-    scene.add(mesh);
-
-	planets.push({
-
-		mesh,
-
-		orbitRadius: radius,
-
-		orbitSpeed:
-		category.orbitSpeed,
-
-		angleOffset:
-		angle,
-
-		x,
-		y,
-
-		planetRadius:
-		category.planetRadius
-
-	});
-
-});
-
-// =====================================
-// SATELLITES HTML
-// =====================================
-
-const moons = [];
-
-categories.forEach(
-(category,index)=>{
-
-category.projects.forEach(
-(project,pIndex)=>{
-
-const moon =
-document.createElement("div");
-
-moon.className =
-"satellite";
-
-moon.innerHTML = `
-
-<img src="assets/images/projects/${project.image}">
-
-<div class="satellite-info">
-
-<h3>${project.title}</h3>
-
-</div>
-
-`;
-
-moon.onclick=()=>{
-    playClickSound();
-    selectedMoon = moon;
-
-    document
-    .querySelectorAll(".satellite")
-    .forEach(m=>m.classList.remove("focused"));
-
-    moon.classList.add("focused");
-
-    document
-    .getElementById("panelImage")
-    .src =
-    `assets/images/projects/${project.image}`;
-
-    document
-    .getElementById("panelTitle")
-    .textContent =
-    project.title;
-
-	document
-	.getElementById(
-		"panelYear"
-	)
-	.textContent =
-	project.year;
-
-    document
-    .getElementById("panelDescription")
-    .textContent =
-    project.description;
-
-    document
-    .getElementById("panelLink")
-    .href =
-    project.url;
-
-    document.body.classList.add(
-        "project-open"
-    );
-
-    projectPanel.classList.add(
-        "open"
-    );
-
-};
-
-orbitContainer.appendChild(
-moon
-);
-
-moons.push({
-
-    element: moon,
-
-    project,
-
-    planetIndex: index,
-
-    radius:
-    category.planetRadius * 1.15,
-
-    angleOffset:
-    (Math.PI * 2 /
-    category.projects.length)
-    * pIndex,
-
-    orbitSpeed: 0.8
-
-});
-
-moon.addEventListener(
-"mouseenter",
-()=>{
-
-    playHoverSound();
-
-    moon.classList.add(
-        "focused"
-    );
-
-});
-
-moon.addEventListener(
-"mouseleave",
-()=>{
-
-    moon.classList.remove(
-        "focused"
-    );
-
-});
-
-
-});
-
-});
-
-// =====================================
-// LABELS
-// =====================================
-
-const labels = [];
-
-categories.forEach(category=>{
-
-
-const div =
-document.createElement("div");
-
-div.style.position="absolute";
-div.style.color="white";
-div.style.fontWeight="bold";
-div.style.textShadow="0 0 10px cyan";
-
-div.innerHTML = `
-
-    <div class="category-title">
-
-        ${category.name}
-
-    </div>
-
-    <div class="category-count">
-
-        ${category.projects.length}
-        Projects
-
-    </div>
-
-`;
-
-orbitContainer.appendChild(
-div
-);
-
-labels.push(div);
-
-});
-
-// =====================================
-// ANIMATION
-// =====================================
-let selectedMoon = null;
-
-function animate(){
-
-requestAnimationFrame(
-animate
-);
-
-const t =
-performance.now()*0.001;
-
-corePlanet.rotation.y +=
-0.002;
-
-coreLabel.style.left =
-`${window.innerWidth/2 - 120}px`;
-
-coreLabel.style.top =
-`${window.innerHeight/2 - 60}px`;
-
-// planets
-
-// planets
-
-planets.forEach(
-(planet,index)=>{
-
-	const orbitAngle =
-	(t * planet.orbitSpeed) +
-	planet.angleOffset;
-
-    const x =
-    Math.cos(
-        orbitAngle
-    )
-    *
-    planet.orbitRadius;
-	
-    const y =
-    Math.sin(
-        orbitAngle
-    )
-    *
-    planet.orbitRadius;
-	planet.currentAngle = orbitAngle;
-    planet.x = x;
-    planet.y = y;
-
-
-	planet.mesh.position.set(
-		x,
-		y,
-		0
-	);
-
-    planet.mesh.rotation.y +=
-    0.01;
-
-	labels[index].style.left =
-	`${window.innerWidth/2 + x}px`;
-
-	labels[index].style.top =
-	`${window.innerHeight/2 -
-	y -
-	planet.planetRadius -
-	40}px`;
-
-	labels[index].style.transform =
-	"translateX(-50%)";
-	
-	
-
-});
-
-// moons
-
-moons.forEach(moon=>{
-
-    if(
-        selectedMoon === moon.element &&
-        moon.frozenX !== undefined
-    ){
-
-        moon.element.style.left =
-        `${moon.frozenX}px`;
-
-        moon.element.style.top =
-        `${moon.frozenY}px`;
-
-        return;
-    }
-
-    const parent =
-    planets[moon.planetIndex];
-
-    const angle =
-    (t * moon.orbitSpeed) +
-    moon.angleOffset;
-
-    const x =
-    parent.x +
-    Math.cos(angle) *
-    moon.radius;
-
-    const y =
-    parent.y +
-    Math.sin(angle) *
-    moon.radius;
-
-    const screenX =
-    window.innerWidth/2 + x;
-
-    const screenY =
-    window.innerHeight/2 - y;
-
-    moon.element.style.left =
-    `${screenX}px`;
-
-    moon.element.style.top =
-    `${screenY}px`;
-
-    moon.frozenX = screenX;
-    moon.frozenY = screenY;
-
-    if(
-        moon.element.classList.contains(
-            "focused"
-        )
-    ){
-
-        moon.element.style.transform =
-        "translate(-50%,-50%) scale(1.4)";
-
-    }else{
-
-        moon.element.style.transform =
-        "translate(-50%,-50%)";
-    }
-
-});
-
-if(
-    selectedMoon &&
-    projectPanel.classList.contains(
-        "open"
-    )
-){
-
-    const moonRect =
-    selectedMoon.getBoundingClientRect();
-
-    projectPanel.style.left =
-    `${moonRect.right + 25}px`;
-
-    projectPanel.style.top =
-    `${moonRect.top - 40}px`;
-
-    projectPanel.style.transform =
-    "none";
-}
-
-renderer.render(
-scene,
-camera
-);
-
-}
-
-animate();
-
-// =====================================
-// RESIZE
-// =====================================
-
-window.addEventListener(
-"resize",
-()=>{
-
-camera.aspect =
-window.innerWidth /
-window.innerHeight;
-
-camera.updateProjectionMatrix();
-
-renderer.setSize(
-window.innerWidth,
-window.innerHeight
-);
-
-});
-
+// Public helpers remain available to the home-page featured projects.
 function getAllProjects() {
-    const allProjects = [];
-
-    categories.forEach(category => {
-
-        category.projects.forEach(project => {
-
-            allProjects.push({
-                ...project,
-                category: category.name
-            });
-
-        });
-
-    });
-
-    return allProjects;
+    return categories.flatMap(category => category.projects.map(project => ({...project, category: category.name})));
 }
-
 function getRandomProjects(count = 3) {
-
-    const shuffled =
-    [...getAllProjects()]
-    .sort(() => Math.random() - 0.5);
-
-    return shuffled.slice(0, count);
+    const all = getAllProjects();
+    for (let i = all.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [all[i], all[j]] = [all[j], all[i]];
+    }
+    return all.slice(0, count);
 }
+
+(() => {
+    function initializeObservatory() {
+        const root = document.getElementById('projectObservatory');
+        if (!root) return;
+        const colors = ['#83d6f3','#e5b481','#b3a0ef','#83d8bb','#eea8bb','#e6ce88'];
+        const intros = [
+            'From machine perception to local intelligence. Explore systems that make sense of signals, images and information.',
+            'Ideas that move into the physical world. Machines, mechanisms and new ways to control them.',
+            'Where neural signals become interaction. Devices and experiences connecting people with computational systems.',
+            'From an experiment to something tangible. Interfaces, hardware and products built to be used.',
+            'Technology in service of people. Education, recycling and community-oriented initiatives.',
+            'Play as a space for experimentation. Interactive worlds, retro hardware and cultural experiences.'
+        ];
+        const rows = categories.flatMap((category, ci) => category.projects.map((project, pi) => ({project, ci, pi, id:`${ci}-${pi}`})));
+        const map = document.getElementById('orbitMap');
+        const nodes = document.getElementById('mapNodes');
+        const inspector = document.getElementById('projectInspector');
+        const collection = document.getElementById('projectCollection');
+        const search = document.getElementById('projectSearch');
+        const filters = document.getElementById('categoryFilters');
+        const status = document.getElementById('projectStatus');
+        let selectedCategory = null;
+        let selectedProject = null;
+        let view = 'map';
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+        let paused = reduced.matches;
+
+        function el(tag, className, text) {
+            const node = document.createElement(tag);
+            if (className) node.className = className;
+            if (text !== undefined) node.textContent = text;
+            return node;
+        }
+        function button(className, text, action) {
+            const node = el('button', className, text);
+            node.type = 'button';
+            node.addEventListener('click', action);
+            return node;
+        }
+        function image(file, className, folder='projects') {
+            const img = el('img', className);
+            img.alt = ''; img.loading = 'lazy'; img.decoding = 'async';
+            img.addEventListener('error', () => {
+                // Keep the geometry and accessible button label if a cover is absent.
+                img.removeAttribute('src'); img.style.opacity = '.12';
+            }, {once:true});
+            if (file) img.src = `assets/images/${folder}/${file}`;
+            return img;
+        }
+        function matching() {
+            const query = search.value.trim().toLowerCase();
+            return rows.filter(row => (selectedCategory === null || row.ci === selectedCategory) &&
+                [row.project.title,row.project.description,row.project.year,categories[row.ci].name].join(' ').toLowerCase().includes(query));
+        }
+        function selectCategory(ci) {
+            selectedCategory = ci; selectedProject = null;
+            render();
+        }
+        function selectProject(row) {
+            selectedProject = row.id;
+            render();
+            if (window.innerWidth <= 760) inspector.scrollIntoView({block:"start", behavior: reduced.matches ? "auto" : "smooth"});
+        }
+        function projectLink(url) {
+            if (!url || !url.trim() || url === 'l') return null;
+            try {
+                const parsed = new URL(url, document.baseURI);
+                return ['https:','http:'].includes(parsed.protocol) ? parsed.href : null;
+            } catch { return null; }
+        }
+        function renderFilters() {
+            const activeElement = document.activeElement;
+            const focusIndex = Array.from(filters.children).indexOf(activeElement);
+            filters.replaceChildren();
+            const all = button('obs-filter', 'All worlds', () => selectCategory(null));
+            all.setAttribute('aria-pressed',String(selectedCategory === null)); filters.append(all);
+            categories.forEach((category, index) => {
+                const chip = button('obs-filter', '', () => selectCategory(index));
+                chip.style.setProperty('--world-color',colors[index % colors.length]);
+                chip.append(el('i'),document.createTextNode(category.name),el('span','',String(category.projects.length)));
+                chip.setAttribute('aria-pressed',String(selectedCategory === index)); filters.append(chip);
+            });
+            if (focusIndex >= 0) filters.children[focusIndex]?.focus({preventScroll:true});
+        }
+        function renderMap(matches) {
+            nodes.replaceChildren();
+            const category = selectedCategory === null ? null : categories[selectedCategory];
+            document.getElementById('mapBreadcrumb').textContent = category ? `SYSTEM / ${category.name.toUpperCase()}` : 'THE COMPLETE SYSTEM';
+            const core = el('div','obs-core');
+            core.append(el('small','',category ? 'CURRENT WORLD' : 'BRUNO / SELECTED WORK'),el('strong','',category ? category.name : String(rows.length)),el('small','',category ? `${matches.length} projects` : 'PROJECTS · 6 WORLDS'));
+            nodes.append(core);
+            if (selectedCategory === null && !search.value.trim()) {
+                categories.forEach((cat, ci) => {
+                    const angle = -Math.PI / 2 + ci * Math.PI * 2 / categories.length;
+                    const world = button('obs-world','',() => selectCategory(ci));
+                    world.style.left = `${50+34*Math.cos(angle)}%`;
+                    world.style.top = `${48+32*Math.sin(angle)}%`;
+                    world.style.setProperty('--world-color',colors[ci % colors.length]);
+                    world.setAttribute('aria-label',`Explore ${cat.name}, ${cat.projects.length} projects`);
+                    const globe = el('span','obs-globe');globe.append(image(cat.texture,'','planets'));
+                    world.append(globe,el('span','obs-world-label',cat.name),el('span','obs-world-count',`${cat.projects.length} projects`));nodes.append(world);
+                });
+                return;
+            }
+            matches.forEach((row, i) => {
+                const angle = -Math.PI / 2 + i*Math.PI*2/Math.max(1,matches.length);
+                // Search results use two rings when the result set grows.
+                const radius = matches.length > 16 && i%2 ? 24 : 35;
+                const node = button('obs-project-node','',() => selectProject(row));
+                node.style.left = `${50+radius*Math.cos(angle)}%`;node.style.top=`${49+radius*Math.sin(angle)}%`;
+                node.setAttribute('aria-label',`${row.project.title}, ${row.project.year}. Show details`);
+                node.title=row.project.title;
+                node.setAttribute('aria-pressed',String(selectedProject === row.id));
+                node.append(image(row.project.image),el('span','obs-node-number',String(i+1).padStart(2,'0')));nodes.append(node);
+            });
+        }
+        function renderCollection(matches) {
+            collection.replaceChildren();
+            matches.forEach(row => {
+                const card = button('obs-mini-card','',() => selectProject(row));
+                card.setAttribute('aria-pressed',String(selectedProject === row.id));
+                card.append(image(row.project.image),el('small','',`${categories[row.ci].name} / ${row.project.year}`),el('strong','',row.project.title));
+                collection.append(card);
+            });
+            if (!matches.length) collection.append(el('p','obs-no-results','No projects match this search. Try another word or return to All worlds.'));
+        }
+        function renderInspector(matches) {
+            // Restore keyboard focus after updating the detail panel.
+            const previous = inspector.contains(document.activeElement) ? document.activeElement?.dataset.project : null;
+            inspector.replaceChildren();
+            const row = matches.find(item => item.id === selectedProject);
+            const ci = row ? row.ci : selectedCategory;
+            root.style.setProperty('--obs-accent',ci === null ? '#8debdc' : colors[ci%colors.length]);
+            if (row) {
+                inspector.append(el('div','obs-kicker',`${categories[row.ci].name} / ${row.project.year}`),image(row.project.image,'obs-inspector-image'),el('h3','',row.project.title),el('p','',row.project.description));
+                const url=projectLink(row.project.url);
+                if(url) {
+                    const link=el('a','obs-open-link','Open project ↗');link.href=url;link.target='_blank';link.rel='noopener noreferrer';inspector.append(link);
+                } else inspector.append(el('p','', 'Project overview · no external link available.'));
+            } else if (selectedCategory !== null) {
+                inspector.append(el('div','obs-kicker',`WORLD ${String(selectedCategory+1).padStart(2,'0')}`),el('h3','',categories[selectedCategory].name),el('p','',intros[selectedCategory] || 'Explore this collection of projects.'));
+            } else {
+                inspector.append(el('div','obs-kicker','WELCOME, EXPLORER'),el('h3','','Different worlds. Shared curiosity.'),el('p','','Every world opens a different part of the portfolio. Select a planet to enter its constellation, or search for an idea to follow it across disciplines.'));
+                const facts=el('div','obs-facts');
+                [[rows.length,'Projects'],[categories.length,'Worlds']].forEach(([n,label])=>{const fact=el('div');fact.append(el('strong','',String(n)),el('span','',label));facts.append(fact)});inspector.append(facts);
+            }
+            inspector.append(el('div','obs-next-label',`${matches.length} PROJECTS / SELECT TO DISCOVER`));
+            const list=el('div','obs-project-list');
+            matches.forEach(item=>{
+                const entry=button('obs-list-item','',()=>selectProject(item));entry.dataset.project=item.id;
+                entry.setAttribute('aria-pressed',String(selectedProject===item.id));
+                entry.append(image(item.project.image),el('span','',item.project.title));list.append(entry);
+            });
+            if(!matches.length) list.append(el('p','obs-no-results','No matches. Clear the search or choose another world.'));
+            inspector.append(list);
+            if(previous) Array.from(list.children).find(n=>n.dataset.project===previous)?.focus({preventScroll:true});
+        }
+        function render() {
+            const matches=matching();
+            if(!matches.some(row=>row.id===selectedProject)) selectedProject=null;
+            renderFilters();renderMap(matches);renderCollection(matches);renderInspector(matches);
+            map.hidden=view!=='map';collection.hidden=view!=='cards';
+            document.getElementById('mapView').setAttribute('aria-pressed',String(view==='map'));
+            document.getElementById('cardsView').setAttribute('aria-pressed',String(view==='cards'));
+            status.textContent=`${matches.length} of ${rows.length} projects${selectedCategory===null ? ' · All worlds' : ' · '+categories[selectedCategory].name}`;
+        }
+        search.addEventListener('input',()=>{selectedProject=null;render()});
+        document.getElementById('resetOrbit').addEventListener('click',()=>{search.value='';selectedCategory=null;selectedProject=null;render()});
+        document.getElementById('mapView').addEventListener('click',()=>{view='map';render();drawStars()});
+        document.getElementById('cardsView').addEventListener('click',()=>{view='cards';render()});
+        const motion=document.getElementById('motionToggle');
+        function updateMotion(){root.classList.toggle('obs-paused',paused);motion.textContent=paused?'Resume motion':'Pause motion';motion.setAttribute('aria-pressed',String(paused))}
+        motion.addEventListener('click',()=>{paused=!paused;updateMotion()});
+        function drawStars() {
+            const canvas=document.getElementById('starCanvas');
+            const width=map.clientWidth,height=map.clientHeight;
+            if(!width||!height)return;
+            const dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=width*dpr;canvas.height=height*dpr;
+            const ctx=canvas.getContext('2d');if(!ctx)return;ctx.scale(dpr,dpr);
+            let seed=41;const random=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
+            for(let i=0;i<180;i++){const x=random()*width,y=random()*height,r=random()*.9+.2;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=`rgba(180,213,244,${random()*.6+.12})`;ctx.fill()}
+        }
+        new ResizeObserver(drawStars).observe(map);
+        render();updateMotion();drawStars();
+    }
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initializeObservatory,{once:true});
+    else initializeObservatory();
+})();
