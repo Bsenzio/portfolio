@@ -37,7 +37,7 @@ if(profilePhoto){
 // =========================
 
 const slides =
-document.querySelectorAll(".skill-slide");
+document.querySelectorAll(".skill-carousel-section .skill-slide");
 
 let current = 0;
 
@@ -188,7 +188,7 @@ if(nextBtn && prevBtn && slides.length){
 }
 
 const timelineSlides =
-document.querySelectorAll(".timeline-slide");
+document.querySelectorAll("#timelineContainer .timeline-slide");
 
 let timelineCurrent = 0;
 
@@ -199,10 +199,10 @@ function updateTimeline(){
         let offset =
         index - timelineCurrent;
 
-        if(offset < -7)
+        if(offset < -Math.floor(timelineSlides.length / 2))
             offset += timelineSlides.length;
 
-        if(offset > 7)
+        if(offset > Math.floor(timelineSlides.length / 2))
             offset -= timelineSlides.length;
 
         if(offset === 0){
@@ -263,7 +263,9 @@ function updateTimeline(){
 
 document
 .getElementById("nextTimeline")
-.addEventListener("click",()=>{
+?.addEventListener("click",()=>{
+
+    if (!timelineSlides.length) return;
 
     timelineCurrent =
     (timelineCurrent+1)
@@ -274,7 +276,9 @@ document
 
 document
 .getElementById("prevTimeline")
-.addEventListener("click",()=>{
+?.addEventListener("click",()=>{
+
+    if (!timelineSlides.length) return;
 
     timelineCurrent =
     (timelineCurrent-1+timelineSlides.length)
@@ -287,68 +291,58 @@ document
 
 
 
-function createSimpleSlider(
-    slideClass,
-    prevBtn,
-    nextBtn
-){
+function createSimpleSlider(slideClass, prevId, nextId, containerSelector) {
+    const previous = document.getElementById(prevId);
+    const next = document.getElementById(nextId);
+    const container = containerSelector
+        ? document.querySelector(containerSelector)
+        : previous?.closest('.dashboard-column');
 
-    const slides =
-    document.querySelectorAll(slideClass);
+    if (!container) return;
 
-    let current = 0;
+    let currentSlide = null;
+    let position = 0;
 
-    function update(){
-
-        slides.forEach((slide,index)=>{
-
-            if(index === current){
-
-                slide.style.opacity = 1;
-                slide.style.transform =
-                "translateY(0px)";
-
-                slide.style.zIndex = 10;
-            }
-
-            else{
-
-                slide.style.opacity = 0;
-
-                slide.style.transform =
-                "translateY(40px)";
-
-                slide.style.zIndex = 0;
-            }
-
-        });
-
+    function getSlides() {
+        // Read the current DOM, including cards inserted after page load.
+        return Array.from(container.querySelectorAll(slideClass))
+            .filter(slide => slide.textContent.trim() ||
+                slide.querySelector('img[src], video, iframe, canvas'));
     }
 
-    document
-    .getElementById(prevBtn)
-    .addEventListener("click",()=>{
+    function update(direction = 0) {
+        const items = getSlides();
+        const oldIndex = items.indexOf(currentSlide);
+        if (oldIndex >= 0) position = oldIndex;
+        position = items.length
+            ? ((position + direction) % items.length + items.length) % items.length
+            : 0;
+        currentSlide = items[position] || null;
 
-        current =
-        (current-1+slides.length)
-        %slides.length;
+        items.forEach(slide => {
+            const active = slide === currentSlide;
+            slide.style.opacity = active ? '1' : '0';
+            slide.style.transform = active ? 'translateY(0px)' : 'translateY(40px)';
+            slide.style.zIndex = active ? '10' : '0';
+            slide.style.pointerEvents = active ? 'auto' : 'none';
+            slide.style.visibility = active ? 'visible' : 'hidden';
+            slide.setAttribute('aria-hidden', String(!active));
+        });
 
-        update();
+        [previous, next].forEach(button => {
+            if (button) {
+                button.disabled = items.length < 2;
+                button.hidden = items.length < 2;
+            }
+        });
+    }
 
+    previous?.addEventListener('click', () => update(-1));
+    next?.addEventListener('click', () => update(1));
+    new MutationObserver(() => update()).observe(container, {
+        childList: true,
+        subtree: true
     });
-
-    document
-    .getElementById(nextBtn)
-    .addEventListener("click",()=>{
-
-        current =
-        (current+1)
-        %slides.length;
-
-        update();
-
-    });
-
     update();
 }
 
@@ -356,9 +350,12 @@ function getAllProjects() {
 
     const allProjects = [];
 
-    categories.forEach(category => {
+    const sourceCategories = typeof categories !== "undefined" && Array.isArray(categories)
+        ? categories : [];
 
-        category.projects.forEach(project => {
+    sourceCategories.forEach(category => {
+
+        (category.projects || []).forEach(project => {
 
             allProjects.push({
                 ...project,
@@ -402,7 +399,7 @@ function loadFeaturedProjects() {
         "featuredProjects"
     );
 
-    if(!container) return;
+    if(!container || container.querySelector(".project-slide")) return;
 
     const featured =
     getRandomProjects(3);
@@ -434,7 +431,8 @@ loadFeaturedProjects();
 createSimpleSlider(
     ".project-slide",
     "prevProject",
-    "nextProject"
+    "nextProject",
+    "#featuredProjects"
 );
 
 createSimpleSlider(

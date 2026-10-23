@@ -1,0 +1,9 @@
+Blue Ocean Strategy offers a useful starting point for exploring new value: reconsider the assumptions behind an existing product or experience.
+
+## Changing the question
+
+Instead of asking only how to make a system faster or more powerful, ask what would make it useful to someone who is currently overlooked.
+
+## From idea to experiment
+
+A small prototype can help test whether the proposed experience is understandable and valuable. Creativity provides a direction; feedback helps refine it.

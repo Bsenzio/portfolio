@@ -1,0 +1,9 @@
+Edge AI brings model inference closer to the source of the data, processing inputs locally on a device.
+
+## Beyond the model
+
+The complete system must acquire data, prepare it, run inference, and respond. Memory, processing time, and energy use influence every decision.
+
+## Testing on real hardware
+
+Evaluate the entire pipeline under representative conditions. The goal is useful, repeatable behavior on the device where the application will operate.
