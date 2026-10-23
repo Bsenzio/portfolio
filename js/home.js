@@ -14,7 +14,9 @@ if (featuredContainer && typeof projects !== 'undefined' && Array.isArray(projec
 }
 const blogContainer = document.getElementById('featuredBlog');
 if (blogContainer && typeof blogPosts !== 'undefined' && Array.isArray(blogPosts)) {
- blogContainer.innerHTML = blogPosts.filter(item => item && item.featured).map(item => `<div class="blog-slide"><h3>${escapeHTML(item.title)}</h3><p>${escapeHTML(item.excerpt || '')}</p></div>`).join('');
+ blogContainer.innerHTML = blogPosts.filter(item => item && item.featured)
+ .slice().sort((a,b) => String(b.created || '').localeCompare(String(a.created || '')))
+ .map(item => `<div class="blog-slide">${item.created ? `<time class="blog-date" datetime="${escapeHTML(item.created)}">${escapeHTML(item.created)}</time>` : ''}<h3>${escapeHTML(item.title)}</h3><p>${escapeHTML(item.excerpt || '')}</p><a class="blog-read-link" href="blog.html#${encodeURIComponent(item.slug || '')}">Read story →</a></div>`).join('');
 }
 // =========================
 // PROFILE IMAGE ROTATION
@@ -107,73 +109,20 @@ document.querySelectorAll("#timelineContainer .timeline-slide");
 
 let timelineCurrent = 0;
 
-function updateTimeline(){
-
-    timelineSlides.forEach((slide,index)=>{
-
-        let offset =
-        index - timelineCurrent;
-
-        if(offset < -Math.floor(timelineSlides.length / 2))
-            offset += timelineSlides.length;
-
-        if(offset > Math.floor(timelineSlides.length / 2))
-            offset -= timelineSlides.length;
-
-        if(offset === 0){
-
-            slide.style.transform =
-            `
-            translate(-50%,-50%)
-            translateY(0px)
-            scale(1)
-            `;
-
-            slide.style.opacity = 1;
-            slide.style.zIndex = 10;
-        }
-
-        else if(offset === -1){
-
-            slide.style.transform =
-            `
-            translate(-50%,-50%)
-            translateY(-180px)
-            scale(.8)
-            `;
-
-            slide.style.opacity = .5;
-            slide.style.zIndex = 5;
-        }
-
-        else if(offset === 1){
-
-            slide.style.transform =
-            `
-            translate(-50%,-50%)
-            translateY(180px)
-            scale(.8)
-            `;
-
-            slide.style.opacity = .5;
-            slide.style.zIndex = 5;
-        }
-
-        else{
-
-            slide.style.opacity = 0;
-            slide.style.zIndex = 0;
-
-            slide.style.transform =
-            `
-            translate(-50%,-50%)
-            translateY(${offset*400}px)
-            scale(.5)
-            `;
-        }
-
+function updateTimeline() {
+    timelineSlides.forEach((slide, index) => {
+        const active = index === timelineCurrent;
+        slide.style.transform = 'none';
+        slide.style.opacity = active ? '1' : '0';
+        slide.style.visibility = active ? 'visible' : 'hidden';
+        slide.style.pointerEvents = active ? 'auto' : 'none';
+        slide.style.zIndex = active ? '10' : '0';
+        slide.setAttribute('aria-hidden', String(!active));
     });
-
+    ['prevTimeline','nextTimeline'].forEach(id => {
+        const button = document.getElementById(id);
+        if (button) button.hidden = timelineSlides.length < 2;
+    });
 }
 
 document

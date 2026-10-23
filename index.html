@@ -174,6 +174,35 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 </style>
 
+<style>
+/* Scoped style: the three bottom panels only. */
+.career-dashboard.home-panels { width:calc(100% - 40px); max-width:1180px; margin:52px auto; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+.home-panels .dashboard-column { display:flex; flex-direction:column; min-width:0; min-height:0; padding:22px; border:1px solid #293e56; border-radius:18px; background:linear-gradient(145deg,#122237,#0c1726); box-shadow:0 10px 28px rgba(0,0,0,.18); backdrop-filter:none; overflow:hidden; }
+.home-panels .home-panel-heading { display:flex; align-items:center; gap:12px; padding-bottom:18px; border-bottom:1px solid #283c52; }
+.home-panels .home-panel-icon { display:grid; place-items:center; flex:none; width:38px; height:38px; border:1px solid #315561; border-radius:11px; background:#16323c; color:#8debdc; font-size:15px; }
+.home-panels .dashboard-column h2 { margin:0 0 3px; text-align:left; font-family:'Playfair Display',serif; font-size:22px; line-height:1.25; font-weight:400; color:#eef4ff; }
+.home-panels .home-panel-heading p { margin:0; font-size:11px; color:#94a9c3; }
+.home-panels .dashboard-column .panel-view { position:relative; height:330px; width:100%; margin:18px 0; overflow:hidden; perspective:none; }
+.home-panels .timeline-slide,.home-panels .project-slide,.home-panels .blog-slide { position:absolute; inset:0; top:0; left:0; width:100%; max-width:none; height:100%; padding:0; margin:0; background:transparent; border:0; border-radius:0; box-shadow:none; backdrop-filter:none; text-align:left; overflow-y:auto; scrollbar-width:thin; scrollbar-color:#365269 transparent; }
+.home-panels .project-slide,.home-panels .blog-slide { display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start; gap:12px; }
+.home-panels .timeline-slide .year { display:inline-block; min-width:0; width:auto; margin:0 0 20px; padding:5px 10px; background:#1a393e; color:#9be6d7; border:1px solid #315561; border-radius:30px; font-size:11px; }
+.home-panels .timeline-slide h3,.home-panels .project-slide h3,.home-panels .blog-slide h3 { color:#e1edf9; font-size:19px; line-height:1.4; font-weight:500; margin:0 0 12px; }
+.home-panels .timeline-slide p,.home-panels .project-slide p,.home-panels .blog-slide p { color:#aabdd4; font-size:13px; line-height:1.8; margin:0; }
+.home-panels .featured-project-image { display:block; flex:none; width:100%; height:150px; object-fit:cover; border:1px solid #293e56; border-radius:10px; box-shadow:none; }
+.home-panels .home-panel-bottom { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:auto; padding-top:14px; border-top:1px solid #283c52; }
+.home-panels .home-panel-controls { display:flex; gap:7px; }
+.home-panels .panel-btn { display:grid; place-items:center; width:30px; height:30px; margin:0; border:1px solid #304b61; border-radius:8px; background:#172d40; color:#a9dfd8; font-size:11px; cursor:pointer; transition:background .2s; }
+.home-panels .panel-btn:hover { transform:none; background:#234655; }
+.home-panels .panel-btn[hidden] { display:none; }
+.home-panels .home-panel-link,.home-panels .home-panel-label { font-size:11px; color:#8dd5cb; }
+.home-panels .home-panel-link i { margin-left:5px; font-size:9px; }
+.home-panels .home-panel-link:hover { color:#fff; }
+.home-panels button:focus-visible,.home-panels a:focus-visible { outline:2px solid #8debdc; outline-offset:4px; }
+.home-panels .blog-date { font-size:11px; color:#8fa5bf; }
+.home-panels .blog-read-link { align-self:flex-start; margin-top:auto; padding:9px 0; font-size:12px; color:#8debdc; }
+@media(max-width:1000px) { .career-dashboard.home-panels { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:650px) { .career-dashboard.home-panels { grid-template-columns:1fr; width:calc(100% - 32px); margin:32px auto; } .home-panels .dashboard-column { padding:20px; } .home-panels .dashboard-column .panel-view { height:300px; } }
+</style>
 </head>
 
 <body>
@@ -565,125 +594,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
      CAREER DASHBOARD
      ========================================================= -->
 
-<section class="career-dashboard">
-
-
-<!-- =====================================================
-     CAREER
-     ===================================================== -->
-
+<section class="career-dashboard home-panels" aria-label="Explore my work">
 <div class="dashboard-column career-column">
-
-    <h2>
-        Career Journey
-    </h2>
-
-
-    <button
-        id="prevTimeline"
-        class="panel-btn"
-    >
-        <i class="fas fa-chevron-up"></i>
-    </button>
-
-
-    <div
-        class="panel-view"
-        id="timelineContainer"
-    >
-    </div>
-
-
-    <button
-        id="nextTimeline"
-        class="panel-btn"
-    >
-        <i class="fas fa-chevron-down"></i>
-    </button>
-
-</div>
-
-
-
-<!-- =====================================================
-     PROJECTS
-     ===================================================== -->
-
+ <div class="home-panel-heading"><span class="home-panel-icon"><i class="fas fa-route" aria-hidden="true"></i></span><div><h2>Career Journey</h2><p>Milestones & experience</p></div></div>
+ <div class="panel-view" id="timelineContainer"></div>
+ <div class="home-panel-bottom"><div class="home-panel-controls"><button id="prevTimeline" class="panel-btn" type="button" aria-label="Previous career journey"><i class="fas fa-arrow-left" aria-hidden="true"></i></button><button id="nextTimeline" class="panel-btn" type="button" aria-label="Next career journey"><i class="fas fa-arrow-right" aria-hidden="true"></i></button></div><span class="home-panel-label">Career highlights</span></div></div>
 <div class="dashboard-column project-column">
-
-    <h2>
-        Featured Projects
-    </h2>
-
-
-    <button
-        id="prevProject"
-        class="panel-btn"
-    >
-        <i class="fas fa-chevron-left"></i>
-    </button>
-
-
-    <div
-        class="panel-view"
-        id="featuredProjects"
-    >
-    </div>
-
-
-    <button
-        id="nextProject"
-        class="panel-btn"
-    >
-        <i class="fas fa-chevron-right"></i>
-    </button>
-
-</div>
-
-
-
-<!-- =====================================================
-     BLOG
-     ===================================================== -->
-
+ <div class="home-panel-heading"><span class="home-panel-icon"><i class="fas fa-code" aria-hidden="true"></i></span><div><h2>Featured Projects</h2><p>Ideas put into practice</p></div></div>
+ <div class="panel-view" id="featuredProjects"></div>
+ <div class="home-panel-bottom"><div class="home-panel-controls"><button id="prevProject" class="panel-btn" type="button" aria-label="Previous featured projects"><i class="fas fa-arrow-left" aria-hidden="true"></i></button><button id="nextProject" class="panel-btn" type="button" aria-label="Next featured projects"><i class="fas fa-arrow-right" aria-hidden="true"></i></button></div><a class="home-panel-link" href="projects.html">View all <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div></div>
 <div class="dashboard-column blog-column">
-
-    <h2>
-        Latest Blog
-    </h2>
-
-
-    <button
-        id="prevBlog"
-        class="panel-btn"
-    >
-        <i class="fas fa-chevron-left"></i>
-    </button>
-
-
-    <div class="panel-view blog-placeholder">
-
-
-        <img
-            src="assets/images/under-construction.png"
-            alt="Under Construction"
-            class="under-construction-image"
-        >
-
-
-    </div>
-
-
-    <button
-        id="nextBlog"
-        class="panel-btn"
-    >
-        <i class="fas fa-chevron-right"></i>
-    </button>
-
-</div>
-
-
+ <div class="home-panel-heading"><span class="home-panel-icon"><i class="fas fa-feather-pointed" aria-hidden="true"></i></span><div><h2>Latest Blog</h2><p>Notes & perspectives</p></div></div>
+ <div class="panel-view" id="featuredBlog"></div>
+ <div class="home-panel-bottom"><div class="home-panel-controls"><button id="prevBlog" class="panel-btn" type="button" aria-label="Previous latest blog"><i class="fas fa-arrow-left" aria-hidden="true"></i></button><button id="nextBlog" class="panel-btn" type="button" aria-label="Next latest blog"><i class="fas fa-arrow-right" aria-hidden="true"></i></button></div><a class="home-panel-link" href="blog.html">View all <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div></div>
 </section>
 
 <!-- =========================================================
@@ -860,7 +783,7 @@ document.addEventListener(
 
 <script src="js/blog.js"></script>
 
-<script src="js/home.js"></script>
+<script src="js/home.js?v=panels-1"></script>
 
 <!-- Home carousels are controlled by home.js only. -->
 
