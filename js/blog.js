@@ -45,7 +45,34 @@ const blogPosts = [
         excerpt: "Running intelligence locally.",
         url: "blog.html#edge-ai",
         contentUrl: "assets/blog/stories/edge-ai.txt"
-    }
+    },
+    {
+        id: 4,
+        slug: "edge-ai",
+        created: "2026-10-23", // Example date; replace with the actual date.
+        featured: true,
+        title: "Edge AI",
+        image: "edgeai.jpg",
+        topic: "Artificial Intelligence",
+        keywords: ["Embedded Systems", "Edge AI"],
+        excerpt: "Running intelligence locally.",
+        url: "blog.html#video",
+        contentUrl: "assets/blog/stories/video.txt"
+    },
+    {
+        id: 5,
+        slug: "edge-ai",
+        created: "2026-10-23", // Example date; replace with the actual date.
+        featured: true,
+        title: "Edge AI",
+        image: "edgeai.jpg",
+        topic: "Artificial Intelligence",
+        keywords: ["Embedded Systems", "Edge AI"],
+        excerpt: "Running intelligence locally.",
+        url: "blog.html#ejemplo-con-imagenes",
+        contentUrl: "assets/blog/stories/ejemplo-con-imagenes.txt"
+    }	
+	
 ];
 
 (() => {
