@@ -407,7 +407,7 @@ abstract:"Interview in May 2026 exploring the journey from Artificial Life exper
 id:30,
 title:"Modular interface for controlling devices and actuators via mind control",
 authors:"<strong>Bruno Senzio-Savino</strong>, Ivan Macias, Stephanie Davalos",
-venue:"Pat. Pend. Application 100233478",
+venue:"MX/a/2012/010393",
 year:2012,
 type:"Patent",
 image:"bmi_module.jpg",
