@@ -442,6 +442,35 @@ function getRandomProjects(count = 3) {
         let view = 'map';
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
         let paused = reduced.matches;
+        let orbitTime = 0;
+        let lastFrame = null;
+        let frameRequest = null;
+        let pointerInside = false;
+        let orbitWorlds = [];
+
+        function stopOrbit() {
+            if (frameRequest !== null) cancelAnimationFrame(frameRequest);
+            frameRequest = null; lastFrame = null;
+        }
+        function startOrbit() {
+            if (frameRequest !== null || paused || reduced.matches || document.hidden || view !== 'map') return;
+            frameRequest = requestAnimationFrame(animateOrbit);
+        }
+        function animateOrbit(timestamp) {
+            frameRequest = null;
+            if (paused || reduced.matches || document.hidden || view !== 'map') { lastFrame = null; return; }
+            const dt = lastFrame === null ? 0 : Math.min((timestamp - lastFrame) / 1000, .05);
+            lastFrame = timestamp;
+            // Stop the orbital travel while someone is pointing or navigating by keyboard.
+            const interacting = pointerInside || map.contains(document.activeElement);
+            if (!interacting) orbitTime += dt;
+            orbitWorlds.forEach(({node, angle, rx=34, ry=32, centerY=48, speed=.022}) => {
+                const phase = angle + orbitTime * speed;
+                node.style.left = `${50 + rx * Math.cos(phase)}%`;
+                node.style.top = `${centerY + ry * Math.sin(phase)}%`;
+            });
+            if (orbitWorlds.length) frameRequest = requestAnimationFrame(animateOrbit);
+        }
 
         function el(tag, className, text) {
             const node = document.createElement(tag);
@@ -502,20 +531,34 @@ function getRandomProjects(count = 3) {
         }
         function renderMap(matches) {
             nodes.replaceChildren();
+            orbitWorlds = [];
             const category = selectedCategory === null ? null : categories[selectedCategory];
             document.getElementById('mapBreadcrumb').textContent = category ? `SYSTEM / ${category.name.toUpperCase()}` : 'THE COMPLETE SYSTEM';
             const core = el('div','obs-core');
-            core.append(el('small','',category ? 'CURRENT WORLD' : 'BRUNO / SELECTED WORK'),el('strong','',category ? category.name : String(rows.length)),el('small','',category ? `${matches.length} projects` : 'PROJECTS · 6 WORLDS'));
+            const sun = el('span','obs-sun-surface');
+            if (category) {
+                core.classList.add('obs-category-core');
+                core.style.setProperty('--core-color',colors[selectedCategory % colors.length]);
+                sun.style.backgroundImage = `url("assets/images/planets/${category.texture}")`;
+            }
+            core.append(sun);
+            core.append(el('small','',category ? 'CURRENT WORLD' : 'PROJECT SYSTEM'),el('strong','',category ? category.name : String(rows.length)),el('small','',category ? `${matches.length} projects` : 'PROJECTS · 6 WORLDS'));
             nodes.append(core);
             if (selectedCategory === null && !search.value.trim()) {
                 categories.forEach((cat, ci) => {
                     const angle = -Math.PI / 2 + ci * Math.PI * 2 / categories.length;
                     const world = button('obs-world','',() => selectCategory(ci));
-                    world.style.left = `${50+34*Math.cos(angle)}%`;
-                    world.style.top = `${48+32*Math.sin(angle)}%`;
+                    world.style.left = `${50+34*Math.cos(angle+orbitTime*.022)}%`;
+                    world.style.top = `${48+32*Math.sin(angle+orbitTime*.022)}%`;
+                    world.style.setProperty('--spin-duration', `${35 + ci * 9}s`);
+                    world.style.setProperty('--spin-delay', `${-ci * 7}s`);
+                    orbitWorlds.push({node:world,angle});
                     world.style.setProperty('--world-color',colors[ci % colors.length]);
                     world.setAttribute('aria-label',`Explore ${cat.name}, ${cat.projects.length} projects`);
-                    const globe = el('span','obs-globe');globe.append(image(cat.texture,'','planets'));
+                    const globe = el('span','obs-globe');
+                    const surface = el('span','obs-surface');
+                    surface.style.backgroundImage = `url("assets/images/planets/${cat.texture}")`;
+                    globe.append(surface);
                     world.append(globe,el('span','obs-world-label',cat.name),el('span','obs-world-count',`${cat.projects.length} projects`));nodes.append(world);
                 });
                 return;
@@ -525,7 +568,11 @@ function getRandomProjects(count = 3) {
                 // Search results use two rings when the result set grows.
                 const radius = matches.length > 16 && i%2 ? 24 : 35;
                 const node = button('obs-project-node','',() => selectProject(row));
-                node.style.left = `${50+radius*Math.cos(angle)}%`;node.style.top=`${49+radius*Math.sin(angle)}%`;
+                const speed=.035;
+                const phase=angle+orbitTime*speed;
+                node.style.left = `${50+radius*Math.cos(phase)}%`;node.style.top=`${49+radius*Math.sin(phase)}%`;
+                orbitWorlds.push({node,angle,rx:radius,ry:radius,centerY:49,speed});
+                node.style.setProperty('--project-spin',`${65+(i%7)*8}s`);
                 node.setAttribute('aria-label',`${row.project.title}, ${row.project.year}. Show details`);
                 node.title=row.project.title;
                 node.setAttribute('aria-pressed',String(selectedProject === row.id));
@@ -580,15 +627,31 @@ function getRandomProjects(count = 3) {
             map.hidden=view!=='map';collection.hidden=view!=='cards';
             document.getElementById('mapView').setAttribute('aria-pressed',String(view==='map'));
             document.getElementById('cardsView').setAttribute('aria-pressed',String(view==='cards'));
+            startOrbit();
             status.textContent=`${matches.length} of ${rows.length} projects${selectedCategory===null ? ' · All worlds' : ' · '+categories[selectedCategory].name}`;
         }
         search.addEventListener('input',()=>{selectedProject=null;render()});
         document.getElementById('resetOrbit').addEventListener('click',()=>{search.value='';selectedCategory=null;selectedProject=null;render()});
         document.getElementById('mapView').addEventListener('click',()=>{view='map';render();drawStars()});
-        document.getElementById('cardsView').addEventListener('click',()=>{view='cards';render()});
+        document.getElementById('cardsView').addEventListener('click',()=>{view='cards';stopOrbit();render()});
         const motion=document.getElementById('motionToggle');
-        function updateMotion(){root.classList.toggle('obs-paused',paused);motion.textContent=paused?'Resume motion':'Pause motion';motion.setAttribute('aria-pressed',String(paused))}
+        function updateMotion(){
+            root.classList.toggle('obs-paused',paused || reduced.matches);
+            motion.textContent=paused?'Resume motion':'Pause motion';
+            motion.setAttribute('aria-pressed',String(paused));
+            if(paused || reduced.matches) stopOrbit(); else startOrbit();
+        }
         motion.addEventListener('click',()=>{paused=!paused;updateMotion()});
+        map.addEventListener('pointerenter',()=>{pointerInside=true;root.classList.add('obs-hovering')});
+        map.addEventListener('pointerleave',()=>{pointerInside=false;root.classList.remove('obs-hovering');map.style.removeProperty('--light-x');map.style.removeProperty('--light-y')});
+        map.addEventListener('pointermove', event=>{
+            if(reduced.matches || paused) return;
+            const rect=map.getBoundingClientRect();
+            map.style.setProperty('--light-x',`${event.clientX-rect.left}px`);
+            map.style.setProperty('--light-y',`${event.clientY-rect.top}px`);
+        });
+        document.addEventListener('visibilitychange',()=>{if(document.hidden)stopOrbit();else startOrbit()});
+        reduced.addEventListener('change',()=>{paused=reduced.matches;updateMotion()});
         function drawStars() {
             const canvas=document.getElementById('starCanvas');
             const width=map.clientWidth,height=map.clientHeight;
