@@ -44,7 +44,7 @@ const profileImages = [
     "assets/images/profile5.jpg"
 ];
 
-const profilePhoto =
+const profilePhoto = document.documentElement.classList.contains("compact-home") ? null :
 document.getElementById("profile-photo");
 
 if(profilePhoto){
@@ -339,22 +339,12 @@ function initializeDesk() {
     }
     showBlog();
 
-    // Explore the project deck directly by moving across the image area.
+    // Hover pauses autoplay; navigation uses the button or keyboard.
     feature.setAttribute('tabindex','0');
     feature.setAttribute('role','group');
-    feature.setAttribute('aria-label','Featured projects. Move across the image to explore, or use left and right arrow keys.');
+    feature.setAttribute('aria-label','Featured projects. Use Next discovery or the left and right arrow keys to explore.');
     feature.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse')projectHover=true});
     feature.addEventListener('pointerleave',()=>{projectHover=false});
-    feature.addEventListener('pointermove',event=>{
-        if(event.pointerType!=='mouse')return;
-        const cover=feature.querySelector('.lp-project-image');
-        if(!cover)return;
-        const rect=cover.getBoundingClientRect();
-        if(event.clientY<rect.top||event.clientY>rect.bottom)return;
-        const items=filtered();
-        const index=Math.min(items.length-1,Math.max(0,Math.floor((event.clientX-rect.left)/rect.width*items.length)));
-        if(index>=0&&index!==projectIndex){projectIndex=index;projectElapsed=0;showProject()}
-    });
     feature.addEventListener('keydown',event=>{
         if(!['ArrowLeft','ArrowRight'].includes(event.key)||!filtered().length)return;
         event.preventDefault();projectIndex=(projectIndex+(event.key==='ArrowRight'?1:-1)+filtered().length)%filtered().length;projectElapsed=0;showProject();
