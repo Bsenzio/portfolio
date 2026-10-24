@@ -71,7 +71,7 @@ if(profilePhoto){
 
 
 const skillStage = document.querySelector('.skill-carousel-section .carousel-3d');
-if (skillStage) {
+if (skillStage && !document.documentElement.classList.contains('compact-home')) {
  let skillIndex = 0;
  let skillSlides = Array.from(skillStage.querySelectorAll('.skill-slide'));
  const prev = document.getElementById('prevSkill');
@@ -125,7 +125,7 @@ else initializeHome();
 
 function initializeDesk() {
     const desk = document.querySelector('.launchpad');
-    if (!desk) return;
+    if (!desk || document.documentElement.classList.contains('compact-home')) return;
     const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
     let userPaused = false;
     let projectElapsed=0,blogElapsed=0,journeyElapsed=0;
