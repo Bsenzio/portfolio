@@ -163,7 +163,15 @@ function initializeDesk() {
         const card=node('article','ct-reel-card');
         const dateLabel=item.date?new Intl.DateTimeFormat('en-US',{month:'short',year:'numeric',timeZone:'UTC'}).format(new Date(item.date+'-01T12:00:00Z')):item.year;
         card.append(node('small','ct-reel-date',dateLabel+' / '+item.kind),node('h4','ct-reel-title',item.title),node('p','',item.description));
-        if(item.link){const link=node('a','',item.kind==='Projects'?'Explore Projects ↗':'View Publications ↗');link.href=item.link;card.append(link)}
+        if(item.link){
+            const label=item.kind==='Projects'?'Explore Projects ↗':'View Publications ↗';
+            const link=node('a','ct-scrolling-link');link.href=item.link;
+            link.setAttribute('aria-label',label);
+            const track=node('span','ct-link-track');
+            track.append(node('span','',label));
+            const duplicate=node('span','',label);duplicate.setAttribute('aria-hidden','true');
+            track.append(duplicate);link.append(track);card.append(link);
+        }
         card.addEventListener('click',event=>{if(index!==chapterIndex&&!event.target.closest('a')){chapterIndex=index;journeyElapsed=0;showHistory()}});
         milestone.append(card);reelCards.push(card);
     });

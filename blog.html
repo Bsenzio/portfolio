@@ -103,14 +103,91 @@
 @media(max-width:360px) { .personal-blog .blog-grid { grid-template-columns:minmax(0,300px); } }
 </style>
 <script src="js/blog.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Orbitron:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+/* Shared signature and digital identity across the portfolio. */
+body .navbar[aria-label="Main navigation"] {
+ display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+ align-items:center; gap:20px; padding:15px 28px;
+}
+.navbar .nav-signature {
+ justify-self:start; min-width:0; color:#e4f4ef;
+ font-family:'Allura','Brush Script MT',cursive; font-size:30px;
+ font-weight:400; line-height:1.15; text-decoration:none; white-space:nowrap;
+ text-shadow:0 2px 12px #83dac91a;
+}
+.navbar .nav-menu { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:6px; min-width:0; }
+.navbar .nav-digital-life {
+ justify-self:end; font-family:'Orbitron',monospace; font-size:15px;
+ font-weight:500; letter-spacing:2.5px; white-space:nowrap;
+ color:#8debdc; text-shadow:0 0 16px #63d7df33;
+}
+.navbar .nav-digital-life::before {
+ content:''; display:inline-block; width:6px; height:6px; border-radius:50%;
+ margin-right:10px; vertical-align:middle; background:#8debdc; box-shadow:0 0 9px #8debdc66;
+}
+@media(max-width:1200px) {
+ body .navbar[aria-label="Main navigation"] { grid-template-columns:minmax(0,1fr) auto; gap:12px 18px; padding:14px 20px; }
+ .navbar .nav-signature { font-size:29px; }
+ .navbar .nav-menu { grid-row:2; grid-column:1/-1; }
+ .navbar .nav-digital-life { grid-row:1; grid-column:2; font-size:13px; }
+}
+@media(max-width:540px) {
+ body .navbar[aria-label="Main navigation"] { padding:12px 10px; gap:12px 8px; }
+ .navbar .nav-signature { font-size:clamp(19px,4.9vw,26px); white-space:normal; }
+ .navbar .nav-digital-life { font-size:10px; letter-spacing:1px; }
+ .navbar .nav-digital-life::before { width:4px; height:4px; margin-right:5px; }
+ .navbar .nav-menu { gap:2px; }
+ body .navbar .nav-menu .nav-btn { padding:9px 10px; font-size:11px; }
+}
+</style>
+<style>
+.navbar .nav-digital-life {
+ color:#8debdc; animation:digital-life-neon 7s ease-in-out infinite;
+}
+@keyframes digital-life-neon {
+ 0%,100% { color:#80fff0; text-shadow:0 0 8px #43e8cf88,0 0 22px #43e8cf44; }
+ 33% { color:#f6a4ff; text-shadow:0 0 8px #ed65ff88,0 0 22px #ed65ff44; }
+ 66% { color:#a6bcff; text-shadow:0 0 8px #708aff88,0 0 22px #708aff44; }
+}
+body footer .tesla-reflection { max-width:740px; margin:24px auto 0; padding:20px 16px 0; border-top:1px solid #7e9aac33; text-align:center; }
+body footer .tesla-reflection blockquote { margin:0; padding:0; border:0; background:none; }
+body footer .tesla-reflection blockquote p { font-family:'Playfair Display',Georgia,serif; font-style:italic; font-size:clamp(15px,2vw,18px); line-height:1.8; color:#c6d9e5; }
+body footer .tesla-reflection figcaption { margin-top:10px; font-size:11px; color:#92aabd; }
+body footer .tesla-reflection a { color:#91dfd2; text-decoration:underline; text-underline-offset:4px; }
+body footer .tesla-reflection .tesla-history { display:inline-block; margin-top:12px; font-size:11px; line-height:1.7; }
+@media(prefers-reduced-motion:reduce) { .navbar .nav-digital-life { animation:none; } }
+</style>
+<style>
+/* Keep the existing footer centered; place the reflection in its own corner. */
+body footer { position:relative; padding-bottom:145px; }
+body footer .tesla-reflection {
+ position:absolute; right:22px; bottom:14px; width:min(300px,calc(100% - 44px));
+ max-width:300px; margin:0; padding:0; border:0; text-align:right;
+}
+body footer .tesla-reflection blockquote p {
+ margin:0; font-size:11px; line-height:1.6; color:#91a6b8;
+}
+body footer .tesla-reflection figcaption { margin-top:5px; font-size:9px; line-height:1.5; }
+body footer .tesla-reflection .tesla-history { margin-top:5px; font-size:9px; line-height:1.5; }
+body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
+@media(max-width:540px) {
+ body footer { padding-bottom:150px; }
+ body footer .tesla-reflection { right:16px; width:min(280px,calc(100% - 32px)); }
+}
+</style>
 </head><body class="personal-blog">
 <a class="skip-link" href="#main-content">Skip to content</a>
 <nav class="navbar" aria-label="Main navigation">
+<a class="nav-signature" href="index.html">Bruno Senzio-Savino Barzellato</a>
+<div class="nav-menu">
     <a href="index.html" class="nav-btn home-btn"><i class="fas fa-house" aria-hidden="true"></i> Home</a>
     <a href="publications.html" class="nav-btn pub-btn"><i class="fas fa-book" aria-hidden="true"></i> Publications</a>
     <a href="projects.html" class="nav-btn project-btn"><i class="fas fa-code" aria-hidden="true"></i> Projects</a>
     <a href="blog.html" class="nav-btn blog-btn" aria-current="page"><i class="fas fa-gamepad" aria-hidden="true"></i> Blog</a>
-  </nav>
+  </div>
+<span class="nav-digital-life">Digital Life</span>
+</nav>
 <main id="main-content">
 <header class="project-hero"><div class="hero-layout"><div>
 <p class="eyebrow">Notes from the journey</p>
@@ -145,6 +222,14 @@
     </div>
     <p>Edge AI · Game Development · XR · Robotics</p>
     <p>© <span id="copyrightYear"></span> Bruno Senzio-Savino Barzellato</p>
-  </footer>
+  
+<figure class="tesla-reflection">
+ <blockquote cite="https://en.wikisource.org/wiki/My_Inventions">
+  <p>“This is the difficult task of the inventor who is often misunderstood and unrewarded.”</p>
+ </blockquote>
+ <figcaption>— Nikola Tesla, <a href="https://en.wikisource.org/wiki/My_Inventions" target="_blank" rel="noopener noreferrer"><cite>My Inventions</cite> (1919)</a></figcaption>
+ <a class="tesla-history" href="https://www.smithsonianmag.com/history/nikola-tesla-tower-that-became-million-dollar-folly-11074324/" target="_blank" rel="noopener noreferrer">Tesla’s financial struggles, Edison rivalry &amp; the fate of Wardenclyffe — Smithsonian ↗</a>
+</figure>
+</footer>
 <script>document.getElementById('copyrightYear').textContent=new Date().getFullYear();</script>
 </body></html>

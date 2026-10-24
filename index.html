@@ -172,6 +172,39 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     .navbar .nav-btn i { margin-right:4px; }
 }
 
+
+/* Prominent observatory invitation and scrolling timeline links. */
+.launchpad .lp-three .lp-section-head { flex-wrap:wrap; }
+.launchpad .lp-three .lp-observatory-cta {
+ display:inline-flex; align-items:center; justify-content:center; max-width:100%;
+ padding:10px 14px; border:1px solid #82e8d4; border-radius:9px;
+ background:linear-gradient(120deg,#174b51,#233558); color:#dffff5;
+ font-size:13px; font-weight:700; line-height:1.5; text-align:center;
+ animation:observatory-invitation 2.8s ease-in-out infinite;
+}
+@keyframes observatory-invitation {
+ 0%,100% { opacity:.65; box-shadow:0 0 4px #82e8d422; }
+ 50% { opacity:1; box-shadow:0 0 22px #82e8d455; }
+}
+.launchpad .lp-observatory-cta:hover,.launchpad .lp-observatory-cta:focus-visible {
+ animation:none; opacity:1; background:#245f64;
+}
+.launchpad .ct-reel-card a.ct-scrolling-link {
+ display:block; width:180px; max-width:100%; overflow:hidden; white-space:nowrap;
+ border:1px solid #91e9e544; border-radius:5px; padding:6px 0;
+ background:#071b2966; text-decoration:none;
+}
+.ct-link-track { display:flex; width:max-content; animation:timeline-link-scroll 8s linear infinite; animation-play-state:paused; }
+.ct-link-track>span { flex:none; padding:0 22px; }
+.ct-reel-active .ct-link-track { animation-play-state:running; }
+.ct-scrolling-link:hover .ct-link-track,.ct-scrolling-link:focus-visible .ct-link-track { animation-play-state:paused; }
+@keyframes timeline-link-scroll { to { transform:translateX(-50%); } }
+@media(prefers-reduced-motion:reduce) {
+ .launchpad .lp-three .lp-observatory-cta,.ct-link-track { animation:none; opacity:1; }
+ .ct-link-track>span[aria-hidden] { display:none; }
+ .launchpad .ct-reel-card a.ct-scrolling-link { width:auto; white-space:normal; }
+}
+
 </style>
 
 
@@ -482,6 +515,118 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 .lp-three .lp-journal-all:hover { color:#fff; }
 @media(max-width:760px) { .lp-three .lp-blog-screen .lp-blog-photo { height:180px; } }
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Orbitron:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+/* Shared signature and digital identity across the portfolio. */
+body .navbar[aria-label="Main navigation"] {
+ display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+ align-items:center; gap:20px; padding:15px 28px;
+}
+.navbar .nav-signature {
+ justify-self:start; min-width:0; color:#e4f4ef;
+ font-family:'Allura','Brush Script MT',cursive; font-size:30px;
+ font-weight:400; line-height:1.15; text-decoration:none; white-space:nowrap;
+ text-shadow:0 2px 12px #83dac91a;
+}
+.navbar .nav-menu { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:6px; min-width:0; }
+.navbar .nav-digital-life {
+ justify-self:end; font-family:'Orbitron',monospace; font-size:15px;
+ font-weight:500; letter-spacing:2.5px; white-space:nowrap;
+ color:#8debdc; text-shadow:0 0 16px #63d7df33;
+}
+.navbar .nav-digital-life::before {
+ content:''; display:inline-block; width:6px; height:6px; border-radius:50%;
+ margin-right:10px; vertical-align:middle; background:#8debdc; box-shadow:0 0 9px #8debdc66;
+}
+@media(max-width:1200px) {
+ body .navbar[aria-label="Main navigation"] { grid-template-columns:minmax(0,1fr) auto; gap:12px 18px; padding:14px 20px; }
+ .navbar .nav-signature { font-size:29px; }
+ .navbar .nav-menu { grid-row:2; grid-column:1/-1; }
+ .navbar .nav-digital-life { grid-row:1; grid-column:2; font-size:13px; }
+}
+@media(max-width:540px) {
+ body .navbar[aria-label="Main navigation"] { padding:12px 10px; gap:12px 8px; }
+ .navbar .nav-signature { font-size:clamp(19px,4.9vw,26px); white-space:normal; }
+ .navbar .nav-digital-life { font-size:10px; letter-spacing:1px; }
+ .navbar .nav-digital-life::before { width:4px; height:4px; margin-right:5px; }
+ .navbar .nav-menu { gap:2px; }
+ body .navbar .nav-menu .nav-btn { padding:9px 10px; font-size:11px; }
+}
+</style>
+<style>
+.navbar .nav-digital-life {
+ color:#8debdc; animation:digital-life-neon 7s ease-in-out infinite;
+}
+@keyframes digital-life-neon {
+ 0%,100% { color:#80fff0; text-shadow:0 0 8px #43e8cf88,0 0 22px #43e8cf44; }
+ 33% { color:#f6a4ff; text-shadow:0 0 8px #ed65ff88,0 0 22px #ed65ff44; }
+ 66% { color:#a6bcff; text-shadow:0 0 8px #708aff88,0 0 22px #708aff44; }
+}
+body footer .tesla-reflection { max-width:740px; margin:24px auto 0; padding:20px 16px 0; border-top:1px solid #7e9aac33; text-align:center; }
+body footer .tesla-reflection blockquote { margin:0; padding:0; border:0; background:none; }
+body footer .tesla-reflection blockquote p { font-family:'Playfair Display',Georgia,serif; font-style:italic; font-size:clamp(15px,2vw,18px); line-height:1.8; color:#c6d9e5; }
+body footer .tesla-reflection figcaption { margin-top:10px; font-size:11px; color:#92aabd; }
+body footer .tesla-reflection a { color:#91dfd2; text-decoration:underline; text-underline-offset:4px; }
+body footer .tesla-reflection .tesla-history { display:inline-block; margin-top:12px; font-size:11px; line-height:1.7; }
+@media(prefers-reduced-motion:reduce) { .navbar .nav-digital-life { animation:none; } }
+</style>
+<style>
+/* Keep the existing footer centered; place the reflection in its own corner. */
+body footer { position:relative; padding-bottom:145px; }
+body footer .tesla-reflection {
+ position:absolute; right:22px; bottom:14px; width:min(300px,calc(100% - 44px));
+ max-width:300px; margin:0; padding:0; border:0; text-align:right;
+}
+body footer .tesla-reflection blockquote p {
+ margin:0; font-size:11px; line-height:1.6; color:#91a6b8;
+}
+body footer .tesla-reflection figcaption { margin-top:5px; font-size:9px; line-height:1.5; }
+body footer .tesla-reflection .tesla-history { margin-top:5px; font-size:9px; line-height:1.5; }
+body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
+@media(max-width:540px) {
+ body footer { padding-bottom:150px; }
+ body footer .tesla-reflection { right:16px; width:min(280px,calc(100% - 32px)); }
+}
+</style>
+<style>
+/* Home footer uses the same geometry as the inner pages. */
+body footer {
+ display:block; position:relative; box-sizing:border-box; width:100%;
+ min-height:0; height:auto; margin:48px 0 0; padding:30px 20px 145px;
+ text-align:center; background:#0b1421; border-top:1px solid #203049;
+}
+body footer>.footer-links { display:flex; justify-content:center; align-items:center; gap:20px; margin:0 0 12px; }
+body footer>.footer-links a { font-size:20px; }
+body footer>p { display:block; width:auto; margin:4px 0; font-size:11px; line-height:1.6; text-align:center; }
+body footer .tesla-reflection {
+ display:block; float:none; position:absolute; inset:auto 22px 14px auto;
+ transform:none; box-sizing:border-box; width:min(300px,calc(100% - 44px));
+ max-width:300px; height:auto; margin:0; padding:0; text-align:right;
+}
+body footer .tesla-reflection blockquote p { text-align:right; font-size:11px; line-height:1.6; margin:0; }
+@media(max-width:540px) {
+ body footer { padding-bottom:150px; }
+ body footer .tesla-reflection { right:16px; width:min(280px,calc(100% - 32px)); }
+}
+</style>
+<style>
+/* Align the quote with the social links without shifting their center. */
+body footer { padding:30px 20px; min-height:155px; }
+body footer .tesla-reflection { top:30px; bottom:auto; right:22px; width: min(300px,calc((100% - 420px)/2)); }
+@media(max-width:1000px) {
+ body footer { padding-bottom:145px; }
+ body footer .tesla-reflection { top:auto; bottom:14px; width:min(300px,calc(100% - 44px)); }
+}
+@media(max-width:540px) {
+ body footer { padding-bottom:150px; }
+ body footer .tesla-reflection { right:16px; width:min(280px,calc(100% - 32px)); }
+}
+</style>
+<style>
+.lp-three .lp-next { color:#91e0d5; }
+.lp-three .lp-next:not(:disabled):hover,
+.lp-three .lp-next:not(:disabled):focus-visible { color:#fff; }
+</style>
 </head>
 
 <body>
@@ -493,6 +638,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
      ========================================================= -->
 
 <nav class="navbar" aria-label="Main navigation">
+<a class="nav-signature" href="index.html">Bruno Senzio-Savino Barzellato</a>
+<div class="nav-menu">
 
 
 <a href="index.html" class="nav-btn home-btn" aria-current="page">
@@ -516,6 +663,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 </a>
 
 
+</div>
+<span class="nav-digital-life">Digital Life</span>
 </nav>
 
 <!-- =========================================================
@@ -885,7 +1034,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
  </section>
  
   <section class="lp-lab" aria-labelledby="lab-title">
-   <div class="lp-section-head"><div><p class="lp-eyebrow">02 / THE WORKBENCH</p><h3 id="lab-title">Featured Projects</h3></div><a class="lp-section-link" href="projects.html">Enter the observatory ↗</a></div>
+   <div class="lp-section-head"><div><p class="lp-eyebrow">02 / THE WORKBENCH</p><h3 id="lab-title">Featured Projects</h3></div><a class="lp-section-link lp-observatory-cta" href="projects.html">Enter the observatory ↗</a></div>
    <div id="projectLenses" class="lp-lenses" aria-label="Choose a project category"></div>
    <div id="featuredProjects" class="lp-project-feature"></div>
    <p class="lp-project-mouse-hint">Move across the image to explore · leave it to resume autoplay</p>
@@ -966,6 +1115,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 </p>
 
 
+
+<figure class="tesla-reflection">
+ <blockquote cite="https://en.wikisource.org/wiki/My_Inventions">
+  <p>“This is the difficult task of the inventor who is often misunderstood and unrewarded.”</p>
+ </blockquote>
+ <figcaption>— Nikola Tesla, <a href="https://en.wikisource.org/wiki/My_Inventions" target="_blank" rel="noopener noreferrer"><cite>My Inventions</cite> (1919)</a></figcaption>
+ <a class="tesla-history" href="https://www.smithsonianmag.com/history/nikola-tesla-tower-that-became-million-dollar-folly-11074324/" target="_blank" rel="noopener noreferrer">Tesla’s financial struggles, Edison rivalry &amp; the fate of Wardenclyffe — Smithsonian ↗</a>
+</figure>
 </footer>
 
 <!-- =========================================================
@@ -1074,7 +1231,7 @@ document.addEventListener(
 
 <script src="js/blog.js"></script>
 
-<script src="js/home.js?v=neon-panels-8"></script>
+<script src="js/home.js?v=footer-audio-10"></script>
 
 <!-- Home carousels are controlled by home.js only. -->
 
