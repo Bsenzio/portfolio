@@ -1,6 +1,36 @@
 // Homepage: existing profile and skill carousel + Explorer Desk.
 (() => {
 function initializeHome() {
+
+// Shared effects for carousel arrows, document downloads and game cartridges.
+const homeHoverSound = new Audio('assets/audio/sfx/sfxhover.mp3');
+const homeClickSound = new Audio('assets/audio/sfx/sfxclick.mp3');
+homeHoverSound.preload = homeClickSound.preload = 'auto';
+const homeSoundControls = '.carousel-btn, .lp-next, .document-button, .game-cartridge';
+function playHomeSound(sound) {
+    try {
+        sound.currentTime = 0;
+        const playback = sound.play();
+        if (playback) playback.catch(() => {});
+    } catch {
+        // Audio availability must not interrupt downloads or game selection.
+    }
+}
+document.addEventListener('pointerover', event => {
+    if (event.pointerType === 'touch') return;
+    const control = event.target.closest(homeSoundControls);
+    if (!control || control.disabled) return;
+    if (event.relatedTarget && control.contains(event.relatedTarget)) return;
+    playHomeSound(homeHoverSound);
+});
+// Capture plays the effect before a cartridge or carousel action updates the page.
+document.addEventListener('click', event => {
+    const control = event.target.closest(homeSoundControls);
+    if (!control || control.disabled) return;
+    homeHoverSound.pause();
+    playHomeSound(homeClickSound);
+}, true);
+
 // =========================
 // PROFILE IMAGE ROTATION
 // =========================

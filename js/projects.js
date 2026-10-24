@@ -13,7 +13,7 @@ const categories = [
     projects:[
         {
             title:"Face Mask Detection",
-			year:"2016",
+			year:"2021",
             image:"npu_ai.jpg",
             url:"",
 			description:
@@ -195,7 +195,7 @@ const categories = [
 			"Special Engravings and fabrications"
         },
         {
-            title:"AoLDC Apparrel",
+            title:"AOLDC Apparrel",
 			year:"2012",
             image:"fotl1.jpg",
             url:"",
@@ -203,7 +203,7 @@ const categories = [
 			"One layer of different acrylic products Light Displays"
         },
         {
-            title:"AoLDC",
+            title:"AOLDC",
 			year:"2011",
             image:"aoldc1_small.jpg",
             url:"",
@@ -390,7 +390,7 @@ const categories = [
         },
         {
             title:"8-bit Trouble",
-			year:"2025",
+			year:"2011",
             image:"8_bit_trouble.jpg",
             url:"https://youtu.be/TFJNJK4z_fE?si=UcRHCHUPbZp82q-7",
 			description:
@@ -478,9 +478,35 @@ function getRandomProjects(count = 3) {
             if (text !== undefined) node.textContent = text;
             return node;
         }
+        // Reuse the effects and restart them for each new interaction.
+        const projectHoverSound = new Audio('assets/audio/sfx/sfxhover.mp3');
+        const projectClickSound = new Audio('assets/audio/sfx/sfxclick.mp3');
+        projectHoverSound.preload = projectClickSound.preload = 'auto';
+
+        function playProjectSound(sound) {
+            try {
+                sound.currentTime = 0;
+                const playback = sound.play();
+                if (playback) playback.catch(() => {});
+            } catch {
+                // Audio restrictions or missing files must not interrupt navigation.
+            }
+        }
+        function addProjectSounds(node) {
+            node.addEventListener('pointerenter', event => {
+                if (event.pointerType !== 'touch') playProjectSound(projectHoverSound);
+            });
+            node.addEventListener('click', () => {
+                projectHoverSound.pause();
+                playProjectSound(projectClickSound);
+            });
+        }
         function button(className, text, action) {
             const node = el('button', className, text);
             node.type = 'button';
+            if (['obs-project-node', 'obs-mini-card', 'obs-list-item'].includes(className)) {
+                addProjectSounds(node);
+            }
             node.addEventListener('click', action);
             return node;
         }
@@ -600,7 +626,7 @@ function getRandomProjects(count = 3) {
                 inspector.append(el('div','obs-kicker',`${categories[row.ci].name} / ${row.project.year}`),image(row.project.image,'obs-inspector-image'),el('h3','',row.project.title),el('p','',row.project.description));
                 const url=projectLink(row.project.url);
                 if(url) {
-                    const link=el('a','obs-open-link','Open project ↗');link.href=url;link.target='_blank';link.rel='noopener noreferrer';inspector.append(link);
+                    const link=el('a','obs-open-link','Open project ↗');link.href=url;link.target='_blank';link.rel='noopener noreferrer';addProjectSounds(link);inspector.append(link);
                 } else inspector.append(el('p','', 'Project overview · no external link available.'));
             } else if (selectedCategory !== null) {
                 inspector.append(el('div','obs-kicker',`WORLD ${String(selectedCategory+1).padStart(2,'0')}`),el('h3','',categories[selectedCategory].name),el('p','',intros[selectedCategory] || 'Explore this collection of projects.'));

@@ -766,6 +766,25 @@ document.addEventListener(
 "DOMContentLoaded",
 () => {
 
+    // Delegate hover handling so it survives searches and filter updates.
+    const publicationHoverSound = new Audio('assets/audio/sfx/sfxhover.mp3');
+    publicationHoverSound.preload = 'auto';
+    const publicationContainer = document.getElementById('publicationsContainer');
+    publicationContainer.addEventListener('pointerover', event => {
+        if (event.pointerType === 'touch') return;
+        const card = event.target.closest('.publication-card');
+        if (!card || !publicationContainer.contains(card)) return;
+        // Moving between elements inside one card is still the same hover.
+        if (event.relatedTarget && card.contains(event.relatedTarget)) return;
+        try {
+            publicationHoverSound.currentTime = 0;
+            const playback = publicationHoverSound.play();
+            if (playback) playback.catch(() => {});
+        } catch {
+            // Keep the publication controls working if audio is unavailable.
+        }
+    });
+
     // YEARS
 
     const years =
