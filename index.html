@@ -899,6 +899,34 @@ body footer .tesla-reflection { top:30px; bottom:auto; right:22px; width: min(30
  .arcade-controls .cartridge-group .game-cartridge {flex:0 1 80px;min-width:0;}
 }
 </style>
+<style>
+.arcade-key-guide {display:flex;justify-content:center;flex-wrap:wrap;gap:7px 12px;padding:10px 14px 14px;background:#121522;color:#bdc9db;font:10px/1.6 'DM Sans',sans-serif;text-align:center;}
+.arcade-key-guide span {white-space:nowrap;}
+.arcade-key-guide kbd {display:inline-block;padding:1px 5px;border:1px solid #466075;border-radius:4px;background:#202b3a;color:#a5f4f2;font:inherit;}
+.arcade-key-guide small {flex-basis:100%;font-size:9px;color:#8f9db0;}
+.arcade-key-guide a {font-size:9px;color:#9aebe1;text-decoration:underline;text-underline-offset:3px;}
+body.arcade-playing .lp-ticker-track,body.arcade-playing .cartridge-belt,body.arcade-playing .arcade-title,body.arcade-playing .lp-observatory-cta,body.arcade-playing .ct-link-track,body.arcade-playing .arcade-cabinet::before,body.arcade-playing .arcade-cabinet::after {animation-play-state:paused !important;}
+</style>
+<style>
+.arcade-deck .arcade-instruction-display {position:relative;z-index:1;flex:1;min-width:0;max-width:230px;margin:0 16px;padding:7px 0;border:1px solid #62d6df44;border-radius:5px;background:#080f19;box-shadow:inset 0 0 10px #0008;letter-spacing:1px;}
+.arcade-instruction-window {overflow:hidden;width:100%;}
+.arcade-instruction-tape {display:flex;width:max-content;animation:arcade-instructions-scroll 32s linear infinite;}
+.arcade-instruction-tape span {flex:none;white-space:nowrap;padding-right:48px;color:#a5f4f2;font:8px/1.8 'DM Sans',sans-serif;}
+.arcade-instruction-display a {display:block;padding:4px 5px 0;color:#edb9ff;font:8px/1.4 'DM Sans',sans-serif;letter-spacing:.2px;text-decoration:underline;text-underline-offset:2px;}
+.arcade-instruction-display:hover .arcade-instruction-tape,.arcade-instruction-display:focus-within .arcade-instruction-tape {animation-play-state:paused;}
+.arcade-instruction-display a:focus-visible {outline:2px solid #a5f4f2;outline-offset:2px;}
+.arcade-deck .arcade-stick,.arcade-deck .arcade-buttons {flex-shrink:0;}
+@keyframes arcade-instructions-scroll {from {transform:translateX(0);}to {transform:translateX(-50%);}}
+@media(max-width:600px) {.arcade-deck .arcade-instruction-display {margin-inline:9px;}.arcade-instruction-tape span {font-size:7px;}}
+@media(prefers-reduced-motion:reduce) {
+ .arcade-instruction-tape {animation:none;width:100%;}
+ .arcade-instruction-tape span {white-space:normal;padding:0 5px;font-size:7px;}
+ .arcade-instruction-tape span[aria-hidden="true"] {display:none;}
+}
+</style>
+<style>
+#game .unity-arcade-frame {display:block;width:100%;height:100%;border:0;background:#050811;}
+</style>
 </head>
 
 <body>
@@ -1061,9 +1089,17 @@ body footer .tesla-reflection { top:30px; bottom:auto; right:22px; width: min(30
         </div>
 
 
-        <div class="arcade-deck" aria-hidden="true">
+        <div class="arcade-deck">
             <div class="arcade-stick"></div>
-            <div class="arcade-deck-note">READY TO PLAY?<br>SELECT A CARTRIDGE BELOW</div>
+            <div class="arcade-deck-note arcade-instruction-display" role="group" aria-label="Game instructions">
+ <div class="arcade-instruction-window">
+  <div class="arcade-instruction-tape">
+   <span>SELECT A CARTRIDGE BELOW · ↑ ↓ ← → MOVE · Z: A · X: B · V: SELECT · ENTER: START · CLICK THE SCREEN TO PLAY · ESC: PAGE NAVIGATION</span>
+   <span aria-hidden="true">SELECT A CARTRIDGE BELOW · ↑ ↓ ← → MOVE · Z: A · X: B · V: SELECT · ENTER: START · CLICK THE SCREEN TO PLAY · ESC: PAGE NAVIGATION</span>
+  </div>
+ </div>
+ <a id="arcade-performance-mode" href="?graphics=fast">Performance mode · no CRT</a>
+</div>
             <div class="arcade-buttons"><i></i><i></i><i></i><i></i><i></i><i></i></div>
         </div>
         <div class="arcade-controls">
@@ -1102,6 +1138,7 @@ body footer .tesla-reflection { top:30px; bottom:auto; right:22px; width: min(30
 
 
         </div>
+        
         <div class="arcade-plinth" aria-hidden="true"><div class="arcade-coin">FREE PLAY</div><small>EST. IN CURIOSITY · 1UP</small></div>
     </div>
 </div>
@@ -1326,6 +1363,16 @@ window.EJS_player =
     "#game";
 
 
+// Default visual preset, configured before the emulator loader runs.
+window.EJS_defaultOptions = {
+    ...(window.EJS_defaultOptions || {}),
+    shader: params.get('graphics') === 'fast' ? 'disabled' : 'crt-geom.glslp',
+    vsync: 'disabled',
+    rewindEnabled: 'disabled',
+    fastForward: 'disabled',
+    slowMotion: 'disabled'
+};
+
 window.EJS_core =
     "nes";
 
@@ -1354,7 +1401,7 @@ document.addEventListener(
 			{
                 cartridge.tabIndex = 0;
                 cartridge.setAttribute('role', 'button');
-                cartridge.setAttribute('aria-label', 'Play ' + cartridge.alt + (cartridge.dataset.link ? ' (opens a new tab)' : ''));
+                cartridge.setAttribute('aria-label', 'Play ' + cartridge.alt + (cartridge.dataset.link ? ' (Unity WebGL)' : ''));
                 cartridge.addEventListener('keydown', event => {
                     if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); cartridge.click(); }
                 });
@@ -1363,16 +1410,13 @@ document.addEventListener(
 					() =>
 					{
 
-						/* External project */
-						if (cartridge.dataset.link)
-						{
-							window.open(
-								cartridge.dataset.link,
-								"_blank"
-							);
-
-							return;
-						}
+                        /* Unity cartridge: switch engine without running both at once. */
+                        if (cartridge.dataset.link) {
+                            const url=new URL(location.href);
+                            url.searchParams.set('unity','staygood');
+                            location.href=url.href;
+                            return;
+                        }
 
 
 						/* NES game */
@@ -1381,9 +1425,10 @@ document.addEventListener(
 							const rom =
 								cartridge.dataset.rom;
 
-							window.location.href =
-								"?rom=" +
-								encodeURIComponent(rom);
+							const url=new URL(location.href);
+                            url.searchParams.delete('unity');
+                            url.searchParams.set('rom',rom);
+                            location.href=url.href;
 						}
 
 					}
@@ -1398,7 +1443,7 @@ document.addEventListener(
 				if (
 					cartridge.dataset.rom &&
 					cartridge.dataset.rom ===
-					window.EJS_gameUrl
+					window.EJS_gameUrl && !params.has("unity")
 				)
 				{
 					cartridge.classList.add(
@@ -1413,7 +1458,7 @@ document.addEventListener(
 </script>
 
 <script>
-if(!document.documentElement.classList.contains('compact-home')){
+if(!document.documentElement.classList.contains('compact-home') && new URLSearchParams(location.search).get('unity')!=='staygood'){
  const loader=document.createElement('script');loader.src='https://cdn.emulatorjs.org/stable/data/loader.js';document.body.append(loader);
 }
 </script>
@@ -1450,6 +1495,58 @@ if(!document.documentElement.classList.contains('compact-home')){
  };
  if('ResizeObserver' in window)new ResizeObserver(resize).observe(track);
  window.addEventListener('resize',resize);resize();
+})();
+</script>
+<script>
+(() => {
+ const game=document.getElementById('game');
+ if(!game) return;
+ if(!game.hasAttribute('tabindex')) game.tabIndex=0;
+ game.setAttribute('aria-label','NES emulator. Click to play; Escape releases arrow keys for page navigation.');
+ let playing=false;
+ const setPlaying=value=>{playing=value;document.body.classList.toggle('arcade-playing',value);};
+ const activate=()=>{setPlaying(true);};
+ game.addEventListener('pointerdown',activate);
+ game.addEventListener('focusin',activate);
+ document.addEventListener('pointerdown',event=>{if(!game.contains(event.target))setPlaying(false);},true);
+ game.addEventListener('focusout',event=>{if(!game.contains(event.relatedTarget))setPlaying(false);});
+ window.addEventListener('blur',()=>{setPlaying(false);});
+ document.addEventListener('keydown',event=>{
+   if(event.key==='Escape'){setPlaying(false);return;}
+   const target=event.target;
+   if(target && (target.isContentEditable || target.closest('input,textarea,select'))) return;
+   if(playing && ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(event.key)) {
+     // Cancel browser scrolling while preserving keyboard events for EmulatorJS.
+     event.preventDefault();
+   }
+ },{capture:true,passive:false});
+ const previousStart=window.EJS_onGameStart;
+ window.EJS_onGameStart=(...args)=>{
+   if(typeof previousStart==='function')previousStart(...args);
+   setPlaying(true);
+ };
+})();
+</script>
+<script>
+(() => {
+ const link=document.getElementById('arcade-performance-mode');
+ const url=new URL(location.href);const fast=url.searchParams.get('graphics')==='fast';
+ if(fast)url.searchParams.delete('graphics');else url.searchParams.set('graphics','fast');
+ link.href=url.href;link.textContent=fast?'CRT geom mode':'Performance mode · no CRT';
+})();
+</script>
+<script>
+(() => {
+ if(new URLSearchParams(location.search).get('unity')!=='staygood' || document.documentElement.classList.contains('compact-home')) return;
+ const game=document.getElementById('game');
+ const frame=document.createElement('iframe');frame.className='unity-arcade-frame';
+ frame.title='Stay Good: Barber Assault — Unity WebGL';frame.src='unity/staygood/index.html';
+ frame.allow='autoplay; fullscreen; gamepad';frame.allowFullscreen=true;
+ game.replaceChildren(frame);
+ document.querySelectorAll('.game-cartridge').forEach(c=>c.classList.toggle('selected-cartridge',!!c.dataset.link));
+ document.querySelectorAll('.arcade-instruction-tape span').forEach(span=>{span.textContent='STAY GOOD · W: LOOK UP · A: MOVE LEFT · S: CROUCH · D: MOVE RIGHT · E / MOUSE 1: FIRE / USE TOOL · F: FORWARD DASH · SPACE: JUMP, TRIPLE JUMP & WALL CLIMB';});
+ document.getElementById('arcade-performance-mode').hidden=true;
+ document.body.classList.add('arcade-playing');
 })();
 </script>
 </body>
