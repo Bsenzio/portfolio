@@ -25,12 +25,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     .publications-page .skip-link:focus { transform:none; }
     .publications-page .project-hero { position:relative; max-width:1180px; margin:32px auto 0; padding:58px 52px; overflow:hidden; border:1px solid #273852; border-radius:24px; background:linear-gradient(100deg,rgba(10,22,40,.97),rgba(10,22,40,.76)),url('assets/bg-images/bgpublications.png') center/cover; }
     .publications-page .project-hero::after { content:''; position:absolute; width:340px; height:340px; right:-130px; top:-170px; border-radius:50%; background:#47cbb5; filter:blur(110px); opacity:.15; pointer-events:none; }
-    .publications-page .hero-layout { display:flex; justify-content:space-between; align-items:center; gap:36px; position:relative; z-index:1; }
+    .publications-page .hero-layout { display:flex; justify-content:space-between; align-items:center; gap:36px; position:relative; z-index:1; padding-right:300px; }
     .publications-page .eyebrow { display:flex; align-items:center; gap:9px; color:#86dfce; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; }
     .publications-page .eyebrow::before { content:''; width:6px; height:6px; background:#86dfce; border-radius:50%; }
     .publications-page .project-hero h1 { font-family:'Playfair Display',serif; font-size:clamp(38px,6vw,66px); font-weight:400; line-height:1.1; letter-spacing:-1.5px; margin:16px 0; }
     .publications-page .hero-description { max-width:540px; font-size:15px; line-height:1.8; color:#aebed3; }
-    .publications-page .hero-avatar { flex:none; width:170px; height:170px; object-fit:contain; filter:drop-shadow(0 14px 26px rgba(0,0,0,.4)); }
+    .publications-page .hero-avatar { position:absolute; right:-42px; bottom:-48px; width:340px; height:340px; object-fit:contain; object-position:right bottom; pointer-events:none; filter:drop-shadow(0 14px 26px rgba(0,0,0,.4)); }
     .publications-page .topic-list { display:flex; flex-wrap:wrap; gap:8px; margin-top:25px; list-style:none; padding:0; }
     .publications-page .topic-list li { padding:6px 11px; border:1px solid #30425a; border-radius:30px; color:#c0cee0; font-size:11px; background:rgba(255,255,255,.025); }
     .publications-page .hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
@@ -55,8 +55,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     .publications-page footer p { font-size:11px; margin:4px 0; }
     @media(max-width:800px) {
       .publications-page .project-hero { margin:18px 16px 0; padding:32px 26px; }
-      .publications-page .hero-layout { gap:16px; }
-      .publications-page .hero-avatar { width:110px; height:110px; }
+      .publications-page .hero-layout { gap:16px; padding-right:190px; }
+      .publications-page .hero-avatar { right:-16px; bottom:-22px; width:220px; height:220px; }
       .publications-page .explore-section { padding:0 16px; margin-top:28px; }
     }
     @media(max-width:520px) {
@@ -64,8 +64,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       .publications-page .nav-btn { padding:9px 10px; font-size:11px; }
       .publications-page .nav-btn i { margin-right:4px; }
       .publications-page .project-hero { padding:28px 22px; }
-      .publications-page .hero-layout { align-items:flex-start; }
-      .publications-page .hero-avatar { position:absolute; top:0; right:0; width:62px; height:62px; opacity:.65; }
+      .publications-page .hero-layout { align-items:flex-start; padding-right:0; padding-bottom:124px; }
+      .publications-page .hero-avatar { position:absolute; top:auto; right:-12px; bottom:-18px; width:124px; height:124px; opacity:1; }
       .publications-page .eyebrow { padding-right:64px; font-size:9px; letter-spacing:1px; }
       .publications-page .project-hero h1 { margin-top:24px; }
       .publications-page .hero-description { font-size:13px; }
@@ -189,6 +189,11 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
  body footer .tesla-reflection { right:16px; width:min(280px,calc(100% - 32px)); }
 }
 </style>
+<script type="module" src="https://unpkg.com/@google/model-viewer@4.2.0/dist/model-viewer.min.js"></script>
+<style>
+.publications-page model-viewer.hero-avatar { display:block; background:transparent; --poster-color:transparent; }
+.academia-model-status { position:absolute; left:8px; right:8px; bottom:24px; text-align:center; font-size:12px; color:#aebed3; }
+</style>
 </head>
 
 <body class="publications-page">
@@ -231,7 +236,15 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
       <p class="hero-description">Explore research across intelligent systems, experimental hardware and interactive worlds. Browse publications, patents and academic activities, or download a selection.</p>
       <ul class="topic-list" aria-label="Record categories"><li>Journal Articles</li><li>Conference Papers</li><li>Theses &amp; Patents</li><li>Talks &amp; Workshops</li><li>Interviews</li></ul>
     </div>
-    <img src="assets/images/avatar-publications.png" class="hero-avatar" alt="" width="170" height="170">
+    <model-viewer id="academia-avatar-3d" class="hero-avatar"
+      src="assets/glb/academia_avatar.glb"
+      alt="Rotating academic 3D avatar"
+      auto-rotate auto-rotate-delay="0" rotation-per-second="12deg"
+      camera-orbit="0deg 85deg auto" camera-target="auto auto auto"
+      environment-image="neutral" exposure="1" shadow-intensity="0"
+      interaction-prompt="none" loading="eager" reveal="auto">
+      <span slot="poster" class="academia-model-status">Loading 3D avatar…</span>
+    </model-viewer>
   </div>
 </header>
 
@@ -384,5 +397,17 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
 
 <!-- Fondo tecnológico -->
 <script src="js/tech-background.js"></script>
+<script>
+(() => {
+  const viewer = document.getElementById('academia-avatar-3d');
+  const status = viewer.querySelector('.academia-model-status');
+  viewer.addEventListener('error', () => { status.textContent = '3D avatar unavailable'; viewer.showPoster(); });
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const updateRotation = () => viewer.toggleAttribute('auto-rotate', !motion.matches && !document.hidden);
+  motion.addEventListener('change', updateRotation);
+  document.addEventListener('visibilitychange', updateRotation);
+  updateRotation();
+})();
+</script>
 </body>
 </html>

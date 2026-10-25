@@ -660,6 +660,44 @@ body footer .tesla-reflection { top:30px; bottom:auto; right:22px; width: min(30
 .lp-three .lp-project-open { color:#91e0d5; }
 .lp-three .lp-project-open:hover,.lp-three .lp-project-open:focus-visible { color:#fff; }
 </style>
+
+<style id="section-avatar-backgrounds">
+/* Decorative avatars stay behind the content and never intercept input. */
+.lp-three > .lp-journey,
+.lp-three > .lp-lab,
+.lp-three > .lp-journal {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.lp-three > .lp-journey { --section-avatar: url('assets/images/avatar-career.png'); }
+.lp-three > .lp-lab { --section-avatar: url('assets/images/avatar-projects.png'); }
+.lp-three > .lp-journal { --section-avatar: url('assets/images/avatar-blogs.png'); }
+.lp-three > .lp-journey::before,
+.lp-three > .lp-lab::before,
+.lp-three > .lp-journal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: var(--section-avatar);
+  background-repeat: no-repeat;
+  background-position: right -35px bottom -45px;
+  background-size: auto 85%;
+  opacity: .24;
+  pointer-events: none;
+}
+/* Keep the career avatar in the right margin beside the timeline. */
+.lp-three > .lp-journey::before {
+  background-size: 105px auto;
+  background-position: right 12px top 25px;
+  opacity: .65;
+}
+/* Tuck the blog avatar further into the bottom-right corner. */
+.lp-three > .lp-journal::before {
+  background-position: right -90px bottom -100px;
+}
+</style>
 </head>
 
 <body>

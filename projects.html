@@ -310,6 +310,18 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
  body footer .tesla-reflection { right:16px; width:min(280px,calc(100% - 32px)); }
 }
 </style>
+<script type="module" src="https://unpkg.com/@google/model-viewer@4.2.0/dist/model-viewer.min.js"></script>
+<style>
+.projects-page .hero-model-wrap { position:relative; align-self:flex-end; flex:0 0 300px; width:300px; height:320px; margin-right:-36px; margin-bottom:-48px; }
+.projects-page .hero-model-wrap model-viewer { display:block; width:100%; height:100%; background:transparent; pointer-events:none; --poster-color:transparent; }
+.projects-page .hero-model-status { position:absolute; left:12px; right:12px; bottom:24px; text-align:center; font-size:12px; color:#aebed3; pointer-events:none; }
+.projects-page .hero-model-status[hidden] { display:none; }
+@media(max-width:800px) { .projects-page .hero-model-wrap { flex-basis:200px; width:200px; height:250px; margin-right:-18px; margin-bottom:-26px; } }
+@media(max-width:520px) {
+ .projects-page .hero-layout { flex-wrap:wrap; }
+ .projects-page .hero-model-wrap { flex:0 0 180px; width:180px; height:210px; margin:-8px -14px -24px auto; }
+}
+</style>
 </head>
 <body class="projects-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -336,7 +348,17 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
             <a class="hero-action secondary" href="https://github.com/Bsenzio" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
           </div>
         </div>
-        <img src="assets/images/avatar-projects.png" class="hero-avatar" alt="" width="170" height="170">
+        <div class="hero-model-wrap">
+          <model-viewer id="projects-avatar-3d"
+            src="/assets/glb/projects_avatar.glb"
+            alt="Bruno’s rotating 3D avatar"
+            auto-rotate auto-rotate-delay="0" rotation-per-second="12deg"
+            camera-orbit="0deg 85deg auto" camera-target="auto auto auto"
+            environment-image="neutral" exposure="1" shadow-intensity="0"
+            interaction-prompt="none" loading="eager" reveal="auto">
+          </model-viewer>
+          <span class="hero-model-status" role="status">Loading 3D avatar…</span>
+        </div>
       </div>
     </header>
     <section class="explore-section" id="explore" aria-labelledby="explore-title">
@@ -437,5 +459,18 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
   
   <script src="js/projects.js?v=observatory-astronaut-4"></script>
   
+<script>
+(() => {
+  const viewer = document.getElementById('projects-avatar-3d');
+  const status = document.querySelector('.hero-model-status');
+  viewer.addEventListener('load', () => { status.hidden = true; });
+  viewer.addEventListener('error', () => { status.hidden = false; status.textContent = '3D avatar unavailable'; });
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const updateRotation = () => { viewer.toggleAttribute('auto-rotate', !motion.matches && !document.hidden); };
+  motion.addEventListener('change', updateRotation);
+  document.addEventListener('visibilitychange', updateRotation);
+  updateRotation();
+})();
+</script>
 </body>
 </html>
