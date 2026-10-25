@@ -1,5 +1,15 @@
 // =====================================
 // DATA
+// PROJECT LINKS: add as many objects as you need to links.
+// Each object creates a button; label is its editable text and url is its destination.
+// Example (replace these URLs with your actual destinations):
+// links: [
+//     { label: "Video demo", url: "https://example.com/video" },
+//     { label: "GitHub", url: "https://example.com/code" },
+//     { label: "Paper", url: "https://example.com/paper" }
+// ],
+// links: [] displays no buttons. No HTML or CSS changes are needed.
+// The legacy url field remains supported when the project has no links array.
 // =====================================
 
 const categories = [
@@ -15,7 +25,7 @@ const categories = [
             title:"Face Mask Detection",
 			year:"2021",
             image:"npu_ai.jpg",
-            url:"",
+            links:[],
 			description:
 			"Edge AI Implementation on NPU"
         },
@@ -23,7 +33,7 @@ const categories = [
             title:"Machine Learning for BCI",
 			year:"2016",
             image:"som_bci.jpg",
-            url:"",
+            links:[],
 			description:
 			"Unsupervised and Supervised Learning for BCI"
         },
@@ -31,7 +41,7 @@ const categories = [
             title:"OCR Pharmacy Prescription for Fillers",
 			year:"2018",
             image:"prescriptionai.jpg",
-            url:"",
+            links:[],
 			description:
 			"An AI OCR recognition platform for medical prescription filling machines"
         }
@@ -49,7 +59,7 @@ const categories = [
             title:"Mobile Robot Development",
 			year:"2009",
             image:"zmpbot.jpg",
-            url:"https://youtu.be/xXTng9gSrDU?si=ELs3buI4AdGuYo3N",
+            links:[{ label: "Open project", url: "https://youtu.be/xXTng9gSrDU?si=ELs3buI4AdGuYo3N" }],
 			description:
 			"Autonomous Robot Hardware Development and Deployment"
         },
@@ -57,7 +67,7 @@ const categories = [
             title:"Wiimote SCARA Arm",
 			year:"2009",
             image:"scara_wii.jpg",
-            url:"https://youtu.be/SX0WJOZMdzA",
+            links:[{ label: "Open project", url: "https://youtu.be/SX0WJOZMdzA" }],
 			description:
 			"A pioneer SCARA arm prototype controlled with Wiimote"
         },
@@ -65,7 +75,7 @@ const categories = [
             title:"Bruno Kart",
 			year:"2010",
             image:"mobile_wii.jpg",
-            url:"https://youtu.be/qE38qtjhbLs",
+            links:[{ label: "Open project", url: "https://youtu.be/qE38qtjhbLs" }],
 			description:
 			"A pioneer Wiimote Controlled Mobile Robot"
         },
@@ -73,7 +83,7 @@ const categories = [
             title:"Cannonball",
 			year:"2010",
             image:"cannonball.jpg",
-            url:"https://youtu.be/qE38qtjhbLs",
+            links:[{ label: "Open project", url: "https://youtu.be/qE38qtjhbLs" }],
 			description:
 			"A pioneer Wiimote Controlled Mobile Robot"
         },
@@ -81,7 +91,7 @@ const categories = [
             title:"Hand Augmentation",
 			year:"2016",
             image:"supernumerary.jpg",
-            url:"https://www.youtube.com/watch?v=GYFfOJpuJHk",
+            links:[{ label: "Open project", url: "https://www.youtube.com/watch?v=GYFfOJpuJHk" }],
 			description:
 			"A supernumerary robotic limb hand robot"
         },
@@ -89,7 +99,7 @@ const categories = [
             title:"Verdopplerbot AI V1",
 			year:"2023",
             image:"verdopplerbotai.jpg",
-            url:"https://youtu.be/AARts_NJcPw?si=C4CtIP4Z2qYBD8ji",
+            links:[{ label: "Open project", url: "https://youtu.be/AARts_NJcPw?si=C4CtIP4Z2qYBD8ji" }],
 			description:
 			"Archwire bending Robot Machine"
         }		
@@ -108,7 +118,7 @@ const categories = [
             title:"Aura EEG Device",
 			year:"2017",
             image:"aura.jpg",
-            url:"https://www.mirai-innovation-lab.com/aura-through-time/",
+            links:[{ label: "Open project", url: "https://www.mirai-innovation-lab.com/aura-through-time/" }],
 			description:
 			"An EEG Reading Harwdare Device"
         },
@@ -116,7 +126,7 @@ const categories = [
             title:"3D Mindwave Unity Environment",
 			year:"2014",
             image:"bci_env.jpg",
-            url:"https://youtu.be/FN6Tui_sEzo",
+            links:[{ label: "Open project", url: "https://youtu.be/FN6Tui_sEzo" }],
 			description:
 			"A 3D Interactive BCI Environment"
         },
@@ -124,7 +134,7 @@ const categories = [
             title:"BCI Neurocar",
 			year:"2012",
             image:"bcicar.jpg",
-            url:"https://youtu.be/OCTTJRChK8Y?si=2u_pgF-JXPdkFs7R",
+            links:[{ label: "Open project", url: "https://youtu.be/OCTTJRChK8Y?si=2u_pgF-JXPdkFs7R" }],
 			description:
 			"A BCI car prototype to be used from PET recycling funding to help handicap."
         },
@@ -132,7 +142,7 @@ const categories = [
             title:"BMI for Supernumerary",
 			year:"2018",
             image:"bcinature.jpg",
-            url:"https://www.science.org/doi/10.1126/scirobotics.aat1228?ijkey=jgzH2rMiJdja6&keytype=ref&siteid=robotics",
+            links:[{ label: "Open project", url: "https://www.science.org/doi/10.1126/scirobotics.aat1228?ijkey=jgzH2rMiJdja6&keytype=ref&siteid=robotics" }],
 			description:
 			"BMI to perform a goal-oriented task while simultaneously using their own arms to do a different task."
         },
@@ -140,7 +150,7 @@ const categories = [
             title:"ALIFE26 BMI/AL Tutorial",
 			year:"2026",
             image:"alifetutorial.jpg",
-            url:"https://bsenzio.github.io/bmitutorialALIFE26/",
+            links:[{ label: "Open project", url: "https://bsenzio.github.io/bmitutorialALIFE26/" }],
 			description:
 			"From neural signals to AL interactive systems."
         },
@@ -148,7 +158,7 @@ const categories = [
             title:"BCI e-Textile",
 			year:"2019",
             image:"bcipatent.jpg",
-            url:"",
+            links:[{ label: "Open project", url: "https://bsenzio.github.io/portfolio/assets/pdf/Patents/biosignal_feedback_system.pdf" }],
 			description:
 			"BMI Headset with e-textiles and use of wearable neurofeedback"
         }		
@@ -166,7 +176,7 @@ const categories = [
             title:"Touch Water Dispenser",
 			year:"2022",
             image:"touchwaterdispenser.jpg",
-            url:"https://youtube.com/shorts/f878WyXYoyk?feature=share",
+            links:[{ label: "Open project", url: "https://youtube.com/shorts/f878WyXYoyk?feature=share" }],
 			description:
 			"Touch panel water dispensing machine with RFID"
         },
@@ -174,7 +184,7 @@ const categories = [
             title:"Bus Tracking Device",
 			year:"2022",
             image:"products1.jpg",
-            url:"",
+            links:[],
 			description:
 			"Bus GPS and GPRS Tracker"
         },
@@ -182,7 +192,7 @@ const categories = [
             title:"Electric Fence",
 			year:"2013",
             image:"Y2.jpg",
-            url:"",
+            links:[],
 			description:
 			"Electric Fence and Gate controllers"
         },
@@ -190,7 +200,7 @@ const categories = [
             title:"Laser Engravings",
 			year:"2012",
             image:"mabe5.JPG",
-            url:"",
+            links:[],
 			description:
 			"Special Engravings and fabrications"
         },
@@ -198,7 +208,7 @@ const categories = [
             title:"AOLDC Apparrel",
 			year:"2012",
             image:"fotl1.jpg",
-            url:"",
+            links:[],
 			description:
 			"One layer of different acrylic products Light Displays"
         },
@@ -206,7 +216,7 @@ const categories = [
             title:"AOLDC",
 			year:"2011",
             image:"aoldc1_small.jpg",
-            url:"",
+            links:[],
 			description:
 			"One layer of different acrylic products"
         },
@@ -214,7 +224,7 @@ const categories = [
             title:"VaSenzios",
 			year:"2023",
             image:"glass.jpg",
-            url:"https://youtu.be/Q50DDXVfSDA",
+            links:[{ label: "Open project", url: "https://youtu.be/Q50DDXVfSDA" }],
 			description:
 			"An interactive inductive glass prototype"
         },
@@ -222,7 +232,7 @@ const categories = [
             title:"Retail Level RGB LED Lamp",
 			year:"2023",
             image:"led_lamp.jpg",
-            url:"",
+            links:[],
 			description:
 			"An IR remote RGB Commercial Level Lamp"
         },
@@ -230,7 +240,7 @@ const categories = [
             title:"Inductive Braille",
 			year:"2023",
             image:"braille.jpg",
-            url:"https://youtu.be/lZagQIphQ3U",
+            links:[{ label: "Open project", url: "https://youtu.be/lZagQIphQ3U" }],
 			description:
 			"A dynamic Braille proposed"
         },
@@ -238,7 +248,7 @@ const categories = [
 			title:"XR Interaction System",
 			year:"2025",
 			image:"aruco.jpg",
-			url:"https://youtu.be/JOJYk69uOSQ",
+			links:[{ label: "Open project", url: "https://youtu.be/JOJYk69uOSQ" }],
 			description:
 			"A modular interaction framework for XR applications supporting hand tracking, eye tracking and immersive interfaces."
 		},		
@@ -246,7 +256,7 @@ const categories = [
 			title:"Interative Arcade Machine",
 			year:"2026",
 			image:"arcade.jpg",
-			url:"",
+			links:[],
 			description:
 			"An interactive Arcade machine with AI and custom games"
 		}
@@ -265,7 +275,7 @@ const categories = [
             title:"Vegetables here, games there...",
 			year:"2025",
             image:"vegetables.jpg",
-            url:"https://www.youtube.com/live/QoZwG4V6CVw?si=o_C43iGD-uhwwK3-",
+            links:[{ label: "Open project", url: "https://www.youtube.com/live/QoZwG4V6CVw?si=o_C43iGD-uhwwK3-" }],
 			description:
 			"Spreading AI and AL through gaming experiences"
         },
@@ -273,7 +283,7 @@ const categories = [
             title:"BCI and Robotics for Schools",
 			year:"2012",
             image:"bci_schools.jpg",
-            url:"",
+            links:[],
 			description:
 			"Trading PET for BCI Robotics education at schools"
 
@@ -282,7 +292,7 @@ const categories = [
             title:"Recicla para Ayudar",
 			year:"2012",
             image:"social8.JPG",
-            url:"",
+            links:[],
 			description:
 			"A social cause project PET recycling to support lighting marginalized communities"
 
@@ -291,7 +301,7 @@ const categories = [
             title:"Local PET Gathering",
 			year:"2012",
             image:"social16.jpg",
-            url:"l",
+            links:[],
 			description:
 			"PET Gathering at schools"
 
@@ -300,7 +310,7 @@ const categories = [
             title:"Senior People Manufacturing",
 			year:"2023",
             image:"oldmanufacture.jpg",
-            url:"l",
+            links:[],
 			description:
 			"Senior people employment for electronics assembly program"
 
@@ -319,7 +329,7 @@ const categories = [
             title:"Okinawa Adventure 3D",
 			year:"2026",
             image:"okadv3d.jpg",
-            url:"",
+            links:[],
 			description:
 			"Okinawa culture 3D Experience"
 
@@ -328,7 +338,7 @@ const categories = [
             title:"Okinawa Adventure 2D",
 			year:"2026",
             image:"okadv.jpg",
-            url:"https://youtu.be/T-jyL2qHiG4?si=omZ6Z8QPk8VnF5wB",
+            links:[{ label: "Open project", url: "https://youtu.be/T-jyL2qHiG4?si=omZ6Z8QPk8VnF5wB" }],
 			description:
 			"Okinawa culture 2D Retro NES Game"
 
@@ -337,7 +347,7 @@ const categories = [
             title:"Where Are my Veggies",
 			year:"2025",
             image:"wamg.jpg",
-            url:"https://youtu.be/rOK47AQa050?si=SvaBNDeiUAVHA6ar",
+            links:[{ label: "Open project", url: "https://youtu.be/rOK47AQa050?si=SvaBNDeiUAVHA6ar" }],
 			description:
 			"GoL NES Implementation"
 
@@ -346,7 +356,7 @@ const categories = [
             title:"Stay Good: Barber Assault",
 			year:"2026",
             image:"sgba.jpg",
-            url:"https://bsenzio.github.io/TestStayGood/",
+            links:[{ label: "Open project", url: "https://bsenzio.github.io/TestStayGood/" }],
 			description:
 			"WebGL Implementation"
 
@@ -355,7 +365,7 @@ const categories = [
             title:"Nara Adventure",
 			year:"2026",
             image:"naraadventure.jpg",
-			url:"https://bsenzio.github.io/portfolio/projects.html",
+			links:[{ label: "Open project", url: "https://bsenzio.github.io/portfolio/projects.html" }],
 			description:
 			"Game of Nara Prefecture for Local Festivals"
 
@@ -364,7 +374,7 @@ const categories = [
             title:"PDO 3D",
 			year:"2023",
             image:"pdo3d.jpg",
-            url:"https://youtu.be/rOK47AQa050?si=SvaBNDeiUAVHA6ar",
+            links:[{ label: "Open project", url: "https://youtu.be/rOK47AQa050?si=SvaBNDeiUAVHA6ar" }],
 			description:
 			"Mexican 3D Politics game"
 
@@ -374,7 +384,7 @@ const categories = [
             title:"PDO 2D",
 			year:"2023",
             image:"pdo.jpg",
-            url:"https://www.youtube.com/watch?v=BKFJajgmsUY",
+            links:[{ label: "Open project", url: "https://www.youtube.com/watch?v=BKFJajgmsUY" }],
 			description:
 			"Mexican 2D retro type game"
 
@@ -383,7 +393,7 @@ const categories = [
             title:"Ganbare Shisa",
 			year:"2015",
             image:"shisablender.jpg",
-            url:"https://youtu.be/ENqnNoTl6a4",
+            links:[{ label: "Open project", url: "https://youtu.be/ENqnNoTl6a4" }],
 			description:
 			"Small Blender Animation Drafting"
 
@@ -392,7 +402,7 @@ const categories = [
             title:"8-bit Trouble",
 			year:"2011",
             image:"8_bit_trouble.jpg",
-            url:"https://youtu.be/TFJNJK4z_fE?si=UcRHCHUPbZp82q-7",
+            links:[{ label: "Open project", url: "https://youtu.be/TFJNJK4z_fE?si=UcRHCHUPbZp82q-7" }],
 			description:
 			"Fusion begins 2012, all your base are belong to us!!"
 
@@ -403,9 +413,28 @@ const categories = [
 ];
 
 
+// Shared by the observatory and the home-page featured projects.
+function getProjectLinks(project) {
+    const entries = Array.isArray(project.links)
+        ? project.links
+        : [{ label: "Open project", url: project.url }];
+    return entries.flatMap((entry, index) => {
+        if (!entry || typeof entry.url !== 'string') return [];
+        const value = entry.url.trim();
+        if (!value || value === 'l') return [];
+        try {
+            const parsed = new URL(value, document.baseURI);
+            if (!['https:', 'http:'].includes(parsed.protocol)) return [];
+            const label = typeof entry.label === 'string' && entry.label.trim()
+                ? entry.label.trim() : `Link ${index + 1}`;
+            return [{ label, url: parsed.href }];
+        } catch { return []; }
+    });
+}
+
 // Public helpers remain available to the home-page featured projects.
 function getAllProjects() {
-    return categories.flatMap(category => category.projects.map(project => ({...project, category: category.name})));
+    return categories.flatMap(category => category.projects.map(project => ({...project, url: getProjectLinks(project)[0]?.url || "", category: category.name})));
 }
 function getRandomProjects(count = 3) {
     const all = getAllProjects();
@@ -534,13 +563,6 @@ function getRandomProjects(count = 3) {
             render();
             if (window.innerWidth <= 760) inspector.scrollIntoView({block:"start", behavior: reduced.matches ? "auto" : "smooth"});
         }
-        function projectLink(url) {
-            if (!url || !url.trim() || url === 'l') return null;
-            try {
-                const parsed = new URL(url, document.baseURI);
-                return ['https:','http:'].includes(parsed.protocol) ? parsed.href : null;
-            } catch { return null; }
-        }
         function renderFilters() {
             const activeElement = document.activeElement;
             const focusIndex = Array.from(filters.children).indexOf(activeElement);
@@ -624,9 +646,27 @@ function getRandomProjects(count = 3) {
             root.style.setProperty('--obs-accent',ci === null ? '#8debdc' : colors[ci%colors.length]);
             if (row) {
                 inspector.append(el('div','obs-kicker',`${categories[row.ci].name} / ${row.project.year}`),image(row.project.image,'obs-inspector-image'),el('h3','',row.project.title),el('p','',row.project.description));
-                const url=projectLink(row.project.url);
-                if(url) {
-                    const link=el('a','obs-open-link','Open project ↗');link.href=url;link.target='_blank';link.rel='noopener noreferrer';addProjectSounds(link);inspector.append(link);
+                const links = getProjectLinks(row.project);
+                if (links.length) {
+                    const actions = el('div', 'obs-project-links');
+                    // Keep long labels and any number of buttons inside the inspector.
+                    Object.assign(actions.style, {
+                        display: 'flex', flexWrap: 'wrap', gap: '10px',
+                        margin: '16px 0', minWidth: '0'
+                    });
+                    links.forEach(({label, url}) => {
+                        const link = el('a', 'obs-open-link', `${label} ↗`);
+                        link.href = url;
+                        link.target = '_blank';
+                        link.rel = 'noopener noreferrer';
+                        Object.assign(link.style, {
+                            maxWidth: '100%', whiteSpace: 'normal',
+                            overflowWrap: 'anywhere', boxSizing: 'border-box', margin: '0'
+                        });
+                        addProjectSounds(link);
+                        actions.append(link);
+                    });
+                    inspector.append(actions);
                 } else inspector.append(el('p','', 'Project overview · no external link available.'));
             } else if (selectedCategory !== null) {
                 inspector.append(el('div','obs-kicker',`WORLD ${String(selectedCategory+1).padStart(2,'0')}`),el('h3','',categories[selectedCategory].name),el('p','',intros[selectedCategory] || 'Explore this collection of projects.'));
