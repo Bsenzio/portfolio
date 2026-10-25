@@ -33,7 +33,7 @@ const categories = [
             title:"Machine Learning for BCI",
 			year:"2016",
             image:"som_bci.jpg",
-            links:[],
+            links:[{ label: "Open publication", url: "https://thesai.org/Publications/ViewPaper?Volume=8&Issue=1&Code=IJACSA&SerialNo=52" }],
 			description:
 			"Unsupervised and Supervised Learning for BCI"
         },
@@ -91,7 +91,10 @@ const categories = [
             title:"Hand Augmentation",
 			year:"2016",
             image:"supernumerary.jpg",
-            links:[{ label: "Open project", url: "https://www.youtube.com/watch?v=GYFfOJpuJHk" }],
+            links:[{ label: "Open prototype", url: "https://www.youtube.com/watch?v=GYFfOJpuJHk" },
+			{ label: "Open demo 1", url: "https://youtu.be/VIz_QDKCtbs" },
+			{ label: "Open demo 2", url: "https://youtu.be/LCjvAuEIvNI" },
+			{ label: "Open demo 3", url: "https://youtu.be/T67_ayvPHuc" },],
 			description:
 			"A supernumerary robotic limb hand robot"
         },
@@ -228,8 +231,8 @@ const categories = [
             title:"VaSenzios",
 			year:"2023",
             image:"glass.jpg",
-            links:[{ label: "Demo reel", url: "https://youtu.be/CrCvXHIAtJ4" },
-			{ label: "Demo reel", url: "https://youtu.be/Q50DDXVfSDA" }],
+            links:[{ label: "Demo reel 1", url: "https://youtu.be/CrCvXHIAtJ4" },
+			{ label: "Demo reel 2", url: "https://youtu.be/Q50DDXVfSDA" }],
 			description:
 			"An interactive inductive glass prototype"
         },
@@ -384,7 +387,8 @@ const categories = [
             title:"PDO 3D",
 			year:"2023",
             image:"pdo3d.jpg",
-            links:[{ label: "Open project", url: "https://youtu.be/rOK47AQa050?si=SvaBNDeiUAVHA6ar" }],
+            links:[{ label: "Open project", url: "https://youtu.be/VzqxILNy0ho" },
+			{ label: "Open project", url: "https://youtu.be/rOK47AQa050?si=SvaBNDeiUAVHA6ar" }],
 			description:
 			"Mexican 3D Politics game"
 
