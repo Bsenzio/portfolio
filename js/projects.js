@@ -166,7 +166,7 @@ const categories = [
             title:"Touch Water Dispenser",
 			year:"2022",
             image:"touchwaterdispenser.jpg",
-            url:"",
+            url:"https://youtube.com/shorts/f878WyXYoyk?feature=share",
 			description:
 			"Touch panel water dispensing machine with RFID"
         },
