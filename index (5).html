@@ -205,6 +205,110 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
  .launchpad .ct-reel-card a.ct-scrolling-link { width:auto; white-space:normal; }
 }
 
+
+/* Sculpted arcade cabinet: self-contained, no extra image assets. */
+.hero-right .arcade-cabinet { width:100%; max-width:640px; margin:18px auto 28px; box-sizing:border-box; padding:12px 18px 0; border:0; border-radius:26px 26px 12px 12px; background:linear-gradient(90deg,#111320,#36374d 3%,#171827 5%,#141522 95%,#404156 97%,#10111c); box-shadow:0 24px 45px #0008,0 0 35px #a653e51a; overflow:visible; }
+.hero-right .arcade-cabinet::before,.hero-right .arcade-cabinet::after { content:''; position:absolute; z-index:2; top:20px; bottom:24px; width:9px; border-radius:6px; background:linear-gradient(#ff96dd,#e544bc 40%,#7541df 65%,#64e8ff); box-shadow:0 0 10px #e544bc66; pointer-events:none; }
+.hero-right .arcade-cabinet::before {left:5px;} .hero-right .arcade-cabinet::after {right:5px;}
+.hero-right .arcade-marquee { margin:0 -5px; padding:19px 12px 16px; border:4px solid #090b13; border-radius:14px 14px 5px 5px; background:repeating-linear-gradient(135deg,transparent 0 18px,#ffffff06 19px 20px),radial-gradient(ellipse at center,#663b96,#211935 75%); box-shadow:inset 0 0 18px #e27aff45,0 3px 0 #505166; }
+.arcade-marquee .arcade-title { display:block; padding:0; font-family:'DM Sans',sans-serif; font-size:clamp(25px,3.1vw,43px); font-weight:900; line-height:1.1; letter-spacing:5px; color:#fff1b9; text-shadow:2px 2px 0 #dd5499,0 0 15px #ffb56c88; }
+.arcade-marquee .arcade-subtitle { display:block; padding:8px 0 0; font-size:8px; letter-spacing:2.5px; color:#c8bbdf; }
+.arcade-speakers { display:flex; justify-content:space-between; align-items:center; gap:12px; height:33px; padding:0 14px; }
+.arcade-speakers i { width:67px; height:12px; border-radius:9px; background:repeating-linear-gradient(90deg,#05060b 0 3px,#343544 3px 5px); box-shadow:0 1px #565566; }
+.arcade-speakers span {font:8px 'DM Sans',sans-serif;letter-spacing:2px;color:#8ce9e8;}
+.hero-right .arcade-screen-frame { position:relative; padding:22px 22px 28px; border:0; border-radius:30px 30px 18px 18px; background:linear-gradient(145deg,#303345,#11131e 35%,#080a12 75%,#333449); box-shadow:inset 0 2px 3px #ffffff25,inset 0 -3px 6px #000,0 3px 0 #000; }
+.hero-right .arcade-cabinet #game { width:100%; aspect-ratio:4/3; height:auto; min-height:0; position:relative; border:3px solid #05060c; border-radius:12px; overflow:hidden; box-sizing:border-box; background:#050811; box-shadow:0 0 0 2px #454653,0 0 19px #5aabd92a; }
+.arcade-screen-label { display:block; position:absolute; bottom:7px; left:0; right:0; text-align:center; color:#7b8197; font:7px 'DM Sans',sans-serif; letter-spacing:3px; pointer-events:none; }
+.arcade-deck { position:relative; display:flex; align-items:center; justify-content:space-between; height:94px; margin:8px -9px 0; padding:0 30px; border:2px solid #49455d; border-bottom:8px solid #0a0b13; border-radius:8px 8px 15px 15px; background:linear-gradient(170deg,#3c3256,#201e32 55%,#151725); box-shadow:0 8px 12px #0005,inset 0 2px #b596ca44; }
+.arcade-deck::before {content:'';position:absolute;inset:8px;border:1px solid #d37fb444;border-radius:5px;pointer-events:none;}
+.arcade-stick {position:relative;width:63px;height:40px;border-radius:50%;background:radial-gradient(ellipse,#11111d 40%,#5a5069 44%,#10111c 65%);transform:rotate(-8deg);}
+.arcade-stick::before {content:'';position:absolute;left:28px;bottom:18px;width:9px;height:39px;background:linear-gradient(90deg,#5c6377,#e5e7ee,#55576c);border-radius:5px;}
+.arcade-stick::after {content:'';position:absolute;left:13px;bottom:45px;width:37px;height:37px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#ffb4d6,#e83e87 42%,#780c48 85%);box-shadow:3px 6px 9px #0008;}
+.arcade-deck-note {font:8px 'DM Sans',sans-serif;letter-spacing:2px;color:#b9aecb;text-align:center;line-height:1.8;}
+.arcade-buttons {display:grid;grid-template-columns:repeat(3,22px);gap:9px;transform:rotate(-12deg);}
+.arcade-buttons i {width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 25%,#b7ffff,#43c9da 55%,#247485);border:3px solid #0d1220;box-shadow:0 4px 0 #080a12,0 5px 7px #0008;}
+.arcade-buttons i:nth-child(n+4) {background:radial-gradient(circle at 35% 25%,#ffe5a9,#f4b34e 55%,#986021);}
+.hero-right .arcade-controls {padding:18px 14px 15px; border:0; background:linear-gradient(90deg,#121320,#222136 50%,#121320); text-align:center;}
+.arcade-controls .game-cartridge-selector {display:flex;justify-content:center;align-items:center;gap:15px;flex-wrap:wrap;margin:0 0 13px;}
+.arcade-controls .game-cartridge {width:clamp(55px,6vw,82px);height:auto;cursor:pointer;transition:transform .2s,filter .2s;}
+.arcade-controls .game-cartridge:hover,.arcade-controls .game-cartridge:focus-visible {transform:translateY(-5px);filter:drop-shadow(0 0 8px #6de3ef88);outline:2px solid #7fe8eb;outline-offset:4px;}
+.arcade-controls > span {font-size:9px;letter-spacing:2px;color:#b8b1cc;}
+.arcade-plinth {display:flex;align-items:center;justify-content:space-between;gap:15px;padding:14px 22px 19px;border-top:1px solid #454052;background:linear-gradient(#151623,#0b0c14);border-radius:0 0 10px 10px;}
+.arcade-coin {display:flex;align-items:center;gap:10px;font:8px 'DM Sans',sans-serif;letter-spacing:1.5px;color:#f3b4bb;}
+.arcade-coin::before {content:'';width:20px;height:31px;border:3px solid #555462;border-radius:4px;background:linear-gradient(90deg,#101018 35%,#ff7d8e 40% 55%,#101018 60%);box-shadow:inset 0 0 5px #000,0 0 7px #ff7d8e22;}
+.arcade-plinth small {font:7px 'DM Sans',sans-serif;letter-spacing:2px;color:#8b849e;}
+@media(max-width:600px){.hero-right .arcade-cabinet{padding:10px 13px 0;}.hero-right .arcade-screen-frame{padding:15px 12px 25px;}.arcade-deck{padding:0 18px;}.arcade-deck-note{font-size:7px;letter-spacing:1px;}.arcade-marquee .arcade-title{font-size:25px;}}
+
+
+/* Neon lighting: slow breathing glow, with reduced-motion support. */
+.hero-right .arcade-marquee {
+    box-shadow:inset 0 0 24px #e27aff60,0 0 12px #e27aff55,0 0 30px #b35dce33,0 3px 0 #505166;
+}
+.arcade-marquee .arcade-title {
+    text-shadow:2px 2px 0 #dd5499,0 0 5px #fff4cacc,0 0 13px #ffcd79aa,0 0 28px #ff8abd88,0 0 45px #e95cca55;
+    animation:arcade-title-glow 3.8s ease-in-out infinite alternate;
+}
+.hero-right .arcade-cabinet::before,.hero-right .arcade-cabinet::after {
+    box-shadow:0 0 5px #ffc1efcc,0 0 13px #e544bcaa,0 0 27px #bc53e777,0 0 43px #64e8ff44;
+    animation:arcade-side-glow 3.8s ease-in-out infinite alternate;
+}
+@keyframes arcade-title-glow {
+    from {text-shadow:2px 2px 0 #dd5499,0 0 5px #fff4cacc,0 0 13px #ffcd79aa,0 0 28px #ff8abd88,0 0 45px #e95cca55;}
+    to {text-shadow:2px 2px 0 #dd5499,0 0 7px #fff4caee,0 0 19px #ffcd79cc,0 0 38px #ff8abdaa,0 0 58px #e95cca77;}
+}
+@keyframes arcade-side-glow {
+    from {box-shadow:0 0 5px #ffc1efcc,0 0 13px #e544bcaa,0 0 27px #bc53e777,0 0 43px #64e8ff44;}
+    to {box-shadow:0 0 7px #ffc1efee,0 0 18px #e544bccc,0 0 36px #bc53e799,0 0 56px #64e8ff66;}
+}
+@media(prefers-reduced-motion:reduce) {
+    .arcade-marquee .arcade-title,.hero-right .arcade-cabinet::before,.hero-right .arcade-cabinet::after {animation:none;}
+}
+
+
+/* Fantasy scrolling LEDs and saturated retro controls. */
+.arcade-marquee .arcade-title {
+    font-size:clamp(20px,2.3vw,31px);line-height:1.25;letter-spacing:3px;
+}
+.hero-right .arcade-cabinet::before,.hero-right .arcade-cabinet::after {
+    width:9px;
+    background:repeating-linear-gradient(0deg,#66ffff 0%,#00bfff 12%,#783cff 25%,#ff22c8 38%,#ff78e7 50%,#783cff 63%,#00bfff 76%,#66ffff 100%);
+    background-size:100% 220%;
+    border:1px solid #ffffff77;
+    box-sizing:border-box;
+    box-shadow:inset 0 0 3px #fff,0 0 6px #b2ffff,0 0 15px #00dfffaa,0 0 30px #ba35ff88;
+    animation:arcade-led-scroll 4s linear infinite;
+}
+.hero-right .arcade-cabinet::after {animation-direction:reverse;}
+@keyframes arcade-led-scroll {
+    from {background-position:0 0;filter:hue-rotate(0deg);}
+    to {background-position:0 220%;filter:hue-rotate(360deg);}
+}
+.arcade-stick::after {
+    background:radial-gradient(circle at 30% 24%,#727783 0%,#292d35 22%,#101218 50%,#020308 85%);
+    box-shadow:inset -4px -5px 7px #000, inset 2px 2px 3px #ffffff22,3px 6px 9px #0009,0 0 9px #bd58ff33;
+}
+.arcade-buttons i {
+    background:radial-gradient(circle at 34% 25%,#c6ffff,#00f4ff 40%,#0099bd 78%);
+    border-color:#0c1020;
+    box-shadow:0 4px 0 #030610,0 0 10px #00eaff88,inset 0 2px 2px #ffffff99;
+}
+.arcade-buttons i:nth-child(2),.arcade-buttons i:nth-child(5) {
+    background:radial-gradient(circle at 34% 25%,#ffb2f5,#ff10ae 40%,#a00070 78%);
+    box-shadow:0 4px 0 #080310,0 0 10px #ff10ae88,inset 0 2px 2px #ffffff99;
+}
+.arcade-buttons i:nth-child(3),.arcade-buttons i:nth-child(6) {
+    background:radial-gradient(circle at 34% 25%,#f0ffc1,#acff00 40%,#4d9900 78%);
+    box-shadow:0 4px 0 #030910,0 0 10px #acff0088,inset 0 2px 2px #ffffff99;
+}
+.arcade-buttons i:nth-child(4) {
+    background:radial-gradient(circle at 34% 25%,#e5c3ff,#9438ff 40%,#4e00ac 78%);
+    box-shadow:0 4px 0 #080310,0 0 10px #9438ffaa,inset 0 2px 2px #ffffff99;
+}
+@media(max-width:600px){.arcade-marquee .arcade-title{font-size:20px;letter-spacing:2px;}}
+@media(prefers-reduced-motion:reduce){
+    .hero-right .arcade-cabinet::before,.hero-right .arcade-cabinet::after{animation:none;}
+}
+
 </style>
 
 
@@ -698,6 +802,77 @@ body footer .tesla-reflection { top:30px; bottom:auto; right:22px; width: min(30
   background-position: right -90px bottom -100px;
 }
 </style>
+<style>
+/* Editorial identity and two seamless horizontal text ribbons. */
+.hero-left {min-width:0;}
+.hero-left .hero-person-name {margin:20px 0 18px;line-height:1.08;text-align:center;font-family:'Playfair Display',Georgia,serif;font-weight:400;letter-spacing:-.035em;}
+.hero-person-name .name-given {display:block;font-size:clamp(43px,4.6vw,68px);color:#f4f0e9;}
+.hero-person-name .name-family {display:block;margin-top:9px;font-family:'DM Sans',sans-serif;font-size:clamp(17px,1.8vw,25px);font-weight:500;letter-spacing:.045em;color:#c7d4e3;line-height:1.4;}
+.hero-person-name .name-family > span {display:inline-block;font-weight:300;color:#9bafc5;}
+.hero-left .hero-ticker {display:block;width:100%;max-width:600px;min-width:0;box-sizing:border-box;overflow:hidden;white-space:nowrap;margin:0 auto;padding:8px 0;font-family:'DM Sans',sans-serif;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);}
+.hero-left .hero-ticker-expertise {font-size:clamp(14px,1.45vw,18px);font-weight:500;color:#91e4df;letter-spacing:.07em;}
+.hero-left .hero-ticker-roles {font-size:clamp(11px,1.05vw,13px);font-weight:400;color:#a9b8cb;letter-spacing:.04em;padding-top:5px;}
+.hero-ticker-track {display:flex;width:max-content;animation:hero-text-scroll 24s linear infinite;}
+.hero-ticker-roles .hero-ticker-track {animation-duration:36s;animation-direction:reverse;}
+.hero-ticker-copy {display:flex;flex-shrink:0;align-items:center;gap:30px;padding-right:30px;}
+.ticker-separator {color:#d895e6;font-size:11px;}
+.hero-ticker:hover .hero-ticker-track,.hero-ticker:focus .hero-ticker-track {animation-play-state:paused;}
+.hero-ticker:focus-visible {outline:1px solid #91e4df;outline-offset:3px;border-radius:4px;}
+@keyframes hero-text-scroll {to {transform:translateX(-50%);}}
+.hero-left .contact-links {margin-top:16px;margin-bottom:8px;}
+.hero-left .document-section {margin-top:6px;}
+.hero-left .document-columns {margin-top:0;gap:12px;}
+.hero-left .document-group {padding:12px 14px 14px;}
+.hero-left .document-group h3 {margin:0 0 10px;font-size:12px;letter-spacing:2px;color:#b8ccdd;}
+@media(prefers-reduced-motion:reduce){
+ .hero-left .hero-ticker {white-space:normal;mask-image:none;-webkit-mask-image:none;}
+ .hero-ticker-track {display:block;width:auto;animation:none;}
+ .hero-ticker-copy {display:block;white-space:normal;padding:0;text-align:center;}
+ .hero-ticker-copy + .hero-ticker-copy,.ticker-separator {display:none;}
+}
+</style>
+<style>
+/* Matching sans-serif name and collectible document panels. */
+.hero-left .hero-person-name {font-family:'DM Sans',sans-serif;font-weight:500;letter-spacing:.015em;}
+.hero-person-name .name-given {font-family:inherit;font-weight:500;font-size:clamp(39px,4.1vw,59px);letter-spacing:.015em;}
+.hero-left .document-section {max-width:650px;margin:12px auto 0;text-align:left;}
+.document-shelf-heading {display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;padding:0 3px;color:#8396ad;font:9px 'DM Sans',sans-serif;letter-spacing:2px;}
+.document-shelf-heading > span:last-child {color:#a5b9c9;white-space:nowrap;letter-spacing:1px;}
+.document-shelf-heading i {font-style:normal;color:#91e4df;margin-left:5px;}
+.hero-left .document-columns {display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:0;align-items:start;}
+.hero-left .document-group {--document-accent:#85e8df;position:relative;overflow:hidden;box-sizing:border-box;min-width:0;padding:0 12px 12px;border:1px solid #85e8df30;border-radius:14px;background:radial-gradient(ellipse at 0 0,#85e8df0c,transparent 70%),linear-gradient(145deg,#152334e8,#0d1725ee);box-shadow:0 8px 22px #0002;backdrop-filter:blur(8px);}
+.hero-left .document-group.japanese {--document-accent:#d1a5ef;border-color:#d1a5ef30;background:radial-gradient(ellipse at 0 0,#d1a5ef0c,transparent 70%),linear-gradient(145deg,#202237e8,#111827ee);}
+.document-group::before {content:'';position:absolute;top:0;left:14px;right:14px;height:1px;background:linear-gradient(90deg,transparent,var(--document-accent),transparent);box-shadow:0 0 10px var(--document-accent);}
+.document-panel-heading {position:relative;display:flex;align-items:center;gap:10px;padding:17px 0 14px;border-bottom:1px solid #a6bdd21a;margin-bottom:6px;}
+.document-language-code {display:grid;place-items:center;flex-shrink:0;width:32px;height:36px;border:1px solid #a6bdd233;border-radius:6px;color:var(--document-accent);background:#ffffff04;font:500 11px 'DM Sans',sans-serif;letter-spacing:1px;}
+.hero-left .document-group .document-panel-heading h3 {margin:0;color:#ecf1f8;text-align:left;font-size:14px;letter-spacing:.04em;font-weight:500;}
+.document-panel-heading p {margin:4px 0 0;font:9px 'DM Sans','Noto Sans JP',sans-serif;letter-spacing:.02em;color:#92a3b8;line-height:1.4;}
+.document-panel-index {margin-left:auto;align-self:flex-start;color:#718198;font:9px 'DM Sans',sans-serif;letter-spacing:1px;}
+.hero-left .document-buttons {gap:4px;}
+.hero-left .document-button {display:flex;align-items:center;justify-content:flex-start;gap:10px;min-height:57px;box-sizing:border-box;padding:9px 7px;border:1px solid transparent;border-radius:8px;text-align:left;background:transparent;color:#dce6f2;text-decoration:none;box-shadow:none;transform:none;transition:background .2s,border-color .2s;}
+.document-file-icon {flex-shrink:0;display:grid;place-items:center;width:26px;height:30px;border:1px solid #a6bdd226;border-radius:4px;background:#ffffff03;color:var(--document-accent);}
+.hero-left .document-file-icon i {font-size:12px;margin:0;}
+.document-file-copy {display:flex;flex-direction:column;gap:4px;min-width:0;}
+.document-file-copy strong {font:500 12px 'DM Sans','Noto Sans JP',sans-serif;line-height:1.4;color:inherit;}
+.document-file-copy small {font:9px 'DM Sans','Noto Sans JP',sans-serif;line-height:1.4;color:#90a4ba;}
+.document-file-arrow {margin-left:auto;color:var(--document-accent);font-size:16px;transition:transform .2s;}
+.hero-left .document-button:hover,.hero-left .document-button:focus-visible {background:#ffffff07;border-color:var(--document-accent);box-shadow:0 0 14px #8ce7df0a;color:#fff;transform:none;outline:none;}
+.document-button:hover .document-file-arrow,.document-button:focus-visible .document-file-arrow {transform:translate(2px,-2px);}
+.document-sr-only {position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
+@media(max-width:420px){.hero-left .document-columns{grid-template-columns:1fr;}.document-panel-heading p{font-size:10px;}.document-file-copy strong{font-size:13px;}.document-file-copy small{font-size:10px;}}
+</style>
+<style>
+.hero-left .hero-person-name {
+ font-family:'DM Sans',sans-serif;
+ font-size:clamp(17px,1.8vw,25px);
+ font-weight:500;
+ letter-spacing:.045em;
+ line-height:1.4;
+ color:#c7d4e3;
+ text-align:center;
+ margin:20px 0 18px;
+}
+</style>
 </head>
 
 <body>
@@ -760,20 +935,13 @@ body footer .tesla-reflection { top:30px; bottom:auto; right:22px; width: min(30
     >
 
 
-    <h1>
-        Bruno Senzio-Savino Barzellato
-    </h1>
+    <h1 class="hero-person-name">Bruno Senzio-Savino Barzellato</h1>
 
 
-    <h2>
-        Edge/AI · Game Development · XR · Robotics
-    </h2>
+    <h2 class="hero-ticker hero-ticker-expertise" tabindex="0" aria-label="Edge/AI · Game Development · XR · Robotics"><span class="hero-ticker-track" aria-hidden="true"><span class="hero-ticker-copy">Edge/AI · Game Development · XR · Robotics<span class="ticker-separator">✦</span></span><span class="hero-ticker-copy">Edge/AI · Game Development · XR · Robotics<span class="ticker-separator">✦</span></span></span></h2>
 
 
-    <p>
-        Multidisciplinary Researcher | Embedded Systems |
-        XR Developer
-    </p>
+    <p class="hero-ticker hero-ticker-roles" tabindex="0" aria-label="Multidisciplinary Researcher | Embedded Systems | XR Developer"><span class="hero-ticker-track" aria-hidden="true"><span class="hero-ticker-copy">Multidisciplinary Researcher | Embedded Systems | XR Developer<span class="ticker-separator">✦</span></span><span class="hero-ticker-copy">Multidisciplinary Researcher | Embedded Systems | XR Developer<span class="ticker-separator">✦</span></span></span></p>
 
 
     <!-- =================================================
@@ -823,100 +991,18 @@ body footer .tesla-reflection { top:30px; bottom:auto; right:22px; width: min(30
          DOCUMENTS
          ================================================= -->
 
-    <div class="document-section">
-
-
-        <div class="document-columns">
-
-
-            <!-- =========================================
-                 ENGLISH
-                 ========================================= -->
-
-            <div class="document-group">
-
-                <h3>
-                    English
-                </h3>
-
-
-                <div class="document-buttons">
-
-                    <a
-                        href="assets/cv/cv.pdf"
-                        target="_blank"
-                        class="document-button"
-                    >
-                        <i class="fas fa-file-pdf"></i>
-                        Download My CV
-                    </a>
-
-
-                    <a
-                        href="assets/cv/portfolio_en.pdf"
-                        target="_blank"
-                        class="document-button"
-                    >
-                        <i class="fas fa-globe"></i>
-                        Portfolio EN
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <!-- =========================================
-                 JAPANESE
-                 ========================================= -->
-
-            <div class="document-group japanese">
-
-                <h3>
-                    日本語
-                </h3>
-
-
-                <div class="document-buttons">
-
-
-                    <a
-                        href="assets/cv/cv_jp.pdf"
-                        target="_blank"
-                        class="document-button"
-                    >
-                        <i class="fas fa-file-pdf"></i>
-                        履歴書
-                    </a>
-
-
-                    <a
-                        href="assets/cv/keirekisho.pdf"
-                        target="_blank"
-                        class="document-button"
-                    >
-                        <i class="fas fa-file-lines"></i>
-                        職務経歴書
-                    </a>
-
-
-                    <a
-                        href="assets/cv/portfolio_jp.pdf"
-						target="_blank"
-                        class="document-button"
-                    >
-                        <i class="fas fa-globe"></i>
-                        ポートフォリオ
-                    </a>
-
-
-                </div>
-
-            </div>
-
-
+    <div class="document-section" aria-label="CV and portfolio documents">
+      <div class="document-shelf-heading"><span>THE DOCUMENT COLLECTION</span><span>PDF <i aria-hidden="true">↗</i></span></div>
+      <div class="document-columns">
+        <div class="document-group" lang="en">
+          <div class="document-panel-heading"><span class="document-language-code" aria-hidden="true">EN</span><div><h3>English</h3><p>Experience &amp; selected work</p></div><span class="document-panel-index" aria-hidden="true">01</span></div>
+          <div class="document-buttons"><a href="assets/cv/cv.pdf" target="_blank" rel="noopener noreferrer" class="document-button"><span class="document-file-icon" aria-hidden="true"><i class="fas fa-file-lines"></i></span><span class="document-file-copy"><strong>Curriculum Vitae</strong><small>Background & experience</small></span><span class="document-file-arrow" aria-hidden="true">↗</span><span class="document-sr-only"> (PDF, opens in a new tab)</span></a><a href="assets/cv/portfolio_en.pdf" target="_blank" rel="noopener noreferrer" class="document-button"><span class="document-file-icon" aria-hidden="true"><i class="fas fa-layer-group"></i></span><span class="document-file-copy"><strong>Portfolio</strong><small>Selected projects & research</small></span><span class="document-file-arrow" aria-hidden="true">↗</span><span class="document-sr-only"> (PDF, opens in a new tab)</span></a></div>
         </div>
-
+        <div class="document-group japanese" lang="ja">
+          <div class="document-panel-heading"><span class="document-language-code" aria-hidden="true">JP</span><div><h3>日本語</h3><p>経歴と制作実績</p></div><span class="document-panel-index" aria-hidden="true">02</span></div>
+          <div class="document-buttons"><a href="assets/cv/cv_jp.pdf" target="_blank" rel="noopener noreferrer" class="document-button"><span class="document-file-icon" aria-hidden="true"><i class="fas fa-file-lines"></i></span><span class="document-file-copy"><strong>履歴書</strong><small>プロフィール・学歴</small></span><span class="document-file-arrow" aria-hidden="true">↗</span><span class="document-sr-only"> (PDF, opens in a new tab)</span></a><a href="assets/cv/keirekisho.pdf" target="_blank" rel="noopener noreferrer" class="document-button"><span class="document-file-icon" aria-hidden="true"><i class="fas fa-briefcase"></i></span><span class="document-file-copy"><strong>職務経歴書</strong><small>経験・専門スキル</small></span><span class="document-file-arrow" aria-hidden="true">↗</span><span class="document-sr-only"> (PDF, opens in a new tab)</span></a><a href="assets/cv/portfolio_jp.pdf" target="_blank" rel="noopener noreferrer" class="document-button"><span class="document-file-icon" aria-hidden="true"><i class="fas fa-layer-group"></i></span><span class="document-file-copy"><strong>ポートフォリオ</strong><small>研究・プロジェクト実績</small></span><span class="document-file-arrow" aria-hidden="true">↗</span><span class="document-sr-only"> (PDF, opens in a new tab)</span></a></div>
+        </div>
+      </div>
     </div>
 
 
@@ -935,20 +1021,25 @@ body footer .tesla-reflection { top:30px; bottom:auto; right:22px; width: min(30
 
         <div class="arcade-marquee">
 
-            <span>
-                INTERACTIVE GAMING EXPERIENCE
-            </span>
+            <span class="arcade-title">INTERACTIVE<br>GAMING EXPERIENCE</span>
 
         </div>
 
 
+        <div class="arcade-speakers" aria-hidden="true"><i></i><span>• PLAYER ONE •</span><i></i></div>
         <div class="arcade-screen-frame">
 
             <div id="game"></div>
+            <span class="arcade-screen-label" aria-hidden="true">ORIGINAL GAMES · INDEPENDENT SPIRIT</span>
 
         </div>
 
 
+        <div class="arcade-deck" aria-hidden="true">
+            <div class="arcade-stick"></div>
+            <div class="arcade-deck-note">READY TO PLAY?<br>SELECT A CARTRIDGE BELOW</div>
+            <div class="arcade-buttons"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
         <div class="arcade-controls">
 
 
@@ -980,16 +1071,14 @@ body footer .tesla-reflection { top:30px; bottom:auto; right:22px; width: min(30
 
 
             <span>
-                Picky pick a game!
+                PICK A GAME · PRESS START
             </span>
 
 
         </div>
-
+        <div class="arcade-plinth" aria-hidden="true"><div class="arcade-coin">FREE PLAY</div><small>EST. IN CURIOSITY · 1UP</small></div>
     </div>
-
 </div>
-
 
 </header>
 
@@ -1237,6 +1326,12 @@ document.addEventListener(
 			.querySelectorAll(".game-cartridge")
 			.forEach(cartridge =>
 			{
+                cartridge.tabIndex = 0;
+                cartridge.setAttribute('role', 'button');
+                cartridge.setAttribute('aria-label', 'Play ' + cartridge.alt + (cartridge.dataset.link ? ' (opens a new tab)' : ''));
+                cartridge.addEventListener('keydown', event => {
+                    if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); cartridge.click(); }
+                });
 				cartridge.addEventListener(
 					"click",
 					() =>
