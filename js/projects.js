@@ -99,7 +99,11 @@ const categories = [
             title:"Verdopplerbot AI V1",
 			year:"2023",
             image:"verdopplerbotai.jpg",
-            links:[{ label: "Open project", url: "https://youtu.be/AARts_NJcPw?si=C4CtIP4Z2qYBD8ji" }],
+            links:[{ label: "Open Demo 1", url: "https://youtu.be/AARts_NJcPw?si=C4CtIP4Z2qYBD8ji" },
+			{ label: "Open Demo 2", url: "https://youtu.be/7cBsNGovwoU" },
+			{ label: "Open Demo 3", url: "https://youtu.be/1RXU9yrBs6g" },
+			{ label: "Open Demo 4", url: "https://youtu.be/nRNZ9IPP03k" },
+			{ label: "Open Details", url: "https://youtu.be/yYEootnN5VE" }],
 			description:
 			"Archwire bending Robot Machine"
         }		
@@ -134,7 +138,7 @@ const categories = [
             title:"BCI Neurocar",
 			year:"2012",
             image:"bcicar.jpg",
-            links:[{ label: "Open project", url: "https://youtu.be/OCTTJRChK8Y?si=2u_pgF-JXPdkFs7R" }],
+            links:[{ label: "Open video", url: "https://youtu.be/OCTTJRChK8Y?si=2u_pgF-JXPdkFs7R" }],
 			description:
 			"A BCI car prototype to be used from PET recycling funding to help handicap."
         },
@@ -142,7 +146,7 @@ const categories = [
             title:"BMI for Supernumerary",
 			year:"2018",
             image:"bcinature.jpg",
-            links:[{ label: "Open project", url: "https://www.science.org/doi/10.1126/scirobotics.aat1228?ijkey=jgzH2rMiJdja6&keytype=ref&siteid=robotics" }],
+            links:[{ label: "Open publication", url: "https://www.science.org/doi/10.1126/scirobotics.aat1228?ijkey=jgzH2rMiJdja6&keytype=ref&siteid=robotics" }],
 			description:
 			"BMI to perform a goal-oriented task while simultaneously using their own arms to do a different task."
         },
@@ -150,7 +154,7 @@ const categories = [
             title:"ALIFE26 BMI/AL Tutorial",
 			year:"2026",
             image:"alifetutorial.jpg",
-            links:[{ label: "Open project", url: "https://bsenzio.github.io/bmitutorialALIFE26/" }],
+            links:[{ label: "Open tutorial", url: "https://bsenzio.github.io/bmitutorialALIFE26/" }],
 			description:
 			"From neural signals to AL interactive systems."
         },
@@ -158,7 +162,7 @@ const categories = [
             title:"BCI e-Textile",
 			year:"2019",
             image:"bcipatent.jpg",
-            links:[{ label: "Open project", url: "https://bsenzio.github.io/portfolio/assets/pdf/Patents/biosignal_feedback_system.pdf" }],
+            links:[{ label: "Open patent", url: "https://bsenzio.github.io/portfolio/assets/pdf/Patents/biosignal_feedback_system.pdf" }],
 			description:
 			"BMI Headset with e-textiles and use of wearable neurofeedback"
         }		
@@ -192,7 +196,7 @@ const categories = [
             title:"Electric Fence",
 			year:"2013",
             image:"Y2.jpg",
-            links:[],
+            links:[{ label: "Watch Demo", url: "https://www.youtube.com/watch?v=tVdK7wsy1uI" }],
 			description:
 			"Electric Fence and Gate controllers"
         },
@@ -224,7 +228,8 @@ const categories = [
             title:"VaSenzios",
 			year:"2023",
             image:"glass.jpg",
-            links:[{ label: "Open project", url: "https://youtu.be/Q50DDXVfSDA" }],
+            links:[{ label: "Demo reel", url: "https://youtu.be/CrCvXHIAtJ4" },
+			{ label: "Demo reel", url: "https://youtu.be/Q50DDXVfSDA" }],
 			description:
 			"An interactive inductive glass prototype"
         },
@@ -256,7 +261,9 @@ const categories = [
 			title:"Interative Arcade Machine",
 			year:"2026",
 			image:"arcade.jpg",
-			links:[],
+			links:[{ label: "Watch Demo", url: "https://youtu.be/BsE8TvaJvD4" },
+			{ label: "Watch Demo 2", url: "https://youtu.be/acaqdT1WNYM" },
+			{ label: "Watch Demo 3", url: "https://youtu.be/4nDXf4leb6Q" }],
 			description:
 			"An interactive Arcade machine with AI and custom games"
 		}
@@ -283,7 +290,7 @@ const categories = [
             title:"BCI and Robotics for Schools",
 			year:"2012",
             image:"bci_schools.jpg",
-            links:[],
+            links:[{ label: "Open project", url: "https://www.youtube.com/watch?v=PMnEDyEkNCg" }],
 			description:
 			"Trading PET for BCI Robotics education at schools"
 
@@ -292,7 +299,7 @@ const categories = [
             title:"Recicla para Ayudar",
 			year:"2012",
             image:"social8.JPG",
-            links:[],
+            links:[{ label: "Open project", url: "https://www.youtube.com/watch?v=tagIUTo3pMc" }],
 			description:
 			"A social cause project PET recycling to support lighting marginalized communities"
 
@@ -329,7 +336,7 @@ const categories = [
             title:"Okinawa Adventure 3D",
 			year:"2026",
             image:"okadv3d.jpg",
-            links:[],
+            links:[{ label: "Watch Demo", url: "https://youtu.be/BsE8TvaJvD4" }],
 			description:
 			"Okinawa culture 3D Experience"
 
@@ -338,7 +345,8 @@ const categories = [
             title:"Okinawa Adventure 2D",
 			year:"2026",
             image:"okadv.jpg",
-            links:[{ label: "Open project", url: "https://youtu.be/T-jyL2qHiG4?si=omZ6Z8QPk8VnF5wB" }],
+            links:[{ label: "Open project", url: "https://youtu.be/T-jyL2qHiG4?si=omZ6Z8QPk8VnF5wB" },
+			{ label: "Watch Demo Kiosk", url: "https://youtu.be/4nDXf4leb6Q" }],
 			description:
 			"Okinawa culture 2D Retro NES Game"
 
@@ -347,7 +355,9 @@ const categories = [
             title:"Where Are my Veggies",
 			year:"2025",
             image:"wamg.jpg",
-            links:[{ label: "Open project", url: "https://youtu.be/rOK47AQa050?si=SvaBNDeiUAVHA6ar" }],
+            links:[{ label: "Demo random", url: "https://youtu.be/6K8MLqRcPp8" },
+			{ label: "Demo Manual", url: "https://youtu.be/FW_4LI9_3X4" },
+			{ label: "Open publication", url: "https://bsenzio.github.io/portfolio/assets/pdf/Journals/IMI2025_01.pdf" }],
 			description:
 			"GoL NES Implementation"
 
