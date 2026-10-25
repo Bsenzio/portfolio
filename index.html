@@ -927,6 +927,14 @@ body.arcade-playing .lp-ticker-track,body.arcade-playing .cartridge-belt,body.ar
 <style>
 #game .unity-arcade-frame {display:block;width:100%;height:100%;border:0;background:#050811;}
 </style>
+<style>
+.arcade-speakers > i {flex-shrink:0;}
+.arcade-game-title {flex:1;min-width:0;overflow:hidden;max-width:270px;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
+.arcade-game-title-track {display:flex;width:max-content;animation:arcade-game-title-scroll 14s linear infinite;}
+.arcade-speakers .arcade-game-title-track span {flex:none;padding-right:38px;white-space:nowrap;font:600 10px/1.8 'Orbitron','DM Sans',sans-serif;letter-spacing:2px;color:#a4ffff;text-shadow:0 0 4px #3cefff,0 0 10px #3cefff,0 0 18px #ad47ff;}
+@keyframes arcade-game-title-scroll {from {transform:translateX(0);}to {transform:translateX(-50%);}}
+@media(prefers-reduced-motion:reduce) {.arcade-game-title-track {animation:none;width:100%;justify-content:center;}.arcade-speakers .arcade-game-title-track span {white-space:normal;padding-right:0;text-align:center;font-size:8px;}.arcade-game-title-track span[aria-hidden="true"] {display:none;}}
+</style>
 </head>
 
 <body>
@@ -1080,7 +1088,7 @@ body.arcade-playing .lp-ticker-track,body.arcade-playing .cartridge-belt,body.ar
         </div>
 
 
-        <div class="arcade-speakers" aria-hidden="true"><i></i><span>• PLAYER ONE •</span><i></i></div>
+        <div class="arcade-speakers"><i aria-hidden="true"></i><div class="arcade-game-title" role="status" aria-label="Now playing"><div class="arcade-game-title-track"><span>WHERE ARE MY VEGGIES?</span><span aria-hidden="true">WHERE ARE MY VEGGIES?</span></div></div><i aria-hidden="true"></i></div>
         <div class="arcade-screen-frame">
 
             <div id="game"></div>
@@ -1098,7 +1106,7 @@ body.arcade-playing .lp-ticker-track,body.arcade-playing .cartridge-belt,body.ar
    <span aria-hidden="true">SELECT A CARTRIDGE BELOW · ↑ ↓ ← → MOVE · Z: A · X: B · V: SELECT · ENTER: START · CLICK THE SCREEN TO PLAY · ESC: PAGE NAVIGATION</span>
   </div>
  </div>
- <a id="arcade-performance-mode" href="?graphics=fast">Performance mode · no CRT</a>
+ 
 </div>
             <div class="arcade-buttons"><i></i><i></i><i></i><i></i><i></i><i></i></div>
         </div>
@@ -1527,14 +1535,7 @@ if(!document.documentElement.classList.contains('compact-home') && new URLSearch
  };
 })();
 </script>
-<script>
-(() => {
- const link=document.getElementById('arcade-performance-mode');
- const url=new URL(location.href);const fast=url.searchParams.get('graphics')==='fast';
- if(fast)url.searchParams.delete('graphics');else url.searchParams.set('graphics','fast');
- link.href=url.href;link.textContent=fast?'CRT geom mode':'Performance mode · no CRT';
-})();
-</script>
+
 <script>
 (() => {
  if(new URLSearchParams(location.search).get('unity')!=='staygood' || document.documentElement.classList.contains('compact-home')) return;
@@ -1545,8 +1546,19 @@ if(!document.documentElement.classList.contains('compact-home') && new URLSearch
  game.replaceChildren(frame);
  document.querySelectorAll('.game-cartridge').forEach(c=>c.classList.toggle('selected-cartridge',!!c.dataset.link));
  document.querySelectorAll('.arcade-instruction-tape span').forEach(span=>{span.textContent='STAY GOOD · W: LOOK UP · A: MOVE LEFT · S: CROUCH · D: MOVE RIGHT · E / MOUSE 1: FIRE / USE TOOL · F: FORWARD DASH · SPACE: JUMP, TRIPLE JUMP & WALL CLIMB';});
- document.getElementById('arcade-performance-mode').hidden=true;
  document.body.classList.add('arcade-playing');
+})();
+</script>
+<script>
+(() => {
+ const query=new URLSearchParams(location.search);
+ const unity=query.get('unity')==='staygood';
+ const rom=query.get('rom') || 'assets/roms/wamg.nes';
+ const cartridge=[...document.querySelectorAll('.game-cartridge')].find(c=>unity?!!c.dataset.link:c.dataset.rom===rom);
+ const title=unity?'Stay Good: Barber Assault':rom.endsWith('/wamg.nes')?'Where Are My Veggies?':cartridge?.alt || 'NES Arcade';
+ const display=document.querySelector('.arcade-game-title');
+ display.setAttribute('aria-label','Now playing: '+title);
+ display.querySelectorAll('span').forEach(span=>{span.textContent=title.toUpperCase();});
 })();
 </script>
 </body>
