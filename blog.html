@@ -176,6 +176,12 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
  body footer .tesla-reflection { right:16px; width:min(280px,calc(100% - 32px)); }
 }
 </style>
+<script type="module" src="https://unpkg.com/@google/model-viewer@4.2.0/dist/model-viewer.min.js"></script>
+<style>
+.personal-blog model-viewer.hero-avatar { display:block; position:relative; background:transparent; pointer-events:none; --poster-color:transparent; }
+.blog-model-status { position:absolute; left:4px; right:4px; bottom:12px; text-align:center; font-size:11px; color:#aebed3; }
+@media(max-width:520px) { .personal-blog model-viewer.hero-avatar { position:absolute; } }
+</style>
 </head><body class="personal-blog">
 <a class="skip-link" href="#main-content">Skip to content</a>
 <nav class="navbar" aria-label="Main navigation">
@@ -194,7 +200,14 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
 <h1>Ideas, experiments<br>&amp; stories.</h1>
 <p class="hero-description">Personal notes on technology, research and the ideas that connect them. A space for curiosity, reflection and work in progress.</p>
 <ul class="topic-list"><li>Technology</li><li>Research</li><li>Creative Exploration</li></ul>
-</div><img class="hero-avatar" src="assets/images/avatar-blogs.png" alt="" width="170" height="170"></div></header>
+</div><model-viewer id="blogs-avatar-3d" class="hero-avatar"
+ src="assets/glb/blogs_avatar.glb" alt="Rotating 3D blog avatar"
+ auto-rotate auto-rotate-delay="0" rotation-per-second="12deg"
+ camera-orbit="0deg 85deg auto" camera-target="auto auto auto"
+ environment-image="neutral" exposure="1" shadow-intensity="0"
+ interaction-prompt="none" loading="eager" reveal="auto">
+ <span slot="poster" class="blog-model-status">Loading 3D avatar…</span>
+</model-viewer></div></header>
 <section class="blog-area" aria-label="Personal blog">
 <div id="blogListing">
 <div class="blog-tools" role="search" aria-label="Find a story">
@@ -232,4 +245,16 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
 </figure>
 </footer>
 <script>document.getElementById('copyrightYear').textContent=new Date().getFullYear();</script>
+<script>
+(() => {
+ const viewer = document.getElementById('blogs-avatar-3d');
+ const status = viewer.querySelector('.blog-model-status');
+ viewer.addEventListener('error', () => { status.textContent = '3D avatar unavailable'; if (typeof viewer.showPoster === 'function') viewer.showPoster(); });
+ const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+ const updateRotation = () => viewer.toggleAttribute('auto-rotate', !motion.matches && !document.hidden);
+ motion.addEventListener('change', updateRotation);
+ document.addEventListener('visibilitychange', updateRotation);
+ updateRotation();
+})();
+</script>
 </body></html>
