@@ -1,0 +1,23 @@
+## From a Conversation to a STEM Robotics Idea
+
+The other day, I was chatting with my friend Helio from Mozambique, as we often do. We were discussing ideas for his STEM school in Maputo and exploring activities that could bring together robotics, movement, and hands-on learning.
+One idea that caught our attention was a pair of robots that could battle each other, controlled through hand movements or another form of gesture recognition. Instead of using a conventional controller, participants could use their own movements to guide the robots.
+As we explored the possibilities, I started looking for examples, and Helio sent me the toys shown below. They gave us a starting point for imagining what we could build around that kind of interaction.
+
+![Robot toys shared by Helio](assets/blog/images/maputo_toy.jpg "The robot toys Helio shared as a starting point for our discussion.")
+
+## What If the Robot Could Follow Your Movements?
+
+One possibility we discussed was connecting the activity to a digital-twin concept: linking a participant's movements, a virtual representation, and a physical robot.
+Imagine children standing in front of a camera. A gesture- or pose-recognition system would interpret their movements and translate selected actions into commands for the robots. Raising an arm, shifting position, or making a particular gesture could trigger a corresponding action during a robot match.
+The gesture-controlled interaction would be our starting point. A fuller digital-twin version could also include a virtual representation of each robot, updated with feedback from its physical counterpart. That would give students another way to explore the relationship between what they do, what the software interprets, and what the robot actually does.
+What I like about the idea is how many learning opportunities could fit into a playful activity. Students could experiment with movement, discover how a camera-based system interprets a gesture, and see how a software decision becomes a physical action.
+We are still exploring the concept and working out what would be practical for the school. It is an idea in development, but it already feels like an exciting way to bring robotics and interactive technology into a STEM learning environment.
+
+## Meet Helio
+
+https://youtu.be/TlAML54wDjQ
+
+Here is my friend Helio, who is working on STEM education in Maputo, Mozambique. Conversations like this are a chance for us to exchange ideas and think about activities that could take shape in his school's context.
+
+![Helio, working on STEM education in Maputo](assets/blog/images/maputo_robots.jpg "My friend Helio, who is working on STEM education in Maputo, Mozambique.")

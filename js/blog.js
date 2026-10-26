@@ -44,31 +44,31 @@ const blogPosts = [
     },
     {
         id: 3,
-        slug: "edge-ai",
-        defaultLanguage: "es",
-        created: "2026-10-23", // Example date; replace with the actual date.
+        slug: "srl-guy",
+        defaultLanguage: "ja",
+        created: "2017-07-11", // Example date; replace with the actual date.
         featured: true,
-        title: "Edge AI",
-        image: "edgeai.jpg",
-        topic: "Artificial Intelligence",
-        keywords: ["Embedded Systems", "Edge AI"],
-        excerpt: "Running intelligence locally.",
-        url: "blog.html#edge-ai",
-        contentUrl: "assets/blog/stories/edge-ai.txt"
+        title: "SRL Guy",
+        image: "srl_guy.jpg",
+        topic: "Going Supernumerary",
+        keywords: ["Embedded Systems", "SRLs", "Japan"],
+        excerpt: "Being Supernumerary Japanese",
+        url: "blog.html#srl-guy",
+        contentUrl: "assets/blog/stories/srl-guy.txt"
     },
     {
         id: 4,
-        slug: "video",
-        defaultLanguage: "es",
+        slug: "maputo",
+        defaultLanguage: "en",
         created: "2026-10-23", // Example date; replace with the actual date.
         featured: true,
-        title: "Edge AI",
-        image: "edgeai.jpg",
+        title: "Maputo Fighters",
+        image: "maputo_fighters.jpg",
         topic: "Artificial Intelligence",
-        keywords: ["Embedded Systems", "Edge AI"],
-        excerpt: "Running intelligence locally.",
-        url: "blog.html#video",
-        contentUrl: "assets/blog/stories/video.txt"
+        keywords: ["Embedded Systems", "Games", "Entertainment", "Friendly Abroad"],
+        excerpt: "Mozambique fighters yeah!",
+        url: "blog.html#maputo-fighters",
+        contentUrl: "assets/blog/stories/maputo-fighters.txt"
     },
 
 	
@@ -303,6 +303,11 @@ const blogPosts = [
                     (!to || (created && created <= to)) &&
                     [post.title, post.excerpt, post.topic, aliases[language], created, formattedDate, ...(post.keywords || [])]
                         .join(" ").toLocaleLowerCase().includes(query);
+            }).sort((a, b) => {
+                // ISO dates sort chronologically; undated entries go last.
+                const aDate = validDate(a.created) ? a.created : "";
+                const bDate = validDate(b.created) ? b.created : "";
+                return bDate.localeCompare(aDate) || (Number(b.id) || 0) - (Number(a.id) || 0);
             });
             grid.replaceChildren();
             count.textContent = invalidRange ? "The From date must be on or before the To date." : `${filtered.length} of ${blogPosts.length} stories`;

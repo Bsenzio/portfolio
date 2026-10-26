@@ -312,7 +312,7 @@ function initializeDesk() {
     const latest=posts.map((post,i)=>({post,i})).sort((a,b)=>String(b.post.created||'').localeCompare(String(a.post.created||''))||b.i-a.i).slice(0,3);
     let blogIndex=0;
     function blogImage(post,cls) {
-        const img=node('img',cls);img.alt='';img.loading='lazy';img.decoding='async';img.src='assets/blog/'+post.image;
+        const img=node('img',cls);img.alt='';img.loading='lazy';img.decoding='async';img.src='assets/blog/titleimg/'+post.image;
         img.addEventListener('error',()=>img.remove(),{once:true});return img;
     }
     function showBlog(){

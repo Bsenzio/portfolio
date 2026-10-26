@@ -1,9 +1,0 @@
-A digital human can combine a visual character, speech, animation, and interactive behavior.
-
-## Designing a useful role
-
-The character needs a clear purpose. What task should it help someone accomplish? When should it ask for clarification?
-
-## Consistent interaction
-
-Visual detail alone cannot compensate for confusing behavior. Clear feedback and coherent responses help people understand the system.
