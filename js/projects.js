@@ -1,5 +1,10 @@
 // =====================================
 // DATA
+// OPTIONAL CREATOR BADGES: set either flag to true for the relevant project.
+// nonAI: true,       // Created without AI assistance.
+// fromScratch: true, // Original work built from the ground up by its creator.
+// Both flags are independent. Enable them only where the descriptions apply.
+// All projects start with both flags disabled; select the projects yourself.
 // PROJECT LINKS: add as many objects as you need to links.
 // Each object creates a button; label is its editable text and url is its destination.
 // Example (replace these URLs with your actual destinations):
@@ -22,6 +27,8 @@ const categories = [
 
     projects:[
         {
+            nonAI: false,
+            fromScratch: false,
             title:"Face Mask Detection",
 			year:"2021",
             image:"npu_ai.jpg",
@@ -30,6 +37,8 @@ const categories = [
 			"Edge AI Implementation on NPU"
         },
         {
+            nonAI: true,
+            fromScratch: true,
             title:"Machine Learning for BCI",
 			year:"2016",
             image:"som_bci.jpg",
@@ -38,6 +47,8 @@ const categories = [
 			"Unsupervised and Supervised Learning for BCI"
         },
         {
+            nonAI: true,
+            fromScratch: true,
             title:"OCR Pharmacy Prescription for Fillers",
 			year:"2018",
             image:"prescriptionai.jpg",
@@ -56,6 +67,8 @@ const categories = [
 
     projects:[
         {
+            nonAI: true,
+            fromScratch: true,
             title:"Mobile Robot Development",
 			year:"2009",
             image:"zmpbot.jpg",
@@ -64,6 +77,8 @@ const categories = [
 			"Autonomous Robot Hardware Development and Deployment"
         },
         {
+            nonAI: true,
+            fromScratch: true,
             title:"Wiimote SCARA Arm",
 			year:"2009",
             image:"scara_wii.jpg",
@@ -72,6 +87,8 @@ const categories = [
 			"A pioneer SCARA arm prototype controlled with Wiimote"
         },
         {
+            nonAI: true,
+            fromScratch: true,
             title:"Bruno Kart",
 			year:"2010",
             image:"mobile_wii.jpg",
@@ -80,6 +97,8 @@ const categories = [
 			"A pioneer Wiimote Controlled Mobile Robot"
         },
         {
+            nonAI: true,
+            fromScratch: true,
             title:"Cannonball",
 			year:"2010",
             image:"cannonball.jpg",
@@ -88,6 +107,8 @@ const categories = [
 			"A pioneer Wiimote Controlled Mobile Robot"
         },
         {
+            nonAI: true,
+            fromScratch: true,
             title:"Hand Augmentation",
 			year:"2016",
             image:"supernumerary.jpg",
@@ -99,6 +120,8 @@ const categories = [
 			"A supernumerary robotic limb hand robot"
         },
         {
+            nonAI: true,
+            fromScratch: false,
             title:"Verdopplerbot AI V1",
 			year:"2023",
             image:"verdopplerbotai.jpg",
@@ -122,6 +145,8 @@ const categories = [
 
     projects:[
         {
+            nonAI: true,
+            fromScratch: false,
             title:"Aura EEG Device",
 			year:"2017",
             image:"aura.jpg",
@@ -130,6 +155,8 @@ const categories = [
 			"An EEG Reading Harwdare Device"
         },
         {
+            nonAI: true,
+            fromScratch: true,
             title:"3D Mindwave Unity Environment",
 			year:"2014",
             image:"bci_env.jpg",
@@ -138,6 +165,8 @@ const categories = [
 			"A 3D Interactive BCI Environment"
         },
         {
+            nonAI: true,
+            fromScratch: true,
             title:"BCI Neurocar",
 			year:"2012",
             image:"bcicar.jpg",
@@ -146,6 +175,8 @@ const categories = [
 			"A BCI car prototype to be used from PET recycling funding to help handicap."
         },
         {
+            nonAI: false,
+            fromScratch: false,
             title:"BMI for Supernumerary",
 			year:"2018",
             image:"bcinature.jpg",
@@ -154,6 +185,8 @@ const categories = [
 			"BMI to perform a goal-oriented task while simultaneously using their own arms to do a different task."
         },
         {
+            nonAI: false,
+            fromScratch: true,
             title:"ALIFE26 BMI/AL Tutorial",
 			year:"2026",
             image:"alifetutorial.jpg",
@@ -162,6 +195,8 @@ const categories = [
 			"From neural signals to AL interactive systems."
         },
         {
+            nonAI: true,
+            fromScratch: true,
             title:"BCI e-Textile",
 			year:"2019",
             image:"bcipatent.jpg",
@@ -180,6 +215,8 @@ const categories = [
 
     projects:[
         {
+            nonAI: true,
+            fromScratch: false,
             title:"Touch Water Dispenser",
 			year:"2022",
             image:"touchwaterdispenser.jpg",
@@ -188,6 +225,8 @@ const categories = [
 			"Touch panel water dispensing machine with RFID"
         },
         {
+            nonAI: true,
+            fromScratch: false,
             title:"Bus Tracking Device",
 			year:"2022",
             image:"products1.jpg",
@@ -196,6 +235,8 @@ const categories = [
 			"Bus GPS and GPRS Tracker"
         },
         {
+            nonAI: true,
+            fromScratch: false,
             title:"Electric Fence",
 			year:"2013",
             image:"Y2.jpg",
@@ -204,6 +245,8 @@ const categories = [
 			"Electric Fence and Gate controllers"
         },
         {
+            nonAI: true,
+            fromScratch: true,
             title:"Laser Engravings",
 			year:"2012",
             image:"mabe5.JPG",
@@ -212,7 +255,9 @@ const categories = [
 			"Special Engravings and fabrications"
         },
         {
-            title:"AOLDC Apparrel",
+            nonAI: true,
+            fromScratch: true,
+            title:"AOLDC Apparel",
 			year:"2012",
             image:"fotl1.jpg",
             links:[],
@@ -220,6 +265,8 @@ const categories = [
 			"One layer of different acrylic products Light Displays"
         },
         {
+            nonAI: true,
+            fromScratch: true,
             title:"AOLDC",
 			year:"2011",
             image:"aoldc1_small.jpg",
@@ -228,6 +275,8 @@ const categories = [
 			"One layer of different acrylic products"
         },
         {
+            nonAI: true,
+            fromScratch: true,
             title:"VaSenzios",
 			year:"2023",
             image:"glass.jpg",
@@ -237,6 +286,8 @@ const categories = [
 			"An interactive inductive glass prototype"
         },
         {
+            nonAI: true,
+            fromScratch: false,
             title:"Retail Level RGB LED Lamp",
 			year:"2023",
             image:"led_lamp.jpg",
@@ -245,6 +296,8 @@ const categories = [
 			"An IR remote RGB Commercial Level Lamp"
         },
         {
+            nonAI: true,
+            fromScratch: true,
             title:"Inductive Braille",
 			year:"2023",
             image:"braille.jpg",
@@ -253,6 +306,8 @@ const categories = [
 			"A dynamic Braille proposed"
         },
 		{
+			nonAI: false,
+			fromScratch: true,
 			title:"XR Interaction System",
 			year:"2025",
 			image:"aruco.jpg",
@@ -261,6 +316,8 @@ const categories = [
 			"A modular interaction framework for XR applications supporting hand tracking, eye tracking and immersive interfaces."
 		},		
 		{
+			nonAI: false,
+			fromScratch: true,
 			title:"Interative Arcade Machine",
 			year:"2026",
 			image:"arcade.jpg",
@@ -282,6 +339,8 @@ const categories = [
 
     projects:[
         {
+            nonAI: false,
+            fromScratch: true,
             title:"Vegetables here, games there...",
 			year:"2025",
             image:"vegetables.jpg",
@@ -290,6 +349,8 @@ const categories = [
 			"Spreading AI and AL through gaming experiences"
         },
         {
+            nonAI: true,
+            fromScratch: true,
             title:"BCI and Robotics for Schools",
 			year:"2012",
             image:"bci_schools.jpg",
@@ -299,6 +360,8 @@ const categories = [
 
         },
         {
+            nonAI: true,
+            fromScratch: true,
             title:"Recicla para Ayudar",
 			year:"2012",
             image:"social8.JPG",
@@ -308,6 +371,8 @@ const categories = [
 
         },
         {
+            nonAI: true,
+            fromScratch: true,
             title:"Local PET Gathering",
 			year:"2012",
             image:"social16.jpg",
@@ -317,6 +382,8 @@ const categories = [
 
         },
         {
+            nonAI: true,
+            fromScratch: true,
             title:"Senior People Manufacturing",
 			year:"2023",
             image:"oldmanufacture.jpg",
@@ -336,6 +403,8 @@ const categories = [
 
     projects:[
 	    {
+            nonAI: false,
+            fromScratch: true,
             title:"Okinawa Adventure 3D",
 			year:"2026",
             image:"okadv3d.jpg",
@@ -345,6 +414,8 @@ const categories = [
 
         },		
 	    {
+            nonAI: false,
+            fromScratch: true,
             title:"Okinawa Adventure 2D",
 			year:"2026",
             image:"okadv.jpg",
@@ -355,6 +426,8 @@ const categories = [
 
         },		
 	    {
+            nonAI: false,
+            fromScratch: true,
             title:"Where Are my Veggies",
 			year:"2025",
             image:"wamg.jpg",
@@ -366,6 +439,8 @@ const categories = [
 
         },	
 	    {
+            nonAI: false,
+            fromScratch: true,
             title:"Stay Good: Barber Assault",
 			year:"2026",
             image:"sgba.jpg",
@@ -375,6 +450,8 @@ const categories = [
 
         },	
 	    {
+            nonAI: false,
+            fromScratch: true,
             title:"Nara Adventure",
 			year:"2026",
             image:"naraadventure.jpg",
@@ -384,6 +461,8 @@ const categories = [
 
         },	
 	    {
+            nonAI: true,
+            fromScratch: true,
             title:"PDO 3D",
 			year:"2023",
             image:"pdo3d.jpg",
@@ -395,6 +474,8 @@ const categories = [
         },	
 	
 	    {
+            nonAI: true,
+            fromScratch: true,
             title:"PDO 2D",
 			year:"2023",
             image:"pdo.jpg",
@@ -404,6 +485,8 @@ const categories = [
 
         },
         {
+            nonAI: true,
+            fromScratch: true,
             title:"Ganbare Shisa",
 			year:"2015",
             image:"shisablender.jpg",
@@ -413,6 +496,8 @@ const categories = [
 
         },
         {
+            nonAI: true,
+            fromScratch: true,
             title:"8-bit Trouble",
 			year:"2011",
             image:"8_bit_trouble.jpg",
@@ -426,6 +511,55 @@ const categories = [
 
 ];
 
+
+// Creator declarations, displayed only when explicitly enabled.
+function getProjectBadges(project) {
+    const badges = [];
+    if (project.nonAI === true) badges.push({
+        key: 'non-ai', label: 'NON-AI', symbol: '★', color: '#f2d68a',
+        description: "Created without AI assistance, using the creator's own ideas, knowledge, and skills."
+    });
+    if (project.fromScratch === true) badges.push({
+        key: 'from-scratch', label: 'From scratch', symbol: '◆', color: '#8debdc',
+        description: "Designed and developed from the ground up by its creator, rather than adapted from a prebuilt project or template."
+    });
+    return badges;
+}
+
+function createProjectBadges(project, compact = false) {
+    const badges = getProjectBadges(project);
+    if (!badges.length) return null;
+    const group = document.createElement('div');
+    group.className = 'obs-creator-badges';
+    Object.assign(group.style, {display: 'flex', flexWrap: 'wrap', gap: '8px', margin: '12px 0', minWidth: '0'});
+    badges.forEach(badge => {
+        const item = document.createElement('div');
+        item.className = `obs-creator-badge obs-creator-badge--${badge.key}`;
+        Object.assign(item.style, {
+            border: `1px solid ${badge.color}66`, borderRadius: '10px',
+            padding: compact ? '5px 9px' : '10px 12px',
+            background: `${badge.color}0d`, color: badge.color,
+            maxWidth: '100%', boxSizing: 'border-box',
+            flex: compact ? '0 1 auto' : '1 1 180px', textAlign: 'left'
+        });
+        item.title = badge.description;
+        const heading = document.createElement('span');
+        Object.assign(heading.style, {display: 'block', fontSize: '11px', fontWeight: '700', letterSpacing: '.06em'});
+        const icon = document.createElement('span');
+        icon.textContent = badge.symbol;
+        icon.setAttribute('aria-hidden', 'true');
+        heading.append(icon, document.createTextNode(` ${badge.label}`));
+        item.append(heading);
+        if (!compact) {
+            const description = document.createElement('span');
+            description.textContent = badge.description;
+            Object.assign(description.style, {display: 'block', fontSize: '12px', lineHeight: '1.55', marginTop: '6px', color: '#c8d2df', overflowWrap: 'anywhere'});
+            item.append(description);
+        } else item.setAttribute('aria-label', `${badge.label}: ${badge.description}`);
+        group.append(item);
+    });
+    return group;
+}
 
 // Shared by the observatory and the home-page featured projects.
 function getProjectLinks(project) {
@@ -459,6 +593,16 @@ function getRandomProjects(count = 3) {
     return all.slice(0, count);
 }
 
+// Each axis uses the full project count as its own denominator.
+function getCreatorSummary(projects) {
+    const total = projects.length;
+    const count = key => projects.filter(project => project[key] === true).length;
+    const nonAI = count('nonAI');
+    const fromScratch = count('fromScratch');
+    return {total, nonAI, usingAI: total - nonAI,
+        fromScratch, nonScratch: total - fromScratch};
+}
+
 (() => {
     function initializeObservatory() {
         const root = document.getElementById('projectObservatory');
@@ -480,6 +624,60 @@ function getRandomProjects(count = 3) {
         const search = document.getElementById('projectSearch');
         const filters = document.getElementById('categoryFilters');
         const status = document.getElementById('projectStatus');
+        const creatorSummary = document.createElement('section');
+        creatorSummary.className = 'obs-creator-summary';
+        creatorSummary.setAttribute('aria-label', 'Project creation summary');
+        Object.assign(creatorSummary.style, {
+            gridColumn: '1 / -1', width: '100%', boxSizing: 'border-box',
+            marginTop: '16px', padding: '0', borderRadius: '0', flexBasis: '100%',
+            border: 'none', background: 'transparent', boxShadow: 'none',
+            color: '#dce6ef', minWidth: '0', clear: 'both'
+        });
+        // Keep the counter and the selection/exploration legend together.
+        // Append the summary after all existing text within their shared group.
+        const summaryGroup = status.parentElement;
+        if (getComputedStyle(summaryGroup).display.includes('flex')) {
+            summaryGroup.style.flexWrap = 'wrap';
+        }
+        summaryGroup.append(creatorSummary);
+        function renderCreatorSummary(matches) {
+            const stats = getCreatorSummary(matches.map(row => row.project));
+            creatorSummary.replaceChildren();
+            const axes = [
+                ['AI assistance', [['NON-AI', stats.nonAI, '#f2d68a'], ['Using AI', stats.usingAI, '#b3a0ef']]],
+                ['Development origin', [['From scratch', stats.fromScratch, '#8debdc'], ['Non-scratch', stats.nonScratch, '#83b8f3']]]
+            ];
+            axes.forEach(([name, segments], index) => {
+                const row = document.createElement('div');
+                row.style.marginTop = index === 0 ? '0' : '16px';
+                const label = document.createElement('div');
+                label.textContent = name;
+                Object.assign(label.style, {fontSize: '11px', letterSpacing: '.08em', textTransform: 'uppercase', marginBottom: '8px', color: '#a8b8cb'});
+                const bar = document.createElement('div');
+                bar.setAttribute('role', 'img');
+                bar.setAttribute('aria-label', `${name}: ` + segments.map(([title, count]) => `${title} ${stats.total ? (count / stats.total * 100).toFixed(1) : '0'} percent, ${count} projects`).join('; '));
+                Object.assign(bar.style, {display: 'flex', gap: '2px', height: '9px', borderRadius: '8px', overflow: 'hidden', background: '#253044'});
+                const legend = document.createElement('div');
+                Object.assign(legend.style, {display: 'flex', flexWrap: 'wrap', gap: '8px 24px', marginTop: '9px'});
+                segments.forEach(([title, count, color]) => {
+                    const percent = stats.total ? count / stats.total * 100 : 0;
+                    if (count) {
+                        const segment = document.createElement('span');
+                        segment.title = `${title}: ${percent.toFixed(1)}% (${count}/${stats.total})`;
+                        Object.assign(segment.style, {flex: `${count} 1 0`, minWidth: '0', background: color});
+                        bar.append(segment);
+                    }
+                    const entry = document.createElement('span');
+                    Object.assign(entry.style, {display: 'inline-flex', alignItems: 'center', gap: '7px', fontSize: '12px'});
+                    const dot = document.createElement('span');
+                    Object.assign(dot.style, {width: '8px', height: '8px', flexShrink: '0', borderRadius: '50%', background: color});
+                    entry.append(dot, document.createTextNode(`${title} ${percent.toFixed(1)}% · ${count}`));
+                    legend.append(entry);
+                });
+                row.append(label, bar, legend);
+                creatorSummary.append(row);
+            });
+        }
         let selectedCategory = null;
         let selectedProject = null;
         let view = 'map';
@@ -647,6 +845,8 @@ function getRandomProjects(count = 3) {
                 const card = button('obs-mini-card','',() => selectProject(row));
                 card.setAttribute('aria-pressed',String(selectedProject === row.id));
                 card.append(image(row.project.image),el('small','',`${categories[row.ci].name} / ${row.project.year}`),el('strong','',row.project.title));
+                const badges = createProjectBadges(row.project, true);
+                if (badges) card.append(badges);
                 collection.append(card);
             });
             if (!matches.length) collection.append(el('p','obs-no-results','No projects match this search. Try another word or return to All worlds.'));
@@ -660,6 +860,8 @@ function getRandomProjects(count = 3) {
             root.style.setProperty('--obs-accent',ci === null ? '#8debdc' : colors[ci%colors.length]);
             if (row) {
                 inspector.append(el('div','obs-kicker',`${categories[row.ci].name} / ${row.project.year}`),image(row.project.image,'obs-inspector-image'),el('h3','',row.project.title),el('p','',row.project.description));
+                const badges = createProjectBadges(row.project);
+                if (badges) inspector.append(badges);
                 const links = getProjectLinks(row.project);
                 if (links.length) {
                     const actions = el('div', 'obs-project-links');
@@ -709,6 +911,7 @@ function getRandomProjects(count = 3) {
             document.getElementById('cardsView').setAttribute('aria-pressed',String(view==='cards'));
             startOrbit();
             status.textContent=`${matches.length} of ${rows.length} projects${selectedCategory===null ? ' · All worlds' : ' · '+categories[selectedCategory].name}`;
+            renderCreatorSummary(matches);
         }
         search.addEventListener('input',()=>{selectedProject=null;render()});
         document.getElementById('resetOrbit').addEventListener('click',()=>{search.value='';selectedCategory=null;selectedProject=null;render()});
