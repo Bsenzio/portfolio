@@ -1,0 +1,53 @@
+https://youtu.be/VzqxILNy0ho?si=7XkmR6N3wDe90-BM
+
+## Plurinominal de Oposición: un universo de sátira, política y videojuegos
+
+Plurinominal de Oposición nace como una exploración del imaginario cultural y político mexicano a través de los videojuegos. La idea es construir un universo en el que puedan convivir distintas historias, personajes y estilos de juego, entrelazados por una misma identidad satírica.
+
+No se trata de limitar el proyecto a una sola mecánica. Una campaña electoral puede convertirse en un juego de estrategia y recolección de objetos; un recorrido por carretera, en una aventura; y las rivalidades entre grupos, en un torneo de combate. Cada propuesta permite explorar una parte diferente de ese universo.
+
+La siguiente imagen reúne la historia y las conexiones entre los juegos que forman parte del concepto.
+
+![Historia de los juegos de Plurinominal de Oposición](assets/blog/images/pdo_hystoria.jpg "PDO Hystoria")
+
+## Prionominal de Oposición: la campaña en 3D
+
+Una de las primeras propuestas fue Prionominal de Oposición en 3D, ligada al imaginario político del 2 de julio. Su planteamiento consistía en recorrer un escenario de campaña y utilizar los objetos disponibles para intentar comprar votos dentro del juego.
+
+La campaña marcaba el tiempo de la partida. Durante ese periodo, el jugador debía decidir cómo aprovechar los ítems y las oportunidades del escenario para conseguir apoyo electoral. La intención era convertir esas prácticas en mecánicas de una sátira política jugable.
+
+El siguiente espacio está reservado para el video de esa primera propuesta.
+
+## La México–Querétaro y el Centro de la Sabiduría
+
+Otra de las propuestas del universo es La México–Querétaro, una aventura centrada en recuperar diferentes partes destinadas al Centro de la Sabiduría.
+
+Esta idea se conecta con el recorrido de Prionominal de Oposición y su búsqueda por ganar una curul. Así, el proyecto podía salir del escenario de campaña y explorar otros lugares, objetivos y formas de jugar, conservando los vínculos entre sus historias.
+
+En lugar de repetir una sola fórmula, quería que cada juego aportara una experiencia propia y, al mismo tiempo, una pieza más al conjunto.
+
+![La México–Querétaro](assets/blog/images/pdo_mxqro.jpg "La MX-QRO")
+
+## PDO Tríadas: el torneo
+
+También estaba planteado PDO Tríadas, un juego de luchas cuya puesta en escena tomaba como referencia el cine de torneos de combate, especialmente Bloodsport, protagonizada por Jean-Claude Van Damme.
+
+https://www.youtube.com/watch?v=VN0-Xtf41ng
+
+La propuesta contemplaba nueve personajes organizados en tres tríadas. Dentro de la ficción, todos pertenecían a un grupo denominado Illuminati, pero cada tríada representaba un ámbito distinto: tres personajes del entretenimiento, tres de la cultura o de la ciencia y la tecnología, y tres vinculados con la ley.
+
+La estructura permitía pensar en enfrentamientos entre esos grupos y en una identidad particular para cada uno. El torneo serviría como punto de encuentro entre personajes procedentes de diferentes partes del universo del proyecto.
+
+En su vertiente más oscura y deliberadamente ficticia, la trama culminaba en una versión satírica de la isla de Epstein, convertida en escenario de un ritual de sacrificio de carne ante Baal. Ese desenlace formaba parte de la fantasía del juego y de su mezcla de símbolos de poder, imaginarios conspirativos y exageración grotesca.
+
+![PDO Triadas](assets/blog/images/pdo_triadas.jpg "PDO: Triadas")
+
+## De los prototipos a una recopilación
+
+El desarrollo inicial comenzó en Unity alrededor de 2023. Desde entonces, la intención ha sido que Prionominal de Oposición pueda extenderse más allá de una primera experiencia y reunir estas propuestas en una recopilación conectada.
+
+Una posibilidad para una siguiente etapa es trasladar el proyecto a Unreal Engine, buscando una presentación gráfica más ambiciosa y desarrollando cada uno de los juegos con una identidad propia. Por ahora, esa transición forma parte del planteamiento a futuro.
+
+La meta es poder publicar los juegos en Steam y también a través de Retroid Club, la pequeña empresa de videojuegos a la carta que tengo planeado seguir desarrollando.
+
+Plurinominal de Oposición es, por ahora, un universo en construcción: una manera de transformar referencias culturales, política, humor y experiencias de juego en historias que puedan cruzarse entre sí. La tarea pendiente es darle forma a cada una de esas piezas y encontrar el modo de reunirlas en una experiencia que conserve el carácter con el que comenzó todo.

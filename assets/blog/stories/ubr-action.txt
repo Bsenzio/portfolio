@@ -1,9 +1,32 @@
-Blue Ocean Strategy offers a useful starting point for exploring new value: reconsider the assumptions behind an existing product or experience.
+https://youtu.be/fxvuvvIFAzw?si=SttuqE4XQu0jVXgo
 
-## Changing the question
+En 2024, después de aproximadamente un año trabajando como ingeniero de desarrollo de computadoras para vehículos, la empresa en la que estaba se quedó sin presupuesto. Esa situación me hizo buscar otra manera de generar ingresos. Tenía un Nissan Sentra 2023 muy equipado, así que decidí comenzar a trabajar como conductor de Uber.
+Al principio empecé a notar algo que me llamó la atención: a muchos pasajeros les gustaba el auto y les parecía muy lujoso. Por sus comentarios, estaban acostumbrados a viajar en vehículos más sencillos, como los Chevrolet Aveo, entre otros. Subirse al Sentra ya les daba una sensación diferente.
+Eso me hizo pensar que quizá había una oportunidad para ofrecer algo más que un traslado.
 
-Instead of asking only how to make a system faster or more powerful, ask what would make it useful to someone who is currently overlooked.
+## Una experiencia distinta sobre ruedas
 
-## From idea to experiment
+Conforme fui haciendo viajes, también empecé a hacer cuentas. La gasolina representaba un gasto considerable. Entonces pensé: «Si tuviera un vehículo eléctrico y pudiera cargarlo en casa con los paneles solares que ya tengo, ¿cuánto podría reducir ese gasto?».
+Pero la idea no se quedó en cambiar de vehículo. ¿Y si, además, lo equipaba con videojuegos y un sistema de entretenimiento para los pasajeros de atrás? ¿Y si convertía cada viaje en una experiencia de lujo, con música que les gustara y una conversación que valiera la pena recordar?
+Quería ofrecer una experiencia que no encontraran en ningún otro Uber de la ciudad. Un vehículo en el que el trayecto también fuera parte de la diversión.
+Mientras manejaba, podría conocer personas con perfiles muy distintos, escuchar sus historias y descubrir otras maneras de vivir la ciudad. La vida nocturna, las conversaciones y los encuentros podían convertirse, con su participación, en el material de un canal de YouTube.
+Poco a poco, aquella idea empezó a parecerse a un personaje: una especie de superhéroe de los UBRs.
 
-A small prototype can help test whether the proposed experience is understandable and valuable. Creativity provides a direction; feedback helps refine it.
+## Así nació UBR Action
+
+Todavía existía la posibilidad de dar continuidad a mi trabajo de alguna manera, aunque ya no fuera en la misma posición. De ahí surgió la frase que resumía todo el concepto:
+
+«Godín de día, superhéroe de noche».
+
+Durante el día podría seguir vinculado al trabajo de ingeniería. Por la noche sería Uber Action: un conductor que recorría la ciudad, conocía personas y convertía los viajes en pequeñas historias.
+También había una parte muy personal en todo esto. Quería encontrarle sentido a lo que estaba pasando en mi vida. Entender por qué había llegado a esa situación y qué podía hacer con ella. Tal vez, mientras escuchaba la vida de otras personas, también podría entender un poco mejor la mía.
+Entre todas las ocurrencias que se me cruzaban, incluso imaginaba hacer uno o dos rondines por el casino. Me preguntaba qué historia saldría de entrar con cien pesos ganados en un viaje y ver si ese día la suerte los convertía en trescientos o cuatrocientos. Era otra de las ideas que aparecían mientras imaginaba las aventuras nocturnas del personaje.
+Así comenzó UBR Action: como una manera de responder a una situación inesperada mezclando ingeniería, entretenimiento, curiosidad y ganas de seguir adelante.
+
+## Los Rangers de la ciudad
+
+Con el concepto en mente, comencé a pensar en cómo hacer la intro de este superhéroe urbano. No quería que fuera solamente la presentación de un conductor: quería darle identidad a todo ese pequeño universo de Uber Action.
+Incluso imaginaba incorporar una especie de equipo de Rangers. Tenía otro vehículo de color naranja, así que podía existir el Ranger Naranja y, por otro lado, el Ranger Blanco, o Uber Action como tal.
+La idea era que pudiéramos comunicarnos mientras recorríamos la ciudad y coordinar nuestros movimientos. Una especie de sincronía citadina: distintos vehículos, distintas historias y personajes conectados por lo que sucedía durante la noche.
+Quizá un viaje terminaba donde comenzaba la aventura del otro. Quizá una conversación nos daba una idea para el siguiente recorrido. Todavía estaba imaginando cómo darle forma, pero la imagen ya me entusiasmaba: un pequeño equipo de superhéroes urbanos que hacía de la ciudad su escenario.
+Y todo había comenzado con una empresa sin presupuesto, un auto disponible y la pregunta de qué podía hacer con lo que tenía a mi alcance.

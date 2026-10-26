@@ -20,7 +20,7 @@ const blogPosts = [
         defaultLanguage: "es",
         created: "2024-06-23", // Example date; replace with the actual date.
         featured: true,
-        title: "UBR ACTION EL DESPERTAR",
+        title: "UBR ACTION: El Despertar",
         image: "ubraction_logo.jpg",
         topic: "Crónicas",
         keywords: ["UBR Action", "Adventure", "Real Life"],
@@ -30,17 +30,17 @@ const blogPosts = [
     },
     {
         id: 2,
-        slug: "digital-humans",
+        slug: "pdo-3d",
         defaultLanguage: "es",
-        created: "2026-10-23", // Example date; replace with the actual date.
+        created: "2024-08-10", // Example date; replace with the actual date.
         featured: true,
-        title: "Digital Humans",
-        image: "digitalhumans.jpg",
-        topic: "Human–Computer Interaction",
-        keywords: ["AI", "Interaction"],
-        excerpt: "Future interaction systems.",
-        url: "blog.html#digital-humans",
-        contentUrl: "assets/blog/stories/digital-humans.txt"
+        title: "Plurinominal de oposición (PDO)",
+        image: "pdo_title.jpg",
+        topic: "El tres de",
+        keywords: ["PDO3D", "Games", "Pre-AI"],
+        excerpt: "La historia mi chavo",
+        url: "blog.html#pdo-3d",
+        contentUrl: "assets/blog/stories/pdo-3d.txt"
     },
     {
         id: 3,
@@ -70,20 +70,7 @@ const blogPosts = [
         url: "blog.html#video",
         contentUrl: "assets/blog/stories/video.txt"
     },
-    {
-        id: 5,
-        slug: "ejemplo-con-imagenes",
-        defaultLanguage: "es",
-        created: "2026-10-23", // Example date; replace with the actual date.
-        featured: true,
-        title: "Edge AI",
-        image: "edgeai.jpg",
-        topic: "Artificial Intelligence",
-        keywords: ["Embedded Systems", "Edge AI"],
-        excerpt: "Running intelligence locally.",
-        url: "blog.html#ejemplo-con-imagenes",
-        contentUrl: "assets/blog/stories/ejemplo-con-imagenes.txt"
-    }	
+
 	
 ];
 
