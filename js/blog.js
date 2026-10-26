@@ -64,8 +64,8 @@ const blogPosts = [
         featured: true,
         title: "Maputo Fighters",
         image: "maputo_fighters.jpg",
-        topic: "Artificial Intelligence",
-        keywords: ["Embedded Systems", "Games", "Entertainment", "Friendly Abroad"],
+        topic: "Fighting Games",
+        keywords: ["Embedded Systems", "Games", "Entertainment", "Friendly Abroad", "Fighting Games"],
         excerpt: "Mozambique fighters yeah!",
         url: "blog.html#maputo-fighters",
         contentUrl: "assets/blog/stories/maputo-fighters.txt"
