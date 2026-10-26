@@ -1,3 +1,9 @@
+// Cover images: assets/blog/titleimg/ (relative to blog.html).
+// Example: image: "ubraction_logo.jpg" loads assets/blog/titleimg/ubraction_logo.jpg.
+// Original language of each TXT: defaultLanguage: "es", "en" or "ja".
+// Also accepts "Español", "English" and "日本語".
+// Translate each story title, excerpt and TXT body. The site UI stays unchanged.
+// Google public translation service: requires Internet; availability is not guaranteed.
 // YouTube: paste one full video URL on a separate line in the TXT.
 // Each entry points to a UTF-8 .txt file, loaded only when opened.
 // created: use the real creation date in YYYY-MM-DD format.
@@ -10,20 +16,22 @@
 const blogPosts = [
     {
         id: 1,
-        slug: "blue-ocean",
-        created: "2026-10-23", // Example date; replace with the actual date.
+        slug: "ubr-action",
+        defaultLanguage: "es",
+        created: "2024-06-23", // Example date; replace with the actual date.
         featured: true,
-        title: "Blue Ocean Strategy",
-        image: "blueocean.jpg",
-        topic: "Innovation",
-        keywords: ["Strategy", "Creativity"],
-        excerpt: "Innovation beyond competition.",
-        url: "blog.html#blue-ocean",
-        contentUrl: "assets/blog/stories/blue-ocean.txt"
+        title: "UBR ACTION EL DESPERTAR",
+        image: "ubraction_logo.jpg",
+        topic: "Crónicas",
+        keywords: ["UBR Action", "Adventure", "Real Life"],
+        excerpt: "Godín de día, Superhéroe de noche...",
+        url: "blog.html#ubr-action",
+        contentUrl: "assets/blog/stories/ubr-action.txt"
     },
     {
         id: 2,
         slug: "digital-humans",
+        defaultLanguage: "es",
         created: "2026-10-23", // Example date; replace with the actual date.
         featured: true,
         title: "Digital Humans",
@@ -37,6 +45,7 @@ const blogPosts = [
     {
         id: 3,
         slug: "edge-ai",
+        defaultLanguage: "es",
         created: "2026-10-23", // Example date; replace with the actual date.
         featured: true,
         title: "Edge AI",
@@ -50,6 +59,7 @@ const blogPosts = [
     {
         id: 4,
         slug: "video",
+        defaultLanguage: "es",
         created: "2026-10-23", // Example date; replace with the actual date.
         featured: true,
         title: "Edge AI",
@@ -63,6 +73,7 @@ const blogPosts = [
     {
         id: 5,
         slug: "ejemplo-con-imagenes",
+        defaultLanguage: "es",
         created: "2026-10-23", // Example date; replace with the actual date.
         featured: true,
         title: "Edge AI",
@@ -84,6 +95,10 @@ const blogPosts = [
         const search = document.getElementById("blogSearch");
         const topic = document.getElementById("blogTopic");
         const count = document.getElementById("blogCount");
+        const languageFilter = document.getElementById("blogLanguage");
+        const dateFrom = document.getElementById("blogDateFrom");
+        const dateTo = document.getElementById("blogDateTo");
+        const resetFilters = document.getElementById("blogResetFilters");
         const reader = document.getElementById("storyReader");
         const title = document.getElementById("storyTitle");
         const content = document.getElementById("storyContent");
@@ -92,6 +107,112 @@ const blogPosts = [
         let listScroll = 0;
         let previousLink = null;
         let wasReading = false;
+        const languageButton = document.getElementById("storyLanguage");
+        const languageStatus = document.getElementById("translationStatus");
+        const languages = ["es", "en", "ja"];
+        const labels = { es: "Español", en: "English", ja: "日本語" };
+        const translations = new Map();
+        let activePost = null;
+        let originalBlocks = null;
+        let currentLanguage = "es";
+        let translationController = null;
+        function sourceLanguage(post) {
+            const value = String(post.defaultLanguage || "es").trim().toLowerCase();
+            return ({ español: "es", spanish: "es", english: "en", japanese: "ja", "日本語": "ja" })[value] ||
+                (languages.includes(value) ? value : "es");
+        }
+        function languageState(language) {
+            currentLanguage = language;
+            reader.dataset.language = language;
+            content.lang = language;
+            languageButton.textContent = labels[language];
+            const next = languages[(languages.indexOf(language) + 1) % languages.length];
+            languageButton.setAttribute("aria-label", `Language: ${labels[language]}. Switch to ${labels[next]}`);
+            languageButton.title = `Switch to ${labels[next]}`;
+        }
+        function showTranslationStatus(message = "") {
+            languageStatus.textContent = message;
+            languageStatus.hidden = !message;
+        }
+        function storyReady(blocks, request) {
+            if (request !== version) return;
+            originalBlocks = structuredClone(blocks);
+            renderContent(blocks);
+            languageButton.disabled = !postIsTxt(activePost);
+        }
+        function postIsTxt(post) {
+            if (!post?.contentUrl) return false;
+            try { return /\.txt$/i.test(new URL(post.contentUrl, document.baseURI).pathname); } catch { return false; }
+        }
+        async function translateText(text, source, target, signal) {
+            if (!text || !text.trim()) return text;
+            // Bound each URL and preserve every character, including long paragraphs.
+            const characters = Array.from(text);
+            const pieces = [];
+            for (let i = 0; i < characters.length; i += 900) {
+                const part = characters.slice(i, i + 900).join("");
+                const params = new URLSearchParams({ client: "gtx", sl: source, tl: target, dt: "t", q: part });
+                const response = await fetch("https://translate.googleapis.com/translate_a/single?" + params, { signal });
+                if (!response.ok) throw new Error("Translation unavailable");
+                const data = await response.json();
+                if (!Array.isArray(data?.[0])) throw new Error("Invalid translation");
+                const translated = data[0].map(item => typeof item?.[0] === "string" ? item[0] : "").join("");
+                if (!translated) throw new Error("Empty translation");
+                pieces.push(translated);
+            }
+            return pieces.join("");
+        }
+        languageButton?.addEventListener("click", async () => {
+            if (!activePost || !originalBlocks || languageButton.disabled || !postIsTxt(activePost)) return;
+            const request = version;
+            const post = activePost;
+            const source = sourceLanguage(post);
+            const target = languages[(languages.indexOf(currentLanguage) + 1) % languages.length];
+            const key = JSON.stringify([post.slug, source, target, post.title, post.excerpt, post.topic, originalBlocks]);
+            translationController?.abort();
+            const controller = new AbortController();
+            translationController = controller;
+            const timeout = setTimeout(() => controller.abort(), 90000);
+            languageButton.disabled = true;
+            reader.setAttribute("aria-busy", "true");
+            showTranslationStatus("Translating…");
+            try {
+                let result = translations.get(key);
+                if (!result) {
+                    result = { title: post.title, excerpt: post.excerpt || "", topic: post.topic || "", blocks: structuredClone(originalBlocks) };
+                    if (target !== source) {
+                        for (const field of ["title", "excerpt"]) {
+                            result[field] = await translateText(result[field], source, target, controller.signal);
+                        }
+                        for (const block of result.blocks) {
+                            const fields = ["paragraph", "heading", "link"].includes(block.type) ? ["text"] : block.type === "image" ? ["alt", "caption"] : [];
+                            for (const field of fields) {
+                                if (typeof block[field] === "string") block[field] = await translateText(block[field], source, target, controller.signal);
+                            }
+                        }
+                    }
+                    translations.set(key, result);
+                }
+                if (request !== version) return;
+                title.textContent = result.title;
+                title.lang = target;
+                const excerpt = document.getElementById("storyExcerpt");
+                excerpt.textContent = result.excerpt;
+                excerpt.lang = target;
+                document.title = `${result.title} | Bruno Senzio-Savino`;
+                languageState(target);
+                renderContent(result.blocks);
+                showTranslationStatus();
+            } catch {
+                if (request === version) showTranslationStatus("Translation unavailable. Click the language button to try again.");
+            } finally {
+                clearTimeout(timeout);
+                if (request === version) {
+                    reader.removeAttribute("aria-busy");
+                    languageButton.disabled = false;
+                }
+            }
+        });
 
         function element(tag, className, text) {
             const node = document.createElement(tag);
@@ -105,6 +226,11 @@ const blogPosts = [
                 return ["http:", "https:"].includes(url.protocol) ||
                     (image && url.protocol === "file:") ? url.href : null;
             } catch { return null; }
+        }
+        function validDate(value) {
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) return false;
+            const date = new Date(value + "T12:00:00Z");
+            return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
         }
         function creationTime(value) {
             if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) return null;
@@ -173,15 +299,30 @@ const blogPosts = [
         }
         function renderCards() {
             const query = search.value.trim().toLocaleLowerCase();
-            const filtered = blogPosts.filter(post =>
-                (topic.value === "all" || post.topic === topic.value) &&
-                [post.title, post.excerpt, post.topic, ...(post.keywords || [])]
-                    .join(" ").toLocaleLowerCase().includes(query)
-            );
+            const from = dateFrom?.value || "";
+            const to = dateTo?.value || "";
+            const invalidRange = Boolean(from && to && from > to);
+            const filtered = blogPosts.filter(post => {
+                const language = sourceLanguage(post);
+                const created = validDate(post.created) ? post.created : "";
+                const formattedDate = created ? new Intl.DateTimeFormat("en-US", {
+                    year: "numeric", month: "long", day: "numeric", timeZone: "UTC"
+                }).format(new Date(created + "T12:00:00Z")) : "";
+                const aliases = { es: "es español spanish", en: "en english inglés", ja: "ja 日本語 japanese japonés" };
+                return !invalidRange &&
+                    (topic.value === "all" || post.topic === topic.value) &&
+                    (!languageFilter || languageFilter.value === "all" || languageFilter.value === language) &&
+                    (!from || (created && created >= from)) &&
+                    (!to || (created && created <= to)) &&
+                    [post.title, post.excerpt, post.topic, aliases[language], created, formattedDate, ...(post.keywords || [])]
+                        .join(" ").toLocaleLowerCase().includes(query);
+            });
             grid.replaceChildren();
-            count.textContent = `${filtered.length} of ${blogPosts.length} stories`;
+            count.textContent = invalidRange ? "The From date must be on or before the To date." : `${filtered.length} of ${blogPosts.length} stories`;
             filtered.forEach(post => {
                 const card = element("article", "story-card");
+                card.dataset.language = sourceLanguage(post);
+                // Card metadata remains in the site language (English).
                 const cover = element("div", "story-cover");
                 const icon = element("i", "fas fa-feather-pointed");
                 icon.setAttribute("aria-hidden", "true");
@@ -194,7 +335,7 @@ const blogPosts = [
                     image.width = 300; image.height = 150;
                     image.addEventListener("error", () => image.remove(), { once: true });
                     image.addEventListener("load", () => icon.remove(), { once: true });
-                    image.src = `assets/blog/${post.image}`;
+                    image.src = `assets/blog/titleimg/${post.image}`;
                     cover.append(image);
                     // The fallback icon is hidden while a real cover is present.
                     icon.style.display = "none";
@@ -205,6 +346,7 @@ const blogPosts = [
                 body.append(element("h2", "", post.title));
                 const created = creationTime(post.created);
                 if (created) body.append(created);
+                body.append(element("span", "story-original-language", "Original language: " + labels[sourceLanguage(post)]));
                 body.append(element("p", "", post.excerpt));
                 const link = element("a", "story-link", "Read more →");
                 link.href = `#${encodeURIComponent(post.slug)}`;
@@ -215,7 +357,7 @@ const blogPosts = [
                 });
                 body.append(link); card.append(cover, body); grid.append(card);
             });
-            if (!filtered.length) grid.append(element("p", "blog-empty", "No stories match your search. Try another topic or keyword."));
+            if (!filtered.length) grid.append(element("p", "blog-empty", "No stories match your filters. Try another keyword, language or date range."));
         }
         function renderContent(blocks) {
             content.replaceChildren();
@@ -273,6 +415,12 @@ const blogPosts = [
         }
         async function route() {
             const request = ++version;
+            translationController?.abort();
+            activePost = null;
+            originalBlocks = null;
+            languageButton.disabled = true;
+            reader.removeAttribute("aria-busy");
+            showTranslationStatus();
             let slug;
             try { slug = decodeURIComponent(location.hash.slice(1)); }
             catch { slug = ""; }
@@ -289,9 +437,34 @@ const blogPosts = [
                 }
                 return;
             }
+            activePost = post;
+            const readerCover = document.getElementById("storyReaderCover");
+            if (readerCover) {
+                readerCover.replaceChildren();
+                readerCover.hidden = true;
+                if (post.image) {
+                    const coverImage = document.createElement("img");
+                    coverImage.alt = post.title || "Story cover";
+                    coverImage.width = 520;
+                    coverImage.height = 260;
+                    coverImage.decoding = "async";
+                    coverImage.addEventListener("load", () => {
+                        if (readerCover.firstChild === coverImage) readerCover.hidden = false;
+                    }, { once: true });
+                    coverImage.addEventListener("error", () => {
+                        if (readerCover.firstChild === coverImage) readerCover.hidden = true;
+                    }, { once: true });
+                    readerCover.append(coverImage);
+                    coverImage.src = `assets/blog/titleimg/${post.image}`;
+                }
+            }
+            languageButton.hidden = !postIsTxt(post);
+            languageState(sourceLanguage(post));
             wasReading = true;
             listing.hidden = true; reader.hidden = false;
             title.textContent = post.title;
+            title.lang = sourceLanguage(post);
+            document.getElementById("storyExcerpt").lang = sourceLanguage(post);
             document.getElementById("storyCreated")?.remove();
             const created = creationTime(post.created);
             if (created) { created.id = "storyCreated"; title.after(created); }
@@ -302,7 +475,7 @@ const blogPosts = [
             reader.style.scrollMarginTop = "90px";
             reader.scrollIntoView({ block: "start" });
             if (!post.contentUrl) {
-                renderContent(Array.isArray(post.content) ? post.content : []);
+                storyReady(Array.isArray(post.content) ? post.content : [], request);
                 return;
             }
             content.replaceChildren(element("p", "story-note", "Loading story…"));
@@ -319,7 +492,7 @@ const blogPosts = [
                     if (!Array.isArray(blocks)) throw new Error("Invalid story format");
                     cache.set(post.slug, blocks);
                 }
-                if (request === version) renderContent(blocks);
+                storyReady(blocks, request);
             } catch {
                 if (request !== version) return;
                 content.replaceChildren(element("p", "story-note", "This story could not be loaded. Please try again."));
@@ -334,6 +507,15 @@ const blogPosts = [
             });
         search.addEventListener("input", renderCards);
         topic.addEventListener("change", renderCards);
+        for (const control of [languageFilter, dateFrom, dateTo]) control?.addEventListener("change", renderCards);
+        resetFilters?.addEventListener("click", () => {
+            search.value = "";
+            topic.value = "all";
+            if (languageFilter) languageFilter.value = "all";
+            if (dateFrom) dateFrom.value = "";
+            if (dateTo) dateTo.value = "";
+            renderCards();
+        });
         window.addEventListener("hashchange", route);
         renderCards(); route();
     }

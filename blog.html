@@ -182,6 +182,51 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
 .blog-model-status { position:absolute; left:4px; right:4px; bottom:12px; text-align:center; font-size:11px; color:#aebed3; }
 @media(max-width:520px) { .personal-blog model-viewer.hero-avatar { position:absolute; } }
 </style>
+<style>
+/* Language colours belong to the article/card, never the page. */
+.personal-blog .story-reader[data-language="es"], .personal-blog .story-card[data-language="es"] { background:#101d30; }
+.personal-blog .story-reader[data-language="en"], .personal-blog .story-card[data-language="en"] { background:#261b39; border-color:#685082; }
+.personal-blog .story-reader[data-language="ja"], .personal-blog .story-card[data-language="ja"] { background:#112e27; border-color:#38765e; }
+.personal-blog .reader-language-bar { display:flex;justify-content:flex-end;align-items:center;flex-wrap:wrap;gap:10px;margin:0 0 14px; }
+.personal-blog .story-language-button { font:600 12px 'DM Sans',sans-serif;color:#edf3ff;background:inherit;border:1px solid #66818c;border-radius:999px;padding:6px 13px;cursor:pointer;min-height:32px; }
+.personal-blog .story-language-button:hover { border-color:#8debdc; }
+.personal-blog .story-language-button:disabled { opacity:.6;cursor:wait; }
+.personal-blog .translation-status { color:#c6d7df;font-size:12px;max-width:440px; }
+.personal-blog .translation-status[hidden] { display:none; }
+</style>
+<style>
+.personal-blog .blog-tools { align-items:center; }
+.personal-blog .blog-tools #blogSearch { flex:1 1 230px;min-width:0; }
+.personal-blog .blog-date-filter { display:flex;align-items:center;gap:7px;font-size:12px;color:#b1c4d8; }
+.personal-blog .blog-date-filter input { color-scheme:dark;min-width:0;width:145px; }
+.personal-blog .blog-reset-filters { border:1px solid #345269;border-radius:8px;padding:10px 12px;background:#14273a;color:#c8e5e1;cursor:pointer;font:inherit;font-size:12px; }
+.personal-blog .blog-reset-filters:hover { border-color:#8debdc; }
+@media(max-width:560px) { .personal-blog .blog-date-filter { flex:1 1 140px; } .personal-blog .blog-date-filter input { width:100%; } }
+</style>
+<style>
+.personal-blog .story-original-language { display:block;font-size:10px;line-height:1.5;color:#9cb0c9;margin:0 0 8px; }
+.personal-blog .reader-title-cover { margin-right:auto;flex:0 1 260px;max-width:65%; }
+.personal-blog .reader-title-cover[hidden] { display:none; }
+.personal-blog .reader-title-cover img { display:block;width:100%;height:auto;aspect-ratio:2/1;object-fit:contain;border-radius:10px; }
+.personal-blog .reader-language-bar { align-items:center; }
+@media(max-width:480px) { .personal-blog .reader-title-cover { flex-basis:180px;max-width:62%; } }
+</style>
+<style>
+/* Full-width reader cover with the language control over the image. */
+.personal-blog .reader-language-bar { position:relative;isolation:isolate;display:flex;align-items:flex-start;justify-content:flex-end;gap:10px;margin:12px 0 22px; }
+.personal-blog .reader-title-cover { flex:0 0 100%;width:100%;max-width:100%;margin:0;overflow:hidden;border-radius:16px;background:#102132; }
+.personal-blog .reader-title-cover img { display:block;width:100%;height:auto;aspect-ratio:2/1;object-fit:cover;border-radius:inherit; }
+.personal-blog .reader-language-bar:has(.reader-title-cover:not([hidden])) .story-language-button { position:absolute;top:14px;right:14px;z-index:2;background:rgba(8,14,25,.82);border-color:rgba(255,255,255,.55);box-shadow:0 2px 12px rgba(0,0,0,.3);backdrop-filter:blur(8px); }
+.personal-blog .reader-language-bar .translation-status:not([hidden]) { flex:0 0 100%;max-width:100%; }
+@media(max-width:480px) {
+ .personal-blog .reader-title-cover { flex-basis:100%;max-width:100%;border-radius:12px; }
+ .personal-blog .reader-language-bar:has(.reader-title-cover:not([hidden])) .story-language-button { top:10px;right:10px; }
+}
+</style>
+<style>
+/* Compact cover: same 150px height as the cards in the blog listing. */
+.personal-blog .reader-title-cover img { width:100%;height:150px;aspect-ratio:auto;object-fit:cover;object-position:center; }
+</style>
 </head><body class="personal-blog">
 <a class="skip-link" href="#main-content">Skip to content</a>
 <nav class="navbar" aria-label="Main navigation">
@@ -211,14 +256,25 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
 <section class="blog-area" aria-label="Personal blog">
 <div id="blogListing">
 <div class="blog-tools" role="search" aria-label="Find a story">
-<input id="blogSearch" type="search" placeholder="Search stories, topics or keywords…" aria-label="Search stories">
+<input id="blogSearch" type="search" placeholder="Search stories, languages or dates…" aria-label="Search stories">
 <select id="blogTopic" aria-label="Filter by topic"><option value="all">All topics</option></select>
+<select id="blogLanguage" aria-label="Filter by original language">
+<option value="all">All languages</option><option value="es">Español</option><option value="en">English</option><option value="ja">日本語</option>
+</select>
+<label class="blog-date-filter">From<input id="blogDateFrom" type="date" aria-label="From date"></label>
+<label class="blog-date-filter">To<input id="blogDateTo" type="date" aria-label="To date"></label>
+<button id="blogResetFilters" type="button" class="blog-reset-filters">Clear filters</button>
 </div>
 <p class="blog-count" id="blogCount" role="status" aria-live="polite"></p>
 <div id="blogGrid" class="blog-grid"></div>
 </div>
 <article id="storyReader" class="story-reader" hidden aria-labelledby="storyTitle">
 <a class="reader-back" href="#"><i class="fas fa-arrow-left" aria-hidden="true"></i> All stories</a>
+<div class="reader-language-bar">
+<div id="storyReaderCover" class="reader-title-cover" hidden></div>
+<button id="storyLanguage" type="button" class="story-language-button" aria-label="Language: Español. Switch to English" disabled>Español</button>
+<span id="translationStatus" class="translation-status" role="status" aria-live="polite" hidden></span>
+</div>
 <p id="storyTopic" class="story-topic"></p>
 <h2 id="storyTitle" tabindex="-1"></h2>
 <p id="storyExcerpt" class="reader-excerpt"></p>
