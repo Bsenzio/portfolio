@@ -1,3 +1,44 @@
+// projects page bundle rebuilt from original scripts, in source order.
+// ---- inline ----
+(() => {
+document.getElementById('copyrightYear').textContent = new Date().getFullYear();
+    (() => {
+      const audio = document.getElementById('bgm');
+      const button = document.getElementById('soundToggle');
+      let userPaused = false;
+      audio.volume = 0.05;
+      function updateSoundButton() {
+        const playing = !audio.paused;
+        button.setAttribute('aria-pressed', String(playing));
+        button.setAttribute('aria-label', playing ? 'Pause background music' : 'Play background music');
+        button.querySelector('i').className = playing ? 'fas fa-volume-low' : 'fas fa-volume-xmark';
+        button.querySelector('span').textContent = playing ? 'Sound on' : 'Sound off';
+      }
+      function removeUnlockListeners() {
+        ['pointerdown','keydown','touchend'].forEach(event => document.removeEventListener(event, unlock));
+      }
+      function tryPlay() {
+        if(userPaused) return;
+        audio.play().then(removeUnlockListeners).catch(() => {});
+      }
+      function unlock(event) {
+        if(button.contains(event.target)) return;
+        tryPlay();
+      }
+      ['pointerdown','keydown','touchend'].forEach(event => document.addEventListener(event, unlock));
+      audio.addEventListener('play', updateSoundButton);
+      audio.addEventListener('pause', updateSoundButton);
+      button.addEventListener('click', () => {
+        if(!audio.paused) { userPaused=true; audio.pause(); removeUnlockListeners(); }
+        else { userPaused=false; tryPlay(); }
+      });
+      window.addEventListener('load', tryPlay, {once:true});
+      tryPlay();
+    })();
+})();
+
+// ---- js/projects.js ----
+(() => {
 // =====================================
 // DATA
 // OPTIONAL CREATOR BADGES: set either flag to true for the relevant project.
@@ -938,4 +979,21 @@ function getCreatorSummary(projects) {
     }
     if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initializeObservatory,{once:true});
     else initializeObservatory();
+})();
+
+})();
+
+// ---- inline ----
+(() => {
+(() => {
+  const viewer = document.getElementById('projects-avatar-3d');
+  const status = document.querySelector('.hero-model-status');
+  viewer.addEventListener('load', () => { status.hidden = true; });
+  viewer.addEventListener('error', () => { status.hidden = false; status.textContent = '3D avatar unavailable'; });
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const updateRotation = () => { viewer.toggleAttribute('auto-rotate', !motion.matches && !document.hidden); };
+  motion.addEventListener('change', updateRotation);
+  document.addEventListener('visibilitychange', updateRotation);
+  updateRotation();
+})();
 })();

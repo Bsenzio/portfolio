@@ -1,3 +1,11 @@
+// publications page bundle rebuilt from original scripts, in source order.
+// ---- inline ----
+(() => {
+document.querySelectorAll("[data-current-year]").forEach(node => node.textContent = new Date().getFullYear())
+})();
+
+// ---- js/publications.js ----
+(() => {
 // =========================
 // PUBLICATIONS DATABASE
 // =========================
@@ -945,3 +953,1140 @@ document.addEventListener(
     renderPublications();
 
 });
+})();
+
+// ---- js/publications-pdf.js ----
+(() => {
+document.addEventListener("DOMContentLoaded", () => {
+    const button = document.getElementById("downloadPublicationsBtn");
+
+    if (button) {
+        button.addEventListener("click", generatePublicationsPDF);
+    }
+});
+
+function generatePublicationsPDF() {
+    if (!window.jspdf || !window.jspdf.jsPDF) {
+        alert("Unable to load PDF generation library.");
+        return;
+    }
+
+    const records = window.filteredPublications;
+
+    if (!Array.isArray(records)) {
+        alert("Publication data is not ready.");
+        return;
+    }
+
+    if (records.length === 0) {
+        alert("No records match the current filters.");
+        return;
+    }
+
+    const { jsPDF } = window.jspdf;
+
+    const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4"
+    });
+
+    const W = doc.internal.pageSize.getWidth();
+    const H = doc.internal.pageSize.getHeight();
+    const M = 18;
+    const CW = W - M * 2;
+
+    const navy = [36, 59, 85];
+    const gray = [90, 105, 120];
+    const blue = [35, 100, 170];
+
+    let y = 20;
+    let number = 1;
+
+    // ----------------------------------
+    // FILTER INFORMATION
+    // ----------------------------------
+
+    const getValue = (id, fallback = "all") => {
+        const element = document.getElementById(id);
+        return element ? element.value : fallback;
+    };
+
+    const filters = {
+        search: getValue("searchInput", "").trim(),
+        year: getValue("yearFilter"),
+        type: getValue("typeFilter"),
+        language: getValue("languageFilter"),
+        keywords: Array.isArray(window.selectedKeywords)
+            ? [...window.selectedKeywords]
+            : []
+    };
+
+    if (
+        typeof selectedKeywords !== "undefined" &&
+        Array.isArray(selectedKeywords)
+    ) {
+        filters.keywords = [...selectedKeywords];
+    }
+
+    const activeFilters = [];
+
+    if (filters.search) {
+        activeFilters.push(["Search", filters.search]);
+    }
+
+    if (filters.year !== "all") {
+        activeFilters.push(["Year", filters.year]);
+    }
+
+    if (filters.type !== "all") {
+        activeFilters.push(["Type", filters.type]);
+    }
+
+    if (filters.language !== "all") {
+        activeFilters.push(["Language", filters.language]);
+    }
+
+    if (filters.keywords.length) {
+        activeFilters.push([
+            "Keywords",
+            filters.keywords.join(", ")
+        ]);
+    }
+
+    const hasActiveFilters = activeFilters.length > 0;
+
+    // ----------------------------------
+    // HELPERS
+    // ----------------------------------
+
+    function clean(value) {
+        const div = document.createElement("div");
+        div.innerHTML = String(value ?? "");
+
+        return div.textContent || "";
+    }
+
+    function newPageIfNeeded(height) {
+        if (y + height > H - 23) {
+            doc.addPage();
+            y = 22;
+        }
+    }
+
+    function getLines(text, fontSize, style = "normal") {
+        doc.setFont("helvetica", style);
+        doc.setFontSize(fontSize);
+
+        return doc.splitTextToSize(clean(text), CW - 3);
+    }
+
+    function getTextHeight(text, fontSize, style = "normal") {
+        const lines = getLines(text, fontSize, style);
+        return lines.length * fontSize * 0.46 + 2;
+    }
+
+    function writeWrapped(
+        text,
+        x,
+        fontSize,
+        color,
+        style = "normal"
+    ) {
+        const lines = getLines(text, fontSize, style);
+        const lineHeight = fontSize * 0.46;
+
+        doc.setTextColor(...color);
+
+        lines.forEach(line => {
+            newPageIfNeeded(lineHeight);
+
+            doc.text(line, x, y);
+            y += lineHeight;
+        });
+
+        y += 2;
+    }
+
+    function getRecordLinks(record) {
+        const activityTypes = ["Talk", "Workshop", "Interview"];
+
+        return [
+            {
+                value: record.link,
+                label: activityTypes.includes(record.type)
+                    ? "View Details"
+                    : "View Publication"
+            },
+            {
+                value: record.youtube,
+                label: "Watch Video"
+            },
+            {
+                value: record.github,
+                label: "View Repository"
+            }
+        ].filter(item => item.value);
+    }
+
+    // ----------------------------------
+    // COVER HEADER
+    // ----------------------------------
+
+    doc.setFillColor(...navy);
+    doc.rect(0, 0, W, 49, "F");
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(9);
+    doc.setTextColor(190, 215, 235);
+    doc.text("ACADEMIC RESEARCH PORTFOLIO", M, 14);
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(17);
+    doc.setTextColor(255, 255, 255);
+    doc.text("Publications and Academic Activities", M, 27);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(11);
+    doc.text("Bruno Senzio-Savino Barzellato", M, 36);
+
+    doc.setFontSize(8);
+    doc.text(
+        "Generated: " + new Date().toLocaleDateString("en-US"),
+        M,
+        43
+    );
+
+    y = 59;
+
+    // ----------------------------------
+    // FILTER SUMMARY
+    // ----------------------------------
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(12);
+    doc.setTextColor(...navy);
+    doc.text("Applied Filters", M, y);
+
+    y += 7;
+
+    const summaryFilters = hasActiveFilters
+        ? activeFilters
+        : [["Selection", "All Records"]];
+
+    summaryFilters.forEach(([label, value]) => {
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(9);
+
+        const lines = doc.splitTextToSize(
+            clean(value),
+            CW - 46
+        );
+
+        // Render long filter values in chunks across pages.
+        let index = 0;
+
+        while (index < lines.length) {
+            newPageIfNeeded(12);
+
+            const availableLines = Math.max(
+                1,
+                Math.floor((H - 23 - y - 7) / 4.5)
+            );
+
+            const chunk = lines.slice(
+                index,
+                index + availableLines
+            );
+
+            const rowHeight = Math.max(
+                10,
+                chunk.length * 4.5 + 5
+            );
+
+            doc.setFillColor(241, 245, 249);
+            doc.roundedRect(
+                M,
+                y - 3,
+                CW,
+                rowHeight,
+                2,
+                2,
+                "F"
+            );
+
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(9);
+            doc.setTextColor(...navy);
+            doc.text(
+                index === 0 ? label + ":" : "Continued:",
+                M + 5,
+                y + 2
+            );
+
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(...gray);
+            doc.text(chunk, M + 42, y + 2);
+
+            y += rowHeight + 2;
+            index += chunk.length;
+        }
+    });
+
+    y += 5;
+
+    // ----------------------------------
+    // RESULTS SUMMARY
+    // ----------------------------------
+
+    newPageIfNeeded(25);
+
+    const databaseTotal =
+        typeof publications !== "undefined" &&
+        Array.isArray(publications)
+            ? publications.length
+            : Array.isArray(window.publications)
+                ? window.publications.length
+                : null;
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(11);
+    doc.setTextColor(...navy);
+
+    doc.text(
+        "Matching Records: " + records.length,
+        M,
+        y
+    );
+
+    if (databaseTotal !== null) {
+        doc.text(
+            "Database Total: " + databaseTotal,
+            W - M,
+            y,
+            { align: "right" }
+        );
+    }
+
+    y += 7;
+
+    doc.setDrawColor(200, 210, 220);
+    doc.line(M, y, W - M, y);
+
+    y += 12;
+
+    // ----------------------------------
+    // CATEGORIES
+    // ----------------------------------
+
+    const categories = [
+        ["Journal", "Journal Articles"],
+        ["Conference", "Conference Papers"],
+        ["Thesis", "Theses"],
+        ["Patent", "Patents"],
+        ["Talk", "Talks"],
+        ["Workshop", "Workshops and Tutorials"],
+        ["Interview", "Interviews"]
+    ];
+
+    // Include any additional record types automatically.
+    const knownTypes = new Set(
+        categories.map(([type]) => type)
+    );
+
+    records.forEach(record => {
+        if (!knownTypes.has(record.type)) {
+            knownTypes.add(record.type);
+
+            categories.push([
+                record.type,
+                record.type || "Other Activities"
+            ]);
+        }
+    });
+
+    categories.forEach(([type, heading]) => {
+        const group = records
+            .filter(record => record.type === type)
+            .sort((a, b) => Number(b.year) - Number(a.year));
+
+        if (!group.length) return;
+
+        // Reserve space for the heading and the start of a record.
+        newPageIfNeeded(40);
+
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(14);
+        doc.setTextColor(...navy);
+        doc.text(clean(heading), M, y);
+
+        y += 5;
+
+        doc.setDrawColor(180, 195, 210);
+        doc.line(M, y, W - M, y);
+
+        y += 9;
+
+        group.forEach(record => {
+            const title = number + ". " + clean(record.title);
+            const authors = clean(record.authors);
+            const venue =
+                clean(record.venue) + " (" + record.year + ")";
+
+            const links = getRecordLinks(record);
+
+            const height =
+                getTextHeight(title, 10, "bold") +
+                getTextHeight(authors, 9) +
+                getTextHeight(venue, 9, "italic") +
+                (
+                    record.doi
+                        ? getTextHeight("DOI: " + record.doi, 8)
+                        : 0
+                ) +
+                links.length * 6 +
+                5;
+
+            newPageIfNeeded(height);
+
+            writeWrapped(title, M, 10, navy, "bold");
+            writeWrapped(authors, M, 9, gray);
+            writeWrapped(venue, M, 9, gray, "italic");
+
+            if (record.doi) {
+                writeWrapped(
+                    "DOI: " + record.doi,
+                    M,
+                    8,
+                    blue
+                );
+            }
+
+            links.forEach(({ value, label }) => {
+                let url;
+
+                try {
+                    url = new URL(
+                        value,
+                        window.location.href
+                    ).href;
+                } catch {
+                    return;
+                }
+
+                newPageIfNeeded(6);
+
+                doc.setFont("helvetica", "normal");
+                doc.setFontSize(8);
+                doc.setTextColor(...blue);
+
+                doc.textWithLink(label, M, y, { url });
+
+                y += 6;
+            });
+
+            y += 5;
+            number++;
+        });
+
+        y += 5;
+    });
+
+    // ----------------------------------
+    // PAGE FOOTERS
+    // ----------------------------------
+
+    const pages = doc.internal.getNumberOfPages();
+
+    for (let page = 1; page <= pages; page++) {
+        doc.setPage(page);
+
+        doc.setDrawColor(205, 215, 225);
+        doc.line(M, H - 18, W - M, H - 18);
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(8);
+        doc.setTextColor(120, 130, 140);
+
+        doc.text(
+            "Bruno Senzio-Savino | Publications and Academic Activities",
+            M,
+            H - 12
+        );
+
+        doc.text(
+            "Page " + page + " of " + pages,
+            W - M,
+            H - 12,
+            { align: "right" }
+        );
+    }
+
+    // ----------------------------------
+    // DOWNLOAD
+    // ----------------------------------
+
+    const suffix = hasActiveFilters ? "_Filtered" : "";
+
+    doc.save(
+        "Bruno_Senzio_Savino_Publications_and_Activities" +
+        suffix +
+        ".pdf"
+    );
+}
+})();
+
+// ---- js/tech-background.js ----
+(() => {
+// =====================================================
+// TECH BACKGROUND
+// Bruno Senzio-Savino Website
+// =====================================================
+
+const canvas = document.createElement("canvas");
+const ctx = canvas.getContext("2d");
+
+canvas.id = "tech-background";
+
+canvas.style.position = "fixed";
+canvas.style.top = "0";
+canvas.style.left = "0";
+canvas.style.width = "100%";
+canvas.style.height = "100%";
+canvas.style.zIndex = "-1";
+canvas.style.pointerEvents = "none";
+
+document.body.prepend(canvas);
+
+// =====================================================
+// RESIZE
+// =====================================================
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+// =====================================================
+// STARS
+// =====================================================
+
+const stars = [];
+
+for (let i = 0; i < 250; i++) {
+    stars.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        r: Math.random() * 2,
+        speed: 0.2 + Math.random() * 0.8
+    });
+}
+
+// =====================================================
+// CIRCUIT NODES
+// =====================================================
+
+const nodes = [];
+
+for (let i = 0; i < 80; i++) {
+    nodes.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3
+    });
+}
+
+// =====================================================
+// ASTEROIDS
+// =====================================================
+
+const asteroids = [];
+
+for (let i = 0; i < 18; i++) {
+    asteroids.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        size: 10 + Math.random() * 20,
+        speed: 0.2 + Math.random(),
+        rot: Math.random() * Math.PI
+    });
+}
+
+// =====================================================
+// SPACESHIPS
+// =====================================================
+
+const ships = [];
+
+for (let i = 0; i < 5; i++) {
+    ships.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        speed: 1 + Math.random() * 2,
+        dir: Math.random() > 0.5 ? 1 : -1
+    });
+}
+
+// =====================================================
+// LASERS
+// =====================================================
+
+const lasers = [];
+
+function spawnLaser() {
+
+    const ship = ships[Math.floor(Math.random() * ships.length)];
+
+    lasers.push({
+        x: ship.x,
+        y: ship.y,
+        vx: ship.dir * 8,
+        life: 80
+    });
+}
+
+setInterval(spawnLaser, 1200);
+
+// =====================================================
+// HOLOGRAMS
+// =====================================================
+
+const holograms = [];
+
+for (let i = 0; i < 10; i++) {
+
+    holograms.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        size: 20 + Math.random() * 40,
+        phase: Math.random() * Math.PI * 2
+    });
+}
+
+// =====================================================
+// VEGETABLES
+// =====================================================
+
+const vegetables = [];
+
+const veggieIcons = [
+    "🥕",
+    "🥦",
+    "🌽",
+    "🍅",
+    "🥬",
+    "🧅"
+];
+
+for (let i = 0; i < 15; i++) {
+
+    vegetables.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        icon: veggieIcons[Math.floor(Math.random() * veggieIcons.length)],
+        speed: 0.2 + Math.random() * 0.5,
+        size: 16 + Math.random() * 16
+    });
+}
+
+// =====================================================
+// DRAW STARS
+// =====================================================
+
+function drawStars() {
+
+    ctx.fillStyle = "white";
+
+    stars.forEach(star => {
+
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        star.y += star.speed;
+
+        if (star.y > canvas.height) {
+            star.y = 0;
+            star.x = Math.random() * canvas.width;
+        }
+    });
+}
+
+// =====================================================
+// DRAW NEURAL NETWORK
+// =====================================================
+
+function drawNetwork() {
+
+    nodes.forEach(node => {
+
+        node.x += node.vx;
+        node.y += node.vy;
+
+        if (node.x < 0 || node.x > canvas.width)
+            node.vx *= -1;
+
+        if (node.y < 0 || node.y > canvas.height)
+            node.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = "#00ffff";
+        ctx.fill();
+    });
+
+    for (let i = 0; i < nodes.length; i++) {
+
+        for (let j = i + 1; j < nodes.length; j++) {
+
+            const dx = nodes[i].x - nodes[j].x;
+            const dy = nodes[i].y - nodes[j].y;
+
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 120) {
+
+                ctx.strokeStyle =
+                    `rgba(0,255,255,${1 - dist / 120})`;
+
+                ctx.lineWidth = 0.5;
+
+                ctx.beginPath();
+
+                ctx.moveTo(nodes[i].x, nodes[i].y);
+
+                ctx.lineTo(nodes[j].x, nodes[j].y);
+
+                ctx.stroke();
+            }
+        }
+    }
+}
+
+// =====================================================
+// DRAW CIRCUITS
+// =====================================================
+
+function drawCircuits() {
+
+    ctx.strokeStyle = "rgba(0,255,150,0.15)";
+    ctx.lineWidth = 1;
+
+    for (let x = 0; x < canvas.width; x += 140) {
+
+        ctx.beginPath();
+
+        ctx.moveTo(x, 0);
+
+        ctx.lineTo(x, canvas.height);
+
+        ctx.stroke();
+    }
+
+    for (let y = 0; y < canvas.height; y += 140) {
+
+        ctx.beginPath();
+
+        ctx.moveTo(0, y);
+
+        ctx.lineTo(canvas.width, y);
+
+        ctx.stroke();
+    }
+}
+
+// =====================================================
+// DRAW ASTEROIDS
+// =====================================================
+
+function drawAsteroids() {
+
+    ctx.strokeStyle = "#888";
+
+    asteroids.forEach(a => {
+
+        ctx.save();
+
+        ctx.translate(a.x, a.y);
+
+        ctx.rotate(a.rot);
+
+        ctx.beginPath();
+
+        ctx.moveTo(-a.size, -a.size / 2);
+        ctx.lineTo(a.size, -a.size);
+        ctx.lineTo(a.size * 1.2, 0);
+        ctx.lineTo(a.size / 2, a.size);
+        ctx.lineTo(-a.size, a.size / 2);
+
+        ctx.closePath();
+
+        ctx.stroke();
+
+        ctx.restore();
+
+        a.x -= a.speed;
+
+        if (a.x < -50) {
+            a.x = canvas.width + 50;
+        }
+    });
+}
+
+// =====================================================
+// DRAW SHIPS
+// =====================================================
+
+function drawShips() {
+
+    ctx.strokeStyle = "#00ffff";
+    ctx.lineWidth = 2;
+
+    ships.forEach(ship => {
+
+        ctx.beginPath();
+
+        ctx.moveTo(ship.x, ship.y);
+
+        ctx.lineTo(ship.x - 15 * ship.dir, ship.y - 8);
+
+        ctx.lineTo(ship.x - 15 * ship.dir, ship.y + 8);
+
+        ctx.closePath();
+
+        ctx.stroke();
+
+        ship.x += ship.speed * ship.dir;
+
+        if (ship.x > canvas.width + 50)
+            ship.x = -50;
+
+        if (ship.x < -50)
+            ship.x = canvas.width + 50;
+    });
+}
+
+// =====================================================
+// DRAW LASERS
+// =====================================================
+
+function drawLasers() {
+
+    ctx.strokeStyle = "#ff3333";
+    ctx.lineWidth = 2;
+
+	for(let i = lasers.length - 1; i >= 0; i--){
+
+		const laser = lasers[i];
+
+		ctx.beginPath();
+		ctx.moveTo(laser.x, laser.y);
+		ctx.lineTo(laser.x - laser.vx * 2, laser.y);
+		ctx.stroke();
+
+		laser.x += laser.vx;
+		laser.life--;
+
+		if(laser.life <= 0){
+			lasers.splice(i,1);
+		}
+	}
+}
+
+// =====================================================
+// DRAW HOLOGRAMS
+// =====================================================
+
+function drawHolograms() {
+
+    holograms.forEach(h => {
+
+        const alpha =
+            0.2 +
+            Math.sin(Date.now() * 0.002 + h.phase) * 0.1;
+
+        ctx.strokeStyle =
+            `rgba(0,255,255,${alpha})`;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            h.x,
+            h.y,
+            h.size,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.stroke();
+
+        for (let i = -h.size; i < h.size; i += 6) {
+
+            ctx.beginPath();
+
+            ctx.moveTo(h.x - h.size, h.y + i);
+
+            ctx.lineTo(h.x + h.size, h.y + i);
+
+            ctx.stroke();
+        }
+    });
+}
+
+// =====================================================
+// DRAW VEGETABLES
+// =====================================================
+
+function drawVegetables() {
+
+    vegetables.forEach(v => {
+
+        ctx.font = `${v.size}px Segoe UI Emoji`;
+
+        ctx.fillText(v.icon, v.x, v.y);
+
+        v.y += v.speed;
+
+        if (v.y > canvas.height + 50) {
+
+            v.y = -50;
+            v.x = Math.random() * canvas.width;
+        }
+    });
+}
+
+// =====================================================
+// ANIMATION LOOP
+// =====================================================
+
+function animateBackground() {
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    drawStars();
+
+    drawCircuits();
+
+    drawNetwork();
+
+    drawAsteroids();
+
+    drawShips();
+
+    drawLasers();
+
+    drawHolograms();
+
+    drawVegetables();
+
+    drawRobots();
+
+    drawAR();
+
+    drawXR();
+
+    drawScanner();
+
+	requestAnimationFrame(
+		animateBackground
+	);
+}
+
+const robots = [];
+
+for(let i=0;i<8;i++){
+
+    robots.push({
+        x:Math.random()*window.innerWidth,
+        y:Math.random()*window.innerHeight,
+        dir:Math.random()>0.5?1:-1,
+        speed:0.4+Math.random()
+    });
+}
+
+function drawRobots(){
+
+    ctx.strokeStyle="#00ff88";
+    ctx.lineWidth=2;
+
+    robots.forEach(r=>{
+
+        // cabeza
+        ctx.strokeRect(
+            r.x-8,
+            r.y-20,
+            16,
+            16
+        );
+
+        // ojos
+        ctx.beginPath();
+        ctx.arc(r.x-4,r.y-14,1.5,0,Math.PI*2);
+        ctx.arc(r.x+4,r.y-14,1.5,0,Math.PI*2);
+        ctx.stroke();
+
+        // cuerpo
+        ctx.strokeRect(
+            r.x-10,
+            r.y,
+            20,
+            18
+        );
+
+        // piernas
+        ctx.beginPath();
+        ctx.moveTo(r.x-5,r.y+18);
+        ctx.lineTo(r.x-8,r.y+28);
+
+        ctx.moveTo(r.x+5,r.y+18);
+        ctx.lineTo(r.x+8,r.y+28);
+
+        ctx.stroke();
+
+        r.x += r.speed*r.dir;
+
+        if(r.x>canvas.width+30)
+            r.x=-30;
+
+        if(r.x<-30)
+            r.x=canvas.width+30;
+    });
+}
+
+const arMarkers=[];
+
+for(let i=0;i<12;i++){
+
+    arMarkers.push({
+        x:Math.random()*window.innerWidth,
+        y:Math.random()*window.innerHeight,
+        size:20+Math.random()*50,
+        phase:Math.random()*10
+    });
+}
+
+function drawAR(){
+
+    arMarkers.forEach(m=>{
+
+        const pulse=
+        Math.sin(Date.now()*0.002+m.phase)*5;
+
+        ctx.strokeStyle=
+        "rgba(0,255,255,0.3)";
+
+        ctx.beginPath();
+
+        ctx.rect(
+            m.x-m.size/2,
+            m.y-m.size/2,
+            m.size+pulse,
+            m.size+pulse
+        );
+
+        ctx.stroke();
+
+        ctx.beginPath();
+
+        ctx.arc(
+            m.x,
+            m.y,
+            m.size/2+pulse,
+            0,
+            Math.PI*2
+        );
+
+        ctx.stroke();
+    });
+}
+
+const xrObjects=[];
+
+for(let i=0;i<10;i++){
+
+    xrObjects.push({
+        angle:Math.random()*Math.PI*2,
+        radius:20+Math.random()*30,
+        x:Math.random()*window.innerWidth,
+        y:Math.random()*window.innerHeight
+    });
+}
+
+function drawXR(){
+
+    xrObjects.forEach(o=>{
+
+        o.angle+=0.01;
+
+        const ox=
+        o.x+Math.cos(o.angle)*o.radius;
+
+        const oy=
+        o.y+Math.sin(o.angle)*o.radius;
+
+        ctx.strokeStyle=
+        "rgba(255,0,255,0.35)";
+
+        ctx.beginPath();
+
+        ctx.arc(
+            ox,
+            oy,
+            6,
+            0,
+            Math.PI*2
+        );
+
+        ctx.stroke();
+
+        ctx.beginPath();
+
+        ctx.moveTo(o.x,o.y);
+        ctx.lineTo(ox,oy);
+
+        ctx.stroke();
+    });
+}
+
+function drawScanner(){
+
+    const y =
+    (Date.now()*0.05)%canvas.height;
+
+    ctx.strokeStyle=
+    "rgba(0,255,255,0.08)";
+
+    ctx.beginPath();
+
+    ctx.moveTo(0,y);
+
+    ctx.lineTo(canvas.width,y);
+
+    ctx.stroke();
+}
+
+animateBackground();
+})();
+
+// ---- inline ----
+(() => {
+(() => {
+  const viewer = document.getElementById('academia-avatar-3d');
+  const status = viewer.querySelector('.academia-model-status');
+  viewer.addEventListener('error', () => { status.textContent = '3D avatar unavailable'; viewer.showPoster(); });
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const updateRotation = () => viewer.toggleAttribute('auto-rotate', !motion.matches && !document.hidden);
+  motion.addEventListener('change', updateRotation);
+  document.addEventListener('visibilitychange', updateRotation);
+  updateRotation();
+})();
+})();

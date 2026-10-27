@@ -1,3 +1,6 @@
+// blog page bundle rebuilt from original scripts, in source order.
+// ---- js/blog.js ----
+(() => {
 // Cover images: assets/blog/titleimg/ (relative to blog.html).
 // Example: image: "ubraction_logo.jpg" loads assets/blog/titleimg/ubraction_logo.jpg.
 // Original language of each TXT: defaultLanguage: "es", "en" or "ja".
@@ -675,4 +678,25 @@ const blogPosts = [
     }
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initializeBlog, { once: true });
     else initializeBlog();
+})();
+
+})();
+
+// ---- inline ----
+(() => {
+document.getElementById('copyrightYear').textContent=new Date().getFullYear();
+})();
+
+// ---- inline ----
+(() => {
+(() => {
+ const viewer = document.getElementById('blogs-avatar-3d');
+ const status = viewer.querySelector('.blog-model-status');
+ viewer.addEventListener('error', () => { status.textContent = '3D avatar unavailable'; if (typeof viewer.showPoster === 'function') viewer.showPoster(); });
+ const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+ const updateRotation = () => viewer.toggleAttribute('auto-rotate', !motion.matches && !document.hidden);
+ motion.addEventListener('change', updateRotation);
+ document.addEventListener('visibilitychange', updateRotation);
+ updateRotation();
+})();
 })();
