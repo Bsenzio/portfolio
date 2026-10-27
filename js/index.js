@@ -2254,7 +2254,7 @@ function getCreatorSummary(projects) {
     return {total, nonAI, usingAI: total - nonAI,
         fromScratch, nonScratch: total - fromScratch};
 }
-window.getProjectLinks = getProjectLinks; window.getAllProjects = getAllProjects; window.getRandomProjects = getRandomProjects; window.getCreatorSummary = getCreatorSummary;
+window.categories = categories; window.getProjectLinks = getProjectLinks; window.getAllProjects = getAllProjects; window.getRandomProjects = getRandomProjects; window.getCreatorSummary = getCreatorSummary;
 
 (() => {
     function initializeObservatory() {

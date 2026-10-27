@@ -643,6 +643,7 @@ function getCreatorSummary(projects) {
     return {total, nonAI, usingAI: total - nonAI,
         fromScratch, nonScratch: total - fromScratch};
 }
+window.categories = categories;
 window.getProjectLinks = getProjectLinks;
 window.getAllProjects = getAllProjects;
 window.getRandomProjects = getRandomProjects;
