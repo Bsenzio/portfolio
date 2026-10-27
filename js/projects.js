@@ -643,6 +643,10 @@ function getCreatorSummary(projects) {
     return {total, nonAI, usingAI: total - nonAI,
         fromScratch, nonScratch: total - fromScratch};
 }
+window.getProjectLinks = getProjectLinks;
+window.getAllProjects = getAllProjects;
+window.getRandomProjects = getRandomProjects;
+window.getCreatorSummary = getCreatorSummary;
 
 (() => {
     function initializeObservatory() {
@@ -817,6 +821,10 @@ function getCreatorSummary(projects) {
             const activeElement = document.activeElement;
             const focusIndex = Array.from(filters.children).indexOf(activeElement);
             filters.replaceChildren();
+            const allChip = button('obs-filter obs-filter-all', '', () => selectCategory(null));
+            allChip.append(el('i'), document.createTextNode('All'), el('span', '', String(rows.length)));
+            allChip.setAttribute('aria-pressed', String(selectedCategory === null));
+            filters.append(allChip);
             categories.forEach((category, index) => {
                 const chip = button('obs-filter', '', () => selectCategory(selectedCategory === index ? null : index));
                 chip.style.setProperty('--world-color',colors[index % colors.length]);

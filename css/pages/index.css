@@ -762,9 +762,9 @@ body footer .tesla-reflection { top:30px; bottom:auto; right:22px; width: min(30
   isolation: isolate;
   overflow: hidden;
 }
-.lp-three > .lp-journey { --section-avatar: url('assets/images/avatar-career.png'); }
-.lp-three > .lp-lab { --section-avatar: url('assets/images/avatar-projects.png'); }
-.lp-three > .lp-journal { --section-avatar: url('assets/images/avatar-blogs.png'); }
+.lp-three > .lp-journey { --section-avatar: url('../../assets/images/avatar-career.png'); }
+.lp-three > .lp-lab { --section-avatar: url('../../assets/images/avatar-projects.png'); }
+.lp-three > .lp-journal { --section-avatar: url('../../assets/images/avatar-blogs.png'); }
 .lp-three > .lp-journey::before,
 .lp-three > .lp-lab::before,
 .lp-three > .lp-journal::before {

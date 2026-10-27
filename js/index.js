@@ -1,4 +1,5 @@
-// index page bundle rebuilt from original scripts, in source order.
+// Rebuilt homepage bundle using the supplied working index, home, and timeline references.
+
 // ---- inline ----
 (() => {
 (() => {
@@ -769,7 +770,7 @@ animateBackground();
 (() => {
 // Career archive in English, updated from the supplied dated CV screenshots.
 // date is YYYY-MM when the month was supplied; project/publication dates retain year precision.
-const careerEvents = [
+window.careerEvents = [
   {
     "id": "chapter-1",
     "year": "2006",
@@ -2253,6 +2254,7 @@ function getCreatorSummary(projects) {
     return {total, nonAI, usingAI: total - nonAI,
         fromScratch, nonScratch: total - fromScratch};
 }
+window.getProjectLinks = getProjectLinks; window.getAllProjects = getAllProjects; window.getRandomProjects = getRandomProjects; window.getCreatorSummary = getCreatorSummary;
 
 (() => {
     function initializeObservatory() {
@@ -2610,7 +2612,7 @@ function getCreatorSummary(projects) {
 // Images in TXT: ![Description](assets/blog/photo.jpg "Optional caption")
 // Image paths are relative to blog.html, not the TXT file.
 // Existing content arrays and JSON contentUrl files remain supported.
-const blogPosts = [
+window.blogPosts = [
     {
         id: 1,
         slug: "ubr-action",
