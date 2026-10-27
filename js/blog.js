@@ -300,6 +300,102 @@ const blogPosts = [
             flush();
             return blocks;
         }
+        const prev = document.getElementById("carouselPrev");
+        const next = document.getElementById("carouselNext");
+        const dots = document.getElementById("carouselDots");
+        const position = document.getElementById("carouselPosition");
+        // A fresh audio instance allows quick successive clicks without cutting off a sound.
+        function playCarouselSound(file) {
+            const audio = new Audio(`assets/audio/sfx/${file}`);
+            audio.volume = 0.55;
+            audio.play().catch(() => {});
+        }
+        for (const button of [prev, next]) {
+            button.addEventListener("mouseenter", () => { if (!button.disabled) playCarouselSound("sfxhover.mp3"); });
+            button.addEventListener("click", () => { if (!button.disabled) playCarouselSound("sfxclick.mp3"); });
+        }
+        const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+        function scheduleSparkle(card) {
+            const delay = 800 + Math.random() * 6500;
+            setTimeout(() => {
+                if (!card.isConnected) return;
+                if (!reducedMotion.matches && !document.hidden) {
+                    const side = Math.floor(Math.random() * 4);
+                    const along = 8 + Math.random() * 84;
+                    const x = side === 0 ? 0 : side === 1 ? 100 : along;
+                    const y = side === 2 ? 0 : side === 3 ? 100 : along;
+                    card.style.setProperty("--spark-x", `${x}%`);
+                    card.style.setProperty("--spark-y", `${y}%`);
+                    card.style.setProperty("--spark-duration", `${(0.8 + Math.random() * 0.8).toFixed(2)}s`);
+                    card.classList.remove("is-sparkling");
+                    void card.offsetWidth;
+                    card.classList.add("is-sparkling");
+                }
+                scheduleSparkle(card);
+            }, delay);
+        }
+        grid.addEventListener("pointermove", event => {
+            if (event.pointerType === "touch" || reducedMotion.matches) return;
+            const card = event.target.closest(".story-card");
+            if (!card || card.getAttribute("aria-hidden") === "true") return;
+            const box = card.getBoundingClientRect();
+            card.style.setProperty("--image-x", `${((event.clientX - box.left) / box.width - .5) * -10}px`);
+            card.style.setProperty("--image-y", `${((event.clientY - box.top) / box.height - .5) * -7}px`);
+        });
+        grid.addEventListener("pointerout", event => {
+            const card = event.target.closest(".story-card");
+            if (card && !card.contains(event.relatedTarget)) {
+                card.style.removeProperty("--image-x"); card.style.removeProperty("--image-y");
+            }
+        });
+        let carouselIndex = 0;
+        function updateCarousel() {
+            const slides = [...grid.querySelectorAll(".story-card")];
+            if (!slides.length) { prev.disabled = next.disabled = true; position.textContent = ""; dots.replaceChildren(); return; }
+            carouselIndex = (carouselIndex + slides.length) % slides.length;
+            prev.disabled = next.disabled = slides.length < 2;
+            position.textContent = `${String(carouselIndex + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+            const spacing = Math.min(grid.clientWidth * .31, 320);
+            slides.forEach((slide, index) => {
+                let offset = index - carouselIndex;
+                const half = Math.floor(slides.length / 2);
+                if (offset < -half) offset += slides.length;
+                if (offset > half) offset -= slides.length;
+                const distance = Math.abs(offset);
+                const visible = distance <= 2;
+                const scale = distance === 0 ? 1 : distance === 1 ? .82 : .65;
+                const angle = offset === 0 ? 0 : (offset < 0 ? 1 : -1) * (distance === 1 ? 40 : 55);
+                slide.style.transform = `translate(-50%, -50%) translateX(${offset * spacing}px) rotateY(${angle}deg) scale(${scale})`;
+                slide.style.zIndex = String(Math.max(0, 10 - distance * 4));
+                slide.style.opacity = !visible ? "0" : distance === 0 ? "1" : distance === 1 ? ".85" : ".45";
+                slide.style.pointerEvents = visible ? "auto" : "none";
+                slide.setAttribute("aria-hidden", String(offset !== 0));
+                const link = slide.querySelector(".story-link");
+                if (link) link.tabIndex = offset === 0 ? 0 : -1;
+            });
+            [...dots.children].forEach((dot, i) => dot.setAttribute("aria-current", String(i === carouselIndex)));
+        }
+        function goToStory(index) { carouselIndex = index; updateCarousel(); }
+        prev.addEventListener("click", () => goToStory(carouselIndex - 1));
+        next.addEventListener("click", () => goToStory(carouselIndex + 1));
+        grid.addEventListener("click", event => {
+            const slide = event.target.closest(".story-card");
+            if (!slide) return;
+            const index = [...grid.querySelectorAll(".story-card")].indexOf(slide);
+            if (index !== carouselIndex) { event.preventDefault(); goToStory(index); }
+        });
+        grid.addEventListener("keydown", event => {
+            if (event.key === "ArrowRight" || event.key === "ArrowLeft") { event.preventDefault(); goToStory(carouselIndex + (event.key === "ArrowRight" ? 1 : -1)); }
+        });
+        let touchStartX = null;
+        grid.addEventListener("touchstart", event => { touchStartX = event.touches[0].clientX; }, { passive:true });
+        grid.addEventListener("touchend", event => {
+            if (touchStartX === null) return;
+            const delta = event.changedTouches[0].clientX - touchStartX;
+            if (Math.abs(delta) > 45) goToStory(carouselIndex + (delta < 0 ? 1 : -1));
+            touchStartX = null;
+        }, { passive:true });
+        window.addEventListener("resize", updateCarousel);
         function renderCards() {
             const query = search.value.trim().toLocaleLowerCase();
             const from = dateFrom?.value || "";
@@ -340,10 +436,15 @@ const blogPosts = [
                 return bDate.localeCompare(aDate) || (Number(b.id) || 0) - (Number(a.id) || 0);
             });
             grid.replaceChildren();
+            dots.replaceChildren(); carouselIndex = 0; grid.scrollLeft = 0;
             count.textContent = invalidRange ? "The From date must be on or before the To date." : `${filtered.length} of ${blogPosts.length} stories`;
-            filtered.forEach(post => {
+            filtered.forEach((post, index) => {
+                const dot = document.createElement("button");
+                dot.type = "button"; dot.setAttribute("aria-label", `Show story ${index + 1}: ${post.title}`);
+                dot.addEventListener("click", () => goToStory(index)); dots.append(dot);
                 const card = element("article", "story-card");
                 card.dataset.language = sourceLanguage(post);
+                scheduleSparkle(card);
                 // Card metadata remains in the site language (English).
                 const cover = element("div", "story-cover");
                 const icon = element("i", "fas fa-feather-pointed");
@@ -380,6 +481,7 @@ const blogPosts = [
                 body.append(link); card.append(cover, body); grid.append(card);
             });
             if (!filtered.length) grid.append(element("p", "blog-empty", "No stories match your filters. Try another keyword, language or date range."));
+            updateCarousel();
         }
         function renderContent(blocks) {
             content.replaceChildren();

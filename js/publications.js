@@ -648,9 +648,12 @@ function renderPublications() {
     :
     "";
 
-	container.innerHTML += `
+	const typeClass = ({ Journal: "journal", Conference: "conference", Thesis: "thesis", Patent: "patent", Presentation: "presentation", "Workshop-Tutorial": "workshop", Interview: "interview" })[pub.type] || "other";
+    const sparkleDelay = -(Math.random() * 12).toFixed(2);
+    const sparkleDuration = (8 + Math.random() * 8).toFixed(2);
+    container.innerHTML += `
 
-	<div class="publication-card">
+	<div class="publication-card publication-card--${typeClass}" style="--shine-delay:${sparkleDelay}s;--shine-duration:${sparkleDuration}s">
 
 		<div class="publication-thumbnail">
 

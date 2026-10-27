@@ -112,6 +112,26 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 .publications-page .paper-button { padding:6px 9px; font-size:11px; border-radius:7px; background:#23496a; }
 .publications-page .youtube-btn { background:#813340; }
 .publications-page .github-btn { background:#2b394b; }
+/* Collectible card themes by publication type */
+.publications-page #publicationsContainer .publication-card { --card-metal:#8babc0; --card-bg:#132338; --card-panel:#0d1a2a; --card-text:#d9eafa; position:relative; overflow:hidden; padding:10px; border:2px solid var(--card-metal); background:linear-gradient(135deg,#ffffff1a,transparent 35%,#fff1),var(--card-bg); box-shadow:inset 0 0 0 2px #101923, inset 0 0 0 3px var(--card-metal), inset 0 1px #ffffff70, 0 0 14px color-mix(in srgb,var(--card-metal) 28%,transparent), 0 12px 28px #0007; transition:transform .25s ease,box-shadow .25s ease; }
+.publications-page #publicationsContainer .publication-card:hover { transform:translateY(-4px); border-color:var(--card-metal); box-shadow:inset 0 0 0 2px #101923, inset 0 0 0 3px var(--card-metal), 0 0 24px color-mix(in srgb,var(--card-metal) 52%,transparent), 0 14px 30px #0009; }
+.publications-page #publicationsContainer .publication-card--journal { --card-metal:#85bff6; --card-bg:#162e4d; --card-panel:#102039; --card-text:#d2eaff; }
+.publications-page #publicationsContainer .publication-card--conference { --card-metal:#a997f0; --card-bg:#2d234c; --card-panel:#201937; --card-text:#e1d8ff; }
+.publications-page #publicationsContainer .publication-card--thesis { --card-metal:#d3b67b; --card-bg:#423521; --card-panel:#292316; --card-text:#f8e7bf; }
+.publications-page #publicationsContainer .publication-card--patent { --card-metal:#e9a767; --card-bg:#482b20; --card-panel:#2d1c19; --card-text:#ffdfc0; }
+.publications-page #publicationsContainer .publication-card--presentation { --card-metal:#6bceb7; --card-bg:#173e3b; --card-panel:#102b2b; --card-text:#c2f7e8; }
+.publications-page #publicationsContainer .publication-card--workshop { --card-metal:#90ce82; --card-bg:#263f29; --card-panel:#192c1e; --card-text:#d8f5cc; }
+.publications-page #publicationsContainer .publication-card--interview { --card-metal:#e799b9; --card-bg:#472536; --card-panel:#301a29; --card-text:#ffdaeb; }
+.publications-page #publicationsContainer .publication-card::after { content:''; position:absolute; inset:1px; z-index:2; border-radius:12px; padding:2px; pointer-events:none; opacity:0; background:radial-gradient(circle 50px at 75% 0%, #fff, var(--card-metal) 30%,transparent 100%); -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); mask-composite:exclude; animation:publication-spark var(--shine-duration,12s) ease-in-out var(--shine-delay,0s) infinite; }
+@keyframes publication-spark { 0%, 4%, 10%, 100% { opacity:0; } 6% { opacity:1; } 8% { opacity:.35; } }
+.publications-page #publicationsContainer .publication-thumbnail { position:relative; border:1px solid var(--card-metal); box-sizing:border-box; margin-bottom:9px; box-shadow:0 2px 9px #0008; }
+.publications-page #publicationsContainer .publication-thumbnail::after { content:''; position:absolute; inset:0; pointer-events:none; background:linear-gradient(120deg,#ffffff38,transparent 27%,#a9fff018 46%,#f1bdff15 53%,transparent 68%),linear-gradient(to bottom,#fff1,transparent 42%,#03081455); }
+.publications-page #publicationsContainer .publication-content { border:1px solid color-mix(in srgb,var(--card-metal) 65%,transparent); border-radius:7px; padding:10px; background:linear-gradient(130deg,#ffffff15,transparent 45%),var(--card-panel); }
+.publications-page #publicationsContainer .publication-header { gap:6px; }
+.publications-page #publicationsContainer .publication-type,.publications-page #publicationsContainer .publication-year { background:color-mix(in srgb,var(--card-metal) 19%,#101824); border:1px solid color-mix(in srgb,var(--card-metal) 58%,transparent); color:var(--card-text); }
+.publications-page #publicationsContainer .publication-content h3 { margin:10px 0; padding:8px; border:1px solid color-mix(in srgb,var(--card-metal) 55%,transparent); border-radius:5px; background:#ffffff0a; color:#f5fbff; text-shadow:0 0 12px color-mix(in srgb,var(--card-metal) 70%,transparent); }
+.publications-page #publicationsContainer .keyword-tag { border-color:color-mix(in srgb,var(--card-metal) 50%,transparent); color:var(--card-text); }
+@media(prefers-reduced-motion:reduce) { .publications-page #publicationsContainer .publication-card::after { animation:none; } }
 @media(max-width:800px) { .publications-page .results-background { margin:20px 16px 0; padding:18px 14px 26px; } }
 @media(max-width:520px) { .publications-page .search-container #searchInput { flex-basis:100%; } .publications-page .search-container #downloadPublicationsBtn,.publications-page .search-container .download-japanese-btn { flex:1 1 auto; } }
 @media(max-width:360px) { .publications-page #publicationsContainer { grid-template-columns:minmax(0,300px); } }
@@ -401,7 +421,7 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <!-- Publications Database -->
-<script src="js/publications.js?v=dependent-filters-1"></script>
+<script src="js/publications.js?v=publication-themes-1"></script>
 
 <!-- PDF Export -->
 <script src="js/publications-pdf.js"></script>
