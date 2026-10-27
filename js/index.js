@@ -3741,7 +3741,8 @@ function initializeDesk() {
  if(new URLSearchParams(location.search).get('unity')!=='staygood' || document.documentElement.classList.contains('compact-home')) return;
  const game=document.getElementById('game');
  const frame=document.createElement('iframe');frame.className='unity-arcade-frame';
- frame.title='Stay Good: Barber Assault — Unity WebGL';frame.src='unity/staygood/index.html';
+ frame.title='Stay Good: Barber Assault — Unity WebGL';
+ frame.src='unity/staygood/index.html';
  frame.allow='autoplay; fullscreen; gamepad';frame.allowFullscreen=true;
  game.replaceChildren(frame);
  document.querySelectorAll('.game-cartridge').forEach(c=>c.classList.toggle('selected-cartridge',!!c.dataset.link));
