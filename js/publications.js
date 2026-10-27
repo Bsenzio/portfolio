@@ -1,460 +1,536 @@
+/** Publication records, search, filtering, rendering, and interaction handlers. */
 // publications page bundle rebuilt from original scripts, in source order.
 // ---- inline ----
 (() => {
-document.querySelectorAll("[data-current-year]").forEach(node => node.textContent = new Date().getFullYear())
+    document
+        .querySelectorAll('[data-current-year]')
+        .forEach((node) => (node.textContent = new Date().getFullYear()));
 })();
 
 // ---- js/publications.js ----
 (() => {
-// =========================
-// PUBLICATIONS DATABASE
-// =========================
+    // =========================
+    // PUBLICATIONS DATABASE
+    // =========================
 
-const publications = [
+    const publications = [
+        {
+            id: 1,
+            title: 'Vegetables, Enemies, and Emergence: A Playable Game of Life on Nintendo for Educational Purposes',
+            authors: '<strong>Bruno Senzio-Savino</strong>, F. Alsharif',
+            venue: 'Innovations in Machine Intelligence',
+            year: 2026,
+            type: 'Journal',
+            image: 'game_of_life_nintendo.jpg',
+            link: 'assets/pdf/Journals/IMI2025_01.pdf',
+            youtube: 'https://youtu.be/6K8MLqRcPp8',
+            github: 'https://github.com/Bsenzio/wamg',
+            language: ['English'],
+            keywords: ['NES', 'CA065', 'Game Based Learning', 'Artificial Life'],
+            abstract:
+                "Educational implementation of Conway's Game of Life on Nintendo hardware for machine intelligence teaching.",
+        },
 
-{
-id:1,
-title:"Vegetables, Enemies, and Emergence: A Playable Game of Life on Nintendo for Educational Purposes",
-authors:"<strong>Bruno Senzio-Savino</strong>, F. Alsharif",
-venue:"Innovations in Machine Intelligence",
-year:2026,
-type:"Journal",
-image:"game_of_life_nintendo.jpg",
-link:"assets/pdf/Journals/IMI2025_01.pdf",
-youtube:"https://youtu.be/6K8MLqRcPp8",
-github:"https://github.com/Bsenzio/wamg",
-language:["English"],
-keywords:["NES","CA065","Game Based Learning","Artificial Life"],
-abstract:"Educational implementation of Conway's Game of Life on Nintendo hardware for machine intelligence teaching."
-},
+        {
+            id: 2,
+            title: 'An Online Synchronous Brain Wave Signal Pattern Classifier with Parallel Processing Optimization for Embedded System Implementation',
+            authors:
+                '<strong>Bruno Senzio-Savino</strong>, M.R. Alsharif, C.E. Gutierrez, K. Setarehdan',
+            venue: 'International Journal of Advanced Computer Science and Applications',
+            year: 2017,
+            type: 'Journal',
+            image: 'online_eeg_classifier.jpg',
+            youtube: 'https://youtu.be/FN6Tui_sEzo?si=7YFRzopRgCEv1mxE',
+            doi: '10.14569/IJACSA.2017.080152',
+            link: 'https://doi.org/10.14569/IJACSA.2017.080152',
+            language: ['English'],
+            keywords: ['EEG', 'BCI', 'Embedded Systems', 'Parallel Processing'],
+            abstract:
+                'Online EEG pattern classifier using parallel processing and embedded implementation.',
+        },
 
-{
-id:2,
-title:"An Online Synchronous Brain Wave Signal Pattern Classifier with Parallel Processing Optimization for Embedded System Implementation",
-authors:"<strong>Bruno Senzio-Savino</strong>, M.R. Alsharif, C.E. Gutierrez, K. Setarehdan",
-venue:"International Journal of Advanced Computer Science and Applications",
-year:2017,
-type:"Journal",
-image:"online_eeg_classifier.jpg",
-youtube:"https://youtu.be/FN6Tui_sEzo?si=7YFRzopRgCEv1mxE",
-doi:"10.14569/IJACSA.2017.080152",
-link:"https://doi.org/10.14569/IJACSA.2017.080152",
-language:["English"],
-keywords:["EEG","BCI","Embedded Systems","Parallel Processing"],
-abstract:"Online EEG pattern classifier using parallel processing and embedded implementation."
-},
+        {
+            id: 3,
+            title: 'Brain Wave Pattern Classification: Towards the Design of an Effective Online Classifier',
+            authors: '<strong>Bruno Senzio-Savino</strong>, M.R. Alsharif et al.',
+            venue: 'European Journal of Information Science and Technology',
+            year: 2016,
+            type: 'Journal',
+            image: 'brainwave_classifier.jpg',
+            link: 'assets/pdf/Journals/EJIST-1-1-pp-18-29-Bruno-Senzio-Savino.pdf',
+            language: ['English'],
+            youtube: 'https://youtu.be/FN6Tui_sEzo?si=7YFRzopRgCEv1mxE',
+            keywords: ['EEG', 'BCI', 'SVM', 'Machine Learning', 'Self-Organizing Maps', 'Arduino'],
+            abstract: 'EEG attention and meditation signal classification for online systems.',
+        },
 
-{
-id:3,
-title:"Brain Wave Pattern Classification: Towards the Design of an Effective Online Classifier",
-authors:"<strong>Bruno Senzio-Savino</strong>, M.R. Alsharif et al.",
-venue:"European Journal of Information Science and Technology",
-year:2016,
-type:"Journal",
-image:"brainwave_classifier.jpg",
-link:"assets/pdf/Journals/EJIST-1-1-pp-18-29-Bruno-Senzio-Savino.pdf",
-language:["English"],
-youtube:"https://youtu.be/FN6Tui_sEzo?si=7YFRzopRgCEv1mxE",
-keywords:["EEG","BCI","SVM","Machine Learning", "Self-Organizing Maps","Arduino"],
-abstract:"EEG attention and meditation signal classification for online systems."
-},
+        {
+            id: 4,
+            title: 'Path Detection in Virtual Environment for Synchronous EEG by Density-Based Support Vector Machine',
+            authors: '<strong>Bruno Senzio-Savino</strong>, M.R. Alsharif et al.',
+            venue: 'Journal of Information and Communications Engineering',
+            year: 2015,
+            type: 'Journal',
+            image: 'dbsvm_path_detection.jpg',
+            youtube: 'https://youtu.be/FN6Tui_sEzo?si=7YFRzopRgCEv1mxE',
+            language: ['English'],
+            keywords: [
+                'EEG',
+                'BCI',
+                'SVM',
+                'Machine Learning',
+                'Game Development',
+                'Pattern Recognition',
+                'Arduino',
+            ],
+            link: 'https://www.ascspublications.org/product/path-detection-in-virtual-environment-for-synchronous-eeg-by-density-based-support-vector-machine/',
+            abstract: 'DBSVM-based path detection in virtual EEG environments.',
+        },
 
-{
-id:4,
-title:"Path Detection in Virtual Environment for Synchronous EEG by Density-Based Support Vector Machine",
-authors:"<strong>Bruno Senzio-Savino</strong>, M.R. Alsharif et al.",
-venue:"Journal of Information and Communications Engineering",
-year:2015,
-type:"Journal",
-image:"dbsvm_path_detection.jpg",
-youtube:"https://youtu.be/FN6Tui_sEzo?si=7YFRzopRgCEv1mxE",
-language:["English"],
-keywords:["EEG","BCI","SVM","Machine Learning", "Game Development", "Pattern Recognition","Arduino"],
-link:"https://www.ascspublications.org/product/path-detection-in-virtual-environment-for-synchronous-eeg-by-density-based-support-vector-machine/",
-abstract:"DBSVM-based path detection in virtual EEG environments."
-},
+        {
+            id: 5,
+            title: 'BrainWave Processing Modular System',
+            authors: '<strong>Bruno Senzio-Savino</strong>',
+            venue: 'Master Thesis',
+            year: 2017,
+            type: 'Thesis',
+            image: 'brainwave_modular_system.jpg',
+            youtube: 'https://youtu.be/FN6Tui_sEzo?si=7YFRzopRgCEv1mxE',
+            language: ['English'],
+            keywords: [
+                'EEG',
+                'BCI',
+                'SVM',
+                'Machine Learning',
+                'Game Development',
+                'Pattern Recognition',
+                'Arduino',
+            ],
+            link: 'assets/pdf/Thesis/MS_Thesis.pdf',
+            abstract: 'Modular architecture for EEG processing and low-cost BCI systems.',
+        },
 
-{
-id:5,
-title:"BrainWave Processing Modular System",
-authors:"<strong>Bruno Senzio-Savino</strong>",
-venue:"Master Thesis",
-year:2017,
-type:"Thesis",
-image:"brainwave_modular_system.jpg",
-youtube:"https://youtu.be/FN6Tui_sEzo?si=7YFRzopRgCEv1mxE",
-language:["English"],
-keywords:["EEG","BCI","SVM","Machine Learning", "Game Development", "Pattern Recognition","Arduino"],
-link:"assets/pdf/Thesis/MS_Thesis.pdf",
-abstract:"Modular architecture for EEG processing and low-cost BCI systems."
-},
+        {
+            id: 6,
+            title: 'Non-Linear EEG Signal Feature Extraction and Healthy or Epileptic User Seizure Discrimination',
+            authors: '<strong>Bruno Senzio-Savino</strong> et al.',
+            venue: 'ICTES',
+            year: 2017,
+            type: 'Conference',
+            image: 'epileptic_eeg_detection.jpg',
+            language: ['English'],
+            keywords: [
+                'EEG',
+                'SVM',
+                'DSP',
+                'Hilbert-Huang Transform',
+                'EMD',
+                'Weighted Frequency',
+                'Arduino',
+            ],
+            link: 'assets/pdf/International_First_Author/Non_linear_Epilepsy.pdf',
+        },
 
-{
-id:6,
-title:"Non-Linear EEG Signal Feature Extraction and Healthy or Epileptic User Seizure Discrimination",
-authors:"<strong>Bruno Senzio-Savino</strong> et al.",
-venue:"ICTES",
-year:2017,
-type:"Conference",
-image:"epileptic_eeg_detection.jpg",
-language:["English"],
-keywords:["EEG","SVM","DSP", "Hilbert-Huang Transform", "EMD", "Weighted Frequency","Arduino"],
-link:"assets/pdf/International_First_Author/Non_linear_Epilepsy.pdf"
-},
+        {
+            id: 7,
+            title: 'Implementation of a Cloud Processing Based Voice Communication and Noise Reduction Embedded System Network',
+            authors: '<strong>Bruno Senzio-Savino</strong>, M.R. Alsharif, Y. Yabiku',
+            venue: 'ICTES',
+            year: 2017,
+            type: 'Conference',
+            image: 'cloud_voice_processing.jpg',
+            github: 'https://github.com/Bsenzio/Wtransfer_Arduino',
+            language: ['English'],
+            keywords: ['Arduino', 'Intel Edison', 'DSP', 'Cloud', 'Weighted Averaging'],
+            link: 'assets/pdf/International_First_Author/Cloud_NR_System.pdf',
+        },
 
-{
-id:7,
-title:"Implementation of a Cloud Processing Based Voice Communication and Noise Reduction Embedded System Network",
-authors:"<strong>Bruno Senzio-Savino</strong>, M.R. Alsharif, Y. Yabiku",
-venue:"ICTES",
-year:2017,
-type:"Conference",
-image:"cloud_voice_processing.jpg",
-github:"https://github.com/Bsenzio/Wtransfer_Arduino",
-language:["English"],
-keywords:["Arduino","Intel Edison","DSP", "Cloud", "Weighted Averaging"],
-link:"assets/pdf/International_First_Author/Cloud_NR_System.pdf"
-},
+        {
+            id: 8,
+            title: 'Brain Wave Pattern Classification from Virtual Training Environment by Self-Organizing Maps',
+            authors: '<strong>Bruno Senzio-Savino</strong> et al.',
+            venue: 'ITC-CSCC',
+            year: 2016,
+            type: 'Conference',
+            image: 'brainwave_som.jpg',
+            youtube: 'https://youtu.be/FN6Tui_sEzo?si=7YFRzopRgCEv1mxE',
+            language: ['English'],
+            keywords: [
+                'EEG',
+                'BCI',
+                'SOM',
+                'Machine Learning',
+                'Game Development',
+                'Pattern Recognition',
+                'Arduino',
+            ],
+            link: 'assets/pdf/International_First_Author/Brain_Wave_Pattern_Classification_from_Virtual_Training_Environment_by_Self-Organizing_Maps.pdf',
+        },
 
-{
-id:8,
-title:"Brain Wave Pattern Classification from Virtual Training Environment by Self-Organizing Maps",
-authors:"<strong>Bruno Senzio-Savino</strong> et al.",
-venue:"ITC-CSCC",
-year:2016,
-type:"Conference",
-image:"brainwave_som.jpg",
-youtube:"https://youtu.be/FN6Tui_sEzo?si=7YFRzopRgCEv1mxE",
-language:["English"],
-keywords:["EEG","BCI","SOM","Machine Learning", "Game Development", "Pattern Recognition","Arduino"],
-link:"assets/pdf/International_First_Author/Brain_Wave_Pattern_Classification_from_Virtual_Training_Environment_by_Self-Organizing_Maps.pdf"
-},
+        {
+            id: 9,
+            title: 'Disturbance Response and Stability Analysis of Wireless Tele-Control System for MIMO Plant',
+            authors: 'F. Alsharif et al., <strong>Bruno Senzio-Savino</strong>',
+            venue: 'ITC-CSCC',
+            year: 2016,
+            type: 'Conference',
+            image: 'wireless_mimo_control.jpg',
+            language: ['English'],
+            keywords: ['Wireless Control', 'MIMO', 'Multipath Channel Equalization'],
+            link: 'assets/pdf/International_Coauthor/Disturbance_Response_and_Stability_Analysis_of_Wireless_Telecontrol_System_for_MIMO_Plant.pdf',
+        },
 
-{
-id:9,
-title:"Disturbance Response and Stability Analysis of Wireless Tele-Control System for MIMO Plant",
-authors:"F. Alsharif et al., <strong>Bruno Senzio-Savino</strong>",
-venue:"ITC-CSCC",
-year:2016,
-type:"Conference",
-image:"wireless_mimo_control.jpg",
-language:["English"],
-keywords:["Wireless Control","MIMO", "Multipath Channel Equalization"],
-link:"assets/pdf/International_Coauthor/Disturbance_Response_and_Stability_Analysis_of_Wireless_Telecontrol_System_for_MIMO_Plant.pdf"
-},
+        {
+            id: 10,
+            title: 'On the Effect of Informed Nodes on Learning over Complex Adaptive Networks',
+            authors: 'M. Farhid et al., <strong>Bruno Senzio-Savino</strong>',
+            venue: 'ITC-CSCC',
+            year: 2016,
+            type: 'Conference',
+            image: 'adaptive_network_learning.jpg',
+            language: ['English'],
+            keywords: [
+                'Adaptive Network',
+                'Diffusion LMS',
+                'Mean Square Dervation',
+                'Distributed Estimation',
+            ],
+            link: 'assets/pdf/International_Coauthor/On_the_Effect_of_Informed_Nodes_on_Learning_Over_Complex_Adaptative_Networks.pdf',
+        },
 
-{
-id:10,
-title:"On the Effect of Informed Nodes on Learning over Complex Adaptive Networks",
-authors:"M. Farhid et al., <strong>Bruno Senzio-Savino</strong>",
-venue:"ITC-CSCC",
-year:2016,
-type:"Conference",
-image:"adaptive_network_learning.jpg",
-language:["English"],
-keywords:["Adaptive Network","Diffusion LMS", "Mean Square Dervation", "Distributed Estimation"],
-link:"assets/pdf/International_Coauthor/On_the_Effect_of_Informed_Nodes_on_Learning_Over_Complex_Adaptative_Networks.pdf"
-},
+        {
+            id: 11,
+            title: 'A New Double Adaptation Algorithm for Acoustic Noise Control',
+            authors: 'M.R. Alsharif et al., <strong>Bruno Senzio-Savino</strong>',
+            venue: 'ITC-CSCC',
+            year: 2016,
+            type: 'Conference',
+            image: 'acoustic_noise_control.jpg',
+            language: ['English'],
+            keywords: [
+                'Adaptive Filtering',
+                'LMS Adaptation',
+                'Filtered-x LMS',
+                'Smart Acoustic Room',
+            ],
+            link: 'assets/pdf/International_Coauthor/A_New_Double_Adaptation_Algorithm_for_Acoustic_Noise_Control.pdf',
+        },
 
-{
-id:11,
-title:"A New Double Adaptation Algorithm for Acoustic Noise Control",
-authors:"M.R. Alsharif et al., <strong>Bruno Senzio-Savino</strong>",
-venue:"ITC-CSCC",
-year:2016,
-type:"Conference",
-image:"acoustic_noise_control.jpg",
-language:["English"],
-keywords:["Adaptive Filtering","LMS Adaptation", "Filtered-x LMS", "Smart Acoustic Room"],
-link:"assets/pdf/International_Coauthor/A_New_Double_Adaptation_Algorithm_for_Acoustic_Noise_Control.pdf"
-},
+        {
+            id: 12,
+            title: 'Classification of Attention Deficit Hyperactivity Disorder (ADHD) Using Non-Linear EEG Features',
+            authors: 'A. Heidarpour et al., <strong>Bruno Senzio-Savino</strong>',
+            venue: 'ITC-CSCC',
+            year: 2016,
+            type: 'Conference',
+            image: 'adhd_eeg_classification.jpg',
+            language: ['English'],
+            keywords: ['ADHD', 'EMD', 'Wilcoxon Test', 'SVM'],
+            link: 'assets/pdf/International_Coauthor/Classification_of_Attention_deficit_hyperactivity_disorder_ADHD_by_Extracting_nonlinear_Features_of_Childrens_EEG.pdf',
+        },
 
-{
-id:12,
-title:"Classification of Attention Deficit Hyperactivity Disorder (ADHD) Using Non-Linear EEG Features",
-authors:"A. Heidarpour et al., <strong>Bruno Senzio-Savino</strong>",
-venue:"ITC-CSCC",
-year:2016,
-type:"Conference",
-image:"adhd_eeg_classification.jpg",
-language:["English"],
-keywords:["ADHD","EMD", "Wilcoxon Test", "SVM"],
-link:"assets/pdf/International_Coauthor/Classification_of_Attention_deficit_hyperactivity_disorder_ADHD_by_Extracting_nonlinear_Features_of_Childrens_EEG.pdf"
-},
+        {
+            id: 13,
+            title: 'Tractor Oil Pump Fault Diagnosis by Pseudo-Spectrum Analysis',
+            authors: 'S. Gupta et al., <strong>Bruno Senzio-Savino</strong>',
+            venue: 'ITC-CSCC',
+            year: 2016,
+            type: 'Conference',
+            image: 'tractor_fault_diagnosis.jpg',
+            language: ['English'],
+            keywords: ['Fault Diagnosis', 'Oil Pump', 'Pseudo Spectrum', 'Vibration Sound Track'],
+            link: 'assets/pdf/International_Coauthor/Tractor_Oil_Pump_Fault_Diagnosis_by_Pseudospectrum_Analysis_of_Vehicle_Sound_Records.pdf',
+        },
 
-{
-id:13,
-title:"Tractor Oil Pump Fault Diagnosis by Pseudo-Spectrum Analysis",
-authors:"S. Gupta et al., <strong>Bruno Senzio-Savino</strong>",
-venue:"ITC-CSCC",
-year:2016,
-type:"Conference",
-image:"tractor_fault_diagnosis.jpg",
-language:["English"],
-keywords:["Fault Diagnosis", "Oil Pump","Pseudo Spectrum", "Vibration Sound Track"],
-link:"assets/pdf/International_Coauthor/Tractor_Oil_Pump_Fault_Diagnosis_by_Pseudospectrum_Analysis_of_Vehicle_Sound_Records.pdf"
-},
+        {
+            id: 14,
+            title: 'Density Based Support Vector Machine Classification for a Synchronous EEG Path Tracing Virtual Environment',
+            authors: '<strong>Bruno Senzio-Savino</strong> et al.',
+            venue: 'ICIIBMS',
+            year: 2015,
+            type: 'Conference',
+            image: 'dbsvm_path.jpg',
+            youtube: 'https://youtu.be/FN6Tui_sEzo?si=7YFRzopRgCEv1mxE',
+            language: ['English'],
+            keywords: [
+                'BCI',
+                'MindWave',
+                'SVM',
+                'Game Development',
+                'Machine Learning',
+                'Pattern Recognition',
+                'Arduino',
+            ],
+            doi: '10.1109/ICIIBMS.2015.7439486',
+            link: 'assets/pdf/International_First_Author/EEGSVMBrunoT2-20822.pdf',
+        },
 
-{
-id:14,
-title:"Density Based Support Vector Machine Classification for a Synchronous EEG Path Tracing Virtual Environment",
-authors:"<strong>Bruno Senzio-Savino</strong> et al.",
-venue:"ICIIBMS",
-year:2015,
-type:"Conference",
-image:"dbsvm_path.jpg",
-youtube:"https://youtu.be/FN6Tui_sEzo?si=7YFRzopRgCEv1mxE",
-language:["English"],
-keywords:["BCI", "MindWave","SVM", "Game Development", "Machine Learning", "Pattern Recognition","Arduino"],
-doi:"10.1109/ICIIBMS.2015.7439486",
-link:"assets/pdf/International_First_Author/EEGSVMBrunoT2-20822.pdf"
-},
+        {
+            id: 15,
+            title: 'Synchronous Emotion Pattern Recognition with a Virtual Training Environment',
+            authors: '<strong>Bruno Senzio-Savino</strong>',
+            venue: 'ICAI',
+            year: 2015,
+            type: 'Conference',
+            image: 'emotion_recognition_vr.jpg',
+            youtube: 'https://youtu.be/FN6Tui_sEzo?si=7YFRzopRgCEv1mxE',
+            language: ['English'],
+            keywords: [
+                'BCI',
+                'MindWave',
+                'SVM',
+                'Game Development',
+                'Machine Learning',
+                'Pattern Recognition',
+                'Arduino',
+            ],
+            link: 'assets/pdf/International_First_Author/ICA2627.pdf',
+        },
 
-{
-id:15,
-title:"Synchronous Emotion Pattern Recognition with a Virtual Training Environment",
-authors:"<strong>Bruno Senzio-Savino</strong>",
-venue:"ICAI",
-year:2015,
-type:"Conference",
-image:"emotion_recognition_vr.jpg",
-youtube:"https://youtu.be/FN6Tui_sEzo?si=7YFRzopRgCEv1mxE",
-language:["English"],
-keywords:["BCI", "MindWave","SVM", "Game Development", "Machine Learning", "Pattern Recognition","Arduino"],
-link:"assets/pdf/International_First_Author/ICA2627.pdf"
-},
+        {
+            id: 16,
+            title: 'Stability and Performance Evaluation of Wireless Tele-Control System for MIMO Plant',
+            authors: 'F. Alsharif et al., <strong>Bruno Senzio-Savino</strong>',
+            venue: 'ICWN',
+            year: 2015,
+            type: 'Conference',
+            image: 'stability_mimo.jpg',
+            language: ['English'],
+            keywords: ['Wireless Control', 'MIMO', 'Multipath Channel Equalization'],
+            link: 'assets/pdf/International_Coauthor/ICW2737.pdf',
+        },
 
-{
-id:16,
-title:"Stability and Performance Evaluation of Wireless Tele-Control System for MIMO Plant",
-authors:"F. Alsharif et al., <strong>Bruno Senzio-Savino</strong>",
-venue:"ICWN",
-year:2015,
-type:"Conference",
-image:"stability_mimo.jpg",
-language:["English"],
-keywords:["Wireless Control","MIMO", "Multipath Channel Equalization"],
-link:"assets/pdf/International_Coauthor/ICW2737.pdf"
-},
+        {
+            id: 17,
+            title: 'Test and Development of a Brainwave Password Application',
+            authors: '<strong>Bruno Senzio-Savino</strong>, K. Yamada',
+            venue: 'IEEE/SICE',
+            year: 2014,
+            type: 'Conference',
+            image: 'brainwave_password.jpg',
+            language: ['English', 'Japanese'],
+            keywords: ['BCI', 'EEG', 'Pattern Recognition'],
+            link: 'assets/pdf/International_First_Author/SIP2014.pdf',
+        },
 
-{
-id:17,
-title:"Test and Development of a Brainwave Password Application",
-authors:"<strong>Bruno Senzio-Savino</strong>, K. Yamada",
-venue:"IEEE/SICE",
-year:2014,
-type:"Conference",
-image:"brainwave_password.jpg",
-language:["English", "Japanese"],
-keywords:["BCI","EEG", "Pattern Recognition"],
-link:"assets/pdf/International_First_Author/SIP2014.pdf"
-},
+        {
+            id: 18,
+            title: 'Remote Operation of a Parabolic Motion and Free Fall Experiment',
+            authors: '<strong>Bruno Senzio-Savino</strong>',
+            venue: 'ICIAS',
+            year: 2011,
+            type: 'Conference',
+            image: 'remote_parabolic_motion.jpg',
+            youtube: 'https://youtu.be/BFOjEwmgu6E',
+            language: ['English', 'Spanish'],
+            keywords: ['Parabolic Motion', 'Teleoperation', 'Embedded Systems', 'System Control'],
+            link: 'https://www.researchgate.net/publication/280599430_Remote_operation_of_a_parabolic_motion_and_free_fall_experiment',
+        },
 
-{
-id:18,
-title:"Remote Operation of a Parabolic Motion and Free Fall Experiment",
-authors:"<strong>Bruno Senzio-Savino</strong>",
-venue:"ICIAS",
-year:2011,
-type:"Conference",
-image:"remote_parabolic_motion.jpg",
-youtube:"https://youtu.be/BFOjEwmgu6E",
-language:["English", "Spanish"],
-keywords:["Parabolic Motion","Teleoperation", "Embedded Systems", "System Control"],
-link:"https://www.researchgate.net/publication/280599430_Remote_operation_of_a_parabolic_motion_and_free_fall_experiment"
-},
+        {
+            id: 19,
+            title: 'Instrumentation and Control for the Remote Operation of the Projectile Motion and Free-Fall Experiment',
+            authors: '<strong>Bruno Senzio-Savino</strong>',
+            venue: 'Bachelor Thesis',
+            year: 2011,
+            type: 'Thesis',
+            image: 'projectile_motion_lab.jpg',
+            youtube: 'https://youtu.be/BFOjEwmgu6E',
+            language: ['Spanish'],
+            keywords: ['Parabolic Motion', 'Teleoperation', 'Embedded Systems', 'System Control'],
+            link: 'assets/pdf/Thesis/BS_Thesis.pdf',
+        },
 
-{
-id:19,
-title:"Instrumentation and Control for the Remote Operation of the Projectile Motion and Free-Fall Experiment",
-authors:"<strong>Bruno Senzio-Savino</strong>",
-venue:"Bachelor Thesis",
-year:2011,
-type:"Thesis",
-image:"projectile_motion_lab.jpg",
-youtube:"https://youtu.be/BFOjEwmgu6E",
-language:["Spanish"],
-keywords:["Parabolic Motion","Teleoperation", "Embedded Systems", "System Control"],
-link:"assets/pdf/Thesis/BS_Thesis.pdf"
-},
+        {
+            id: 20,
+            title: "Experimental Determination of an Irregular Object's Moment of Inertia",
+            authors: 'Y. Minami Koyama et al., <strong>Bruno Senzio-Savino</strong>',
+            venue: 'ICIAS',
+            year: 2009,
+            type: 'Conference',
+            image: 'pmoment_of_inertia.jpg',
+            language: ['English', 'Spanish'],
+            keywords: [
+                'Moment of intertia',
+                'Irregular Objects',
+                'Experimental Method',
+                'Oscillating Platform',
+            ],
+            link: "https://www.researchgate.net/publication/267379166_EXPERIMENTAL_DETERMINATION_OF_AN_IRREGULAR_OBJECT'S_MOMENT_OF_INERTIA",
+        },
 
-{
-id:20,
-title:"Experimental Determination of an Irregular Object's Moment of Inertia",
-authors:"Y. Minami Koyama et al., <strong>Bruno Senzio-Savino</strong>",
-venue:"ICIAS",
-year:2009,
-type:"Conference",
-image:"pmoment_of_inertia.jpg",
-language:["English", "Spanish"],
-keywords:["Moment of intertia","Irregular Objects", "Experimental Method", "Oscillating Platform"],
-link:"https://www.researchgate.net/publication/267379166_EXPERIMENTAL_DETERMINATION_OF_AN_IRREGULAR_OBJECT'S_MOMENT_OF_INERTIA"
-},
+        {
+            id: 21,
+            title: 'Mobile Robot Navigation with a Wiimote',
+            authors: '<strong>Bruno Senzio-Savino</strong>',
+            venue: 'ICIAS',
+            year: 2009,
+            type: 'Conference',
+            image: 'wiimote_robot.jpg',
+            youtube: 'https://youtu.be/qE38qtjhbLs',
+            language: ['English', 'Spanish'],
+            keywords: ['Wiimote', 'Navigation', 'Teleoperation', 'Mobile Robot', 'HMI'],
+            link: 'https://www.researchgate.net/publication/269278243_Mobile_robot_navigation_with_a_Wiimote',
+        },
 
-{
-id:21,
-title:"Mobile Robot Navigation with a Wiimote",
-authors:"<strong>Bruno Senzio-Savino</strong>",
-venue:"ICIAS",
-year:2009,
-type:"Conference",
-image:"wiimote_robot.jpg",
-youtube:"https://youtu.be/qE38qtjhbLs",
-language:["English", "Spanish"],
-keywords:["Wiimote","Navigation", "Teleoperation", "Mobile Robot", "HMI"],
-link:"https://www.researchgate.net/publication/269278243_Mobile_robot_navigation_with_a_Wiimote"
-},
+        {
+            id: 22,
+            title: 'Feature Extraction and Classification of Attention and Meditation EEG Signals Using Moving Average Methods',
+            authors: 'H. Takahashi et al., <strong>Bruno Senzio-Savino</strong>',
+            venue: 'IEEJ',
+            year: 2016,
+            type: 'Conference',
+            image: 'featureEEG.jpg',
+            language: ['English', 'Japanese'],
+            keywords: ['BCI', 'Feature Extraction', 'SVM', 'ARMA', 'Moving Average', 'PCA'],
+            link: 'assets/pdf/National_Coauthor/16-19.pdf',
+        },
 
-{
-id:22,
-title:"Feature Extraction and Classification of Attention and Meditation EEG Signals Using Moving Average Methods",
-authors:"H. Takahashi et al., <strong>Bruno Senzio-Savino</strong>",
-venue:"IEEJ",
-year:2016,
-type:"Conference",
-image:"featureEEG.jpg",
-language:["English", "Japanese"],
-keywords:["BCI","Feature Extraction", "SVM", "ARMA", "Moving Average", "PCA"],
-link:"assets/pdf/National_Coauthor/16-19.pdf"
-},
+        {
+            id: 23,
+            title: 'Mixed Reality Environment Generation Technology',
+            authors: '<strong>Bruno Senzio-Savino</strong>, Alfredo Gilbert',
+            venue: 'Patent MXa2025009159',
+            year: 2025,
+            type: 'Patent',
+            image: 'mixed_reality_patent.jpg',
+            language: ['Spanish'],
+            keywords: ['XR', 'Embedded Systems', 'Augmented Reality'],
+            youtube: 'https://youtu.be/AeA8wv9oNZQ',
+            link: 'assets/pdf/Patents/mixed_reality_patent.pdf',
+        },
 
-{
-id:23,
-title:"Mixed Reality Environment Generation Technology",
-authors:"<strong>Bruno Senzio-Savino</strong>, Alfredo Gilbert",
-venue:"Patent MXa2025009159",
-year:2025,
-type:"Patent",
-image:"mixed_reality_patent.jpg",
-language:["Spanish"],
-keywords:["XR", "Embedded Systems", "Augmented Reality"],
-youtube:"https://youtu.be/AeA8wv9oNZQ",
-link:"assets/pdf/Patents/mixed_reality_patent.pdf"
-},
+        {
+            id: 24,
+            title: 'Matrix Electromagnetic Transduction System',
+            authors: '<strong>Bruno Senzio-Savino</strong>',
+            venue: 'Patent MXa2023002399',
+            year: 2024,
+            type: 'Patent',
+            image: 'electromagnetic_transduction.jpg',
+            youtube: 'https://youtu.be/TWv7ySUl4P0?si=9eY6XIpPea0iGKkp',
+            language: ['Spanish'],
+            keywords: [
+                'Electromagnetic Transduction',
+                'Wireless Power Transfer',
+                'Inductive Coupling Matrix',
+                'Interactive Smart Objects',
+            ],
+            link: 'assets/pdf/Patents/electromagnetic_transduction.pdf',
+        },
 
-{
-id:24,
-title:"Matrix Electromagnetic Transduction System",
-authors:"<strong>Bruno Senzio-Savino</strong>",
-venue:"Patent MXa2023002399",
-year:2024,
-type:"Patent",
-image:"electromagnetic_transduction.jpg",
-youtube:"https://youtu.be/TWv7ySUl4P0?si=9eY6XIpPea0iGKkp",
-language:["Spanish"],
-keywords:["Electromagnetic Transduction", "Wireless Power Transfer", "Inductive Coupling Matrix", "Interactive Smart Objects"],
-link:"assets/pdf/Patents/electromagnetic_transduction.pdf"
-},
+        {
+            id: 25,
+            title: 'Interactive Biosignal Processing System with Sensor Feedback',
+            authors: '<strong>Bruno Senzio-Savino</strong>',
+            venue: 'Patent 388756',
+            year: 2018,
+            type: 'Patent',
+            image: 'biosignal_feedback_system.jpg',
+            language: ['Spanish'],
+            keywords: ['BCI', 'Embedded Systems', 'Wearables', 'E-textiles'],
+            link: 'assets/pdf/Patents/biosignal_feedback_system.pdf',
+        },
 
-{
-id:25,
-title:"Interactive Biosignal Processing System with Sensor Feedback",
-authors:"<strong>Bruno Senzio-Savino</strong>",
-venue:"Patent 388756",
-year:2018,
-type:"Patent",
-image:"biosignal_feedback_system.jpg",
-language:["Spanish"],
-keywords:["BCI", "Embedded Systems", "Wearables", "E-textiles"],
-link:"assets/pdf/Patents/biosignal_feedback_system.pdf"
-},
+        {
+            id: 26,
+            title: 'Liquid container sssembly with removable optical projection base, and projection base module',
+            authors: '<strong>Bruno Senzio-Savino</strong>, Jason Noble',
+            venue: 'Pat. Pend. Application 100233478',
+            year: 2026,
+            type: 'Patent',
+            image: 'liquid_container.jpg',
+            link: 'assets/pdf/Patents/liquid_container.pdf',
+            language: ['English', 'Japanese'],
+            keywords: ['Holographic Glass', 'Projection Module'],
+            abstract:
+                'Liquid container assembly that produces pseudo-holographic effect wit a projection base module.',
+        },
 
-{
-id:26,
-title:"Liquid container sssembly with removable optical projection base, and projection base module",
-authors:"<strong>Bruno Senzio-Savino</strong>, Jason Noble",
-venue:"Pat. Pend. Application 100233478",
-year:2026,
-type:"Patent",
-image:"liquid_container.jpg",
-link:"assets/pdf/Patents/liquid_container.pdf",
-language:["English", "Japanese"],
-keywords:["Holographic Glass","Projection Module"],
-abstract:"Liquid container assembly that produces pseudo-holographic effect wit a projection base module."
-},
+        {
+            id: 27,
+            title: 'Arduino and Applications in the Industry',
+            authors: '<strong>Bruno Senzio-Savino</strong>',
+            venue: 'Instituto Politécnico Nacional — Speaker',
+            year: 2012,
+            type: 'Presentation',
+            image: 'arduino_industry.jpg',
+            keywords: ['Arduino', 'Embedded Systems', 'Industry', 'Education'],
+            abstract:
+                'Talk delivered in March 2012, featuring demonstrations and hands-on exploration of Arduino applications in academic and industrial environments and the connections between them.',
+        },
 
-{
-id:27,
-title:"Arduino and Applications in the Industry",
-authors:"<strong>Bruno Senzio-Savino</strong>",
-venue:"Instituto Politécnico Nacional — Speaker",
-year:2012,
-type:"Presentation",
-image:"arduino_industry.jpg",
-keywords:["Arduino", "Embedded Systems", "Industry", "Education"],
-abstract:"Talk delivered in March 2012, featuring demonstrations and hands-on exploration of Arduino applications in academic and industrial environments and the connections between them."
-},
+        {
+            id: 28,
+            title: 'Hands-on Tutorial on Brain–Computer Interfaces (BCI)',
+            authors: '<strong>Bruno Senzio-Savino</strong>, M. Khosravy, A. Adams, O. Witkowsky',
+            venue: 'ALIFE26 — Co-organizer',
+            year: 2026,
+            type: 'Workshop-Tutorial',
+            image: 'alife26_bci_workshop.jpg',
+            github: 'https://bsenzio.github.io/bmitutorialALIFE26/',
+            keywords: ['BCI', 'Artificial Life', 'Adaptive Systems', 'Embedded Systems'],
+            abstract:
+                'Hands-on tutorial organized for ALIFE26 in August 2026, exploring how neural signals can be integrated into adaptive and evolving systems. Topics include embodied artificial agents, hybrid biological–digital systems, and interactive evolutionary environments.',
+        },
 
-{
-id:28,
-title:"Hands-on Tutorial on Brain–Computer Interfaces (BCI)",
-authors:"<strong>Bruno Senzio-Savino</strong>, M. Khosravy, A. Adams, O. Witkowsky",
-venue:"ALIFE26 — Co-organizer",
-year:2026,
-type:"Workshop-Tutorial",
-image:"alife26_bci_workshop.jpg",
-github:"https://bsenzio.github.io/bmitutorialALIFE26/",
-keywords:["BCI", "Artificial Life", "Adaptive Systems", "Embedded Systems"],
-abstract:"Hands-on tutorial organized for ALIFE26 in August 2026, exploring how neural signals can be integrated into adaptive and evolving systems. Topics include embodied artificial agents, hybrid biological–digital systems, and interactive evolutionary environments."
-},
+        {
+            id: 29,
+            title: 'Vegetables Here, Games There: BCI and New Horizons',
+            authors: 'A. Adam, <strong>Bruno Senzio-Savino</strong>',
+            venue: 'Cross Labs — YouTube Interview',
+            year: 2026,
+            type: 'Interview',
+            image: 'cross_labs_interview.jpg',
+            youtube: 'https://www.youtube.com/live/QoZwG4V6CVw?si=so2k_09jyvl0jWI-',
+            keywords: [
+                'BCI',
+                'Artificial Life',
+                'Unconventional Computing',
+                'Embedded Systems',
+                'Edge AI',
+            ],
+            abstract:
+                'Interview in May 2026 exploring the journey from Artificial Life experiments on modified gaming hardware and low-cost computing platforms to practical BCI applications, connecting embedded systems, signal processing, and edge AI.',
+        },
 
-{
-id:29,
-title:"Vegetables Here, Games There: BCI and New Horizons",
-authors:"A. Adam, <strong>Bruno Senzio-Savino</strong>",
-venue:"Cross Labs — YouTube Interview",
-year:2026,
-type:"Interview",
-image:"cross_labs_interview.jpg",
-youtube:"https://www.youtube.com/live/QoZwG4V6CVw?si=so2k_09jyvl0jWI-",
-keywords:["BCI", "Artificial Life", "Unconventional Computing", "Embedded Systems", "Edge AI"],
-abstract:"Interview in May 2026 exploring the journey from Artificial Life experiments on modified gaming hardware and low-cost computing platforms to practical BCI applications, connecting embedded systems, signal processing, and edge AI."
-},
+        {
+            id: 30,
+            title: 'Modular interface for controlling devices and actuators via mind control',
+            authors: '<strong>Bruno Senzio-Savino</strong>, Ivan Macias, Stephanie Davalos',
+            venue: 'MX/a/2012/010393',
+            year: 2012,
+            type: 'Patent',
+            image: 'bmi_module.jpg',
+            link: 'assets/pdf/Patents/modular_bmi.pdf',
+            language: ['Spanish'],
+            keywords: ['BCI', 'Modularity'],
+            abstract: 'BMI Modular interface with smart interdependency',
+        },
+    ];
+    // =========================
+    // GLOBALS
+    // =========================
 
-{
-id:30,
-title:"Modular interface for controlling devices and actuators via mind control",
-authors:"<strong>Bruno Senzio-Savino</strong>, Ivan Macias, Stephanie Davalos",
-venue:"MX/a/2012/010393",
-year:2012,
-type:"Patent",
-image:"bmi_module.jpg",
-link:"assets/pdf/Patents/modular_bmi.pdf",
-language:["Spanish"],
-keywords:["BCI","Modularity"],
-abstract:"BMI Modular interface with smart interdependency"
-}
+    let selectedKeywords = [];
 
+    // =========================
+    // KEYWORD TAGS
+    // =========================
 
-];
-// =========================
-// GLOBALS
-// =========================
+    function renderSelectedKeywords() {
+        const container = document.getElementById('selectedKeywords');
 
-let selectedKeywords = [];
+        if (!container) return;
 
-// =========================
-// KEYWORD TAGS
-// =========================
+        container.innerHTML = '';
 
-function renderSelectedKeywords() {
+        selectedKeywords.forEach((keyword) => {
+            const tag = document.createElement('span');
 
-    const container =
-    document.getElementById("selectedKeywords");
+            tag.className = 'selected-keyword';
 
-    if(!container) return;
-
-    container.innerHTML = "";
-
-    selectedKeywords.forEach(keyword => {
-
-        const tag =
-        document.createElement("span");
-
-        tag.className =
-        "selected-keyword";
-
-        tag.innerHTML = `
+            tag.innerHTML = `
             ${keyword}
             <button
                 class="remove-keyword"
@@ -463,156 +539,124 @@ function renderSelectedKeywords() {
             </button>
         `;
 
-        container.appendChild(tag);
-
-    });
-
-    document
-    .querySelectorAll(".remove-keyword")
-    .forEach(button => {
-
-        button.addEventListener("click", () => {
-
-            removeKeyword(
-                button.dataset.keyword
-            );
-
+            container.appendChild(tag);
         });
 
-    });
-
-}
-
-function removeKeyword(keyword){
-
-    selectedKeywords =
-    selectedKeywords.filter(
-        k => k !== keyword
-    );
-
-    renderSelectedKeywords();
-    renderPublications();
-
-}
-
-// =========================
-// RENDER ENGINE
-// =========================
-
-function renderPublications() {
-
-    const search =
-    document
-    .getElementById("searchInput")
-    .value
-    .toLowerCase();
-
-    const year =
-    document
-    .getElementById("yearFilter")
-    .value;
-
-    const type =
-    document
-    .getElementById("typeFilter")
-    .value;
-
-    const language =
-    document
-    .getElementById("languageFilter")
-    .value;
-
-    const matches = (pub, ignored = "") => {
-        const searchable = [pub.title, pub.authors, pub.venue, pub.abstract, pub.type, pub.year,
-            ...(pub.language || []), ...(pub.keywords || [])].join(" ").toLocaleLowerCase();
-        return searchable.includes(search.trim()) &&
-            (ignored === "year" || year === "all" || String(pub.year) === year) &&
-            (ignored === "type" || type === "all" || pub.type === type) &&
-            (ignored === "language" || language === "all" || (pub.language || []).includes(language)) &&
-            selectedKeywords.every(keyword => (pub.keywords || []).includes(keyword));
-    };
-    for (const [id, facet, values] of [
-        ["yearFilter", "year", pub => [String(pub.year)]],
-        ["typeFilter", "type", pub => [pub.type]],
-        ["languageFilter", "language", pub => pub.language || []],
-        ["keywordFilter", "keyword", pub => pub.keywords || []]
-    ]) {
-        const select = document.getElementById(id);
-        const available = new Set(publications.filter(pub => matches(pub, facet)).flatMap(values));
-        for (const option of select.options) {
-            option.disabled = option.value !== "all" && (facet === "keyword"
-                ? selectedKeywords.includes(option.value) || !available.has(option.value)
-                : option.value !== select.value && !available.has(option.value));
-        }
+        document.querySelectorAll('.remove-keyword').forEach((button) => {
+            button.addEventListener('click', () => {
+                removeKeyword(button.dataset.keyword);
+            });
+        });
     }
-    const filtered = publications.filter(pub => matches(pub));
 
-    filtered.sort(
-        (a,b) => b.year - a.year
-    );
-	
-	// Store the publications currently displayed
-	window.filteredPublications = [...filtered];
+    function removeKeyword(keyword) {
+        selectedKeywords = selectedKeywords.filter((k) => k !== keyword);
 
-    document
-    .getElementById("resultCount")
-    .innerHTML =
+        renderSelectedKeywords();
+        renderPublications();
+    }
 
-    `Showing <strong>${filtered.length}</strong> of ${publications.length} records`;
+    // =========================
+    // RENDER ENGINE
+    // =========================
 
-    const container =
-    document.getElementById(
-        "publicationsContainer"
-    );
+    function renderPublications() {
+        const search = document.getElementById('searchInput').value.toLowerCase();
 
-    container.innerHTML = "";
+        const year = document.getElementById('yearFilter').value;
 
-    filtered.forEach(pub => {
+        const type = document.getElementById('typeFilter').value;
 
-    const languageTags =
-    (pub.language || [])
-    .map(lang =>
-    `<span class="tag language-tag">${lang}</span>`)
-    .join("");
+        const language = document.getElementById('languageFilter').value;
 
-    const keywordTags =
-    (pub.keywords || [])
-    .map(keyword =>
-    `<span class="tag keyword-tag">${keyword}</span>`)
-    .join("");
+        const matches = (pub, ignored = '') => {
+            const searchable = [
+                pub.title,
+                pub.authors,
+                pub.venue,
+                pub.abstract,
+                pub.type,
+                pub.year,
+                ...(pub.language || []),
+                ...(pub.keywords || []),
+            ]
+                .join(' ')
+                .toLocaleLowerCase();
+            return (
+                searchable.includes(search.trim()) &&
+                (ignored === 'year' || year === 'all' || String(pub.year) === year) &&
+                (ignored === 'type' || type === 'all' || pub.type === type) &&
+                (ignored === 'language' ||
+                    language === 'all' ||
+                    (pub.language || []).includes(language)) &&
+                selectedKeywords.every((keyword) => (pub.keywords || []).includes(keyword))
+            );
+        };
+        for (const [id, facet, values] of [
+            ['yearFilter', 'year', (pub) => [String(pub.year)]],
+            ['typeFilter', 'type', (pub) => [pub.type]],
+            ['languageFilter', 'language', (pub) => pub.language || []],
+            ['keywordFilter', 'keyword', (pub) => pub.keywords || []],
+        ]) {
+            const select = document.getElementById(id);
+            const available = new Set(
+                publications.filter((pub) => matches(pub, facet)).flatMap(values),
+            );
+            for (const option of select.options) {
+                option.disabled =
+                    option.value !== 'all' &&
+                    (facet === 'keyword'
+                        ? selectedKeywords.includes(option.value) || !available.has(option.value)
+                        : option.value !== select.value && !available.has(option.value));
+            }
+        }
+        const filtered = publications.filter((pub) => matches(pub));
 
-    const abstractSection =
-    pub.abstract
-    ?
-    `
+        filtered.sort((a, b) => b.year - a.year);
+
+        // Store the publications currently displayed
+        window.filteredPublications = [...filtered];
+
+        document.getElementById('resultCount').innerHTML =
+            `Showing <strong>${filtered.length}</strong> of ${publications.length} records`;
+
+        const container = document.getElementById('publicationsContainer');
+
+        container.innerHTML = '';
+
+        filtered.forEach((pub) => {
+            const languageTags = (pub.language || [])
+                .map((lang) => `<span class="tag language-tag">${lang}</span>`)
+                .join('');
+
+            const keywordTags = (pub.keywords || [])
+                .map((keyword) => `<span class="tag keyword-tag">${keyword}</span>`)
+                .join('');
+
+            const abstractSection = pub.abstract
+                ? `
     <div class="publication-abstract">
         <strong>Abstract:</strong>
         ${pub.abstract}
     </div>
     `
-    :
-    "";
+                : '';
 
-    const doiSection =
-    pub.doi
-    ?
-    `
+            const doiSection = pub.doi
+                ? `
     <p class="publication-doi">
         <strong>DOI:</strong>
         ${pub.doi}
     </p>
     `
-    :
-    "";
+                : '';
 
-    // ---------------------
-    // BUTTONS
-    // ---------------------
+            // ---------------------
+            // BUTTONS
+            // ---------------------
 
-    const publicationButton =
-    pub.link
-    ?
-    `
+            const publicationButton = pub.link
+                ? `
     <a
         href="${pub.link}"
         target="_blank"
@@ -621,13 +665,10 @@ function renderPublications() {
         📄 Publication
     </a>
     `
-    :
-    "";
+                : '';
 
-    const youtubeButton =
-    pub.youtube
-    ?
-    `
+            const youtubeButton = pub.youtube
+                ? `
     <a
         href="${pub.youtube}"
         target="_blank"
@@ -637,13 +678,10 @@ function renderPublications() {
         Video
     </a>
     `
-    :
-    "";
+                : '';
 
-    const githubButton =
-    pub.github
-    ?
-    `
+            const githubButton = pub.github
+                ? `
     <a
         href="${pub.github}"
         target="_blank"
@@ -653,13 +691,21 @@ function renderPublications() {
         Repository
     </a>
     `
-    :
-    "";
+                : '';
 
-	const typeClass = ({ Journal: "journal", Conference: "conference", Thesis: "thesis", Patent: "patent", Presentation: "presentation", "Workshop-Tutorial": "workshop", Interview: "interview" })[pub.type] || "other";
-    const sparkleDelay = -(Math.random() * 12).toFixed(2);
-    const sparkleDuration = (8 + Math.random() * 8).toFixed(2);
-    container.innerHTML += `
+            const typeClass =
+                {
+                    Journal: 'journal',
+                    Conference: 'conference',
+                    Thesis: 'thesis',
+                    Patent: 'patent',
+                    Presentation: 'presentation',
+                    'Workshop-Tutorial': 'workshop',
+                    Interview: 'interview',
+                }[pub.type] || 'other';
+            const sparkleDelay = -(Math.random() * 12).toFixed(2);
+            const sparkleDuration = (8 + Math.random() * 8).toFixed(2);
+            container.innerHTML += `
 
 	<div class="publication-card publication-card--${typeClass}" style="--shine-delay:${sparkleDelay}s;--shine-duration:${sparkleDuration}s">
 
@@ -717,977 +763,1053 @@ function renderPublications() {
 	</div>
 
 	`;
+        });
+    }
 
-});
+    // =========================
+    // INITIALIZATION
+    // =========================
 
-}
+    document.addEventListener('DOMContentLoaded', () => {
+        // Delegate hover handling so it survives searches and filter updates.
+        const publicationHoverSound = new Audio('assets/audio/sfx/sfxhover.mp3');
+        publicationHoverSound.preload = 'auto';
+        const publicationContainer = document.getElementById('publicationsContainer');
+        publicationContainer.addEventListener('pointerover', (event) => {
+            if (event.pointerType === 'touch') return;
+            const card = event.target.closest('.publication-card');
+            if (!card || !publicationContainer.contains(card)) return;
+            // Moving between elements inside one card is still the same hover.
+            if (event.relatedTarget && card.contains(event.relatedTarget)) return;
+            try {
+                publicationHoverSound.currentTime = 0;
+                const playback = publicationHoverSound.play();
+                if (playback) playback.catch(() => {});
+            } catch {
+                // Keep the publication controls working if audio is unavailable.
+            }
+        });
 
-// =========================
-// INITIALIZATION
-// =========================
+        // YEARS
 
-document.addEventListener(
-"DOMContentLoaded",
-() => {
+        const years = [...new Set(publications.map((p) => p.year))].sort((a, b) => b - a);
 
-    // Delegate hover handling so it survives searches and filter updates.
-    const publicationHoverSound = new Audio('assets/audio/sfx/sfxhover.mp3');
-    publicationHoverSound.preload = 'auto';
-    const publicationContainer = document.getElementById('publicationsContainer');
-    publicationContainer.addEventListener('pointerover', event => {
-        if (event.pointerType === 'touch') return;
-        const card = event.target.closest('.publication-card');
-        if (!card || !publicationContainer.contains(card)) return;
-        // Moving between elements inside one card is still the same hover.
-        if (event.relatedTarget && card.contains(event.relatedTarget)) return;
-        try {
-            publicationHoverSound.currentTime = 0;
-            const playback = publicationHoverSound.play();
-            if (playback) playback.catch(() => {});
-        } catch {
-            // Keep the publication controls working if audio is unavailable.
-        }
-    });
+        const yearSelect = document.getElementById('yearFilter');
 
-    // YEARS
+        years.forEach((year) => {
+            const option = document.createElement('option');
 
-    const years =
+            option.value = year;
+            option.textContent = year;
 
-    [...new Set(
-        publications.map(
-            p => p.year
-        )
-    )]
-    .sort((a,b)=>b-a);
+            yearSelect.appendChild(option);
+        });
 
-    const yearSelect =
-    document.getElementById(
-        "yearFilter"
-    );
+        // TYPES
+        const typeSelect = document.getElementById('typeFilter');
 
-    years.forEach(year => {
+        const types = [...new Set(publications.map((pub) => pub.type).filter(Boolean))].sort();
+        typeSelect.replaceChildren(new Option('All Types', 'all'));
 
-        const option =
-        document.createElement(
-            "option"
-        );
+        types.forEach((type) => {
+            // Avoid duplicating options already defined in the HTML.
+            if ([...typeSelect.options].some((option) => option.value === type)) {
+                return;
+            }
 
-        option.value = year;
-        option.textContent = year;
+            const option = document.createElement('option');
+            option.value = type;
+            option.textContent = type === 'Workshop-Tutorial' ? 'Workshop / Tutorial' : type;
+            typeSelect.appendChild(option);
+        });
 
-        yearSelect.appendChild(
-            option
-        );
+        // LANGUAGES
 
-    });
+        const languages = [...new Set(publications.flatMap((p) => p.language || []))].sort();
 
-	// TYPES
-	const typeSelect = document.getElementById("typeFilter");
+        const languageSelect = document.getElementById('languageFilter');
 
-	const types = [...new Set(
-        publications.map(pub => pub.type).filter(Boolean)
-    )].sort();
-    typeSelect.replaceChildren(new Option("All Types", "all"));
+        languages.forEach((language) => {
+            const option = document.createElement('option');
 
-	types.forEach(type => {
-		// Avoid duplicating options already defined in the HTML.
-		if ([...typeSelect.options].some(option => option.value === type)) {
-			return;
-		}
+            option.value = language;
+            option.textContent = language;
 
-		const option = document.createElement("option");
-		option.value = type;
-		option.textContent = type === "Workshop-Tutorial" ? "Workshop / Tutorial" : type;
-		typeSelect.appendChild(option);
-	});
+            languageSelect.appendChild(option);
+        });
 
-    // LANGUAGES
+        // KEYWORDS
 
-    const languages =
+        const keywords = [...new Set(publications.flatMap((p) => p.keywords || []))].sort();
 
-    [...new Set(
+        const keywordSelect = document.getElementById('keywordFilter');
 
-        publications.flatMap(
-            p => p.language || []
-        )
+        keywords.forEach((keyword) => {
+            const option = document.createElement('option');
 
-    )]
-    .sort();
+            option.value = keyword;
+            option.textContent = keyword;
 
-    const languageSelect =
-    document.getElementById(
-        "languageFilter"
-    );
+            keywordSelect.appendChild(option);
+        });
 
-    languages.forEach(language => {
+        // EVENTS
+        document.getElementById('searchInput').addEventListener('input', renderPublications);
 
-        const option =
-        document.createElement(
-            "option"
-        );
+        document.getElementById('searchButton').addEventListener('click', renderPublications);
 
-        option.value = language;
-        option.textContent = language;
-
-        languageSelect
-        .appendChild(option);
-
-    });
-
-    // KEYWORDS
-
-    const keywords =
-
-    [...new Set(
-
-        publications.flatMap(
-            p => p.keywords || []
-        )
-
-    )]
-    .sort();
-
-    const keywordSelect =
-    document.getElementById(
-        "keywordFilter"
-    );
-
-    keywords.forEach(keyword => {
-
-        const option =
-        document.createElement(
-            "option"
-        );
-
-        option.value = keyword;
-        option.textContent = keyword;
-
-        keywordSelect
-        .appendChild(option);
-
-    });
-
-    // EVENTS
-    document.getElementById("searchInput").addEventListener("input", renderPublications);
-
-    document
-    .getElementById(
-        "searchButton"
-    )
-    .addEventListener(
-        "click",
-        renderPublications
-    );
-
-    document
-    .getElementById(
-        "searchInput"
-    )
-    .addEventListener(
-        "keyup",
-        function(event){
-
-            if(
-                event.key === "Enter"
-            ){
+        document.getElementById('searchInput').addEventListener('keyup', function (event) {
+            if (event.key === 'Enter') {
                 renderPublications();
             }
+        });
 
-        }
-    );
+        document.getElementById('yearFilter').addEventListener('change', renderPublications);
 
-    document
-    .getElementById(
-        "yearFilter"
-    )
-    .addEventListener(
-        "change",
-        renderPublications
-    );
+        document.getElementById('typeFilter').addEventListener('change', renderPublications);
 
-    document
-    .getElementById(
-        "typeFilter"
-    )
-    .addEventListener(
-        "change",
-        renderPublications
-    );
+        document.getElementById('languageFilter').addEventListener('change', renderPublications);
 
-    document
-    .getElementById(
-        "languageFilter"
-    )
-    .addEventListener(
-        "change",
-        renderPublications
-    );
+        document.getElementById('keywordFilter').addEventListener('change', function () {
+            const keyword = this.value;
 
-    document
-    .getElementById(
-        "keywordFilter"
-    )
-    .addEventListener(
-        "change",
-        function(){
-
-            const keyword =
-            this.value;
-
-            if(
-                keyword !== "all" &&
-                !selectedKeywords.includes(keyword)
-            ){
-                selectedKeywords.push(
-                    keyword
-                );
+            if (keyword !== 'all' && !selectedKeywords.includes(keyword)) {
+                selectedKeywords.push(keyword);
             }
 
-            this.value = "all";
+            this.value = 'all';
             renderSelectedKeywords();
             renderPublications();
+        });
 
-        }
-    );
-
-    renderPublications();
-
-});
+        renderPublications();
+    });
 })();
 
 // ---- js/publications-pdf.js ----
 (() => {
-document.addEventListener("DOMContentLoaded", () => {
-    const button = document.getElementById("downloadPublicationsBtn");
+    document.addEventListener('DOMContentLoaded', () => {
+        const button = document.getElementById('downloadPublicationsBtn');
 
-    if (button) {
-        button.addEventListener("click", generatePublicationsPDF);
-    }
-});
-
-function generatePublicationsPDF() {
-    if (!window.jspdf || !window.jspdf.jsPDF) {
-        alert("Unable to load PDF generation library.");
-        return;
-    }
-
-    const records = window.filteredPublications;
-
-    if (!Array.isArray(records)) {
-        alert("Publication data is not ready.");
-        return;
-    }
-
-    if (records.length === 0) {
-        alert("No records match the current filters.");
-        return;
-    }
-
-    const { jsPDF } = window.jspdf;
-
-    const doc = new jsPDF({
-        orientation: "portrait",
-        unit: "mm",
-        format: "a4"
+        if (button) {
+            button.addEventListener('click', generatePublicationsPDF);
+        }
     });
 
-    const W = doc.internal.pageSize.getWidth();
-    const H = doc.internal.pageSize.getHeight();
-    const M = 18;
-    const CW = W - M * 2;
-
-    const navy = [36, 59, 85];
-    const gray = [90, 105, 120];
-    const blue = [35, 100, 170];
-
-    let y = 20;
-    let number = 1;
-
-    // ----------------------------------
-    // FILTER INFORMATION
-    // ----------------------------------
-
-    const getValue = (id, fallback = "all") => {
-        const element = document.getElementById(id);
-        return element ? element.value : fallback;
-    };
-
-    const filters = {
-        search: getValue("searchInput", "").trim(),
-        year: getValue("yearFilter"),
-        type: getValue("typeFilter"),
-        language: getValue("languageFilter"),
-        keywords: Array.isArray(window.selectedKeywords)
-            ? [...window.selectedKeywords]
-            : []
-    };
-
-    if (
-        typeof selectedKeywords !== "undefined" &&
-        Array.isArray(selectedKeywords)
-    ) {
-        filters.keywords = [...selectedKeywords];
-    }
-
-    const activeFilters = [];
-
-    if (filters.search) {
-        activeFilters.push(["Search", filters.search]);
-    }
-
-    if (filters.year !== "all") {
-        activeFilters.push(["Year", filters.year]);
-    }
-
-    if (filters.type !== "all") {
-        activeFilters.push(["Type", filters.type]);
-    }
-
-    if (filters.language !== "all") {
-        activeFilters.push(["Language", filters.language]);
-    }
-
-    if (filters.keywords.length) {
-        activeFilters.push([
-            "Keywords",
-            filters.keywords.join(", ")
-        ]);
-    }
-
-    const hasActiveFilters = activeFilters.length > 0;
-
-    // ----------------------------------
-    // HELPERS
-    // ----------------------------------
-
-    function clean(value) {
-        const div = document.createElement("div");
-        div.innerHTML = String(value ?? "");
-
-        return div.textContent || "";
-    }
-
-    function newPageIfNeeded(height) {
-        if (y + height > H - 23) {
-            doc.addPage();
-            y = 22;
+    function generatePublicationsPDF() {
+        if (!window.jspdf || !window.jspdf.jsPDF) {
+            alert('Unable to load PDF generation library.');
+            return;
         }
-    }
 
-    function getLines(text, fontSize, style = "normal") {
-        doc.setFont("helvetica", style);
-        doc.setFontSize(fontSize);
+        const records = window.filteredPublications;
 
-        return doc.splitTextToSize(clean(text), CW - 3);
-    }
+        if (!Array.isArray(records)) {
+            alert('Publication data is not ready.');
+            return;
+        }
 
-    function getTextHeight(text, fontSize, style = "normal") {
-        const lines = getLines(text, fontSize, style);
-        return lines.length * fontSize * 0.46 + 2;
-    }
+        if (records.length === 0) {
+            alert('No records match the current filters.');
+            return;
+        }
 
-    function writeWrapped(
-        text,
-        x,
-        fontSize,
-        color,
-        style = "normal"
-    ) {
-        const lines = getLines(text, fontSize, style);
-        const lineHeight = fontSize * 0.46;
+        const { jsPDF } = window.jspdf;
 
-        doc.setTextColor(...color);
-
-        lines.forEach(line => {
-            newPageIfNeeded(lineHeight);
-
-            doc.text(line, x, y);
-            y += lineHeight;
+        const doc = new jsPDF({
+            orientation: 'portrait',
+            unit: 'mm',
+            format: 'a4',
         });
 
-        y += 2;
-    }
+        const W = doc.internal.pageSize.getWidth();
+        const H = doc.internal.pageSize.getHeight();
+        const M = 18;
+        const CW = W - M * 2;
 
-    function getRecordLinks(record) {
-        const activityTypes = ["Talk", "Workshop", "Interview"];
+        const navy = [36, 59, 85];
+        const gray = [90, 105, 120];
+        const blue = [35, 100, 170];
 
-        return [
-            {
-                value: record.link,
-                label: activityTypes.includes(record.type)
-                    ? "View Details"
-                    : "View Publication"
-            },
-            {
-                value: record.youtube,
-                label: "Watch Video"
-            },
-            {
-                value: record.github,
-                label: "View Repository"
+        let y = 20;
+        let number = 1;
+
+        // ----------------------------------
+        // FILTER INFORMATION
+        // ----------------------------------
+
+        const getValue = (id, fallback = 'all') => {
+            const element = document.getElementById(id);
+            return element ? element.value : fallback;
+        };
+
+        const filters = {
+            search: getValue('searchInput', '').trim(),
+            year: getValue('yearFilter'),
+            type: getValue('typeFilter'),
+            language: getValue('languageFilter'),
+            keywords: Array.isArray(window.selectedKeywords) ? [...window.selectedKeywords] : [],
+        };
+
+        if (typeof selectedKeywords !== 'undefined' && Array.isArray(selectedKeywords)) {
+            filters.keywords = [...selectedKeywords];
+        }
+
+        const activeFilters = [];
+
+        if (filters.search) {
+            activeFilters.push(['Search', filters.search]);
+        }
+
+        if (filters.year !== 'all') {
+            activeFilters.push(['Year', filters.year]);
+        }
+
+        if (filters.type !== 'all') {
+            activeFilters.push(['Type', filters.type]);
+        }
+
+        if (filters.language !== 'all') {
+            activeFilters.push(['Language', filters.language]);
+        }
+
+        if (filters.keywords.length) {
+            activeFilters.push(['Keywords', filters.keywords.join(', ')]);
+        }
+
+        const hasActiveFilters = activeFilters.length > 0;
+
+        // ----------------------------------
+        // HELPERS
+        // ----------------------------------
+
+        function clean(value) {
+            const div = document.createElement('div');
+            div.innerHTML = String(value ?? '');
+
+            return div.textContent || '';
+        }
+
+        function newPageIfNeeded(height) {
+            if (y + height > H - 23) {
+                doc.addPage();
+                y = 22;
             }
-        ].filter(item => item.value);
-    }
+        }
 
-    // ----------------------------------
-    // COVER HEADER
-    // ----------------------------------
+        function getLines(text, fontSize, style = 'normal') {
+            doc.setFont('helvetica', style);
+            doc.setFontSize(fontSize);
 
-    doc.setFillColor(...navy);
-    doc.rect(0, 0, W, 49, "F");
+            return doc.splitTextToSize(clean(text), CW - 3);
+        }
 
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(9);
-    doc.setTextColor(190, 215, 235);
-    doc.text("ACADEMIC RESEARCH PORTFOLIO", M, 14);
+        function getTextHeight(text, fontSize, style = 'normal') {
+            const lines = getLines(text, fontSize, style);
+            return lines.length * fontSize * 0.46 + 2;
+        }
 
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(17);
-    doc.setTextColor(255, 255, 255);
-    doc.text("Publications and Academic Activities", M, 27);
+        function writeWrapped(text, x, fontSize, color, style = 'normal') {
+            const lines = getLines(text, fontSize, style);
+            const lineHeight = fontSize * 0.46;
 
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(11);
-    doc.text("Bruno Senzio-Savino Barzellato", M, 36);
+            doc.setTextColor(...color);
 
-    doc.setFontSize(8);
-    doc.text(
-        "Generated: " + new Date().toLocaleDateString("en-US"),
-        M,
-        43
-    );
+            lines.forEach((line) => {
+                newPageIfNeeded(lineHeight);
 
-    y = 59;
+                doc.text(line, x, y);
+                y += lineHeight;
+            });
 
-    // ----------------------------------
-    // FILTER SUMMARY
-    // ----------------------------------
+            y += 2;
+        }
 
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(12);
-    doc.setTextColor(...navy);
-    doc.text("Applied Filters", M, y);
+        function getRecordLinks(record) {
+            const activityTypes = ['Talk', 'Workshop', 'Interview'];
 
-    y += 7;
+            return [
+                {
+                    value: record.link,
+                    label: activityTypes.includes(record.type)
+                        ? 'View Details'
+                        : 'View Publication',
+                },
+                {
+                    value: record.youtube,
+                    label: 'Watch Video',
+                },
+                {
+                    value: record.github,
+                    label: 'View Repository',
+                },
+            ].filter((item) => item.value);
+        }
 
-    const summaryFilters = hasActiveFilters
-        ? activeFilters
-        : [["Selection", "All Records"]];
+        // ----------------------------------
+        // COVER HEADER
+        // ----------------------------------
 
-    summaryFilters.forEach(([label, value]) => {
-        doc.setFont("helvetica", "normal");
+        doc.setFillColor(...navy);
+        doc.rect(0, 0, W, 49, 'F');
+
+        doc.setFont('helvetica', 'normal');
         doc.setFontSize(9);
+        doc.setTextColor(190, 215, 235);
+        doc.text('ACADEMIC RESEARCH PORTFOLIO', M, 14);
 
-        const lines = doc.splitTextToSize(
-            clean(value),
-            CW - 46
-        );
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(17);
+        doc.setTextColor(255, 255, 255);
+        doc.text('Publications and Academic Activities', M, 27);
 
-        // Render long filter values in chunks across pages.
-        let index = 0;
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(11);
+        doc.text('Bruno Senzio-Savino Barzellato', M, 36);
 
-        while (index < lines.length) {
-            newPageIfNeeded(12);
+        doc.setFontSize(8);
+        doc.text('Generated: ' + new Date().toLocaleDateString('en-US'), M, 43);
 
-            const availableLines = Math.max(
-                1,
-                Math.floor((H - 23 - y - 7) / 4.5)
-            );
+        y = 59;
 
-            const chunk = lines.slice(
-                index,
-                index + availableLines
-            );
+        // ----------------------------------
+        // FILTER SUMMARY
+        // ----------------------------------
 
-            const rowHeight = Math.max(
-                10,
-                chunk.length * 4.5 + 5
-            );
-
-            doc.setFillColor(241, 245, 249);
-            doc.roundedRect(
-                M,
-                y - 3,
-                CW,
-                rowHeight,
-                2,
-                2,
-                "F"
-            );
-
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(9);
-            doc.setTextColor(...navy);
-            doc.text(
-                index === 0 ? label + ":" : "Continued:",
-                M + 5,
-                y + 2
-            );
-
-            doc.setFont("helvetica", "normal");
-            doc.setTextColor(...gray);
-            doc.text(chunk, M + 42, y + 2);
-
-            y += rowHeight + 2;
-            index += chunk.length;
-        }
-    });
-
-    y += 5;
-
-    // ----------------------------------
-    // RESULTS SUMMARY
-    // ----------------------------------
-
-    newPageIfNeeded(25);
-
-    const databaseTotal =
-        typeof publications !== "undefined" &&
-        Array.isArray(publications)
-            ? publications.length
-            : Array.isArray(window.publications)
-                ? window.publications.length
-                : null;
-
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(11);
-    doc.setTextColor(...navy);
-
-    doc.text(
-        "Matching Records: " + records.length,
-        M,
-        y
-    );
-
-    if (databaseTotal !== null) {
-        doc.text(
-            "Database Total: " + databaseTotal,
-            W - M,
-            y,
-            { align: "right" }
-        );
-    }
-
-    y += 7;
-
-    doc.setDrawColor(200, 210, 220);
-    doc.line(M, y, W - M, y);
-
-    y += 12;
-
-    // ----------------------------------
-    // CATEGORIES
-    // ----------------------------------
-
-    const categories = [
-        ["Journal", "Journal Articles"],
-        ["Conference", "Conference Papers"],
-        ["Thesis", "Theses"],
-        ["Patent", "Patents"],
-        ["Talk", "Talks"],
-        ["Workshop", "Workshops and Tutorials"],
-        ["Interview", "Interviews"]
-    ];
-
-    // Include any additional record types automatically.
-    const knownTypes = new Set(
-        categories.map(([type]) => type)
-    );
-
-    records.forEach(record => {
-        if (!knownTypes.has(record.type)) {
-            knownTypes.add(record.type);
-
-            categories.push([
-                record.type,
-                record.type || "Other Activities"
-            ]);
-        }
-    });
-
-    categories.forEach(([type, heading]) => {
-        const group = records
-            .filter(record => record.type === type)
-            .sort((a, b) => Number(b.year) - Number(a.year));
-
-        if (!group.length) return;
-
-        // Reserve space for the heading and the start of a record.
-        newPageIfNeeded(40);
-
-        doc.setFont("helvetica", "bold");
-        doc.setFontSize(14);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(12);
         doc.setTextColor(...navy);
-        doc.text(clean(heading), M, y);
+        doc.text('Applied Filters', M, y);
+
+        y += 7;
+
+        const summaryFilters = hasActiveFilters ? activeFilters : [['Selection', 'All Records']];
+
+        summaryFilters.forEach(([label, value]) => {
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(9);
+
+            const lines = doc.splitTextToSize(clean(value), CW - 46);
+
+            // Render long filter values in chunks across pages.
+            let index = 0;
+
+            while (index < lines.length) {
+                newPageIfNeeded(12);
+
+                const availableLines = Math.max(1, Math.floor((H - 23 - y - 7) / 4.5));
+
+                const chunk = lines.slice(index, index + availableLines);
+
+                const rowHeight = Math.max(10, chunk.length * 4.5 + 5);
+
+                doc.setFillColor(241, 245, 249);
+                doc.roundedRect(M, y - 3, CW, rowHeight, 2, 2, 'F');
+
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(9);
+                doc.setTextColor(...navy);
+                doc.text(index === 0 ? label + ':' : 'Continued:', M + 5, y + 2);
+
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(...gray);
+                doc.text(chunk, M + 42, y + 2);
+
+                y += rowHeight + 2;
+                index += chunk.length;
+            }
+        });
 
         y += 5;
 
-        doc.setDrawColor(180, 195, 210);
+        // ----------------------------------
+        // RESULTS SUMMARY
+        // ----------------------------------
+
+        newPageIfNeeded(25);
+
+        const databaseTotal =
+            typeof publications !== 'undefined' && Array.isArray(publications)
+                ? publications.length
+                : Array.isArray(window.publications)
+                  ? window.publications.length
+                  : null;
+
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(11);
+        doc.setTextColor(...navy);
+
+        doc.text('Matching Records: ' + records.length, M, y);
+
+        if (databaseTotal !== null) {
+            doc.text('Database Total: ' + databaseTotal, W - M, y, { align: 'right' });
+        }
+
+        y += 7;
+
+        doc.setDrawColor(200, 210, 220);
         doc.line(M, y, W - M, y);
 
-        y += 9;
+        y += 12;
 
-        group.forEach(record => {
-            const title = number + ". " + clean(record.title);
-            const authors = clean(record.authors);
-            const venue =
-                clean(record.venue) + " (" + record.year + ")";
+        // ----------------------------------
+        // CATEGORIES
+        // ----------------------------------
 
-            const links = getRecordLinks(record);
+        const categories = [
+            ['Journal', 'Journal Articles'],
+            ['Conference', 'Conference Papers'],
+            ['Thesis', 'Theses'],
+            ['Patent', 'Patents'],
+            ['Talk', 'Talks'],
+            ['Workshop', 'Workshops and Tutorials'],
+            ['Interview', 'Interviews'],
+        ];
 
-            const height =
-                getTextHeight(title, 10, "bold") +
-                getTextHeight(authors, 9) +
-                getTextHeight(venue, 9, "italic") +
-                (
-                    record.doi
-                        ? getTextHeight("DOI: " + record.doi, 8)
-                        : 0
-                ) +
-                links.length * 6 +
-                5;
+        // Include any additional record types automatically.
+        const knownTypes = new Set(categories.map(([type]) => type));
 
-            newPageIfNeeded(height);
+        records.forEach((record) => {
+            if (!knownTypes.has(record.type)) {
+                knownTypes.add(record.type);
 
-            writeWrapped(title, M, 10, navy, "bold");
-            writeWrapped(authors, M, 9, gray);
-            writeWrapped(venue, M, 9, gray, "italic");
-
-            if (record.doi) {
-                writeWrapped(
-                    "DOI: " + record.doi,
-                    M,
-                    8,
-                    blue
-                );
+                categories.push([record.type, record.type || 'Other Activities']);
             }
+        });
 
-            links.forEach(({ value, label }) => {
-                let url;
+        categories.forEach(([type, heading]) => {
+            const group = records
+                .filter((record) => record.type === type)
+                .sort((a, b) => Number(b.year) - Number(a.year));
 
-                try {
-                    url = new URL(
-                        value,
-                        window.location.href
-                    ).href;
-                } catch {
-                    return;
+            if (!group.length) return;
+
+            // Reserve space for the heading and the start of a record.
+            newPageIfNeeded(40);
+
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(14);
+            doc.setTextColor(...navy);
+            doc.text(clean(heading), M, y);
+
+            y += 5;
+
+            doc.setDrawColor(180, 195, 210);
+            doc.line(M, y, W - M, y);
+
+            y += 9;
+
+            group.forEach((record) => {
+                const title = number + '. ' + clean(record.title);
+                const authors = clean(record.authors);
+                const venue = clean(record.venue) + ' (' + record.year + ')';
+
+                const links = getRecordLinks(record);
+
+                const height =
+                    getTextHeight(title, 10, 'bold') +
+                    getTextHeight(authors, 9) +
+                    getTextHeight(venue, 9, 'italic') +
+                    (record.doi ? getTextHeight('DOI: ' + record.doi, 8) : 0) +
+                    links.length * 6 +
+                    5;
+
+                newPageIfNeeded(height);
+
+                writeWrapped(title, M, 10, navy, 'bold');
+                writeWrapped(authors, M, 9, gray);
+                writeWrapped(venue, M, 9, gray, 'italic');
+
+                if (record.doi) {
+                    writeWrapped('DOI: ' + record.doi, M, 8, blue);
                 }
 
-                newPageIfNeeded(6);
+                links.forEach(({ value, label }) => {
+                    let url;
 
-                doc.setFont("helvetica", "normal");
-                doc.setFontSize(8);
-                doc.setTextColor(...blue);
+                    try {
+                        url = new URL(value, window.location.href).href;
+                    } catch {
+                        return;
+                    }
 
-                doc.textWithLink(label, M, y, { url });
+                    newPageIfNeeded(6);
 
-                y += 6;
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(8);
+                    doc.setTextColor(...blue);
+
+                    doc.textWithLink(label, M, y, { url });
+
+                    y += 6;
+                });
+
+                y += 5;
+                number++;
             });
 
             y += 5;
-            number++;
         });
 
-        y += 5;
-    });
+        // ----------------------------------
+        // PAGE FOOTERS
+        // ----------------------------------
 
-    // ----------------------------------
-    // PAGE FOOTERS
-    // ----------------------------------
+        const pages = doc.internal.getNumberOfPages();
 
-    const pages = doc.internal.getNumberOfPages();
+        for (let page = 1; page <= pages; page++) {
+            doc.setPage(page);
 
-    for (let page = 1; page <= pages; page++) {
-        doc.setPage(page);
+            doc.setDrawColor(205, 215, 225);
+            doc.line(M, H - 18, W - M, H - 18);
 
-        doc.setDrawColor(205, 215, 225);
-        doc.line(M, H - 18, W - M, H - 18);
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(8);
+            doc.setTextColor(120, 130, 140);
 
-        doc.setFont("helvetica", "normal");
-        doc.setFontSize(8);
-        doc.setTextColor(120, 130, 140);
+            doc.text('Bruno Senzio-Savino | Publications and Academic Activities', M, H - 12);
 
-        doc.text(
-            "Bruno Senzio-Savino | Publications and Academic Activities",
-            M,
-            H - 12
-        );
+            doc.text('Page ' + page + ' of ' + pages, W - M, H - 12, { align: 'right' });
+        }
 
-        doc.text(
-            "Page " + page + " of " + pages,
-            W - M,
-            H - 12,
-            { align: "right" }
-        );
+        // ----------------------------------
+        // DOWNLOAD
+        // ----------------------------------
+
+        const suffix = hasActiveFilters ? '_Filtered' : '';
+
+        doc.save('Bruno_Senzio_Savino_Publications_and_Activities' + suffix + '.pdf');
     }
-
-    // ----------------------------------
-    // DOWNLOAD
-    // ----------------------------------
-
-    const suffix = hasActiveFilters ? "_Filtered" : "";
-
-    doc.save(
-        "Bruno_Senzio_Savino_Publications_and_Activities" +
-        suffix +
-        ".pdf"
-    );
-}
 })();
 
 // ---- js/tech-background.js ----
 (() => {
-// =====================================================
-// TECH BACKGROUND
-// Bruno Senzio-Savino Website
-// =====================================================
+    // =====================================================
+    // TECH BACKGROUND
+    // Bruno Senzio-Savino Website
+    // =====================================================
 
-const canvas = document.createElement("canvas");
-const ctx = canvas.getContext("2d");
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
 
-canvas.id = "tech-background";
+    canvas.id = 'tech-background';
 
-canvas.style.position = "fixed";
-canvas.style.top = "0";
-canvas.style.left = "0";
-canvas.style.width = "100%";
-canvas.style.height = "100%";
-canvas.style.zIndex = "-1";
-canvas.style.pointerEvents = "none";
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.zIndex = '-1';
+    canvas.style.pointerEvents = 'none';
 
-document.body.prepend(canvas);
+    document.body.prepend(canvas);
 
-// =====================================================
-// RESIZE
-// =====================================================
+    // =====================================================
+    // RESIZE
+    // =====================================================
 
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
 
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
-// =====================================================
-// STARS
-// =====================================================
+    // =====================================================
+    // STARS
+    // =====================================================
 
-const stars = [];
+    const stars = [];
 
-for (let i = 0; i < 250; i++) {
-    stars.push({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        r: Math.random() * 2,
-        speed: 0.2 + Math.random() * 0.8
-    });
-}
+    for (let i = 0; i < 250; i++) {
+        stars.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            r: Math.random() * 2,
+            speed: 0.2 + Math.random() * 0.8,
+        });
+    }
 
-// =====================================================
-// CIRCUIT NODES
-// =====================================================
+    // =====================================================
+    // CIRCUIT NODES
+    // =====================================================
 
-const nodes = [];
+    const nodes = [];
 
-for (let i = 0; i < 80; i++) {
-    nodes.push({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3
-    });
-}
+    for (let i = 0; i < 80; i++) {
+        nodes.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3,
+        });
+    }
 
-// =====================================================
-// ASTEROIDS
-// =====================================================
+    // =====================================================
+    // ASTEROIDS
+    // =====================================================
 
-const asteroids = [];
+    const asteroids = [];
 
-for (let i = 0; i < 18; i++) {
-    asteroids.push({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        size: 10 + Math.random() * 20,
-        speed: 0.2 + Math.random(),
-        rot: Math.random() * Math.PI
-    });
-}
+    for (let i = 0; i < 18; i++) {
+        asteroids.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            size: 10 + Math.random() * 20,
+            speed: 0.2 + Math.random(),
+            rot: Math.random() * Math.PI,
+        });
+    }
 
-// =====================================================
-// SPACESHIPS
-// =====================================================
+    // =====================================================
+    // SPACESHIPS
+    // =====================================================
 
-const ships = [];
+    const ships = [];
 
-for (let i = 0; i < 5; i++) {
-    ships.push({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        speed: 1 + Math.random() * 2,
-        dir: Math.random() > 0.5 ? 1 : -1
-    });
-}
+    for (let i = 0; i < 5; i++) {
+        ships.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            speed: 1 + Math.random() * 2,
+            dir: Math.random() > 0.5 ? 1 : -1,
+        });
+    }
 
-// =====================================================
-// LASERS
-// =====================================================
+    // =====================================================
+    // LASERS
+    // =====================================================
 
-const lasers = [];
+    const lasers = [];
 
-function spawnLaser() {
+    function spawnLaser() {
+        const ship = ships[Math.floor(Math.random() * ships.length)];
 
-    const ship = ships[Math.floor(Math.random() * ships.length)];
+        lasers.push({
+            x: ship.x,
+            y: ship.y,
+            vx: ship.dir * 8,
+            life: 80,
+        });
+    }
 
-    lasers.push({
-        x: ship.x,
-        y: ship.y,
-        vx: ship.dir * 8,
-        life: 80
-    });
-}
+    setInterval(spawnLaser, 1200);
 
-setInterval(spawnLaser, 1200);
+    // =====================================================
+    // HOLOGRAMS
+    // =====================================================
 
-// =====================================================
-// HOLOGRAMS
-// =====================================================
+    const holograms = [];
 
-const holograms = [];
+    for (let i = 0; i < 10; i++) {
+        holograms.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            size: 20 + Math.random() * 40,
+            phase: Math.random() * Math.PI * 2,
+        });
+    }
 
-for (let i = 0; i < 10; i++) {
+    // =====================================================
+    // VEGETABLES
+    // =====================================================
 
-    holograms.push({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        size: 20 + Math.random() * 40,
-        phase: Math.random() * Math.PI * 2
-    });
-}
+    const vegetables = [];
 
-// =====================================================
-// VEGETABLES
-// =====================================================
+    const veggieIcons = ['🥕', '🥦', '🌽', '🍅', '🥬', '🧅'];
 
-const vegetables = [];
+    for (let i = 0; i < 15; i++) {
+        vegetables.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            icon: veggieIcons[Math.floor(Math.random() * veggieIcons.length)],
+            speed: 0.2 + Math.random() * 0.5,
+            size: 16 + Math.random() * 16,
+        });
+    }
 
-const veggieIcons = [
-    "🥕",
-    "🥦",
-    "🌽",
-    "🍅",
-    "🥬",
-    "🧅"
-];
+    // =====================================================
+    // DRAW STARS
+    // =====================================================
 
-for (let i = 0; i < 15; i++) {
+    function drawStars() {
+        ctx.fillStyle = 'white';
 
-    vegetables.push({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        icon: veggieIcons[Math.floor(Math.random() * veggieIcons.length)],
-        speed: 0.2 + Math.random() * 0.5,
-        size: 16 + Math.random() * 16
-    });
-}
+        stars.forEach((star) => {
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+            ctx.fill();
 
-// =====================================================
-// DRAW STARS
-// =====================================================
+            star.y += star.speed;
 
-function drawStars() {
+            if (star.y > canvas.height) {
+                star.y = 0;
+                star.x = Math.random() * canvas.width;
+            }
+        });
+    }
 
-    ctx.fillStyle = "white";
+    // =====================================================
+    // DRAW NEURAL NETWORK
+    // =====================================================
 
-    stars.forEach(star => {
+    function drawNetwork() {
+        nodes.forEach((node) => {
+            node.x += node.vx;
+            node.y += node.vy;
 
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
-        ctx.fill();
+            if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
 
-        star.y += star.speed;
+            if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
 
-        if (star.y > canvas.height) {
-            star.y = 0;
-            star.x = Math.random() * canvas.width;
-        }
-    });
-}
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, 2, 0, Math.PI * 2);
+            ctx.fillStyle = '#00ffff';
+            ctx.fill();
+        });
 
-// =====================================================
-// DRAW NEURAL NETWORK
-// =====================================================
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const dx = nodes[i].x - nodes[j].x;
+                const dy = nodes[i].y - nodes[j].y;
 
-function drawNetwork() {
+                const dist = Math.sqrt(dx * dx + dy * dy);
 
-    nodes.forEach(node => {
+                if (dist < 120) {
+                    ctx.strokeStyle = `rgba(0,255,255,${1 - dist / 120})`;
 
-        node.x += node.vx;
-        node.y += node.vy;
+                    ctx.lineWidth = 0.5;
 
-        if (node.x < 0 || node.x > canvas.width)
-            node.vx *= -1;
+                    ctx.beginPath();
 
-        if (node.y < 0 || node.y > canvas.height)
-            node.vy *= -1;
+                    ctx.moveTo(nodes[i].x, nodes[i].y);
 
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, 2, 0, Math.PI * 2);
-        ctx.fillStyle = "#00ffff";
-        ctx.fill();
-    });
+                    ctx.lineTo(nodes[j].x, nodes[j].y);
 
-    for (let i = 0; i < nodes.length; i++) {
-
-        for (let j = i + 1; j < nodes.length; j++) {
-
-            const dx = nodes[i].x - nodes[j].x;
-            const dy = nodes[i].y - nodes[j].y;
-
-            const dist = Math.sqrt(dx * dx + dy * dy);
-
-            if (dist < 120) {
-
-                ctx.strokeStyle =
-                    `rgba(0,255,255,${1 - dist / 120})`;
-
-                ctx.lineWidth = 0.5;
-
-                ctx.beginPath();
-
-                ctx.moveTo(nodes[i].x, nodes[i].y);
-
-                ctx.lineTo(nodes[j].x, nodes[j].y);
-
-                ctx.stroke();
+                    ctx.stroke();
+                }
             }
         }
     }
-}
 
-// =====================================================
-// DRAW CIRCUITS
-// =====================================================
+    // =====================================================
+    // DRAW CIRCUITS
+    // =====================================================
 
-function drawCircuits() {
+    function drawCircuits() {
+        ctx.strokeStyle = 'rgba(0,255,150,0.15)';
+        ctx.lineWidth = 1;
 
-    ctx.strokeStyle = "rgba(0,255,150,0.15)";
-    ctx.lineWidth = 1;
+        for (let x = 0; x < canvas.width; x += 140) {
+            ctx.beginPath();
 
-    for (let x = 0; x < canvas.width; x += 140) {
+            ctx.moveTo(x, 0);
 
-        ctx.beginPath();
+            ctx.lineTo(x, canvas.height);
 
-        ctx.moveTo(x, 0);
+            ctx.stroke();
+        }
 
-        ctx.lineTo(x, canvas.height);
+        for (let y = 0; y < canvas.height; y += 140) {
+            ctx.beginPath();
 
-        ctx.stroke();
+            ctx.moveTo(0, y);
+
+            ctx.lineTo(canvas.width, y);
+
+            ctx.stroke();
+        }
     }
 
-    for (let y = 0; y < canvas.height; y += 140) {
+    // =====================================================
+    // DRAW ASTEROIDS
+    // =====================================================
+
+    function drawAsteroids() {
+        ctx.strokeStyle = '#888';
+
+        asteroids.forEach((a) => {
+            ctx.save();
+
+            ctx.translate(a.x, a.y);
+
+            ctx.rotate(a.rot);
+
+            ctx.beginPath();
+
+            ctx.moveTo(-a.size, -a.size / 2);
+            ctx.lineTo(a.size, -a.size);
+            ctx.lineTo(a.size * 1.2, 0);
+            ctx.lineTo(a.size / 2, a.size);
+            ctx.lineTo(-a.size, a.size / 2);
+
+            ctx.closePath();
+
+            ctx.stroke();
+
+            ctx.restore();
+
+            a.x -= a.speed;
+
+            if (a.x < -50) {
+                a.x = canvas.width + 50;
+            }
+        });
+    }
+
+    // =====================================================
+    // DRAW SHIPS
+    // =====================================================
+
+    function drawShips() {
+        ctx.strokeStyle = '#00ffff';
+        ctx.lineWidth = 2;
+
+        ships.forEach((ship) => {
+            ctx.beginPath();
+
+            ctx.moveTo(ship.x, ship.y);
+
+            ctx.lineTo(ship.x - 15 * ship.dir, ship.y - 8);
+
+            ctx.lineTo(ship.x - 15 * ship.dir, ship.y + 8);
+
+            ctx.closePath();
+
+            ctx.stroke();
+
+            ship.x += ship.speed * ship.dir;
+
+            if (ship.x > canvas.width + 50) ship.x = -50;
+
+            if (ship.x < -50) ship.x = canvas.width + 50;
+        });
+    }
+
+    // =====================================================
+    // DRAW LASERS
+    // =====================================================
+
+    function drawLasers() {
+        ctx.strokeStyle = '#ff3333';
+        ctx.lineWidth = 2;
+
+        for (let i = lasers.length - 1; i >= 0; i--) {
+            const laser = lasers[i];
+
+            ctx.beginPath();
+            ctx.moveTo(laser.x, laser.y);
+            ctx.lineTo(laser.x - laser.vx * 2, laser.y);
+            ctx.stroke();
+
+            laser.x += laser.vx;
+            laser.life--;
+
+            if (laser.life <= 0) {
+                lasers.splice(i, 1);
+            }
+        }
+    }
+
+    // =====================================================
+    // DRAW HOLOGRAMS
+    // =====================================================
+
+    function drawHolograms() {
+        holograms.forEach((h) => {
+            const alpha = 0.2 + Math.sin(Date.now() * 0.002 + h.phase) * 0.1;
+
+            ctx.strokeStyle = `rgba(0,255,255,${alpha})`;
+
+            ctx.beginPath();
+
+            ctx.arc(h.x, h.y, h.size, 0, Math.PI * 2);
+
+            ctx.stroke();
+
+            for (let i = -h.size; i < h.size; i += 6) {
+                ctx.beginPath();
+
+                ctx.moveTo(h.x - h.size, h.y + i);
+
+                ctx.lineTo(h.x + h.size, h.y + i);
+
+                ctx.stroke();
+            }
+        });
+    }
+
+    // =====================================================
+    // DRAW VEGETABLES
+    // =====================================================
+
+    function drawVegetables() {
+        vegetables.forEach((v) => {
+            ctx.font = `${v.size}px Segoe UI Emoji`;
+
+            ctx.fillText(v.icon, v.x, v.y);
+
+            v.y += v.speed;
+
+            if (v.y > canvas.height + 50) {
+                v.y = -50;
+                v.x = Math.random() * canvas.width;
+            }
+        });
+    }
+
+    // =====================================================
+    // ANIMATION LOOP
+    // =====================================================
+
+    function animateBackground() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        drawStars();
+
+        drawCircuits();
+
+        drawNetwork();
+
+        drawAsteroids();
+
+        drawShips();
+
+        drawLasers();
+
+        drawHolograms();
+
+        drawVegetables();
+
+        drawRobots();
+
+        drawAR();
+
+        drawXR();
+
+        drawScanner();
+
+        requestAnimationFrame(animateBackground);
+    }
+
+    const robots = [];
+
+    for (let i = 0; i < 8; i++) {
+        robots.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            dir: Math.random() > 0.5 ? 1 : -1,
+            speed: 0.4 + Math.random(),
+        });
+    }
+
+    function drawRobots() {
+        ctx.strokeStyle = '#00ff88';
+        ctx.lineWidth = 2;
+
+        robots.forEach((r) => {
+            // cabeza
+            ctx.strokeRect(r.x - 8, r.y - 20, 16, 16);
+
+            // ojos
+            ctx.beginPath();
+            ctx.arc(r.x - 4, r.y - 14, 1.5, 0, Math.PI * 2);
+            ctx.arc(r.x + 4, r.y - 14, 1.5, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // cuerpo
+            ctx.strokeRect(r.x - 10, r.y, 20, 18);
+
+            // piernas
+            ctx.beginPath();
+            ctx.moveTo(r.x - 5, r.y + 18);
+            ctx.lineTo(r.x - 8, r.y + 28);
+
+            ctx.moveTo(r.x + 5, r.y + 18);
+            ctx.lineTo(r.x + 8, r.y + 28);
+
+            ctx.stroke();
+
+            r.x += r.speed * r.dir;
+
+            if (r.x > canvas.width + 30) r.x = -30;
+
+            if (r.x < -30) r.x = canvas.width + 30;
+        });
+    }
+
+    const arMarkers = [];
+
+    for (let i = 0; i < 12; i++) {
+        arMarkers.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            size: 20 + Math.random() * 50,
+            phase: Math.random() * 10,
+        });
+    }
+
+    function drawAR() {
+        arMarkers.forEach((m) => {
+            const pulse = Math.sin(Date.now() * 0.002 + m.phase) * 5;
+
+            ctx.strokeStyle = 'rgba(0,255,255,0.3)';
+
+            ctx.beginPath();
+
+            ctx.rect(m.x - m.size / 2, m.y - m.size / 2, m.size + pulse, m.size + pulse);
+
+            ctx.stroke();
+
+            ctx.beginPath();
+
+            ctx.arc(m.x, m.y, m.size / 2 + pulse, 0, Math.PI * 2);
+
+            ctx.stroke();
+        });
+    }
+
+    const xrObjects = [];
+
+    for (let i = 0; i < 10; i++) {
+        xrObjects.push({
+            angle: Math.random() * Math.PI * 2,
+            radius: 20 + Math.random() * 30,
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+        });
+    }
+
+    function drawXR() {
+        xrObjects.forEach((o) => {
+            o.angle += 0.01;
+
+            const ox = o.x + Math.cos(o.angle) * o.radius;
+
+            const oy = o.y + Math.sin(o.angle) * o.radius;
+
+            ctx.strokeStyle = 'rgba(255,0,255,0.35)';
+
+            ctx.beginPath();
+
+            ctx.arc(ox, oy, 6, 0, Math.PI * 2);
+
+            ctx.stroke();
+
+            ctx.beginPath();
+
+            ctx.moveTo(o.x, o.y);
+            ctx.lineTo(ox, oy);
+
+            ctx.stroke();
+        });
+    }
+
+    function drawScanner() {
+        const y = (Date.now() * 0.05) % canvas.height;
+
+        ctx.strokeStyle = 'rgba(0,255,255,0.08)';
 
         ctx.beginPath();
 
@@ -1697,396 +1819,24 @@ function drawCircuits() {
 
         ctx.stroke();
     }
-}
 
-// =====================================================
-// DRAW ASTEROIDS
-// =====================================================
-
-function drawAsteroids() {
-
-    ctx.strokeStyle = "#888";
-
-    asteroids.forEach(a => {
-
-        ctx.save();
-
-        ctx.translate(a.x, a.y);
-
-        ctx.rotate(a.rot);
-
-        ctx.beginPath();
-
-        ctx.moveTo(-a.size, -a.size / 2);
-        ctx.lineTo(a.size, -a.size);
-        ctx.lineTo(a.size * 1.2, 0);
-        ctx.lineTo(a.size / 2, a.size);
-        ctx.lineTo(-a.size, a.size / 2);
-
-        ctx.closePath();
-
-        ctx.stroke();
-
-        ctx.restore();
-
-        a.x -= a.speed;
-
-        if (a.x < -50) {
-            a.x = canvas.width + 50;
-        }
-    });
-}
-
-// =====================================================
-// DRAW SHIPS
-// =====================================================
-
-function drawShips() {
-
-    ctx.strokeStyle = "#00ffff";
-    ctx.lineWidth = 2;
-
-    ships.forEach(ship => {
-
-        ctx.beginPath();
-
-        ctx.moveTo(ship.x, ship.y);
-
-        ctx.lineTo(ship.x - 15 * ship.dir, ship.y - 8);
-
-        ctx.lineTo(ship.x - 15 * ship.dir, ship.y + 8);
-
-        ctx.closePath();
-
-        ctx.stroke();
-
-        ship.x += ship.speed * ship.dir;
-
-        if (ship.x > canvas.width + 50)
-            ship.x = -50;
-
-        if (ship.x < -50)
-            ship.x = canvas.width + 50;
-    });
-}
-
-// =====================================================
-// DRAW LASERS
-// =====================================================
-
-function drawLasers() {
-
-    ctx.strokeStyle = "#ff3333";
-    ctx.lineWidth = 2;
-
-	for(let i = lasers.length - 1; i >= 0; i--){
-
-		const laser = lasers[i];
-
-		ctx.beginPath();
-		ctx.moveTo(laser.x, laser.y);
-		ctx.lineTo(laser.x - laser.vx * 2, laser.y);
-		ctx.stroke();
-
-		laser.x += laser.vx;
-		laser.life--;
-
-		if(laser.life <= 0){
-			lasers.splice(i,1);
-		}
-	}
-}
-
-// =====================================================
-// DRAW HOLOGRAMS
-// =====================================================
-
-function drawHolograms() {
-
-    holograms.forEach(h => {
-
-        const alpha =
-            0.2 +
-            Math.sin(Date.now() * 0.002 + h.phase) * 0.1;
-
-        ctx.strokeStyle =
-            `rgba(0,255,255,${alpha})`;
-
-        ctx.beginPath();
-
-        ctx.arc(
-            h.x,
-            h.y,
-            h.size,
-            0,
-            Math.PI * 2
-        );
-
-        ctx.stroke();
-
-        for (let i = -h.size; i < h.size; i += 6) {
-
-            ctx.beginPath();
-
-            ctx.moveTo(h.x - h.size, h.y + i);
-
-            ctx.lineTo(h.x + h.size, h.y + i);
-
-            ctx.stroke();
-        }
-    });
-}
-
-// =====================================================
-// DRAW VEGETABLES
-// =====================================================
-
-function drawVegetables() {
-
-    vegetables.forEach(v => {
-
-        ctx.font = `${v.size}px Segoe UI Emoji`;
-
-        ctx.fillText(v.icon, v.x, v.y);
-
-        v.y += v.speed;
-
-        if (v.y > canvas.height + 50) {
-
-            v.y = -50;
-            v.x = Math.random() * canvas.width;
-        }
-    });
-}
-
-// =====================================================
-// ANIMATION LOOP
-// =====================================================
-
-function animateBackground() {
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    drawStars();
-
-    drawCircuits();
-
-    drawNetwork();
-
-    drawAsteroids();
-
-    drawShips();
-
-    drawLasers();
-
-    drawHolograms();
-
-    drawVegetables();
-
-    drawRobots();
-
-    drawAR();
-
-    drawXR();
-
-    drawScanner();
-
-	requestAnimationFrame(
-		animateBackground
-	);
-}
-
-const robots = [];
-
-for(let i=0;i<8;i++){
-
-    robots.push({
-        x:Math.random()*window.innerWidth,
-        y:Math.random()*window.innerHeight,
-        dir:Math.random()>0.5?1:-1,
-        speed:0.4+Math.random()
-    });
-}
-
-function drawRobots(){
-
-    ctx.strokeStyle="#00ff88";
-    ctx.lineWidth=2;
-
-    robots.forEach(r=>{
-
-        // cabeza
-        ctx.strokeRect(
-            r.x-8,
-            r.y-20,
-            16,
-            16
-        );
-
-        // ojos
-        ctx.beginPath();
-        ctx.arc(r.x-4,r.y-14,1.5,0,Math.PI*2);
-        ctx.arc(r.x+4,r.y-14,1.5,0,Math.PI*2);
-        ctx.stroke();
-
-        // cuerpo
-        ctx.strokeRect(
-            r.x-10,
-            r.y,
-            20,
-            18
-        );
-
-        // piernas
-        ctx.beginPath();
-        ctx.moveTo(r.x-5,r.y+18);
-        ctx.lineTo(r.x-8,r.y+28);
-
-        ctx.moveTo(r.x+5,r.y+18);
-        ctx.lineTo(r.x+8,r.y+28);
-
-        ctx.stroke();
-
-        r.x += r.speed*r.dir;
-
-        if(r.x>canvas.width+30)
-            r.x=-30;
-
-        if(r.x<-30)
-            r.x=canvas.width+30;
-    });
-}
-
-const arMarkers=[];
-
-for(let i=0;i<12;i++){
-
-    arMarkers.push({
-        x:Math.random()*window.innerWidth,
-        y:Math.random()*window.innerHeight,
-        size:20+Math.random()*50,
-        phase:Math.random()*10
-    });
-}
-
-function drawAR(){
-
-    arMarkers.forEach(m=>{
-
-        const pulse=
-        Math.sin(Date.now()*0.002+m.phase)*5;
-
-        ctx.strokeStyle=
-        "rgba(0,255,255,0.3)";
-
-        ctx.beginPath();
-
-        ctx.rect(
-            m.x-m.size/2,
-            m.y-m.size/2,
-            m.size+pulse,
-            m.size+pulse
-        );
-
-        ctx.stroke();
-
-        ctx.beginPath();
-
-        ctx.arc(
-            m.x,
-            m.y,
-            m.size/2+pulse,
-            0,
-            Math.PI*2
-        );
-
-        ctx.stroke();
-    });
-}
-
-const xrObjects=[];
-
-for(let i=0;i<10;i++){
-
-    xrObjects.push({
-        angle:Math.random()*Math.PI*2,
-        radius:20+Math.random()*30,
-        x:Math.random()*window.innerWidth,
-        y:Math.random()*window.innerHeight
-    });
-}
-
-function drawXR(){
-
-    xrObjects.forEach(o=>{
-
-        o.angle+=0.01;
-
-        const ox=
-        o.x+Math.cos(o.angle)*o.radius;
-
-        const oy=
-        o.y+Math.sin(o.angle)*o.radius;
-
-        ctx.strokeStyle=
-        "rgba(255,0,255,0.35)";
-
-        ctx.beginPath();
-
-        ctx.arc(
-            ox,
-            oy,
-            6,
-            0,
-            Math.PI*2
-        );
-
-        ctx.stroke();
-
-        ctx.beginPath();
-
-        ctx.moveTo(o.x,o.y);
-        ctx.lineTo(ox,oy);
-
-        ctx.stroke();
-    });
-}
-
-function drawScanner(){
-
-    const y =
-    (Date.now()*0.05)%canvas.height;
-
-    ctx.strokeStyle=
-    "rgba(0,255,255,0.08)";
-
-    ctx.beginPath();
-
-    ctx.moveTo(0,y);
-
-    ctx.lineTo(canvas.width,y);
-
-    ctx.stroke();
-}
-
-animateBackground();
+    animateBackground();
 })();
 
 // ---- inline ----
 (() => {
-(() => {
-  const viewer = document.getElementById('academia-avatar-3d');
-  const status = viewer.querySelector('.academia-model-status');
-  viewer.addEventListener('error', () => { status.textContent = '3D avatar unavailable'; viewer.showPoster(); });
-  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const updateRotation = () => viewer.toggleAttribute('auto-rotate', !motion.matches && !document.hidden);
-  motion.addEventListener('change', updateRotation);
-  document.addEventListener('visibilitychange', updateRotation);
-  updateRotation();
-})();
+    (() => {
+        const viewer = document.getElementById('academia-avatar-3d');
+        const status = viewer.querySelector('.academia-model-status');
+        viewer.addEventListener('error', () => {
+            status.textContent = '3D avatar unavailable';
+            viewer.showPoster();
+        });
+        const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const updateRotation = () =>
+            viewer.toggleAttribute('auto-rotate', !motion.matches && !document.hidden);
+        motion.addEventListener('change', updateRotation);
+        document.addEventListener('visibilitychange', updateRotation);
+        updateRotation();
+    })();
 })();

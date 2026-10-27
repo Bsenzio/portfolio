@@ -1,232 +1,342 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+            rel="stylesheet"
+        />
+        <title>Publications | Bruno Senzio-Savino</title>
+        <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/pages/publications.css" />
 
-<head>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Orbitron:wght@500&amp;display=swap"
+            rel="stylesheet"
+        />
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-<title>Publications | Bruno Senzio-Savino</title>
-<link rel="icon" type="image/png" href="assets/images/favicon.png">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/pages/publications.css">
+        <script
+            type="module"
+            src="https://unpkg.com/@google/model-viewer@4.2.0/dist/model-viewer.min.js"
+        ></script>
+    </head>
 
+    <body class="publications-page">
+        <a class="skip-link" href="#main-content">Skip to content</a>
 
+        <nav class="navbar" aria-label="Main navigation">
+            <a class="nav-signature" href="index.html">Bruno Senzio-Savino Barzellato</a>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-btn home-btn">
+                    <i class="fas fa-house"></i>
+                    Home
+                </a>
 
+                <a href="publications.html" class="nav-btn pub-btn" aria-current="page">
+                    <i class="fas fa-book"></i>
+                    Publications
+                </a>
 
-<link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Orbitron:wght@500&amp;display=swap" rel="stylesheet">
+                <a href="projects.html" class="nav-btn project-btn">
+                    <i class="fas fa-code"></i>
+                    Projects
+                </a>
 
+                <a href="blog.html" class="nav-btn blog-btn">
+                    <i class="fas fa-gamepad"></i>
+                    Blog
+                </a>
+            </div>
+            <span class="nav-digital-life">Digital Life</span>
+        </nav>
 
+        <main id="main-content">
+            <header class="project-hero">
+                <div class="hero-stars" aria-hidden="true">
+                    <span
+                        class="hero-star"
+                        style="--x: 3%; --y: 8%; --size: 12px; --duration: 7s; --delay: -1s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 10%; --y: 25%; --size: 8px; --duration: 8s; --delay: -4s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 1%; --y: 45%; --size: 15px; --duration: 9s; --delay: -2s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 18%; --y: 5%; --size: 7px; --duration: 6s; --delay: -5s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 4%; --y: 70%; --size: 9px; --duration: 8s; --delay: -6s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 24%; --y: 31%; --size: 11px; --duration: 10s; --delay: -3s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 12%; --y: 55%; --size: 6px; --duration: 7s; --delay: -2s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 28%; --y: 12%; --size: 13px; --duration: 9s; --delay: -7s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 7%; --y: 90%; --size: 7px; --duration: 8s; --delay: -3s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 35%; --y: 48%; --size: 8px; --duration: 10s; --delay: -5s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 22%; --y: 76%; --size: 10px; --duration: 7s; --delay: -4s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 40%; --y: 18%; --size: 6px; --duration: 8s; --delay: -1s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 15%; --y: 15%; --size: 7px; --duration: 11s; --delay: -8s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 31%; --y: 64%; --size: 11px; --duration: 9s; --delay: -1s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 5%; --y: 35%; --size: 6px; --duration: 6s; --delay: -3s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 42%; --y: 6%; --size: 8px; --duration: 10s; --delay: -7s"
+                    ></span>
+                </div>
+                <div class="hero-layout">
+                    <div>
+                        <p class="eyebrow">Research &amp; exchange</p>
+                        <h1>Publications &amp;<br />Academic Activities</h1>
+                        <p class="hero-description">
+                            Explore research across intelligent systems, experimental hardware and
+                            interactive worlds. Browse publications, patents and academic
+                            activities, or download a selection.
+                        </p>
+                        <ul class="topic-list" aria-label="Record categories">
+                            <li>Journal Articles</li>
+                            <li>Conference Papers</li>
+                            <li>Theses &amp; Patents</li>
+                            <li>Talks &amp; Workshops</li>
+                            <li>Interviews</li>
+                        </ul>
+                    </div>
+                    <model-viewer
+                        id="academia-avatar-3d"
+                        class="hero-avatar"
+                        src="assets/glb/academia_avatar.glb"
+                        alt="Rotating academic 3D avatar"
+                        auto-rotate
+                        auto-rotate-delay="0"
+                        rotation-per-second="12deg"
+                        camera-orbit="0deg 85deg auto"
+                        camera-target="auto auto auto"
+                        environment-image="neutral"
+                        exposure="1"
+                        shadow-intensity="0"
+                        interaction-prompt="none"
+                        loading="eager"
+                        reveal="auto"
+                    >
+                        <span slot="poster" class="academia-model-status">Loading 3D avatar…</span>
+                    </model-viewer>
+                </div>
+            </header>
 
-<script type="module" src="https://unpkg.com/@google/model-viewer@4.2.0/dist/model-viewer.min.js"></script>
+            <div class="results-background">
+                <!-- SEARCH BAR -->
 
+                <div class="search-container">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search title, author, keyword..."
+                        aria-label="Search publications and academic activities"
+                    />
 
-</head>
+                    <button id="searchButton" type="button">
+                        <i class="fas fa-search"></i>
+                        Search
+                    </button>
 
-<body class="publications-page">
-<a class="skip-link" href="#main-content">Skip to content</a>
+                    <!-- DOWNLOAD PDF -->
+                    <button
+                        id="downloadPublicationsBtn"
+                        class="download-publications-btn"
+                        type="button"
+                    >
+                        <i class="fas fa-file-pdf"></i>
+                        Download PDF
+                    </button>
 
-<nav class="navbar" aria-label="Main navigation">
-<a class="nav-signature" href="index.html">Bruno Senzio-Savino Barzellato</a>
-<div class="nav-menu">
+                    <!-- DOWNLOAD JAPANESE CV -->
+                    <a
+                        href="assets/cv/業績リスト＿センシオサビノバルセラトブルーノ.docx"
+                        download="業績リスト＿センシオサビノバルセラトブルーノ.docx"
+                        class="download-japanese-btn"
+                    >
+                        <i class="fas fa-file-word"></i>
+                        業績リスト
+                    </a>
+                </div>
 
-    <a href="index.html" class="nav-btn home-btn">
-        <i class="fas fa-house"></i>
-        Home
-    </a>
+                <!-- FILTERS -->
 
-    <a href="publications.html" class="nav-btn pub-btn" aria-current="page">
-        <i class="fas fa-book"></i>
-        Publications
-    </a>
+                <div class="filters">
+                    <select id="yearFilter" aria-label="Filter by year">
+                        <option value="all">All Years</option>
+                    </select>
 
-    <a href="projects.html" class="nav-btn project-btn">
-        <i class="fas fa-code"></i>
-        Projects
-    </a>
+                    <select id="typeFilter" aria-label="Filter by record type">
+                        <option value="all">All Types</option>
+                        <option value="Journal">Journal</option>
+                        <option value="Conference">Conference</option>
+                        <option value="Thesis">Thesis</option>
+                        <option value="Patent">Patent</option>
+                        <option value="Talk">Talk</option>
+                        <option value="Workshop">Workshop / Tutorial</option>
+                        <option value="Interview">Interview</option>
+                    </select>
 
-    <a href="blog.html" class="nav-btn blog-btn">
-        <i class="fas fa-gamepad"></i>
-        Blog
-    </a>
+                    <select id="languageFilter" aria-label="Filter by language">
+                        <option value="all">All Languages</option>
+                    </select>
 
-</div>
-<span class="nav-digital-life">Digital Life</span>
-</nav>
+                    <div class="keyword-row">
+                        <label for="keywordFilter">Keywords</label>
+                        <select id="keywordFilter" aria-label="Add keyword filter">
+                            <option value="all">Add a keyword…</option>
+                        </select>
+                        <div id="selectedKeywords"></div>
+                    </div>
+                </div>
 
-<main id="main-content">
-<header class="project-hero">
-<div class="hero-stars" aria-hidden="true"><span class="hero-star" style="--x:3%;--y:8%;--size:12px;--duration:7s;--delay:-1s"></span><span class="hero-star" style="--x:10%;--y:25%;--size:8px;--duration:8s;--delay:-4s"></span><span class="hero-star" style="--x:1%;--y:45%;--size:15px;--duration:9s;--delay:-2s"></span><span class="hero-star" style="--x:18%;--y:5%;--size:7px;--duration:6s;--delay:-5s"></span><span class="hero-star" style="--x:4%;--y:70%;--size:9px;--duration:8s;--delay:-6s"></span><span class="hero-star" style="--x:24%;--y:31%;--size:11px;--duration:10s;--delay:-3s"></span><span class="hero-star" style="--x:12%;--y:55%;--size:6px;--duration:7s;--delay:-2s"></span><span class="hero-star" style="--x:28%;--y:12%;--size:13px;--duration:9s;--delay:-7s"></span><span class="hero-star" style="--x:7%;--y:90%;--size:7px;--duration:8s;--delay:-3s"></span><span class="hero-star" style="--x:35%;--y:48%;--size:8px;--duration:10s;--delay:-5s"></span><span class="hero-star" style="--x:22%;--y:76%;--size:10px;--duration:7s;--delay:-4s"></span><span class="hero-star" style="--x:40%;--y:18%;--size:6px;--duration:8s;--delay:-1s"></span><span class="hero-star" style="--x:15%;--y:15%;--size:7px;--duration:11s;--delay:-8s"></span><span class="hero-star" style="--x:31%;--y:64%;--size:11px;--duration:9s;--delay:-1s"></span><span class="hero-star" style="--x:5%;--y:35%;--size:6px;--duration:6s;--delay:-3s"></span><span class="hero-star" style="--x:42%;--y:6%;--size:8px;--duration:10s;--delay:-7s"></span></div>
-  <div class="hero-layout">
-    <div>
-      <p class="eyebrow">Research &amp; exchange</p>
-      <h1>Publications &amp;<br>Academic Activities</h1>
-      <p class="hero-description">Explore research across intelligent systems, experimental hardware and interactive worlds. Browse publications, patents and academic activities, or download a selection.</p>
-      <ul class="topic-list" aria-label="Record categories"><li>Journal Articles</li><li>Conference Papers</li><li>Theses &amp; Patents</li><li>Talks &amp; Workshops</li><li>Interviews</li></ul>
-    </div>
-    <model-viewer id="academia-avatar-3d" class="hero-avatar"
-      src="assets/glb/academia_avatar.glb"
-      alt="Rotating academic 3D avatar"
-      auto-rotate auto-rotate-delay="0" rotation-per-second="12deg"
-      camera-orbit="0deg 85deg auto" camera-target="auto auto auto"
-      environment-image="neutral" exposure="1" shadow-intensity="0"
-      interaction-prompt="none" loading="eager" reveal="auto">
-      <span slot="poster" class="academia-model-status">Loading 3D avatar…</span>
-    </model-viewer>
-  </div>
-</header>
+                <!-- RESULTS COUNT -->
 
-<div class="results-background">
+                <p id="resultCount" role="status" aria-live="polite"></p>
 
-	<!-- SEARCH BAR -->
+                <!-- PUBLICATION CARDS -->
 
-	<div class="search-container">
+                <div class="carousel-wrapper">
+                    <button
+                        id="prevBtn"
+                        class="carousel-nav"
+                        hidden
+                        aria-hidden="true"
+                        tabindex="-1"
+                    >
+                        ❮
+                    </button>
 
-		<input
-			type="text"
-			id="searchInput"
-			placeholder="Search title, author, keyword..."
-            aria-label="Search publications and academic activities"
-		>
+                    <div id="publicationsContainer" class="carousel-container"></div>
 
-		<button id="searchButton" type="button">
-			<i class="fas fa-search"></i>
-			Search
-		</button>
+                    <button
+                        id="nextBtn"
+                        class="carousel-nav"
+                        hidden
+                        aria-hidden="true"
+                        tabindex="-1"
+                    >
+                        ❯
+                    </button>
+                </div>
+                <!-- CLOSE RESULTS BACKGROUND -->
+            </div>
+        </main>
+        <footer>
+            <div class="footer-links">
+                <a href="mailto:b.senzio@gmail.com" aria-label="Email Bruno">
+                    <i class="fas fa-envelope"></i>
+                </a>
 
-		<!-- DOWNLOAD PDF -->
-		<button
-			id="downloadPublicationsBtn"
-			class="download-publications-btn"
-			type="button"
-		>
-			<i class="fas fa-file-pdf"></i>
-			Download PDF
-		</button>
+                <a
+                    href="https://www.linkedin.com/in/bsenzio/"
+                    aria-label="LinkedIn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <i class="fab fa-linkedin"></i>
+                </a>
 
-		<!-- DOWNLOAD JAPANESE CV -->
-		<a
-			href="assets/cv/業績リスト＿センシオサビノバルセラトブルーノ.docx"
-			download="業績リスト＿センシオサビノバルセラトブルーノ.docx"
-			class="download-japanese-btn"
-		>
-			<i class="fas fa-file-word"></i>
-			業績リスト
-		</a>
+                <a
+                    href="https://github.com/Bsenzio"
+                    aria-label="GitHub"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <i class="fab fa-github"></i>
+                </a>
 
-	</div>
+                <a
+                    href="https://www.youtube.com/@Areshiones/videos"
+                    aria-label="YouTube"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
 
-	<!-- FILTERS -->
+            <p>Edge/AI · Game Development · XR · Robotics</p>
 
-	<div class="filters">
+            <p><span data-current-year></span> Bruno Senzio-Savino Barzellato</p>
 
-		<select id="yearFilter" aria-label="Filter by year">
-			<option value="all">All Years</option>
-		</select>
+            <figure class="tesla-reflection">
+                <blockquote cite="https://en.wikisource.org/wiki/My_Inventions">
+                    <p>
+                        “This is the difficult task of the inventor who is often misunderstood and
+                        unrewarded.”
+                    </p>
+                </blockquote>
+                <figcaption>
+                    — Nikola Tesla,
+                    <a
+                        href="https://en.wikisource.org/wiki/My_Inventions"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        ><cite>My Inventions</cite> (1919)</a
+                    >
+                </figcaption>
+                <a
+                    class="tesla-history"
+                    href="https://www.smithsonianmag.com/history/nikola-tesla-tower-that-became-million-dollar-folly-11074324/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Tesla’s financial struggles, Edison rivalry &amp; the fate of Wardenclyffe —
+                    Smithsonian ↗</a
+                >
+            </figure>
+        </footer>
 
-		<select id="typeFilter" aria-label="Filter by record type">
-			<option value="all">All Types</option>
-			<option value="Journal">Journal</option>
-			<option value="Conference">Conference</option>
-			<option value="Thesis">Thesis</option>
-			<option value="Patent">Patent</option>
-            <option value="Talk">Talk</option>
-            <option value="Workshop">Workshop / Tutorial</option>
-            <option value="Interview">Interview</option>
-		</select>
+        <!-- PDF Generation Library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-		<select id="languageFilter" aria-label="Filter by language">
-			<option value="all">All Languages</option>
-		</select>
+        <!-- Publications Database -->
 
-        <div class="keyword-row">
-            <label for="keywordFilter">Keywords</label>
-            <select id="keywordFilter" aria-label="Add keyword filter"><option value="all">Add a keyword…</option></select>
-            <div id="selectedKeywords"></div>
-        </div>
+        <!-- PDF Export -->
 
-	</div>
+        <!-- Fondo tecnológico -->
 
-	<!-- RESULTS COUNT -->
-
-	<p id="resultCount" role="status" aria-live="polite"></p>
-
-	<!-- PUBLICATION CARDS -->
-
-	<div class="carousel-wrapper">
-
-		<button id="prevBtn" class="carousel-nav" hidden aria-hidden="true" tabindex="-1">
-			❮
-		</button>
-
-		<div id="publicationsContainer" class="carousel-container">
-		</div>
-
-		<button id="nextBtn" class="carousel-nav" hidden aria-hidden="true" tabindex="-1">
-			❯
-		</button>
-
-	</div>
-<!-- CLOSE RESULTS BACKGROUND -->
-
-</div>
-
-</main>
-<footer>
-
-    <div class="footer-links">
-
-        <a href="mailto:b.senzio@gmail.com" aria-label="Email Bruno">
-            <i class="fas fa-envelope"></i>
-        </a>
-
-        <a href="https://www.linkedin.com/in/bsenzio/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-linkedin"></i>
-        </a>
-
-        <a href="https://github.com/Bsenzio" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-github"></i>
-        </a>
-
-        <a href="https://www.youtube.com/@Areshiones/videos" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-youtube"></i>
-        </a>
-
-    </div>
-
-    <p>
-        Edge/AI · Game Development · XR · Robotics
-    </p>
-
-	<p>
-		
-		<span data-current-year></span> Bruno Senzio-Savino Barzellato
-	</p>
-
-
-
-<figure class="tesla-reflection">
- <blockquote cite="https://en.wikisource.org/wiki/My_Inventions">
-  <p>“This is the difficult task of the inventor who is often misunderstood and unrewarded.”</p>
- </blockquote>
- <figcaption>— Nikola Tesla, <a href="https://en.wikisource.org/wiki/My_Inventions" target="_blank" rel="noopener noreferrer"><cite>My Inventions</cite> (1919)</a></figcaption>
- <a class="tesla-history" href="https://www.smithsonianmag.com/history/nikola-tesla-tower-that-became-million-dollar-folly-11074324/" target="_blank" rel="noopener noreferrer">Tesla’s financial struggles, Edison rivalry &amp; the fate of Wardenclyffe — Smithsonian ↗</a>
-</figure>
-</footer>
-
-<!-- PDF Generation Library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-<!-- Publications Database -->
-
-
-<!-- PDF Export -->
-
-
-<!-- Fondo tecnológico -->
-
-
-<script src="js/publications.js"></script></body>
+        <script src="js/publications.js"></script>
+    </body>
 </html>

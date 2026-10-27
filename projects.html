@@ -1,121 +1,468 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore Bruno Senzio-Savino's projects in artificial intelligence, XR, robotics, embedded systems and games.">
-  <title>Projects | Bruno Senzio-Savino</title>
-  <link rel="icon" type="image/png" href="assets/images/favicon.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/pages/projects.css">
-  
-<link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Orbitron:wght@500&amp;display=swap" rel="stylesheet">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Explore Bruno Senzio-Savino's projects in artificial intelligence, XR, robotics, embedded systems and games."
+        />
+        <title>Projects | Bruno Senzio-Savino</title>
+        <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/pages/projects.css" />
 
+        <link
+            href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Orbitron:wght@500&amp;display=swap"
+            rel="stylesheet"
+        />
 
-
-<script type="module" src="https://unpkg.com/@google/model-viewer@4.2.0/dist/model-viewer.min.js"></script>
-
-
-</head>
-<body class="projects-page">
-  <a class="skip-link" href="#main-content">Skip to content</a>
-  <nav class="navbar" aria-label="Main navigation">
-<a class="nav-signature" href="index.html">Bruno Senzio-Savino Barzellato</a>
-<div class="nav-menu">
-    <a href="index.html" class="nav-btn home-btn"><i class="fas fa-house" aria-hidden="true"></i> Home</a>
-    <a href="publications.html" class="nav-btn pub-btn"><i class="fas fa-book" aria-hidden="true"></i> Publications</a>
-    <a href="projects.html" class="nav-btn project-btn" aria-current="page"><i class="fas fa-code" aria-hidden="true"></i> Projects</a>
-    <a href="blog.html" class="nav-btn blog-btn"><i class="fas fa-gamepad" aria-hidden="true"></i> Blog</a>
-  </div>
-<span class="nav-digital-life">Digital Life</span>
-</nav>
-  <main id="main-content">
-    <header class="project-hero">
-      <div class="hero-stars" aria-hidden="true"><span class="hero-star" style="--x:3%;--y:8%;--size:12px;--duration:7s;--delay:-1s"></span><span class="hero-star" style="--x:10%;--y:25%;--size:8px;--duration:8s;--delay:-4s"></span><span class="hero-star" style="--x:1%;--y:45%;--size:15px;--duration:9s;--delay:-2s"></span><span class="hero-star" style="--x:18%;--y:5%;--size:7px;--duration:6s;--delay:-5s"></span><span class="hero-star" style="--x:4%;--y:70%;--size:9px;--duration:8s;--delay:-6s"></span><span class="hero-star" style="--x:24%;--y:31%;--size:11px;--duration:10s;--delay:-3s"></span><span class="hero-star" style="--x:12%;--y:55%;--size:6px;--duration:7s;--delay:-2s"></span><span class="hero-star" style="--x:28%;--y:12%;--size:13px;--duration:9s;--delay:-7s"></span><span class="hero-star" style="--x:7%;--y:90%;--size:7px;--duration:8s;--delay:-3s"></span><span class="hero-star" style="--x:35%;--y:48%;--size:8px;--duration:10s;--delay:-5s"></span><span class="hero-star" style="--x:22%;--y:76%;--size:10px;--duration:7s;--delay:-4s"></span><span class="hero-star" style="--x:40%;--y:18%;--size:6px;--duration:8s;--delay:-1s"></span><span class="hero-star" style="--x:15%;--y:15%;--size:7px;--duration:11s;--delay:-8s"></span><span class="hero-star" style="--x:31%;--y:64%;--size:11px;--duration:9s;--delay:-1s"></span><span class="hero-star" style="--x:5%;--y:35%;--size:6px;--duration:6s;--delay:-3s"></span><span class="hero-star" style="--x:42%;--y:6%;--size:8px;--duration:10s;--delay:-7s"></span></div>
-      <div class="hero-layout">
-        <div>
-          <p class="eyebrow">Ideas in orbit</p>
-          <h1>Project Galaxy</h1>
-          <p class="hero-description">Exploring the connections between research, engineering and play. Discover projects across intelligent systems, interactive worlds and experimental hardware.</p>
-          <ul class="topic-list" aria-label="Research areas"><li>Artificial Intelligence</li><li>XR</li><li>Robotics</li><li>Embedded Systems</li><li>Games</li></ul>
-          <div class="hero-actions">
-            <a class="hero-action" href="#explore">Explore the galaxy <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
-            <a class="hero-action secondary" href="https://github.com/Bsenzio" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-          </div>
-        </div>
-        <div class="hero-model-wrap">
-          <model-viewer id="projects-avatar-3d"
-            src="assets/glb/projects_avatar.glb"
-            alt="Bruno’s rotating 3D avatar"
-            auto-rotate auto-rotate-delay="0" rotation-per-second="12deg"
-            camera-orbit="0deg 85deg auto" camera-target="auto auto auto"
-            environment-image="neutral" exposure="1" shadow-intensity="0"
-            interaction-prompt="none" loading="eager" reveal="auto">
-          </model-viewer>
-          <span class="hero-model-status" role="status">Loading 3D avatar…</span>
-        </div>
-      </div>
-    </header>
-    <section class="explore-section" id="explore" aria-labelledby="explore-title">
-      <div class="section-toolbar">
-        <div><h2 id="explore-title">Your next discovery starts here</h2><p>Worlds in motion. Hover to hold their orbit; select one to explore.</p></div>
-        <button class="sound-button" id="soundToggle" type="button" aria-pressed="false" aria-label="Play background music"><i class="fas fa-volume-xmark" aria-hidden="true"></i><span>Sound off</span></button>
-      </div>
-      <div class="observatory" id="projectObservatory">
-        <div class="obs-toolbar">
-          <div class="obs-brand"><span class="obs-dot"></span> PROJECT OBSERVATORY <span class="obs-version">/ 01</span></div>
-          <div class="obs-views" aria-label="Project view"><button type="button" id="mapView" aria-pressed="true">Orbit map</button><button type="button" id="cardsView" aria-pressed="false">Collection</button></div>
-        </div>
-        <div id="categoryFilters" class="obs-filters" aria-label="Project categories"></div>
-        <div class="obs-layout">
-          <div class="obs-universe">
-            <div class="obs-map" id="orbitMap" aria-label="Interactive map of project categories">
-              <canvas id="starCanvas" aria-hidden="true"></canvas>
-              <svg class="obs-orbits" viewBox="0 0 800 640" preserveAspectRatio="none" aria-hidden="true"><ellipse cx="400" cy="320" rx="270" ry="210"/><ellipse cx="400" cy="320" rx="310" ry="250"/><ellipse cx="400" cy="320" rx="190" ry="145"/><path d="M400 30V610 M40 320H760"/></svg>
-              <div class="obs-map-top"><span id="mapBreadcrumb">THE COMPLETE SYSTEM</span><span>SELECT A WORLD</span></div>
-              <div id="mapNodes"></div>
-<div class="obs-space-visitors" aria-hidden="true">
- <span class="obs-visitor obs-visitor-ufo"><svg viewBox="0 0 100 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M27 35C27 6 73 6 73 35" fill="#a4e6f230" stroke="#a1e7ef" stroke-width="1.5"/><ellipse cx="50" cy="27" rx="11" ry="13" fill="#8ddbaa"/><path d="M42 24q7 0 6 6-5 0-6-6m16 0q-7 0-6 6 5 0 6-6" fill="#112f3b"/><path d="m46 34 8 0" stroke="#31605d" stroke-width="1.5"/><ellipse cx="50" cy="39" rx="41" ry="11" fill="#31556d" stroke="#a1c8dc" stroke-width="1.5"/><path d="M13 41q37 23 74 0" fill="#142d45" stroke="#89afc6"/><ellipse cx="50" cy="38" rx="28" ry="4" fill="#67c8c733"/><g fill="#b8f6ce"><circle cx="27" cy="43" r="2"/><circle cx="42" cy="47" r="2"/><circle cx="58" cy="47" r="2"/><circle cx="73" cy="43" r="2"/></g></svg></span>
- <span class="obs-visitor obs-visitor-ship"><svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m32 25-28 5 28 5" fill="#78ddf177"/><path d="m32 28-17 2 17 2" fill="#efffff"/><path d="m35 23-8-15 24 11 36 5 22 6-22 6-36 5-24 11 8-15z" fill="#829fb9" stroke="#d2e1ef" stroke-width="1.2"/><path d="m51 19 23-10 12 15m-35 17 23 10 12-15" fill="#365571" stroke="#acc7dd"/><path d="m64 24 24 6-24 6-9-6z" fill="#133649" stroke="#8edfe9"/><path d="m65 26 12 4-12 4" fill="#80dbe5"/><path d="m38 30 12 0" stroke="#e8c789" stroke-width="2"/></svg></span>
- <span class="obs-visitor obs-visitor-scout"><svg viewBox="0 0 100 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M27 35C27 6 73 6 73 35" fill="#a4e6f230" stroke="#a1e7ef" stroke-width="1.5"/><ellipse cx="50" cy="27" rx="11" ry="13" fill="#8ddbaa"/><path d="M42 24q7 0 6 6-5 0-6-6m16 0q-7 0-6 6 5 0 6-6" fill="#112f3b"/><path d="m46 34 8 0" stroke="#31605d" stroke-width="1.5"/><ellipse cx="50" cy="39" rx="41" ry="11" fill="#31556d" stroke="#a1c8dc" stroke-width="1.5"/><path d="M13 41q37 23 74 0" fill="#142d45" stroke="#89afc6"/><ellipse cx="50" cy="38" rx="28" ry="4" fill="#67c8c733"/><g fill="#b8f6ce"><circle cx="27" cy="43" r="2"/><circle cx="42" cy="47" r="2"/><circle cx="58" cy="47" r="2"/><circle cx="73" cy="43" r="2"/></g></svg></span>
-</div>
-              <div class="obs-coordinate" aria-hidden="true">RESEARCH × ENGINEERING × PLAY</div>
+        <script
+            type="module"
+            src="https://unpkg.com/@google/model-viewer@4.2.0/dist/model-viewer.min.js"
+        ></script>
+    </head>
+    <body class="projects-page">
+        <a class="skip-link" href="#main-content">Skip to content</a>
+        <nav class="navbar" aria-label="Main navigation">
+            <a class="nav-signature" href="index.html">Bruno Senzio-Savino Barzellato</a>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-btn home-btn"
+                    ><i class="fas fa-house" aria-hidden="true"></i> Home</a
+                >
+                <a href="publications.html" class="nav-btn pub-btn"
+                    ><i class="fas fa-book" aria-hidden="true"></i> Publications</a
+                >
+                <a href="projects.html" class="nav-btn project-btn" aria-current="page"
+                    ><i class="fas fa-code" aria-hidden="true"></i> Projects</a
+                >
+                <a href="blog.html" class="nav-btn blog-btn"
+                    ><i class="fas fa-gamepad" aria-hidden="true"></i> Blog</a
+                >
             </div>
-            <div id="projectCollection" class="obs-collection" hidden></div>
-            <div class="obs-status"><span id="projectStatus" role="status" aria-live="polite"></span><span class="obs-legend"><i></i> Selected <i></i> Explore</span></div>
-          </div>
-          <aside class="obs-inspector" id="projectInspector" style="scroll-margin-top:90px" aria-label="Project details"></aside>
+            <span class="nav-digital-life">Digital Life</span>
+        </nav>
+        <main id="main-content">
+            <header class="project-hero">
+                <div class="hero-stars" aria-hidden="true">
+                    <span
+                        class="hero-star"
+                        style="--x: 3%; --y: 8%; --size: 12px; --duration: 7s; --delay: -1s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 10%; --y: 25%; --size: 8px; --duration: 8s; --delay: -4s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 1%; --y: 45%; --size: 15px; --duration: 9s; --delay: -2s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 18%; --y: 5%; --size: 7px; --duration: 6s; --delay: -5s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 4%; --y: 70%; --size: 9px; --duration: 8s; --delay: -6s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 24%; --y: 31%; --size: 11px; --duration: 10s; --delay: -3s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 12%; --y: 55%; --size: 6px; --duration: 7s; --delay: -2s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 28%; --y: 12%; --size: 13px; --duration: 9s; --delay: -7s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 7%; --y: 90%; --size: 7px; --duration: 8s; --delay: -3s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 35%; --y: 48%; --size: 8px; --duration: 10s; --delay: -5s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 22%; --y: 76%; --size: 10px; --duration: 7s; --delay: -4s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 40%; --y: 18%; --size: 6px; --duration: 8s; --delay: -1s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 15%; --y: 15%; --size: 7px; --duration: 11s; --delay: -8s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 31%; --y: 64%; --size: 11px; --duration: 9s; --delay: -1s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 5%; --y: 35%; --size: 6px; --duration: 6s; --delay: -3s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 42%; --y: 6%; --size: 8px; --duration: 10s; --delay: -7s"
+                    ></span>
+                </div>
+                <div class="hero-layout">
+                    <div>
+                        <p class="eyebrow">Ideas in orbit</p>
+                        <h1>Project Galaxy</h1>
+                        <p class="hero-description">
+                            Exploring the connections between research, engineering and play.
+                            Discover projects across intelligent systems, interactive worlds and
+                            experimental hardware.
+                        </p>
+                        <ul class="topic-list" aria-label="Research areas">
+                            <li>Artificial Intelligence</li>
+                            <li>XR</li>
+                            <li>Robotics</li>
+                            <li>Embedded Systems</li>
+                            <li>Games</li>
+                        </ul>
+                        <div class="hero-actions">
+                            <a class="hero-action" href="#explore"
+                                >Explore the galaxy
+                                <i class="fas fa-arrow-down" aria-hidden="true"></i
+                            ></a>
+                            <a
+                                class="hero-action secondary"
+                                href="https://github.com/Bsenzio"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                ><i class="fab fa-github" aria-hidden="true"></i> GitHub
+                                <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i
+                            ></a>
+                        </div>
+                    </div>
+                    <div class="hero-model-wrap">
+                        <model-viewer
+                            id="projects-avatar-3d"
+                            src="assets/glb/projects_avatar.glb"
+                            alt="Bruno’s rotating 3D avatar"
+                            auto-rotate
+                            auto-rotate-delay="0"
+                            rotation-per-second="12deg"
+                            camera-orbit="0deg 85deg auto"
+                            camera-target="auto auto auto"
+                            environment-image="neutral"
+                            exposure="1"
+                            shadow-intensity="0"
+                            interaction-prompt="none"
+                            loading="eager"
+                            reveal="auto"
+                        >
+                        </model-viewer>
+                        <span class="hero-model-status" role="status">Loading 3D avatar…</span>
+                    </div>
+                </div>
+            </header>
+            <section class="explore-section" id="explore" aria-labelledby="explore-title">
+                <div class="section-toolbar">
+                    <div>
+                        <h2 id="explore-title">Your next discovery starts here</h2>
+                        <p>Worlds in motion. Hover to hold their orbit; select one to explore.</p>
+                    </div>
+                    <button
+                        class="sound-button"
+                        id="soundToggle"
+                        type="button"
+                        aria-pressed="false"
+                        aria-label="Play background music"
+                    >
+                        <i class="fas fa-volume-xmark" aria-hidden="true"></i><span>Sound off</span>
+                    </button>
+                </div>
+                <div class="observatory" id="projectObservatory">
+                    <div class="obs-toolbar">
+                        <div class="obs-brand">
+                            <span class="obs-dot"></span> PROJECT OBSERVATORY
+                            <span class="obs-version">/ 01</span>
+                        </div>
+                        <div class="obs-views" aria-label="Project view">
+                            <button type="button" id="mapView" aria-pressed="true">Orbit map</button
+                            ><button type="button" id="cardsView" aria-pressed="false">
+                                Collection
+                            </button>
+                        </div>
+                    </div>
+                    <div
+                        id="categoryFilters"
+                        class="obs-filters"
+                        aria-label="Project categories"
+                    ></div>
+                    <div class="obs-layout">
+                        <div class="obs-universe">
+                            <div
+                                class="obs-map"
+                                id="orbitMap"
+                                aria-label="Interactive map of project categories"
+                            >
+                                <canvas id="starCanvas" aria-hidden="true"></canvas>
+                                <svg
+                                    class="obs-orbits"
+                                    viewBox="0 0 800 640"
+                                    preserveAspectRatio="none"
+                                    aria-hidden="true"
+                                >
+                                    <ellipse cx="400" cy="320" rx="270" ry="210" />
+                                    <ellipse cx="400" cy="320" rx="310" ry="250" />
+                                    <ellipse cx="400" cy="320" rx="190" ry="145" />
+                                    <path d="M400 30V610 M40 320H760" />
+                                </svg>
+                                <div class="obs-map-top">
+                                    <span id="mapBreadcrumb">THE COMPLETE SYSTEM</span
+                                    ><span>SELECT A WORLD</span>
+                                </div>
+                                <div id="mapNodes"></div>
+                                <div class="obs-space-visitors" aria-hidden="true">
+                                    <span class="obs-visitor obs-visitor-ufo"
+                                        ><svg
+                                            viewBox="0 0 100 64"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M27 35C27 6 73 6 73 35"
+                                                fill="#a4e6f230"
+                                                stroke="#a1e7ef"
+                                                stroke-width="1.5"
+                                            />
+                                            <ellipse
+                                                cx="50"
+                                                cy="27"
+                                                rx="11"
+                                                ry="13"
+                                                fill="#8ddbaa"
+                                            />
+                                            <path
+                                                d="M42 24q7 0 6 6-5 0-6-6m16 0q-7 0-6 6 5 0 6-6"
+                                                fill="#112f3b"
+                                            />
+                                            <path
+                                                d="m46 34 8 0"
+                                                stroke="#31605d"
+                                                stroke-width="1.5"
+                                            />
+                                            <ellipse
+                                                cx="50"
+                                                cy="39"
+                                                rx="41"
+                                                ry="11"
+                                                fill="#31556d"
+                                                stroke="#a1c8dc"
+                                                stroke-width="1.5"
+                                            />
+                                            <path
+                                                d="M13 41q37 23 74 0"
+                                                fill="#142d45"
+                                                stroke="#89afc6"
+                                            />
+                                            <ellipse
+                                                cx="50"
+                                                cy="38"
+                                                rx="28"
+                                                ry="4"
+                                                fill="#67c8c733"
+                                            />
+                                            <g fill="#b8f6ce">
+                                                <circle cx="27" cy="43" r="2" />
+                                                <circle cx="42" cy="47" r="2" />
+                                                <circle cx="58" cy="47" r="2" />
+                                                <circle cx="73" cy="43" r="2" />
+                                            </g></svg
+                                    ></span>
+                                    <span class="obs-visitor obs-visitor-ship"
+                                        ><svg
+                                            viewBox="0 0 120 60"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path d="m32 25-28 5 28 5" fill="#78ddf177" />
+                                            <path d="m32 28-17 2 17 2" fill="#efffff" />
+                                            <path
+                                                d="m35 23-8-15 24 11 36 5 22 6-22 6-36 5-24 11 8-15z"
+                                                fill="#829fb9"
+                                                stroke="#d2e1ef"
+                                                stroke-width="1.2"
+                                            />
+                                            <path
+                                                d="m51 19 23-10 12 15m-35 17 23 10 12-15"
+                                                fill="#365571"
+                                                stroke="#acc7dd"
+                                            />
+                                            <path
+                                                d="m64 24 24 6-24 6-9-6z"
+                                                fill="#133649"
+                                                stroke="#8edfe9"
+                                            />
+                                            <path d="m65 26 12 4-12 4" fill="#80dbe5" />
+                                            <path
+                                                d="m38 30 12 0"
+                                                stroke="#e8c789"
+                                                stroke-width="2"
+                                            /></svg
+                                    ></span>
+                                    <span class="obs-visitor obs-visitor-scout"
+                                        ><svg
+                                            viewBox="0 0 100 64"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M27 35C27 6 73 6 73 35"
+                                                fill="#a4e6f230"
+                                                stroke="#a1e7ef"
+                                                stroke-width="1.5"
+                                            />
+                                            <ellipse
+                                                cx="50"
+                                                cy="27"
+                                                rx="11"
+                                                ry="13"
+                                                fill="#8ddbaa"
+                                            />
+                                            <path
+                                                d="M42 24q7 0 6 6-5 0-6-6m16 0q-7 0-6 6 5 0 6-6"
+                                                fill="#112f3b"
+                                            />
+                                            <path
+                                                d="m46 34 8 0"
+                                                stroke="#31605d"
+                                                stroke-width="1.5"
+                                            />
+                                            <ellipse
+                                                cx="50"
+                                                cy="39"
+                                                rx="41"
+                                                ry="11"
+                                                fill="#31556d"
+                                                stroke="#a1c8dc"
+                                                stroke-width="1.5"
+                                            />
+                                            <path
+                                                d="M13 41q37 23 74 0"
+                                                fill="#142d45"
+                                                stroke="#89afc6"
+                                            />
+                                            <ellipse
+                                                cx="50"
+                                                cy="38"
+                                                rx="28"
+                                                ry="4"
+                                                fill="#67c8c733"
+                                            />
+                                            <g fill="#b8f6ce">
+                                                <circle cx="27" cy="43" r="2" />
+                                                <circle cx="42" cy="47" r="2" />
+                                                <circle cx="58" cy="47" r="2" />
+                                                <circle cx="73" cy="43" r="2" />
+                                            </g></svg
+                                    ></span>
+                                </div>
+                                <div class="obs-coordinate" aria-hidden="true">
+                                    RESEARCH × ENGINEERING × PLAY
+                                </div>
+                            </div>
+                            <div id="projectCollection" class="obs-collection" hidden></div>
+                            <div class="obs-status">
+                                <span id="projectStatus" role="status" aria-live="polite"></span
+                                ><span class="obs-legend"><i></i> Selected <i></i> Explore</span>
+                            </div>
+                        </div>
+                        <aside
+                            class="obs-inspector"
+                            id="projectInspector"
+                            style="scroll-margin-top: 90px"
+                            aria-label="Project details"
+                        ></aside>
+                    </div>
+                </div>
+                <noscript
+                    ><p>
+                        Enable JavaScript to explore the interactive galaxy. You can also visit
+                        <a href="https://github.com/Bsenzio">my GitHub projects</a>.
+                    </p></noscript
+                >
+            </section>
+        </main>
+        <div class="left-character" aria-hidden="true">
+            <img src="assets/bg-images/spacesuit.png" alt="" loading="lazy" />
         </div>
-      </div>
-      <noscript><p>Enable JavaScript to explore the interactive galaxy. You can also visit <a href="https://github.com/Bsenzio">my GitHub projects</a>.</p></noscript>
-    </section>
-  </main>
-  <div class="left-character" aria-hidden="true"><img src="assets/bg-images/spacesuit.png" alt="" loading="lazy"></div>
-  <footer>
-    <div class="footer-links">
-      <a href="mailto:b.senzio@gmail.com" aria-label="Email Bruno"><i class="fas fa-envelope" aria-hidden="true"></i></a>
-      <a href="https://www.linkedin.com/in/bsenzio/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-      <a href="https://github.com/Bsenzio" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
-      <a href="https://www.youtube.com/@Areshiones/videos" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
-    </div>
-    <p>Edge AI · Game Development · XR · Robotics</p>
-    <p>© <span id="copyrightYear"></span> Bruno Senzio-Savino Barzellato</p>
-  
-<figure class="tesla-reflection">
- <blockquote cite="https://en.wikisource.org/wiki/My_Inventions">
-  <p>“This is the difficult task of the inventor who is often misunderstood and unrewarded.”</p>
- </blockquote>
- <figcaption>— Nikola Tesla, <a href="https://en.wikisource.org/wiki/My_Inventions" target="_blank" rel="noopener noreferrer"><cite>My Inventions</cite> (1919)</a></figcaption>
- <a class="tesla-history" href="https://www.smithsonianmag.com/history/nikola-tesla-tower-that-became-million-dollar-folly-11074324/" target="_blank" rel="noopener noreferrer">Tesla’s financial struggles, Edison rivalry &amp; the fate of Wardenclyffe — Smithsonian ↗</a>
-</figure>
-</footer>
-  <audio id="bgm" loop autoplay preload="auto"><source src="assets/audio/bgm/space_bgm.mp3" type="audio/mpeg"></audio>
-  
-  
-  
-  
+        <footer>
+            <div class="footer-links">
+                <a href="mailto:b.senzio@gmail.com" aria-label="Email Bruno"
+                    ><i class="fas fa-envelope" aria-hidden="true"></i
+                ></a>
+                <a
+                    href="https://www.linkedin.com/in/bsenzio/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    ><i class="fab fa-linkedin" aria-hidden="true"></i
+                ></a>
+                <a
+                    href="https://github.com/Bsenzio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                    ><i class="fab fa-github" aria-hidden="true"></i
+                ></a>
+                <a
+                    href="https://www.youtube.com/@Areshiones/videos"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="YouTube"
+                    ><i class="fab fa-youtube" aria-hidden="true"></i
+                ></a>
+            </div>
+            <p>Edge AI · Game Development · XR · Robotics</p>
+            <p>© <span id="copyrightYear"></span> Bruno Senzio-Savino Barzellato</p>
 
-<script src="js/projects.js"></script></body>
+            <figure class="tesla-reflection">
+                <blockquote cite="https://en.wikisource.org/wiki/My_Inventions">
+                    <p>
+                        “This is the difficult task of the inventor who is often misunderstood and
+                        unrewarded.”
+                    </p>
+                </blockquote>
+                <figcaption>
+                    — Nikola Tesla,
+                    <a
+                        href="https://en.wikisource.org/wiki/My_Inventions"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        ><cite>My Inventions</cite> (1919)</a
+                    >
+                </figcaption>
+                <a
+                    class="tesla-history"
+                    href="https://www.smithsonianmag.com/history/nikola-tesla-tower-that-became-million-dollar-folly-11074324/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Tesla’s financial struggles, Edison rivalry &amp; the fate of Wardenclyffe —
+                    Smithsonian ↗</a
+                >
+            </figure>
+        </footer>
+        <audio id="bgm" loop autoplay preload="auto">
+            <source src="assets/audio/bgm/space_bgm.mp3" type="audio/mpeg" />
+        </audio>
+
+        <script src="js/projects.js"></script>
+    </body>
 </html>

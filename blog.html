@@ -1,103 +1,323 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Personal notes and ideas by Bruno Senzio-Savino on technology, research and creative exploration.">
-<title>Blog | Bruno Senzio-Savino</title>
-<link rel="icon" href="assets/images/favicon.png">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/pages/blog.css">
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Personal notes and ideas by Bruno Senzio-Savino on technology, research and creative exploration."
+        />
+        <title>Blog | Bruno Senzio-Savino</title>
+        <link rel="icon" href="assets/images/favicon.png" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/pages/blog.css" />
 
+        <link
+            href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Orbitron:wght@500&amp;display=swap"
+            rel="stylesheet"
+        />
 
-<link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Orbitron:wght@500&amp;display=swap" rel="stylesheet">
+        <script
+            type="module"
+            src="https://unpkg.com/@google/model-viewer@4.2.0/dist/model-viewer.min.js"
+        ></script>
+    </head>
+    <body class="personal-blog">
+        <a class="skip-link" href="#main-content">Skip to content</a>
+        <nav class="navbar" aria-label="Main navigation">
+            <a class="nav-signature" href="index.html">Bruno Senzio-Savino Barzellato</a>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-btn home-btn"
+                    ><i class="fas fa-house" aria-hidden="true"></i> Home</a
+                >
+                <a href="publications.html" class="nav-btn pub-btn"
+                    ><i class="fas fa-book" aria-hidden="true"></i> Publications</a
+                >
+                <a href="projects.html" class="nav-btn project-btn"
+                    ><i class="fas fa-code" aria-hidden="true"></i> Projects</a
+                >
+                <a href="blog.html" class="nav-btn blog-btn" aria-current="page"
+                    ><i class="fas fa-gamepad" aria-hidden="true"></i> Blog</a
+                >
+            </div>
+            <span class="nav-digital-life">Digital Life</span>
+        </nav>
+        <main id="main-content">
+            <header class="project-hero">
+                <div class="hero-stars" aria-hidden="true">
+                    <span
+                        class="hero-star"
+                        style="--x: 3%; --y: 8%; --size: 12px; --duration: 7s; --delay: -1s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 10%; --y: 25%; --size: 8px; --duration: 8s; --delay: -4s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 1%; --y: 45%; --size: 15px; --duration: 9s; --delay: -2s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 18%; --y: 5%; --size: 7px; --duration: 6s; --delay: -5s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 4%; --y: 70%; --size: 9px; --duration: 8s; --delay: -6s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 24%; --y: 31%; --size: 11px; --duration: 10s; --delay: -3s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 12%; --y: 55%; --size: 6px; --duration: 7s; --delay: -2s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 28%; --y: 12%; --size: 13px; --duration: 9s; --delay: -7s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 7%; --y: 90%; --size: 7px; --duration: 8s; --delay: -3s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 35%; --y: 48%; --size: 8px; --duration: 10s; --delay: -5s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 22%; --y: 76%; --size: 10px; --duration: 7s; --delay: -4s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 40%; --y: 18%; --size: 6px; --duration: 8s; --delay: -1s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 15%; --y: 15%; --size: 7px; --duration: 11s; --delay: -8s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 31%; --y: 64%; --size: 11px; --duration: 9s; --delay: -1s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 5%; --y: 35%; --size: 6px; --duration: 6s; --delay: -3s"
+                    ></span
+                    ><span
+                        class="hero-star"
+                        style="--x: 42%; --y: 6%; --size: 8px; --duration: 10s; --delay: -7s"
+                    ></span>
+                </div>
+                <div class="hero-layout">
+                    <div>
+                        <p class="eyebrow">Notes from the journey</p>
+                        <h1>Ideas, experiments<br />&amp; stories.</h1>
+                        <p class="hero-description">
+                            Personal notes on technology, research and the ideas that connect them.
+                            A space for curiosity, reflection and work in progress.
+                        </p>
+                        <ul class="topic-list">
+                            <li>Technology</li>
+                            <li>Research</li>
+                            <li>Creative Exploration</li>
+                        </ul>
+                    </div>
+                    <model-viewer
+                        id="blogs-avatar-3d"
+                        class="hero-avatar"
+                        src="assets/glb/blogs_avatar.glb"
+                        alt="Rotating 3D blog avatar"
+                        auto-rotate
+                        auto-rotate-delay="0"
+                        rotation-per-second="12deg"
+                        camera-orbit="0deg 85deg auto"
+                        camera-target="auto auto auto"
+                        environment-image="neutral"
+                        exposure="1"
+                        shadow-intensity="0"
+                        interaction-prompt="none"
+                        loading="eager"
+                        reveal="auto"
+                    >
+                        <span slot="poster" class="blog-model-status">Loading 3D avatar…</span>
+                    </model-viewer>
+                </div>
+            </header>
+            <section class="blog-area" aria-label="Personal blog">
+                <div id="blogListing">
+                    <div class="blog-tools" role="search" aria-label="Find a story">
+                        <input
+                            id="blogSearch"
+                            type="search"
+                            placeholder="Search stories, keywords, languages or dates…"
+                            aria-label="Search stories"
+                        />
+                        <select id="blogTopic" aria-label="Filter by topic">
+                            <option value="all">All topics</option>
+                        </select>
+                        <select id="blogLanguage" aria-label="Filter by original language">
+                            <option value="all">All languages</option>
+                            <option value="es">Español</option>
+                            <option value="en">English</option>
+                            <option value="ja">日本語</option>
+                        </select>
+                        <label class="blog-date-filter"
+                            >From<input id="blogDateFrom" type="date" aria-label="From date"
+                        /></label>
+                        <label class="blog-date-filter"
+                            >To<input id="blogDateTo" type="date" aria-label="To date"
+                        /></label>
+                        <button id="blogResetFilters" type="button" class="blog-reset-filters">
+                            Clear filters
+                        </button>
+                        <div class="blog-keyword-row">
+                            <label for="blogKeyword">Keywords</label
+                            ><select id="blogKeyword">
+                                <option value="">Add a keyword…</option>
+                            </select>
+                            <div
+                                id="blogSelectedKeywords"
+                                class="blog-selected-keywords"
+                                aria-label="Selected keywords"
+                            ></div>
+                        </div>
+                    </div>
+                    <p class="blog-count" id="blogCount" role="status" aria-live="polite"></p>
+                    <div class="carousel-heading">
+                        <div>
+                            <span class="carousel-kicker">THE STORY COLLECTION</span>
+                            <h2>Explore the stories</h2>
+                        </div>
+                        <div class="carousel-controls">
+                            <button id="carouselPrev" type="button" aria-label="Previous story">
+                                ←</button
+                            ><button id="carouselNext" type="button" aria-label="Next story">
+                                →
+                            </button>
+                        </div>
+                    </div>
+                    <div
+                        id="blogGrid"
+                        class="blog-grid"
+                        role="region"
+                        aria-roledescription="carousel"
+                        aria-label="Blog stories"
+                        tabindex="0"
+                    ></div>
+                    <div class="carousel-footer">
+                        <span id="carouselPosition" aria-live="polite"></span>
+                        <div
+                            id="carouselDots"
+                            class="carousel-dots"
+                            aria-label="Choose a story"
+                        ></div>
+                        <span class="carousel-hint"
+                            >SWIPE OR USE ARROWS <span aria-hidden="true">↗</span></span
+                        >
+                    </div>
+                </div>
+                <article id="storyReader" class="story-reader" hidden aria-labelledby="storyTitle">
+                    <a class="reader-back" href="#"
+                        ><i class="fas fa-arrow-left" aria-hidden="true"></i> All stories</a
+                    >
+                    <div class="reader-language-bar">
+                        <div id="storyReaderCover" class="reader-title-cover" hidden></div>
+                        <button
+                            id="storyLanguage"
+                            type="button"
+                            class="story-language-button"
+                            aria-label="Language: Español. Switch to English"
+                            disabled
+                        >
+                            Español
+                        </button>
+                        <span
+                            id="translationStatus"
+                            class="translation-status"
+                            role="status"
+                            aria-live="polite"
+                            hidden
+                        ></span>
+                    </div>
+                    <p id="storyTopic" class="story-topic"></p>
+                    <h2 id="storyTitle" tabindex="-1"></h2>
+                    <p id="storyExcerpt" class="reader-excerpt"></p>
+                    <div id="storyContent" class="reader-content"></div>
+                </article>
+                <noscript
+                    ><p class="story-note">
+                        Enable JavaScript to browse the stories and open the reader.
+                    </p></noscript
+                >
+            </section>
+        </main>
+        <footer>
+            <div class="footer-links">
+                <a href="mailto:b.senzio@gmail.com" aria-label="Email Bruno"
+                    ><i class="fas fa-envelope" aria-hidden="true"></i
+                ></a>
+                <a
+                    href="https://www.linkedin.com/in/bsenzio/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    ><i class="fab fa-linkedin" aria-hidden="true"></i
+                ></a>
+                <a
+                    href="https://github.com/Bsenzio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                    ><i class="fab fa-github" aria-hidden="true"></i
+                ></a>
+                <a
+                    href="https://www.youtube.com/@Areshiones/videos"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="YouTube"
+                    ><i class="fab fa-youtube" aria-hidden="true"></i
+                ></a>
+            </div>
+            <p>Edge AI · Game Development · XR · Robotics</p>
+            <p>© <span id="copyrightYear"></span> Bruno Senzio-Savino Barzellato</p>
 
+            <figure class="tesla-reflection">
+                <blockquote cite="https://en.wikisource.org/wiki/My_Inventions">
+                    <p>
+                        “This is the difficult task of the inventor who is often misunderstood and
+                        unrewarded.”
+                    </p>
+                </blockquote>
+                <figcaption>
+                    — Nikola Tesla,
+                    <a
+                        href="https://en.wikisource.org/wiki/My_Inventions"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        ><cite>My Inventions</cite> (1919)</a
+                    >
+                </figcaption>
+                <a
+                    class="tesla-history"
+                    href="https://www.smithsonianmag.com/history/nikola-tesla-tower-that-became-million-dollar-folly-11074324/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Tesla’s financial struggles, Edison rivalry &amp; the fate of Wardenclyffe —
+                    Smithsonian ↗</a
+                >
+            </figure>
+        </footer>
 
-
-<script type="module" src="https://unpkg.com/@google/model-viewer@4.2.0/dist/model-viewer.min.js"></script>
-
-
-
-
-
-
-
-</head><body class="personal-blog">
-<a class="skip-link" href="#main-content">Skip to content</a>
-<nav class="navbar" aria-label="Main navigation">
-<a class="nav-signature" href="index.html">Bruno Senzio-Savino Barzellato</a>
-<div class="nav-menu">
-    <a href="index.html" class="nav-btn home-btn"><i class="fas fa-house" aria-hidden="true"></i> Home</a>
-    <a href="publications.html" class="nav-btn pub-btn"><i class="fas fa-book" aria-hidden="true"></i> Publications</a>
-    <a href="projects.html" class="nav-btn project-btn"><i class="fas fa-code" aria-hidden="true"></i> Projects</a>
-    <a href="blog.html" class="nav-btn blog-btn" aria-current="page"><i class="fas fa-gamepad" aria-hidden="true"></i> Blog</a>
-  </div>
-<span class="nav-digital-life">Digital Life</span>
-</nav>
-<main id="main-content">
-<header class="project-hero"><div class="hero-stars" aria-hidden="true"><span class="hero-star" style="--x:3%;--y:8%;--size:12px;--duration:7s;--delay:-1s"></span><span class="hero-star" style="--x:10%;--y:25%;--size:8px;--duration:8s;--delay:-4s"></span><span class="hero-star" style="--x:1%;--y:45%;--size:15px;--duration:9s;--delay:-2s"></span><span class="hero-star" style="--x:18%;--y:5%;--size:7px;--duration:6s;--delay:-5s"></span><span class="hero-star" style="--x:4%;--y:70%;--size:9px;--duration:8s;--delay:-6s"></span><span class="hero-star" style="--x:24%;--y:31%;--size:11px;--duration:10s;--delay:-3s"></span><span class="hero-star" style="--x:12%;--y:55%;--size:6px;--duration:7s;--delay:-2s"></span><span class="hero-star" style="--x:28%;--y:12%;--size:13px;--duration:9s;--delay:-7s"></span><span class="hero-star" style="--x:7%;--y:90%;--size:7px;--duration:8s;--delay:-3s"></span><span class="hero-star" style="--x:35%;--y:48%;--size:8px;--duration:10s;--delay:-5s"></span><span class="hero-star" style="--x:22%;--y:76%;--size:10px;--duration:7s;--delay:-4s"></span><span class="hero-star" style="--x:40%;--y:18%;--size:6px;--duration:8s;--delay:-1s"></span><span class="hero-star" style="--x:15%;--y:15%;--size:7px;--duration:11s;--delay:-8s"></span><span class="hero-star" style="--x:31%;--y:64%;--size:11px;--duration:9s;--delay:-1s"></span><span class="hero-star" style="--x:5%;--y:35%;--size:6px;--duration:6s;--delay:-3s"></span><span class="hero-star" style="--x:42%;--y:6%;--size:8px;--duration:10s;--delay:-7s"></span></div><div class="hero-layout"><div>
-<p class="eyebrow">Notes from the journey</p>
-<h1>Ideas, experiments<br>&amp; stories.</h1>
-<p class="hero-description">Personal notes on technology, research and the ideas that connect them. A space for curiosity, reflection and work in progress.</p>
-<ul class="topic-list"><li>Technology</li><li>Research</li><li>Creative Exploration</li></ul>
-</div><model-viewer id="blogs-avatar-3d" class="hero-avatar"
- src="assets/glb/blogs_avatar.glb" alt="Rotating 3D blog avatar"
- auto-rotate auto-rotate-delay="0" rotation-per-second="12deg"
- camera-orbit="0deg 85deg auto" camera-target="auto auto auto"
- environment-image="neutral" exposure="1" shadow-intensity="0"
- interaction-prompt="none" loading="eager" reveal="auto">
- <span slot="poster" class="blog-model-status">Loading 3D avatar…</span>
-</model-viewer></div></header>
-<section class="blog-area" aria-label="Personal blog">
-<div id="blogListing">
-<div class="blog-tools" role="search" aria-label="Find a story">
-<input id="blogSearch" type="search" placeholder="Search stories, keywords, languages or dates…" aria-label="Search stories">
-<select id="blogTopic" aria-label="Filter by topic"><option value="all">All topics</option></select>
-<select id="blogLanguage" aria-label="Filter by original language">
-<option value="all">All languages</option><option value="es">Español</option><option value="en">English</option><option value="ja">日本語</option>
-</select>
-<label class="blog-date-filter">From<input id="blogDateFrom" type="date" aria-label="From date"></label>
-<label class="blog-date-filter">To<input id="blogDateTo" type="date" aria-label="To date"></label>
-<button id="blogResetFilters" type="button" class="blog-reset-filters">Clear filters</button>
-<div class="blog-keyword-row"><label for="blogKeyword">Keywords</label><select id="blogKeyword"><option value="">Add a keyword…</option></select><div id="blogSelectedKeywords" class="blog-selected-keywords" aria-label="Selected keywords"></div></div>
-</div>
-<p class="blog-count" id="blogCount" role="status" aria-live="polite"></p>
-<div class="carousel-heading"><div><span class="carousel-kicker">THE STORY COLLECTION</span><h2>Explore the stories</h2></div><div class="carousel-controls"><button id="carouselPrev" type="button" aria-label="Previous story">←</button><button id="carouselNext" type="button" aria-label="Next story">→</button></div></div>
-<div id="blogGrid" class="blog-grid" role="region" aria-roledescription="carousel" aria-label="Blog stories" tabindex="0"></div>
-<div class="carousel-footer"><span id="carouselPosition" aria-live="polite"></span><div id="carouselDots" class="carousel-dots" aria-label="Choose a story"></div><span class="carousel-hint">SWIPE OR USE ARROWS <span aria-hidden="true">↗</span></span></div>
-</div>
-<article id="storyReader" class="story-reader" hidden aria-labelledby="storyTitle">
-<a class="reader-back" href="#"><i class="fas fa-arrow-left" aria-hidden="true"></i> All stories</a>
-<div class="reader-language-bar">
-<div id="storyReaderCover" class="reader-title-cover" hidden></div>
-<button id="storyLanguage" type="button" class="story-language-button" aria-label="Language: Español. Switch to English" disabled>Español</button>
-<span id="translationStatus" class="translation-status" role="status" aria-live="polite" hidden></span>
-</div>
-<p id="storyTopic" class="story-topic"></p>
-<h2 id="storyTitle" tabindex="-1"></h2>
-<p id="storyExcerpt" class="reader-excerpt"></p>
-<div id="storyContent" class="reader-content"></div>
-</article>
-<noscript><p class="story-note">Enable JavaScript to browse the stories and open the reader.</p></noscript>
-</section></main>
-<footer>
-    <div class="footer-links">
-      <a href="mailto:b.senzio@gmail.com" aria-label="Email Bruno"><i class="fas fa-envelope" aria-hidden="true"></i></a>
-      <a href="https://www.linkedin.com/in/bsenzio/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-      <a href="https://github.com/Bsenzio" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
-      <a href="https://www.youtube.com/@Areshiones/videos" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
-    </div>
-    <p>Edge AI · Game Development · XR · Robotics</p>
-    <p>© <span id="copyrightYear"></span> Bruno Senzio-Savino Barzellato</p>
-  
-<figure class="tesla-reflection">
- <blockquote cite="https://en.wikisource.org/wiki/My_Inventions">
-  <p>“This is the difficult task of the inventor who is often misunderstood and unrewarded.”</p>
- </blockquote>
- <figcaption>— Nikola Tesla, <a href="https://en.wikisource.org/wiki/My_Inventions" target="_blank" rel="noopener noreferrer"><cite>My Inventions</cite> (1919)</a></figcaption>
- <a class="tesla-history" href="https://www.smithsonianmag.com/history/nikola-tesla-tower-that-became-million-dollar-folly-11074324/" target="_blank" rel="noopener noreferrer">Tesla’s financial struggles, Edison rivalry &amp; the fate of Wardenclyffe — Smithsonian ↗</a>
-</figure>
-</footer>
-
-
-<script src="js/blog.js"></script></body></html>
+        <script src="js/blog.js"></script>
+    </body>
+</html>

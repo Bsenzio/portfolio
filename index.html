@@ -1,499 +1,545 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Bruno Senzio-Savino Barzellato</title>
+        <title>Bruno Senzio-Savino Barzellato</title>
 
-<link rel="icon" type="image/png" href="assets/images/favicon.png">
+        <link rel="icon" type="image/png" href="assets/images/favicon.png" />
 
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/pages/index.css">
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/pages/index.css" />
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        />
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+            rel="stylesheet"
+        />
 
+        <link
+            href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Orbitron:wght@500&amp;display=swap"
+            rel="stylesheet"
+        />
+    </head>
 
+    <body>
+        <svg id="tech-background"></svg>
 
-
-
-
-
-
-
-
-
-
-
-
-<link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Orbitron:wght@500&amp;display=swap" rel="stylesheet">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</head>
-
-<body>
-
-<svg id="tech-background"></svg>
-
-<!-- =========================================================
+        <!-- =========================================================
      NAVIGATION
      ========================================================= -->
 
-<nav class="navbar" aria-label="Main navigation">
-<a class="nav-signature" href="index.html">Bruno Senzio-Savino Barzellato</a>
-<div class="nav-menu">
+        <nav class="navbar" aria-label="Main navigation">
+            <a class="nav-signature" href="index.html">Bruno Senzio-Savino Barzellato</a>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-btn home-btn" aria-current="page">
+                    <i class="fas fa-house"></i>
+                    Home
+                </a>
 
+                <a href="publications.html" class="nav-btn pub-btn">
+                    <i class="fas fa-book"></i>
+                    Publications
+                </a>
 
-<a href="index.html" class="nav-btn home-btn" aria-current="page">
-    <i class="fas fa-house"></i>
-    Home
-</a>
+                <a href="projects.html" class="nav-btn project-btn">
+                    <i class="fas fa-code"></i>
+                    Projects
+                </a>
 
-<a href="publications.html" class="nav-btn pub-btn">
-    <i class="fas fa-book"></i>
-    Publications
-</a>
+                <a href="blog.html" class="nav-btn blog-btn">
+                    <i class="fas fa-gamepad"></i>
+                    Blog
+                </a>
+            </div>
+            <span class="nav-digital-life">Digital Life</span>
+        </nav>
 
-<a href="projects.html" class="nav-btn project-btn">
-    <i class="fas fa-code"></i>
-    Projects
-</a>
-
-<a href="blog.html" class="nav-btn blog-btn">
-    <i class="fas fa-gamepad"></i>
-    Blog
-</a>
-
-
-</div>
-<span class="nav-digital-life">Digital Life</span>
-</nav>
-
-<!-- =========================================================
+        <!-- =========================================================
      HERO
      ========================================================= -->
 
-<aside class="mobile-experience" aria-label="Mobile experience"><p>This website is best enjoyed on a desktop PC. On mobile, you can access my English and Japanese résumés, career history and portfolios, and browse my skill cards.</p></aside>
-<header class="hero">
-
-
-<!-- =====================================================
+        <aside class="mobile-experience" aria-label="Mobile experience">
+            <p>
+                This website is best enjoyed on a desktop PC. On mobile, you can access my English
+                and Japanese résumés, career history and portfolios, and browse my skill cards.
+            </p>
+        </aside>
+        <header class="hero">
+            <!-- =====================================================
      LEFT SIDE
      ===================================================== -->
 
-<div class="hero-left">
+            <div class="hero-left">
+                <img
+                    src="assets/images/profile.jpg"
+                    alt="Profile"
+                    class="profile-image"
+                    id="profile-photo"
+                />
 
-    <img
-        src="assets/images/profile.jpg"
-        alt="Profile"
-        class="profile-image"
-        id="profile-photo"
-    >
+                <h1 class="hero-person-name">Bruno Senzio-Savino Barzellato</h1>
 
+                <h2
+                    class="hero-ticker hero-ticker-expertise"
+                    tabindex="0"
+                    aria-label="Edge/AI · Game Development · XR · Robotics"
+                >
+                    <span class="hero-ticker-track" aria-hidden="true"
+                        ><span class="hero-ticker-copy"
+                            >Edge/AI · Game Development · XR · Robotics<span
+                                class="ticker-separator"
+                                >✦</span
+                            ></span
+                        ><span class="hero-ticker-copy"
+                            >Edge/AI · Game Development · XR · Robotics<span
+                                class="ticker-separator"
+                                >✦</span
+                            ></span
+                        ></span
+                    >
+                </h2>
 
-    <h1 class="hero-person-name">Bruno Senzio-Savino Barzellato</h1>
+                <p
+                    class="hero-ticker hero-ticker-roles"
+                    tabindex="0"
+                    aria-label="Multidisciplinary Researcher | Embedded Systems | XR Developer"
+                >
+                    <span class="hero-ticker-track" aria-hidden="true"
+                        ><span class="hero-ticker-copy"
+                            >Multidisciplinary Researcher | Embedded Systems | XR Developer<span
+                                class="ticker-separator"
+                                >✦</span
+                            ></span
+                        ><span class="hero-ticker-copy"
+                            >Multidisciplinary Researcher | Embedded Systems | XR Developer<span
+                                class="ticker-separator"
+                                >✦</span
+                            ></span
+                        ></span
+                    >
+                </p>
 
-
-    <h2 class="hero-ticker hero-ticker-expertise" tabindex="0" aria-label="Edge/AI · Game Development · XR · Robotics"><span class="hero-ticker-track" aria-hidden="true"><span class="hero-ticker-copy">Edge/AI · Game Development · XR · Robotics<span class="ticker-separator">✦</span></span><span class="hero-ticker-copy">Edge/AI · Game Development · XR · Robotics<span class="ticker-separator">✦</span></span></span></h2>
-
-
-    <p class="hero-ticker hero-ticker-roles" tabindex="0" aria-label="Multidisciplinary Researcher | Embedded Systems | XR Developer"><span class="hero-ticker-track" aria-hidden="true"><span class="hero-ticker-copy">Multidisciplinary Researcher | Embedded Systems | XR Developer<span class="ticker-separator">✦</span></span><span class="hero-ticker-copy">Multidisciplinary Researcher | Embedded Systems | XR Developer<span class="ticker-separator">✦</span></span></span></p>
-
-
-    <!-- =================================================
+                <!-- =================================================
          CONTACT LINKS
          ================================================= -->
 
-    <div class="contact-links">
+                <div class="contact-links">
+                    <a href="mailto:b.senzio@gmail.com" title="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
 
-        <a
-            href="mailto:b.senzio@gmail.com"
-            title="Email"
-        >
-            <i class="fas fa-envelope"></i>
-        </a>
+                    <a href="https://www.linkedin.com/in/bsenzio/" target="_blank" title="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
 
+                    <a href="https://github.com/Bsenzio" target="_blank" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
 
-        <a
-            href="https://www.linkedin.com/in/bsenzio/"
-            target="_blank"
-            title="LinkedIn"
-        >
-            <i class="fab fa-linkedin"></i>
-        </a>
+                    <a
+                        href="https://www.youtube.com/@Areshiones/videos"
+                        target="_blank"
+                        title="YouTube"
+                    >
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
 
-
-        <a
-            href="https://github.com/Bsenzio"
-            target="_blank"
-            title="GitHub"
-        >
-            <i class="fab fa-github"></i>
-        </a>
-
-
-        <a
-            href="https://www.youtube.com/@Areshiones/videos"
-            target="_blank"
-            title="YouTube"
-        >
-            <i class="fab fa-youtube"></i>
-        </a>
-
-    </div>
-
-
-    <!-- =================================================
+                <!-- =================================================
          DOCUMENTS
          ================================================= -->
 
-    <div class="document-section" aria-label="CV and portfolio documents">
-      
-      <div class="document-columns">
-        <div class="document-group" lang="en">
-          <div class="document-panel-heading"><span class="document-language-code" aria-hidden="true">EN</span><div><h3>English</h3><p>Experience &amp; selected work</p></div><span class="document-panel-index" aria-hidden="true">01</span></div>
-          <div class="document-buttons"><a href="assets/cv/cv.pdf" target="_blank" rel="noopener noreferrer" class="document-button"><span class="document-file-icon" aria-hidden="true"><i class="fas fa-file-lines"></i></span><span class="document-file-copy"><strong>Curriculum Vitae</strong><small>Background & experience</small></span><span class="document-file-arrow" aria-hidden="true">↗</span><span class="document-sr-only"> (PDF, opens in a new tab)</span></a><a href="assets/cv/portfolio_en.pdf" target="_blank" rel="noopener noreferrer" class="document-button"><span class="document-file-icon" aria-hidden="true"><i class="fas fa-layer-group"></i></span><span class="document-file-copy"><strong>Portfolio</strong><small>Selected projects & research</small></span><span class="document-file-arrow" aria-hidden="true">↗</span><span class="document-sr-only"> (PDF, opens in a new tab)</span></a></div>
-        </div>
-        <div class="document-group japanese" lang="ja">
-          <div class="document-panel-heading"><span class="document-language-code" aria-hidden="true">JP</span><div><h3>日本語</h3><p>経歴と制作実績</p></div><span class="document-panel-index" aria-hidden="true">02</span></div>
-          <div class="document-buttons"><a href="assets/cv/cv_jp.pdf" target="_blank" rel="noopener noreferrer" class="document-button"><span class="document-file-icon" aria-hidden="true"><i class="fas fa-file-lines"></i></span><span class="document-file-copy"><strong>履歴書</strong><small>プロフィール・学歴</small></span><span class="document-file-arrow" aria-hidden="true">↗</span><span class="document-sr-only"> (PDF, opens in a new tab)</span></a><a href="assets/cv/keirekisho.pdf" target="_blank" rel="noopener noreferrer" class="document-button"><span class="document-file-icon" aria-hidden="true"><i class="fas fa-briefcase"></i></span><span class="document-file-copy"><strong>職務経歴書</strong><small>経験・専門スキル</small></span><span class="document-file-arrow" aria-hidden="true">↗</span><span class="document-sr-only"> (PDF, opens in a new tab)</span></a><a href="assets/cv/portfolio_jp.pdf" target="_blank" rel="noopener noreferrer" class="document-button"><span class="document-file-icon" aria-hidden="true"><i class="fas fa-layer-group"></i></span><span class="document-file-copy"><strong>ポートフォリオ</strong><small>研究・プロジェクト実績</small></span><span class="document-file-arrow" aria-hidden="true">↗</span><span class="document-sr-only"> (PDF, opens in a new tab)</span></a></div>
-        </div>
-      </div>
-    </div>
+                <div class="document-section" aria-label="CV and portfolio documents">
+                    <div class="document-columns">
+                        <div class="document-group" lang="en">
+                            <div class="document-panel-heading">
+                                <span class="document-language-code" aria-hidden="true">EN</span>
+                                <div>
+                                    <h3>English</h3>
+                                    <p>Experience &amp; selected work</p>
+                                </div>
+                                <span class="document-panel-index" aria-hidden="true">01</span>
+                            </div>
+                            <div class="document-buttons">
+                                <a
+                                    href="assets/cv/cv.pdf"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="document-button"
+                                    ><span class="document-file-icon" aria-hidden="true"
+                                        ><i class="fas fa-file-lines"></i></span
+                                    ><span class="document-file-copy"
+                                        ><strong>Curriculum Vitae</strong
+                                        ><small>Background & experience</small></span
+                                    ><span class="document-file-arrow" aria-hidden="true">↗</span
+                                    ><span class="document-sr-only">
+                                        (PDF, opens in a new tab)</span
+                                    ></a
+                                ><a
+                                    href="assets/cv/portfolio_en.pdf"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="document-button"
+                                    ><span class="document-file-icon" aria-hidden="true"
+                                        ><i class="fas fa-layer-group"></i></span
+                                    ><span class="document-file-copy"
+                                        ><strong>Portfolio</strong
+                                        ><small>Selected projects & research</small></span
+                                    ><span class="document-file-arrow" aria-hidden="true">↗</span
+                                    ><span class="document-sr-only">
+                                        (PDF, opens in a new tab)</span
+                                    ></a
+                                >
+                            </div>
+                        </div>
+                        <div class="document-group japanese" lang="ja">
+                            <div class="document-panel-heading">
+                                <span class="document-language-code" aria-hidden="true">JP</span>
+                                <div>
+                                    <h3>日本語</h3>
+                                    <p>経歴と制作実績</p>
+                                </div>
+                                <span class="document-panel-index" aria-hidden="true">02</span>
+                            </div>
+                            <div class="document-buttons">
+                                <a
+                                    href="assets/cv/cv_jp.pdf"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="document-button"
+                                    ><span class="document-file-icon" aria-hidden="true"
+                                        ><i class="fas fa-file-lines"></i></span
+                                    ><span class="document-file-copy"
+                                        ><strong>履歴書</strong
+                                        ><small>プロフィール・学歴</small></span
+                                    ><span class="document-file-arrow" aria-hidden="true">↗</span
+                                    ><span class="document-sr-only">
+                                        (PDF, opens in a new tab)</span
+                                    ></a
+                                ><a
+                                    href="assets/cv/keirekisho.pdf"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="document-button"
+                                    ><span class="document-file-icon" aria-hidden="true"
+                                        ><i class="fas fa-briefcase"></i></span
+                                    ><span class="document-file-copy"
+                                        ><strong>職務経歴書</strong
+                                        ><small>経験・専門スキル</small></span
+                                    ><span class="document-file-arrow" aria-hidden="true">↗</span
+                                    ><span class="document-sr-only">
+                                        (PDF, opens in a new tab)</span
+                                    ></a
+                                ><a
+                                    href="assets/cv/portfolio_jp.pdf"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="document-button"
+                                    ><span class="document-file-icon" aria-hidden="true"
+                                        ><i class="fas fa-layer-group"></i></span
+                                    ><span class="document-file-copy"
+                                        ><strong>ポートフォリオ</strong
+                                        ><small>研究・プロジェクト実績</small></span
+                                    ><span class="document-file-arrow" aria-hidden="true">↗</span
+                                    ><span class="document-sr-only">
+                                        (PDF, opens in a new tab)</span
+                                    ></a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-
-</div>
-
-
-
-<!-- =====================================================
+            <!-- =====================================================
      RIGHT SIDE — ARCADE
      ===================================================== -->
 
-<div class="hero-right">
+            <div class="hero-right">
+                <div class="arcade-cabinet">
+                    <div class="arcade-marquee">
+                        <span class="arcade-title">INTERACTIVE<br />GAMING EXPERIENCE</span>
+                    </div>
 
-    <div class="arcade-cabinet">
+                    <div class="arcade-speakers">
+                        <i aria-hidden="true"></i>
+                        <div class="arcade-game-title" role="status" aria-label="Now playing">
+                            <div class="arcade-game-title-track">
+                                <span>WHERE ARE MY VEGGIES?</span
+                                ><span aria-hidden="true">WHERE ARE MY VEGGIES?</span>
+                            </div>
+                        </div>
+                        <i aria-hidden="true"></i>
+                    </div>
+                    <div class="arcade-screen-frame">
+                        <div id="game"></div>
+                        <span class="arcade-screen-label" aria-hidden="true"
+                            >ORIGINAL GAMES · INDEPENDENT SPIRIT</span
+                        >
+                    </div>
 
+                    <div class="arcade-deck">
+                        <div class="arcade-stick"></div>
+                        <div
+                            class="arcade-deck-note arcade-instruction-display"
+                            role="group"
+                            aria-label="Game instructions"
+                        >
+                            <div class="arcade-instruction-window">
+                                <div class="arcade-instruction-tape">
+                                    <span
+                                        >SELECT A CARTRIDGE BELOW · ↑ ↓ ← → MOVE · Z: A · X: B · V:
+                                        SELECT · ENTER: START · CLICK THE SCREEN TO PLAY · ESC: PAGE
+                                        NAVIGATION</span
+                                    >
+                                    <span aria-hidden="true"
+                                        >SELECT A CARTRIDGE BELOW · ↑ ↓ ← → MOVE · Z: A · X: B · V:
+                                        SELECT · ENTER: START · CLICK THE SCREEN TO PLAY · ESC: PAGE
+                                        NAVIGATION</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="arcade-buttons"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                    <div class="arcade-controls">
+                        <div class="cartridge-carousel" role="region" aria-label="Game carousel">
+                            <div
+                                class="game-cartridge-selector"
+                                id="cartridge-track"
+                                tabindex="0"
+                                role="group"
+                                aria-label="Game cartridges"
+                            >
+                                <img
+                                    src="assets/images/cartridges/wamv.png"
+                                    class="game-cartridge"
+                                    data-rom="assets/roms/wamg.nes"
+                                    alt="WAMG"
+                                />
 
-        <div class="arcade-marquee">
+                                <img
+                                    src="assets/images/cartridges/okadv.png"
+                                    class="game-cartridge"
+                                    data-rom="assets/roms/okadv.nes"
+                                    alt="OK Adventure"
+                                />
 
-            <span class="arcade-title">INTERACTIVE<br>GAMING EXPERIENCE</span>
+                                <img
+                                    src="assets/images/cartridges/sgba.png"
+                                    class="game-cartridge"
+                                    data-link="https://bsenzio.github.io/TestStayGood/"
+                                    alt="Stay Good: Barber Assault"
+                                />
+                            </div>
+                        </div>
+                    </div>
 
-        </div>
-
-
-        <div class="arcade-speakers"><i aria-hidden="true"></i><div class="arcade-game-title" role="status" aria-label="Now playing"><div class="arcade-game-title-track"><span>WHERE ARE MY VEGGIES?</span><span aria-hidden="true">WHERE ARE MY VEGGIES?</span></div></div><i aria-hidden="true"></i></div>
-        <div class="arcade-screen-frame">
-
-            <div id="game"></div>
-            <span class="arcade-screen-label" aria-hidden="true">ORIGINAL GAMES · INDEPENDENT SPIRIT</span>
-
-        </div>
-
-
-        <div class="arcade-deck">
-            <div class="arcade-stick"></div>
-            <div class="arcade-deck-note arcade-instruction-display" role="group" aria-label="Game instructions">
- <div class="arcade-instruction-window">
-  <div class="arcade-instruction-tape">
-   <span>SELECT A CARTRIDGE BELOW · ↑ ↓ ← → MOVE · Z: A · X: B · V: SELECT · ENTER: START · CLICK THE SCREEN TO PLAY · ESC: PAGE NAVIGATION</span>
-   <span aria-hidden="true">SELECT A CARTRIDGE BELOW · ↑ ↓ ← → MOVE · Z: A · X: B · V: SELECT · ENTER: START · CLICK THE SCREEN TO PLAY · ESC: PAGE NAVIGATION</span>
-  </div>
- </div>
- 
-</div>
-            <div class="arcade-buttons"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        </div>
-        <div class="arcade-controls">
-
-
-            <div class="cartridge-carousel" role="region" aria-label="Game carousel">
-<div class="game-cartridge-selector" id="cartridge-track" tabindex="0" role="group" aria-label="Game cartridges">
-
-
-                <img
-                    src="assets/images/cartridges/wamv.png"
-                    class="game-cartridge"
-                    data-rom="assets/roms/wamg.nes"
-                    alt="WAMG"
-                >
-
-
-                <img
-                    src="assets/images/cartridges/okadv.png"
-                    class="game-cartridge"
-                    data-rom="assets/roms/okadv.nes"
-                    alt="OK Adventure"
-                >
-
-<img
-    src="assets/images/cartridges/sgba.png"
-    class="game-cartridge"
-    data-link="https://bsenzio.github.io/TestStayGood/"
-    alt="Stay Good: Barber Assault"
->
+                    <div class="arcade-plinth" aria-hidden="true">
+                        <div class="arcade-coin">FREE PLAY</div>
+                        <small>EST. IN CURIOSITY · 1UP</small>
+                    </div>
+                </div>
             </div>
-</div>
+        </header>
 
-
-            
-
-
-        </div>
-        
-        <div class="arcade-plinth" aria-hidden="true"><div class="arcade-coin">FREE PLAY</div><small>EST. IN CURIOSITY · 1UP</small></div>
-    </div>
-</div>
-
-</header>
-
-<!-- =========================================================
+        <!-- =========================================================
      SKILL CAROUSEL
      ========================================================= -->
 
-<section class="skill-carousel-section">
+        <section class="skill-carousel-section">
+            <div class="carousel-wrapper">
+                <button id="prevSkill" class="carousel-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
 
+                <div class="carousel-3d">
+                    <div class="skill-slide active">
+                        <img src="assets/bg-images/skillcartdrige.jpg" alt="" />
+                    </div>
 
-<div class="carousel-wrapper">
+                    <div class="skill-slide">
+                        <img src="assets/bg-images/level15.jpg" alt="" />
+                    </div>
 
+                    <div class="skill-slide">
+                        <img src="assets/bg-images/edgeaipro.jpg" alt="" />
+                    </div>
 
-    <button
-        id="prevSkill"
-        class="carousel-btn"
-    >
-        <i class="fas fa-chevron-left"></i>
-    </button>
+                    <div class="skill-slide">
+                        <img src="assets/bg-images/gamedevdx.jpg" alt="" />
+                    </div>
 
+                    <div class="skill-slide">
+                        <img src="assets/bg-images/xrquest.jpg" alt="" />
+                    </div>
 
-    <div class="carousel-3d">
+                    <div class="skill-slide">
+                        <img src="assets/bg-images/robotics64.jpg" alt="" />
+                    </div>
+                </div>
 
+                <button id="nextSkill" class="carousel-btn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
 
-        <div class="skill-slide active">
-
-            <img
-                src="assets/bg-images/skillcartdrige.jpg"
-                alt=""
-            >
-
-        </div>
-
-
-        <div class="skill-slide">
-
-            <img
-                src="assets/bg-images/level15.jpg"
-                alt=""
-            >
-
-        </div>
-
-
-        <div class="skill-slide">
-
-            <img
-                src="assets/bg-images/edgeaipro.jpg"
-                alt=""
-            >
-
-        </div>
-
-
-        <div class="skill-slide">
-
-            <img
-                src="assets/bg-images/gamedevdx.jpg"
-                alt=""
-            >
-
-        </div>
-
-
-        <div class="skill-slide">
-
-            <img
-                src="assets/bg-images/xrquest.jpg"
-                alt=""
-            >
-
-        </div>
-
-
-        <div class="skill-slide">
-
-            <img
-                src="assets/bg-images/robotics64.jpg"
-                alt=""
-            >
-
-        </div>
-
-
-    </div>
-
-
-    <button
-        id="nextSkill"
-        class="carousel-btn"
-    >
-        <i class="fas fa-chevron-right"></i>
-    </button>
-
-
-</div>
-
-
-</section>
-
-<!-- =========================================================
+        <!-- =========================================================
      CAREER DASHBOARD
      ========================================================= -->
 
-<section class="launchpad" aria-labelledby="launchpad-title">
- <div class="lp-intro"><div><p class="lp-eyebrow">THE EXPLORER’S DESK</p><h2 id="launchpad-title">A few ways into my world.</h2></div><p>Follow the journey. Discover an experiment.<br>Stay for a story.</p></div>
-<div class="lp-three"><section class="lp-journey" aria-labelledby="journey-title">
-  <div class="lp-journey-header"><div><p class="lp-eyebrow">01 / CAREER SELECT</p><h3 id="journey-title">Connecting the dots.</h3></div><span class="lp-live"><i></i> Career Journey</span></div>
-  <div id="journeySurface" class="ct-mouse-surface" tabindex="0" role="group" aria-label="Interactive career timeline">
- <div class="ct-mouse-hint"><span>Scroll or drag vertically to explore the journey</span><span id="careerCount"></span></div>
- <nav id="journeyStops" class="ct-year-field" aria-label="Explore career years"></nav>
- <div id="timelineContainer" class="ct-events"></div>
- </div>
- </section>
- 
-  <section class="lp-lab" aria-labelledby="lab-title">
-   <div class="lp-section-head"><div><p class="lp-eyebrow">02 / THE WORKBENCH</p><h3 id="lab-title">Featured Projects</h3></div><a class="lp-section-link lp-observatory-cta" href="projects.html">Enter the observatory ↗</a></div>
-   <div id="projectLenses" class="lp-lenses" aria-label="Choose a project category"></div>
-   <div id="featuredProjects" class="lp-project-feature"></div>
-   <p class="lp-project-mouse-hint">Next discovery to explore · hover to pause autoplay</p>
-   <div class="lp-deck-footer"><span id="projectPosition" role="status"></span><button id="nextDiscovery" class="lp-next" type="button">Next discovery <span>→</span></button></div>
-  </section>
-  <section class="lp-journal" aria-labelledby="journal-title">
-   <div class="lp-section-head"><div><p class="lp-eyebrow">03 / STORY SELECT</p><h3 id="journal-title">Latest Blog</h3></div><span class="lp-journal-mark" aria-hidden="true"><i class="fas fa-gamepad"></i></span></div>
-   <p class="lp-journal-intro">Choose your next story.</p>
-   <div id="featuredBlog" class="lp-stories"></div>
-   <div class="lp-time-caption">Next story in <span id="blogCountdown">9</span>s</div><div class="lp-time-meter" id="blogTimer" aria-hidden="true"><i></i></div>
-   <a class="lp-journal-all" href="blog.html">All stories <span>↗</span></a>
-  </section></div>
-</section>
+        <section class="launchpad" aria-labelledby="launchpad-title">
+            <div class="lp-intro">
+                <div>
+                    <p class="lp-eyebrow">THE EXPLORER’S DESK</p>
+                    <h2 id="launchpad-title">A few ways into my world.</h2>
+                </div>
+                <p>Follow the journey. Discover an experiment.<br />Stay for a story.</p>
+            </div>
+            <div class="lp-three">
+                <section class="lp-journey" aria-labelledby="journey-title">
+                    <div class="lp-journey-header">
+                        <div>
+                            <p class="lp-eyebrow">01 / CAREER SELECT</p>
+                            <h3 id="journey-title">Connecting the dots.</h3>
+                        </div>
+                        <span class="lp-live"><i></i> Career Journey</span>
+                    </div>
+                    <div
+                        id="journeySurface"
+                        class="ct-mouse-surface"
+                        tabindex="0"
+                        role="group"
+                        aria-label="Interactive career timeline"
+                    >
+                        <div class="ct-mouse-hint">
+                            <span>Scroll or drag vertically to explore the journey</span
+                            ><span id="careerCount"></span>
+                        </div>
+                        <nav
+                            id="journeyStops"
+                            class="ct-year-field"
+                            aria-label="Explore career years"
+                        ></nav>
+                        <div id="timelineContainer" class="ct-events"></div>
+                    </div>
+                </section>
 
-<!-- =========================================================
+                <section class="lp-lab" aria-labelledby="lab-title">
+                    <div class="lp-section-head">
+                        <div>
+                            <p class="lp-eyebrow">02 / THE WORKBENCH</p>
+                            <h3 id="lab-title">Featured Projects</h3>
+                        </div>
+                        <a class="lp-section-link lp-observatory-cta" href="projects.html"
+                            >Enter the observatory ↗</a
+                        >
+                    </div>
+                    <div
+                        id="projectLenses"
+                        class="lp-lenses"
+                        aria-label="Choose a project category"
+                    ></div>
+                    <div id="featuredProjects" class="lp-project-feature"></div>
+                    <p class="lp-project-mouse-hint">
+                        Next discovery to explore · hover to pause autoplay
+                    </p>
+                    <div class="lp-deck-footer">
+                        <span id="projectPosition" role="status"></span
+                        ><button id="nextDiscovery" class="lp-next" type="button">
+                            Next discovery <span>→</span>
+                        </button>
+                    </div>
+                </section>
+                <section class="lp-journal" aria-labelledby="journal-title">
+                    <div class="lp-section-head">
+                        <div>
+                            <p class="lp-eyebrow">03 / STORY SELECT</p>
+                            <h3 id="journal-title">Latest Blog</h3>
+                        </div>
+                        <span class="lp-journal-mark" aria-hidden="true"
+                            ><i class="fas fa-gamepad"></i
+                        ></span>
+                    </div>
+                    <p class="lp-journal-intro">Choose your next story.</p>
+                    <div id="featuredBlog" class="lp-stories"></div>
+                    <div class="lp-time-caption">
+                        Next story in <span id="blogCountdown">9</span>s
+                    </div>
+                    <div class="lp-time-meter" id="blogTimer" aria-hidden="true"><i></i></div>
+                    <a class="lp-journal-all" href="blog.html">All stories <span>↗</span></a>
+                </section>
+            </div>
+        </section>
+
+        <!-- =========================================================
      FOOTER
      ========================================================= -->
 
-<footer>
+        <footer>
+            <div class="footer-links">
+                <a href="mailto:b.senzio@gmail.com">
+                    <i class="fas fa-envelope"></i>
+                </a>
 
+                <a href="https://www.linkedin.com/in/bsenzio/" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
 
-<div class="footer-links">
+                <a href="https://github.com/Bsenzio" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
 
+                <a href="https://www.youtube.com/@Areshiones/videos" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
 
-    <a href="mailto:b.senzio@gmail.com">
+            <p>Edge/AI · Game Development · XR · Robotics</p>
 
-        <i class="fas fa-envelope"></i>
+            <p><span data-current-year></span> Bruno Senzio-Savino Barzellato</p>
 
-    </a>
+            <figure class="tesla-reflection">
+                <blockquote cite="https://en.wikisource.org/wiki/My_Inventions">
+                    <p>
+                        “This is the difficult task of the inventor who is often misunderstood and
+                        unrewarded.”
+                    </p>
+                </blockquote>
+                <figcaption>
+                    — Nikola Tesla,
+                    <a
+                        href="https://en.wikisource.org/wiki/My_Inventions"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        ><cite>My Inventions</cite> (1919)</a
+                    >
+                </figcaption>
+                <a
+                    class="tesla-history"
+                    href="https://www.smithsonianmag.com/history/nikola-tesla-tower-that-became-million-dollar-folly-11074324/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Tesla’s financial struggles, Edison rivalry &amp; the fate of Wardenclyffe —
+                    Smithsonian ↗</a
+                >
+            </figure>
+        </footer>
 
-
-    <a
-        href="https://www.linkedin.com/in/bsenzio/"
-        target="_blank"
-    >
-
-        <i class="fab fa-linkedin"></i>
-
-    </a>
-
-
-    <a
-        href="https://github.com/Bsenzio"
-        target="_blank"
-    >
-
-        <i class="fab fa-github"></i>
-
-    </a>
-
-
-    <a
-        href="https://www.youtube.com/@Areshiones/videos"
-        target="_blank"
-    >
-
-        <i class="fab fa-youtube"></i>
-
-    </a>
-
-
-</div>
-
-
-<p>
-    Edge/AI · Game Development · XR · Robotics
-</p>
-
-
-<p>
-
-    
-
-    <span data-current-year></span> Bruno Senzio-Savino Barzellato
-
-</p>
-
-
-
-<figure class="tesla-reflection">
- <blockquote cite="https://en.wikisource.org/wiki/My_Inventions">
-  <p>“This is the difficult task of the inventor who is often misunderstood and unrewarded.”</p>
- </blockquote>
- <figcaption>— Nikola Tesla, <a href="https://en.wikisource.org/wiki/My_Inventions" target="_blank" rel="noopener noreferrer"><cite>My Inventions</cite> (1919)</a></figcaption>
- <a class="tesla-history" href="https://www.smithsonianmag.com/history/nikola-tesla-tower-that-became-million-dollar-folly-11074324/" target="_blank" rel="noopener noreferrer">Tesla’s financial struggles, Edison rivalry &amp; the fate of Wardenclyffe — Smithsonian ↗</a>
-</figure>
-</footer>
-
-<!-- =========================================================
+        <!-- =========================================================
      EMULATOR
      ========================================================= -->
 
+        <!-- Home carousels are controlled by home.js only. -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Home carousels are controlled by home.js only. -->
-
-
-
-
-
-
-<script src="js/index.js"></script></body>
+        <script src="js/index.js"></script>
+    </body>
 </html>
