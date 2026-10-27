@@ -514,77 +514,30 @@ function renderPublications() {
     .getElementById("languageFilter")
     .value;
 
-    const filtered =
-    publications.filter(pub => {
-
-        const matchesSearch =
-
-            pub.title
-            .toLowerCase()
-            .includes(search)
-
-            ||
-
-            pub.authors
-            .toLowerCase()
-            .includes(search)
-
-            ||
-
-            pub.venue
-            .toLowerCase()
-            .includes(search)
-
-            ||
-
-            (
-                pub.keywords &&
-                pub.keywords
-                .join(" ")
-                .toLowerCase()
-                .includes(search)
-            );
-
-        const matchesYear =
-
-            year === "all" ||
-
-            pub.year.toString() === year;
-
-        const matchesType =
-
-            type === "all" ||
-
-            pub.type === type;
-
-        const matchesLanguage =
-
-            language === "all" ||
-
-            (
-                pub.language &&
-                pub.language.includes(language)
-            );
-
-        const matchesKeyword =
-
-            selectedKeywords.length === 0 ||
-
-            selectedKeywords.every(
-                keyword =>
-                (pub.keywords || [])
-                .includes(keyword)
-            );
-
-        return (
-            matchesSearch &&
-            matchesYear &&
-            matchesType &&
-            matchesLanguage &&
-            matchesKeyword
-        );
-
-    });
+    const matches = (pub, ignored = "") => {
+        const searchable = [pub.title, pub.authors, pub.venue, pub.abstract, pub.type, pub.year,
+            ...(pub.language || []), ...(pub.keywords || [])].join(" ").toLocaleLowerCase();
+        return searchable.includes(search.trim()) &&
+            (ignored === "year" || year === "all" || String(pub.year) === year) &&
+            (ignored === "type" || type === "all" || pub.type === type) &&
+            (ignored === "language" || language === "all" || (pub.language || []).includes(language)) &&
+            selectedKeywords.every(keyword => (pub.keywords || []).includes(keyword));
+    };
+    for (const [id, facet, values] of [
+        ["yearFilter", "year", pub => [String(pub.year)]],
+        ["typeFilter", "type", pub => [pub.type]],
+        ["languageFilter", "language", pub => pub.language || []],
+        ["keywordFilter", "keyword", pub => pub.keywords || []]
+    ]) {
+        const select = document.getElementById(id);
+        const available = new Set(publications.filter(pub => matches(pub, facet)).flatMap(values));
+        for (const option of select.options) {
+            option.disabled = option.value !== "all" && (facet === "keyword"
+                ? selectedKeywords.includes(option.value) || !available.has(option.value)
+                : option.value !== select.value && !available.has(option.value));
+        }
+    }
+    const filtered = publications.filter(pub => matches(pub));
 
     filtered.sort(
         (a,b) => b.year - a.year
@@ -821,8 +774,9 @@ document.addEventListener(
 	const typeSelect = document.getElementById("typeFilter");
 
 	const types = [...new Set(
-		publications.map(pub => pub.type)
-	)].sort();
+        publications.map(pub => pub.type).filter(Boolean)
+    )].sort();
+    typeSelect.replaceChildren(new Option("All Types", "all"));
 
 	types.forEach(type => {
 		// Avoid duplicating options already defined in the HTML.
@@ -832,7 +786,7 @@ document.addEventListener(
 
 		const option = document.createElement("option");
 		option.value = type;
-		option.textContent = type;
+		option.textContent = type === "Workshop-Tutorial" ? "Workshop / Tutorial" : type;
 		typeSelect.appendChild(option);
 	});
 
@@ -903,6 +857,7 @@ document.addEventListener(
     });
 
     // EVENTS
+    document.getElementById("searchInput").addEventListener("input", renderPublications);
 
     document
     .getElementById(
@@ -977,10 +932,9 @@ document.addEventListener(
                 );
             }
 
+            this.value = "all";
             renderSelectedKeywords();
             renderPublications();
-
-            this.value = "all";
 
         }
     );

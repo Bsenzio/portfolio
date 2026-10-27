@@ -8,7 +8,7 @@ No se trata de limitar el proyecto a una sola mecánica. Una campaña electoral 
 
 La siguiente imagen reúne la historia y las conexiones entre los juegos que forman parte del concepto.
 
-![Historia de los juegos de Plurinominal de Oposición](assets/blog/images/pdo_hystoria.jpg "PDO Hystoria")
+![Historia de los juegos de Plurinominal de Oposición](assets/blog/images/pdo/pdo_hystoria.jpg "PDO Hystoria")
 
 ## Prionominal de Oposición: la campaña en 3D
 
@@ -28,7 +28,7 @@ Esta idea se conecta con el recorrido de Prionominal de Oposición y su búsqued
 
 En lugar de repetir una sola fórmula, quería que cada juego aportara una experiencia propia y, al mismo tiempo, una pieza más al conjunto.
 
-![La México–Querétaro](assets/blog/images/pdo_mxqro.jpg "La MX-QRO")
+![La México–Querétaro](assets/blog/images/pdo/pdo_mxqro.jpg "La MX-QRO")
 
 ## PDO Tríadas: el torneo
 
@@ -42,7 +42,7 @@ La estructura permitía pensar en enfrentamientos entre esos grupos y en una ide
 
 En su vertiente más oscura y deliberadamente ficticia, la trama culminaba en una versión satírica de la isla de Epstein, convertida en escenario de un ritual de sacrificio de carne ante Baal. Ese desenlace formaba parte de la fantasía del juego y de su mezcla de símbolos de poder, imaginarios conspirativos y exageración grotesca.
 
-![PDO Triadas](assets/blog/images/pdo_triadas.jpg "PDO: Triadas")
+![PDO Triadas](assets/blog/images/pdo/pdo_triadas.jpg "PDO: Triadas")
 
 ## De los prototipos a una recopilación
 

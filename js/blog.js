@@ -70,7 +70,20 @@ const blogPosts = [
         url: "blog.html#maputo-fighters",
         contentUrl: "assets/blog/stories/maputo-fighters.txt"
     },
-
+    {
+        id: 5,
+        slug: "glasses",
+        defaultLanguage: "en",
+        created: "2026-07-10", // Example date; replace with the actual date.
+        featured: true,
+        title: "VaSenzios Holograph",
+        image: "glass_holograph.jpg",
+        topic: "Hologlasses",
+        keywords: ["Invention", "Ideas", "Friendly Abroad"],
+        excerpt: "An idea for holographic tech in your table...",
+        url: "blog.html#glass-holograph",
+        contentUrl: "assets/blog/stories/glass-holograph.txt"
+    },
 	
 ];
 
@@ -81,6 +94,9 @@ const blogPosts = [
         const listing = document.getElementById("blogListing");
         const search = document.getElementById("blogSearch");
         const topic = document.getElementById("blogTopic");
+        const keywordFilter = document.getElementById("blogKeyword");
+        const selectedKeywordsContainer = document.getElementById("blogSelectedKeywords");
+        const selectedKeywords = new Set();
         const count = document.getElementById("blogCount");
         const languageFilter = document.getElementById("blogLanguage");
         const dateFrom = document.getElementById("blogDateFrom");
@@ -289,7 +305,7 @@ const blogPosts = [
             const from = dateFrom?.value || "";
             const to = dateTo?.value || "";
             const invalidRange = Boolean(from && to && from > to);
-            const filtered = blogPosts.filter(post => {
+            const matches = (post, ignored = "") => {
                 const language = sourceLanguage(post);
                 const created = validDate(post.created) ? post.created : "";
                 const formattedDate = created ? new Intl.DateTimeFormat("en-US", {
@@ -297,13 +313,27 @@ const blogPosts = [
                 }).format(new Date(created + "T12:00:00Z")) : "";
                 const aliases = { es: "es español spanish", en: "en english inglés", ja: "ja 日本語 japanese japonés" };
                 return !invalidRange &&
-                    (topic.value === "all" || post.topic === topic.value) &&
-                    (!languageFilter || languageFilter.value === "all" || languageFilter.value === language) &&
+                    (ignored === "topic" || topic.value === "all" || post.topic === topic.value) &&
+                    [...selectedKeywords].every(keyword => (post.keywords || []).includes(keyword)) &&
+                    (ignored === "language" || !languageFilter || languageFilter.value === "all" || languageFilter.value === language) &&
                     (!from || (created && created >= from)) &&
                     (!to || (created && created <= to)) &&
                     [post.title, post.excerpt, post.topic, aliases[language], created, formattedDate, ...(post.keywords || [])]
                         .join(" ").toLocaleLowerCase().includes(query);
-            }).sort((a, b) => {
+            };
+            // Each menu shows availability under every other active filter.
+            for (const [control, kind, values] of [
+                [topic, "topic", post => [post.topic]],
+                [keywordFilter, "keyword", post => post.keywords || []],
+                [languageFilter, "language", post => [sourceLanguage(post)]]
+            ]) {
+                if (!control) continue;
+                const available = new Set(blogPosts.filter(post => matches(post, kind)).flatMap(values));
+                for (const option of control.options) {
+                    option.disabled = option.value !== "all" && option.value !== "" && (kind === "keyword" ? selectedKeywords.has(option.value) || !available.has(option.value) : option.value !== control.value && !available.has(option.value));
+                }
+            }
+            const filtered = blogPosts.filter(post => matches(post)).sort((a, b) => {
                 // ISO dates sort chronologically; undated entries go last.
                 const aDate = validDate(a.created) ? a.created : "";
                 const bDate = validDate(b.created) ? b.created : "";
@@ -497,12 +527,42 @@ const blogPosts = [
                 const option = element("option", "", value);
                 option.value = value; topic.append(option);
             });
+        [...new Set(blogPosts.flatMap(post => post.keywords || []).filter(Boolean))]
+            .sort((a, b) => a.localeCompare(b))
+            .forEach(value => {
+                const option = element("option", "", value);
+                option.value = value; keywordFilter?.append(option);
+            });
+        function renderSelectedKeywords() {
+            if (!selectedKeywordsContainer) return;
+            selectedKeywordsContainer.replaceChildren();
+            for (const keyword of selectedKeywords) {
+                const button = element("button", "blog-keyword-chip", keyword + " ×");
+                button.type = "button";
+                button.setAttribute("aria-label", "Remove keyword " + keyword);
+                button.addEventListener("click", () => {
+                    selectedKeywords.delete(keyword);
+                    renderSelectedKeywords();
+                    renderCards();
+                });
+                selectedKeywordsContainer.append(button);
+            }
+        }
+        keywordFilter?.addEventListener("change", () => {
+            if (keywordFilter.value) selectedKeywords.add(keywordFilter.value);
+            keywordFilter.value = "";
+            renderSelectedKeywords();
+            renderCards();
+        });
         search.addEventListener("input", renderCards);
         topic.addEventListener("change", renderCards);
         for (const control of [languageFilter, dateFrom, dateTo]) control?.addEventListener("change", renderCards);
         resetFilters?.addEventListener("click", () => {
             search.value = "";
             topic.value = "all";
+            selectedKeywords.clear();
+            if (keywordFilter) keywordFilter.value = "";
+            renderSelectedKeywords();
             if (languageFilter) languageFilter.value = "all";
             if (dateFrom) dateFrom.value = "";
             if (dateTo) dateTo.value = "";

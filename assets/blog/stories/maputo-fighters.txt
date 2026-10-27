@@ -4,7 +4,7 @@ The other day, I was chatting with my friend Helio from Mozambique, as we often 
 One idea that caught our attention was a pair of robots that could battle each other, controlled through hand movements or another form of gesture recognition. Instead of using a conventional controller, participants could use their own movements to guide the robots.
 As we explored the possibilities, I started looking for examples, and Helio sent me the toys shown below. They gave us a starting point for imagining what we could build around that kind of interaction.
 
-![Robot toys shared by Helio](assets/blog/images/maputo_toy.jpg "The robot toys Helio shared as a starting point for our discussion.")
+![Robot toys shared by Helio](assets/blog/images/maputo/maputo_toy.jpg "The robot toys Helio shared as a starting point for our discussion.")
 
 ## What If the Robot Could Follow Your Movements?
 
@@ -20,4 +20,4 @@ https://youtu.be/TlAML54wDjQ
 
 Here is my friend Helio, who is working on STEM education in Maputo, Mozambique. Conversations like this are a chance for us to exchange ideas and think about activities that could take shape in his school's context.
 
-![Helio, working on STEM education in Maputo](assets/blog/images/maputo_robots.jpg "My friend Helio, who is working on STEM education in Maputo, Mozambique.")
+![Helio, working on STEM education in Maputo](assets/blog/images/maputo/maputo_robots.jpg "My friend Helio, who is working on STEM education in Maputo, Mozambique.")

@@ -621,7 +621,6 @@ function getCreatorSummary(projects) {
         const nodes = document.getElementById('mapNodes');
         const inspector = document.getElementById('projectInspector');
         const collection = document.getElementById('projectCollection');
-        const search = document.getElementById('projectSearch');
         const filters = document.getElementById('categoryFilters');
         const status = document.getElementById('projectStatus');
         const creatorSummary = document.createElement('section');
@@ -762,9 +761,7 @@ function getCreatorSummary(projects) {
             return img;
         }
         function matching() {
-            const query = search.value.trim().toLowerCase();
-            return rows.filter(row => (selectedCategory === null || row.ci === selectedCategory) &&
-                [row.project.title,row.project.description,row.project.year,categories[row.ci].name].join(' ').toLowerCase().includes(query));
+            return rows.filter(row => selectedCategory === null || row.ci === selectedCategory);
         }
         function selectCategory(ci) {
             selectedCategory = ci; selectedProject = null;
@@ -779,10 +776,8 @@ function getCreatorSummary(projects) {
             const activeElement = document.activeElement;
             const focusIndex = Array.from(filters.children).indexOf(activeElement);
             filters.replaceChildren();
-            const all = button('obs-filter', 'All worlds', () => selectCategory(null));
-            all.setAttribute('aria-pressed',String(selectedCategory === null)); filters.append(all);
             categories.forEach((category, index) => {
-                const chip = button('obs-filter', '', () => selectCategory(index));
+                const chip = button('obs-filter', '', () => selectCategory(selectedCategory === index ? null : index));
                 chip.style.setProperty('--world-color',colors[index % colors.length]);
                 chip.append(el('i'),document.createTextNode(category.name),el('span','',String(category.projects.length)));
                 chip.setAttribute('aria-pressed',String(selectedCategory === index)); filters.append(chip);
@@ -804,7 +799,7 @@ function getCreatorSummary(projects) {
             core.append(sun);
             core.append(el('small','',category ? 'CURRENT WORLD' : 'PROJECT SYSTEM'),el('strong','',category ? category.name : String(rows.length)),el('small','',category ? `${matches.length} projects` : 'PROJECTS · 6 WORLDS'));
             nodes.append(core);
-            if (selectedCategory === null && !search.value.trim()) {
+            if (selectedCategory === null) {
                 categories.forEach((cat, ci) => {
                     const angle = -Math.PI / 2 + ci * Math.PI * 2 / categories.length;
                     const world = button('obs-world','',() => selectCategory(ci));
@@ -825,7 +820,7 @@ function getCreatorSummary(projects) {
             }
             matches.forEach((row, i) => {
                 const angle = -Math.PI / 2 + i*Math.PI*2/Math.max(1,matches.length);
-                // Search results use two rings when the result set grows.
+                // Use two rings when the category contains many projects.
                 const radius = matches.length > 16 && i%2 ? 24 : 35;
                 const node = button('obs-project-node','',() => selectProject(row));
                 const speed=.035;
@@ -849,7 +844,7 @@ function getCreatorSummary(projects) {
                 if (badges) card.append(badges);
                 collection.append(card);
             });
-            if (!matches.length) collection.append(el('p','obs-no-results','No projects match this search. Try another word or return to All worlds.'));
+            if (!matches.length) collection.append(el('p','obs-no-results','No projects in this world. Return to All worlds.'));
         }
         function renderInspector(matches) {
             // Restore keyboard focus after updating the detail panel.
@@ -887,7 +882,7 @@ function getCreatorSummary(projects) {
             } else if (selectedCategory !== null) {
                 inspector.append(el('div','obs-kicker',`WORLD ${String(selectedCategory+1).padStart(2,'0')}`),el('h3','',categories[selectedCategory].name),el('p','',intros[selectedCategory] || 'Explore this collection of projects.'));
             } else {
-                inspector.append(el('div','obs-kicker','WELCOME, EXPLORER'),el('h3','','Different worlds. Shared curiosity.'),el('p','','Every world opens a different part of the portfolio. Select a planet to enter its constellation, or search for an idea to follow it across disciplines.'));
+                inspector.append(el('div','obs-kicker','WELCOME, EXPLORER'),el('h3','','Different worlds. Shared curiosity.'),el('p','','Every world opens a different part of the portfolio. Select a planet to enter its constellation and discover its projects.'));
                 const facts=el('div','obs-facts');
                 [[rows.length,'Projects'],[categories.length,'Worlds']].forEach(([n,label])=>{const fact=el('div');fact.append(el('strong','',String(n)),el('span','',label));facts.append(fact)});inspector.append(facts);
             }
@@ -898,7 +893,7 @@ function getCreatorSummary(projects) {
                 entry.setAttribute('aria-pressed',String(selectedProject===item.id));
                 entry.append(image(item.project.image),el('span','',item.project.title));list.append(entry);
             });
-            if(!matches.length) list.append(el('p','obs-no-results','No matches. Clear the search or choose another world.'));
+            if(!matches.length) list.append(el('p','obs-no-results','No projects in this world. Choose another world.'));
             inspector.append(list);
             if(previous) Array.from(list.children).find(n=>n.dataset.project===previous)?.focus({preventScroll:true});
         }
@@ -913,18 +908,12 @@ function getCreatorSummary(projects) {
             status.textContent=`${matches.length} of ${rows.length} projects${selectedCategory===null ? ' · All worlds' : ' · '+categories[selectedCategory].name}`;
             renderCreatorSummary(matches);
         }
-        search.addEventListener('input',()=>{selectedProject=null;render()});
-        document.getElementById('resetOrbit').addEventListener('click',()=>{search.value='';selectedCategory=null;selectedProject=null;render()});
         document.getElementById('mapView').addEventListener('click',()=>{view='map';render();drawStars()});
         document.getElementById('cardsView').addEventListener('click',()=>{view='cards';stopOrbit();render()});
-        const motion=document.getElementById('motionToggle');
         function updateMotion(){
             root.classList.toggle('obs-paused',paused || reduced.matches);
-            motion.textContent=paused?'Resume motion':'Pause motion';
-            motion.setAttribute('aria-pressed',String(paused));
             if(paused || reduced.matches) stopOrbit(); else startOrbit();
         }
-        motion.addEventListener('click',()=>{paused=!paused;updateMotion()});
         map.addEventListener('pointerenter',()=>{pointerInside=true;root.classList.add('obs-hovering')});
         map.addEventListener('pointerleave',()=>{pointerInside=false;root.classList.remove('obs-hovering');map.style.removeProperty('--light-x');map.style.removeProperty('--light-y')});
         map.addEventListener('pointermove', event=>{

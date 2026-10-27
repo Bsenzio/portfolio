@@ -194,6 +194,16 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
 .publications-page model-viewer.hero-avatar { display:block; background:transparent; --poster-color:transparent; }
 .academia-model-status { position:absolute; left:8px; right:8px; bottom:24px; text-align:center; font-size:12px; color:#aebed3; }
 </style>
+<style>
+.publications-page .hero-stars { position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0; }
+.publications-page .hero-star { position:absolute;right:var(--x);top:var(--y);width:var(--size);height:var(--size);opacity:0;background:#fff6ce;clip-path:polygon(50% 0,61% 38%,100% 50%,61% 62%,50% 100%,39% 62%,0 50%,39% 38%);filter:drop-shadow(0 0 5px #96ecff);animation:fantasy-star var(--duration) linear var(--delay) infinite; }
+@keyframes fantasy-star { 0% { transform:translate(0,0) scale(.35);opacity:0; } 12% { opacity:.8; } 72% { opacity:.65; } 100% { transform:translate(-40vw,85px) scale(1);opacity:0; } }
+@media (prefers-reduced-motion:reduce) { .publications-page .hero-star { animation:none;opacity:.35; } }
+
+.publications-page .filters #keywordFilter { flex:0 1 210px; }
+.publications-page .keyword-row { display:flex;flex:0 0 100%;flex-wrap:wrap;align-items:center;gap:10px; }
+.publications-page .keyword-row #selectedKeywords { display:flex;flex:1 1 180px;flex-wrap:wrap;gap:7px; }
+</style>
 </head>
 
 <body class="publications-page">
@@ -229,6 +239,7 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
 
 <main id="main-content">
 <header class="project-hero">
+<div class="hero-stars" aria-hidden="true"><span class="hero-star" style="--x:3%;--y:8%;--size:12px;--duration:7s;--delay:-1s"></span><span class="hero-star" style="--x:10%;--y:25%;--size:8px;--duration:8s;--delay:-4s"></span><span class="hero-star" style="--x:1%;--y:45%;--size:15px;--duration:9s;--delay:-2s"></span><span class="hero-star" style="--x:18%;--y:5%;--size:7px;--duration:6s;--delay:-5s"></span><span class="hero-star" style="--x:4%;--y:70%;--size:9px;--duration:8s;--delay:-6s"></span><span class="hero-star" style="--x:24%;--y:31%;--size:11px;--duration:10s;--delay:-3s"></span><span class="hero-star" style="--x:12%;--y:55%;--size:6px;--duration:7s;--delay:-2s"></span><span class="hero-star" style="--x:28%;--y:12%;--size:13px;--duration:9s;--delay:-7s"></span><span class="hero-star" style="--x:7%;--y:90%;--size:7px;--duration:8s;--delay:-3s"></span><span class="hero-star" style="--x:35%;--y:48%;--size:8px;--duration:10s;--delay:-5s"></span><span class="hero-star" style="--x:22%;--y:76%;--size:10px;--duration:7s;--delay:-4s"></span><span class="hero-star" style="--x:40%;--y:18%;--size:6px;--duration:8s;--delay:-1s"></span><span class="hero-star" style="--x:15%;--y:15%;--size:7px;--duration:11s;--delay:-8s"></span><span class="hero-star" style="--x:31%;--y:64%;--size:11px;--duration:9s;--delay:-1s"></span><span class="hero-star" style="--x:5%;--y:35%;--size:6px;--duration:6s;--delay:-3s"></span><span class="hero-star" style="--x:42%;--y:6%;--size:8px;--duration:10s;--delay:-7s"></span></div>
   <div class="hero-layout">
     <div>
       <p class="eyebrow">Research &amp; exchange</p>
@@ -311,11 +322,11 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
 			<option value="all">All Languages</option>
 		</select>
 
-		<select id="keywordFilter" aria-label="Add keyword filter">
-			<option value="all">All Keywords</option>
-		</select>
-
-		<div id="selectedKeywords"></div>
+        <div class="keyword-row">
+            <label for="keywordFilter">Keywords</label>
+            <select id="keywordFilter" aria-label="Add keyword filter"><option value="all">Add a keyword…</option></select>
+            <div id="selectedKeywords"></div>
+        </div>
 
 	</div>
 
@@ -390,7 +401,7 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <!-- Publications Database -->
-<script src="js/publications.js"></script>
+<script src="js/publications.js?v=dependent-filters-1"></script>
 
 <!-- PDF Export -->
 <script src="js/publications-pdf.js"></script>

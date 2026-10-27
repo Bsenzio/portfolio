@@ -103,7 +103,7 @@
 .personal-blog [hidden] { display:none !important; }
 @media(max-width:360px) { .personal-blog .blog-grid { grid-template-columns:minmax(0,300px); } }
 </style>
-<script src="js/blog.js?v=newest-centered-1" defer></script>
+<script src="js/blog.js?v=multiple-keywords-3" defer></script>
 <link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Orbitron:wght@500&amp;display=swap" rel="stylesheet">
 <style>
 /* Shared signature and digital identity across the portfolio. */
@@ -197,6 +197,12 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
 </style>
 <style>
 .personal-blog .blog-tools { align-items:center; }
+.personal-blog .blog-keyword-row { flex:0 0 100%;display:flex;align-items:center;gap:10px;padding-top:4px;color:#b1c4d8;font-size:12px; }
+.personal-blog .blog-keyword-row { flex-wrap:wrap; }
+.personal-blog .blog-keyword-row select { width:auto;min-width:170px;max-width:100%; }
+.personal-blog .blog-selected-keywords { display:flex;flex:1 1 200px;flex-wrap:wrap;gap:7px;align-items:center; }
+.personal-blog .blog-keyword-chip { border:1px solid #345269;border-radius:999px;padding:6px 10px;background:#14273a;color:#c8e5e1;font:inherit;cursor:pointer; }
+.personal-blog .blog-keyword-chip:hover { border-color:#8debdc; }
 .personal-blog .blog-tools #blogSearch { flex:1 1 230px;min-width:0; }
 .personal-blog .blog-date-filter { display:flex;align-items:center;gap:7px;font-size:12px;color:#b1c4d8; }
 .personal-blog .blog-date-filter input { color-scheme:dark;min-width:0;width:145px; }
@@ -228,6 +234,12 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
 /* Compact cover: same 150px height as the cards in the blog listing. */
 .personal-blog .reader-title-cover img { width:100%;height:150px;aspect-ratio:auto;object-fit:cover;object-position:center; }
 </style>
+<style>
+.personal-blog .hero-stars { position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0; }
+.personal-blog .hero-star { position:absolute;right:var(--x);top:var(--y);width:var(--size);height:var(--size);opacity:0;background:#fff6ce;clip-path:polygon(50% 0,61% 38%,100% 50%,61% 62%,50% 100%,39% 62%,0 50%,39% 38%);filter:drop-shadow(0 0 5px #96ecff);animation:fantasy-star var(--duration) linear var(--delay) infinite; }
+@keyframes fantasy-star { 0% { transform:translate(0,0) scale(.35);opacity:0; } 12% { opacity:.8; } 72% { opacity:.65; } 100% { transform:translate(-40vw,85px) scale(1);opacity:0; } }
+@media (prefers-reduced-motion:reduce) { .personal-blog .hero-star { animation:none;opacity:.35; } }
+</style>
 </head><body class="personal-blog">
 <a class="skip-link" href="#main-content">Skip to content</a>
 <nav class="navbar" aria-label="Main navigation">
@@ -241,7 +253,7 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
 <span class="nav-digital-life">Digital Life</span>
 </nav>
 <main id="main-content">
-<header class="project-hero"><div class="hero-layout"><div>
+<header class="project-hero"><div class="hero-stars" aria-hidden="true"><span class="hero-star" style="--x:3%;--y:8%;--size:12px;--duration:7s;--delay:-1s"></span><span class="hero-star" style="--x:10%;--y:25%;--size:8px;--duration:8s;--delay:-4s"></span><span class="hero-star" style="--x:1%;--y:45%;--size:15px;--duration:9s;--delay:-2s"></span><span class="hero-star" style="--x:18%;--y:5%;--size:7px;--duration:6s;--delay:-5s"></span><span class="hero-star" style="--x:4%;--y:70%;--size:9px;--duration:8s;--delay:-6s"></span><span class="hero-star" style="--x:24%;--y:31%;--size:11px;--duration:10s;--delay:-3s"></span><span class="hero-star" style="--x:12%;--y:55%;--size:6px;--duration:7s;--delay:-2s"></span><span class="hero-star" style="--x:28%;--y:12%;--size:13px;--duration:9s;--delay:-7s"></span><span class="hero-star" style="--x:7%;--y:90%;--size:7px;--duration:8s;--delay:-3s"></span><span class="hero-star" style="--x:35%;--y:48%;--size:8px;--duration:10s;--delay:-5s"></span><span class="hero-star" style="--x:22%;--y:76%;--size:10px;--duration:7s;--delay:-4s"></span><span class="hero-star" style="--x:40%;--y:18%;--size:6px;--duration:8s;--delay:-1s"></span><span class="hero-star" style="--x:15%;--y:15%;--size:7px;--duration:11s;--delay:-8s"></span><span class="hero-star" style="--x:31%;--y:64%;--size:11px;--duration:9s;--delay:-1s"></span><span class="hero-star" style="--x:5%;--y:35%;--size:6px;--duration:6s;--delay:-3s"></span><span class="hero-star" style="--x:42%;--y:6%;--size:8px;--duration:10s;--delay:-7s"></span></div><div class="hero-layout"><div>
 <p class="eyebrow">Notes from the journey</p>
 <h1>Ideas, experiments<br>&amp; stories.</h1>
 <p class="hero-description">Personal notes on technology, research and the ideas that connect them. A space for curiosity, reflection and work in progress.</p>
@@ -257,7 +269,7 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
 <section class="blog-area" aria-label="Personal blog">
 <div id="blogListing">
 <div class="blog-tools" role="search" aria-label="Find a story">
-<input id="blogSearch" type="search" placeholder="Search stories, languages or dates…" aria-label="Search stories">
+<input id="blogSearch" type="search" placeholder="Search stories, keywords, languages or dates…" aria-label="Search stories">
 <select id="blogTopic" aria-label="Filter by topic"><option value="all">All topics</option></select>
 <select id="blogLanguage" aria-label="Filter by original language">
 <option value="all">All languages</option><option value="es">Español</option><option value="en">English</option><option value="ja">日本語</option>
@@ -265,6 +277,7 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
 <label class="blog-date-filter">From<input id="blogDateFrom" type="date" aria-label="From date"></label>
 <label class="blog-date-filter">To<input id="blogDateTo" type="date" aria-label="To date"></label>
 <button id="blogResetFilters" type="button" class="blog-reset-filters">Clear filters</button>
+<div class="blog-keyword-row"><label for="blogKeyword">Keywords</label><select id="blogKeyword"><option value="">Add a keyword…</option></select><div id="blogSelectedKeywords" class="blog-selected-keywords" aria-label="Selected keywords"></div></div>
 </div>
 <p class="blog-count" id="blogCount" role="status" aria-live="polite"></p>
 <div id="blogGrid" class="blog-grid"></div>

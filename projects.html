@@ -85,9 +85,6 @@
 .obs-views button { border:0; border-radius:6px; padding:7px 11px; color:#91a6c0; background:transparent; font-size:11px; }
 .obs-views button[aria-pressed=true] { background:#233c4b; color:#c7f9ed; }
 .obs-controls { padding-bottom:8px; }
-.obs-search { display:flex; align-items:center; gap:9px; flex:1 1 240px; padding:10px 12px; border:1px solid #2b3c51; border-radius:9px; background:#0b1827; color:#82a0b6; }
-.obs-search input { min-width:0; width:100%; background:transparent; border:0; outline:none; color:#e1edfb; font:inherit; font-size:12px; }
-.obs-search:focus-within { border-color:#8debdc; }
 .obs-reset { padding:9px 11px; border:1px solid #2b4055; border-radius:8px; background:#112235; color:#afc4da; font-size:11px; }
 .obs-filters { gap:7px; padding-top:7px; padding-bottom:18px; }
 .obs-filter { display:flex; align-items:center; gap:7px; padding:6px 10px; border:1px solid #2a3b51; border-radius:30px; background:#101d2d; color:#a6bad2; font-size:11px; }
@@ -322,6 +319,12 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
  .projects-page .hero-model-wrap { flex:0 0 180px; width:180px; height:210px; margin:-8px -14px -24px auto; }
 }
 </style>
+<style>
+.projects-page .hero-stars { position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0; }
+.projects-page .hero-star { position:absolute;right:var(--x);top:var(--y);width:var(--size);height:var(--size);opacity:0;background:#fff6ce;clip-path:polygon(50% 0,61% 38%,100% 50%,61% 62%,50% 100%,39% 62%,0 50%,39% 38%);filter:drop-shadow(0 0 5px #96ecff);animation:fantasy-star var(--duration) linear var(--delay) infinite; }
+@keyframes fantasy-star { 0% { transform:translate(0,0) scale(.35);opacity:0; } 12% { opacity:.8; } 72% { opacity:.65; } 100% { transform:translate(-40vw,85px) scale(1);opacity:0; } }
+@media (prefers-reduced-motion:reduce) { .projects-page .hero-star { animation:none;opacity:.35; } }
+</style>
 </head>
 <body class="projects-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -337,6 +340,7 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
 </nav>
   <main id="main-content">
     <header class="project-hero">
+      <div class="hero-stars" aria-hidden="true"><span class="hero-star" style="--x:3%;--y:8%;--size:12px;--duration:7s;--delay:-1s"></span><span class="hero-star" style="--x:10%;--y:25%;--size:8px;--duration:8s;--delay:-4s"></span><span class="hero-star" style="--x:1%;--y:45%;--size:15px;--duration:9s;--delay:-2s"></span><span class="hero-star" style="--x:18%;--y:5%;--size:7px;--duration:6s;--delay:-5s"></span><span class="hero-star" style="--x:4%;--y:70%;--size:9px;--duration:8s;--delay:-6s"></span><span class="hero-star" style="--x:24%;--y:31%;--size:11px;--duration:10s;--delay:-3s"></span><span class="hero-star" style="--x:12%;--y:55%;--size:6px;--duration:7s;--delay:-2s"></span><span class="hero-star" style="--x:28%;--y:12%;--size:13px;--duration:9s;--delay:-7s"></span><span class="hero-star" style="--x:7%;--y:90%;--size:7px;--duration:8s;--delay:-3s"></span><span class="hero-star" style="--x:35%;--y:48%;--size:8px;--duration:10s;--delay:-5s"></span><span class="hero-star" style="--x:22%;--y:76%;--size:10px;--duration:7s;--delay:-4s"></span><span class="hero-star" style="--x:40%;--y:18%;--size:6px;--duration:8s;--delay:-1s"></span><span class="hero-star" style="--x:15%;--y:15%;--size:7px;--duration:11s;--delay:-8s"></span><span class="hero-star" style="--x:31%;--y:64%;--size:11px;--duration:9s;--delay:-1s"></span><span class="hero-star" style="--x:5%;--y:35%;--size:6px;--duration:6s;--delay:-3s"></span><span class="hero-star" style="--x:42%;--y:6%;--size:8px;--duration:10s;--delay:-7s"></span></div>
       <div class="hero-layout">
         <div>
           <p class="eyebrow">Ideas in orbit</p>
@@ -370,11 +374,6 @@ body footer .tesla-reflection a { color:#83b4b0; text-underline-offset:2px; }
         <div class="obs-toolbar">
           <div class="obs-brand"><span class="obs-dot"></span> PROJECT OBSERVATORY <span class="obs-version">/ 01</span></div>
           <div class="obs-views" aria-label="Project view"><button type="button" id="mapView" aria-pressed="true">Orbit map</button><button type="button" id="cardsView" aria-pressed="false">Collection</button></div>
-        </div>
-        <div class="obs-controls">
-          <label class="obs-search"><i class="fas fa-magnifying-glass" aria-hidden="true"></i><input type="search" id="projectSearch" placeholder="Find an idea, project or year…" aria-label="Search projects"></label>
-          <button type="button" id="resetOrbit" class="obs-reset">↺ All worlds</button>
-          <button type="button" id="motionToggle" class="obs-reset" aria-pressed="false">Pause motion</button>
         </div>
         <div id="categoryFilters" class="obs-filters" aria-label="Project categories"></div>
         <div class="obs-layout">

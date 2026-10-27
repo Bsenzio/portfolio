@@ -1,0 +1,46 @@
+## A New Idea for Wireless Glasses
+
+A while ago, I was thinking about how to extend the functionality of my nine patents related to wireless glasses, which I had patented in Mexico. I wanted to explore new applications that could build on those ideas and bring them into different settings.
+
+When I discussed the idea with my friend Jason in Okinawa, he suggested that glasses with additional features could be promoted to hotels and tourism resorts in the area. That conversation made us wonder what kind of experience we could create around a drinking glass.
+
+At some point, the conversation turned to holograms. What if we could make a glass with a holographic-style display? 
+
+So we created some prototypes and displayed at one Networking Event of his friend at Okinawa 
+
+![Concept for a glass with a holographic-style display](assets/blog/images/holographic-glasses/glass_demo.jpg "An early look at the holographic-style glass concept.")
+
+
+https://www.networkingdinner.biz/oile-hotel-2026/
+
+## Exploring the Holographic Effect
+
+I started looking into different ways to create the effect and came across an approach using acrylic and a cube-like structure to produce a semi-holographic projection. We explored how that idea could be incorporated into a cup, giving it a visual feature that could attract attention in a bar, hotel, or resort.
+
+The image below gives an idea of what the concept looks like.
+
+![Concept for a glass with a holographic-style display](assets/blog/images/holographic-glasses/glass_holograph.jpg "A step-up on the design")
+
+We even went to some Japanese Glass manufacturer to help us with the mechanical design to see if we could make production units.
+
+![Glass Design](assets/blog/images/holographic-glasses/glass_design.jpg "Japanese Engineers helped in the sample design")
+
+## From an Idea to Physical Samples
+
+After seeing the concept, Jason thought it would be worthwhile to make some samples. We went ahead and ordered them from China so that we could see the idea in a physical form and start sharing it with others.
+
+![Samples of the holographic-style glasses](assets/blog/images/holographic-glasses/glass_samples.jpg "Samples ordered to explore the concept in a physical form.")
+
+Once Jason received the samples, he told me he planned to take them to local bars and other venues in Okinawa. He also sent me some flyers that could help introduce the idea to potential users and businesses.
+
+![Flyer for the holographic-style glasses](assets/blog/images/holographic-glasses/flyer-1.jpg "One of the flyers Jason shared to present the concept.")
+
+![Additional flyer for the holographic-style glasses](assets/blog/images/holographic-glasses/glass_zuhal.jpg "Another look at how the idea could be presented to local venues.")
+
+## What Comes Next?
+
+The next step was to gather feedback from hotels and other people in the area. I have not heard back from Jason about those conversations yet, so I am still curious to learn what people thought of the samples and whether they saw a place for the idea in hospitality or tourism.
+
+We were also able to write down the patent work related to the project. You can find it in the Publications section of my website.
+
+I hope you enjoy seeing how the idea took shape. And who knows? Maybe tomorrow we can bring a new kind of interface to glasses.
