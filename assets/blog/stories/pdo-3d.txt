@@ -28,6 +28,8 @@ Esta idea se conecta con el recorrido de Prionominal de Oposición y su búsqued
 
 En lugar de repetir una sola fórmula, quería que cada juego aportara una experiencia propia y, al mismo tiempo, una pieza más al conjunto.
 
+![PDO Cetro](assets/blog/images/pdo/pdo_cetro.jpg "PDO La MX-QRO, Una banda se ha hecho con los fragmentos del cetro de mando, investiga en poblaciones cercanas a la carretera")
+
 ![La México–Querétaro](assets/blog/images/pdo/pdo_mxqro.jpg "La MX-QRO")
 
 ## PDO Tríadas: el torneo
@@ -53,3 +55,5 @@ Una posibilidad para una siguiente etapa es trasladar el proyecto a Unreal Engin
 La meta es poder publicar los juegos en Steam y también a través de Retroid Club, la pequeña empresa de videojuegos a la carta que tengo planeado seguir desarrollando.
 
 Plurinominal de Oposición es, por ahora, un universo en construcción: una manera de transformar referencias culturales, política, humor y experiencias de juego en historias que puedan cruzarse entre sí. La tarea pendiente es darle forma a cada una de esas piezas y encontrar el modo de reunirlas en una experiencia que conserve el carácter con el que comenzó todo.
+
+![PDO Reencuentro](assets/blog/images/pdo/pdo_reencuentro.jpg "PDO El Recuento: PDO en Unreal")
