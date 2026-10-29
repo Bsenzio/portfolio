@@ -1,5 +1,7 @@
 ## From a Conversation to a STEM Robotics Idea
 
+https://youtu.be/wGMdF-6BzxQ
+
 The other day, I was chatting with my friend Helio from Mozambique, as we often do. We were discussing ideas for his STEM school in Maputo and exploring activities that could bring together robotics, movement, and hands-on learning.
 One idea that caught our attention was a pair of robots that could battle each other, controlled through hand movements or another form of gesture recognition. Instead of using a conventional controller, participants could use their own movements to guide the robots.
 As we explored the possibilities, I started looking for examples, and Helio sent me the toys shown below. They gave us a starting point for imagining what we could build around that kind of interaction.
