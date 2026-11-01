@@ -201,7 +201,7 @@
                         { label: 'Open Demo 3', url: 'https://youtu.be/1RXU9yrBs6g' },
                         { label: 'Open Demo 4', url: 'https://youtu.be/nRNZ9IPP03k' },
                         { label: 'Open Details', url: 'https://youtu.be/yYEootnN5VE' },
-						{ label: 'Website', url: 'https://www.robotdental.org' }
+						{ label: 'Website', url: 'https://www.robotdental.org' },
                     ],
                     description: 'Archwire bending Robot Machine',
                 },
@@ -404,7 +404,7 @@
                     year: '2025',
                     image: 'aruco.jpg',
                     links: [{ label: 'Open project', url: 'https://youtu.be/JOJYk69uOSQ' },
-					{ label: 'Website', url: 'https://www.robotdental.org' }
+					{ label: 'Website', url: 'https://www.robotdental.org' },
 					],
                     description:
                         'A modular interaction framework for XR applications supporting hand tracking, eye tracking and immersive interfaces.',
@@ -418,7 +418,7 @@
                     links: [
                         { label: 'Watch Demo', url: 'https://youtu.be/BsE8TvaJvD4' },
                         { label: 'Watch Demo 2', url: 'https://youtu.be/acaqdT1WNYM' },
-                        { label: 'Watch Demo 3', url: 'https://youtu.be/4nDXf4leb6Q' }
+                        { label: 'Watch Demo 3', url: 'https://youtu.be/4nDXf4leb6Q' },
                     ],
                     description: 'An interactive Arcade machine with AI and custom games',
                 },
