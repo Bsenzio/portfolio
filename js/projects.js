@@ -182,7 +182,7 @@
                         },
                         { label: 'Open demo 1', url: 'https://youtu.be/VIz_QDKCtbs' },
                         { label: 'Open demo 2', url: 'https://youtu.be/LCjvAuEIvNI' },
-                        { label: 'Open demo 3', url: 'https://youtu.be/T67_ayvPHuc' }
+                        { label: 'Open demo 3', url: 'https://youtu.be/T67_ayvPHuc' },
                     ],
                     description: 'A supernumerary robotic limb hand robot',
                 },
@@ -394,7 +394,7 @@
                     title: 'Inductive Braille',
                     year: '2023',
                     image: 'braille.jpg',
-                    links: [{ label: 'Open project', url: 'https://youtu.be/lZagQIphQ3U' }]
+                    links: [{ label: 'Open project', url: 'https://youtu.be/lZagQIphQ3U' }],
                     description: 'A dynamic Braille proposed',
                 },
                 {
