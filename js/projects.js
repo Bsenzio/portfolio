@@ -182,7 +182,7 @@
                         },
                         { label: 'Open demo 1', url: 'https://youtu.be/VIz_QDKCtbs' },
                         { label: 'Open demo 2', url: 'https://youtu.be/LCjvAuEIvNI' },
-                        { label: 'Open demo 3', url: 'https://youtu.be/T67_ayvPHuc' },
+                        { label: 'Open demo 3', url: 'https://youtu.be/T67_ayvPHuc' }
                     ],
                     description: 'A supernumerary robotic limb hand robot',
                 },
@@ -201,6 +201,7 @@
                         { label: 'Open Demo 3', url: 'https://youtu.be/1RXU9yrBs6g' },
                         { label: 'Open Demo 4', url: 'https://youtu.be/nRNZ9IPP03k' },
                         { label: 'Open Details', url: 'https://youtu.be/yYEootnN5VE' },
+						{ label: 'Website', url: 'https://www.robotdental.org' }
                     ],
                     description: 'Archwire bending Robot Machine',
                 },
@@ -393,7 +394,7 @@
                     title: 'Inductive Braille',
                     year: '2023',
                     image: 'braille.jpg',
-                    links: [{ label: 'Open project', url: 'https://youtu.be/lZagQIphQ3U' }],
+                    links: [{ label: 'Open project', url: 'https://youtu.be/lZagQIphQ3U' }]
                     description: 'A dynamic Braille proposed',
                 },
                 {
@@ -402,7 +403,9 @@
                     title: 'XR Interaction System',
                     year: '2025',
                     image: 'aruco.jpg',
-                    links: [{ label: 'Open project', url: 'https://youtu.be/JOJYk69uOSQ' }],
+                    links: [{ label: 'Open project', url: 'https://youtu.be/JOJYk69uOSQ' },
+					{ label: 'Website', url: 'https://www.robotdental.org' }
+					],
                     description:
                         'A modular interaction framework for XR applications supporting hand tracking, eye tracking and immersive interfaces.',
                 },
@@ -415,7 +418,7 @@
                     links: [
                         { label: 'Watch Demo', url: 'https://youtu.be/BsE8TvaJvD4' },
                         { label: 'Watch Demo 2', url: 'https://youtu.be/acaqdT1WNYM' },
-                        { label: 'Watch Demo 3', url: 'https://youtu.be/4nDXf4leb6Q' },
+                        { label: 'Watch Demo 3', url: 'https://youtu.be/4nDXf4leb6Q' }
                     ],
                     description: 'An interactive Arcade machine with AI and custom games',
                 },
@@ -439,7 +442,7 @@
                         {
                             label: 'Open project',
                             url: 'https://www.youtube.com/live/QoZwG4V6CVw?si=o_C43iGD-uhwwK3-',
-                        },
+                        }
                     ],
                     description: 'Spreading AI and AL through gaming experiences',
                 },
@@ -453,7 +456,7 @@
                         {
                             label: 'Open project',
                             url: 'https://www.youtube.com/watch?v=PMnEDyEkNCg',
-                        },
+                        }
                     ],
                     description: 'Trading PET for BCI Robotics education at schools',
                 },
