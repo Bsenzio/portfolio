@@ -19,6 +19,20 @@
     // Existing content arrays and JSON contentUrl files remain supported.
     const blogPosts = [
         {
+            id: 6,
+            slug: 'retroarcdo-four-game-ideas',
+            defaultLanguage: 'ja',
+            created: '2026-11-08',
+            featured: true,
+            title: '妻のスケッチから生まれた、4つのゲームのアイデア',
+            image: 'retroarcdo-four-game-ideas-sketch.jpg',
+            topic: 'ゲーム開発',
+            keywords: ['RetroArcDo', 'ゲーム開発', 'ミニゲーム'],
+            excerpt: 'モグラのいも掘り、たこ焼き、トロッコ、宝探し。妻が描いた4つの案を、RetroArcDoで遊べるゲームにする方法を考えています。',
+            url: 'blog.html#retroarcdo-four-game-ideas',
+            contentUrl: 'assets/blog/stories/retroarcdo-four-game-ideas.txt',
+        },
+        {
             id: 1,
             slug: 'ubr-action',
             defaultLanguage: 'es',
