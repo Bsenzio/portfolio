@@ -58,6 +58,23 @@ Some visual and document features also use third-party resources loaded from the
 
 Keep filenames and data fields consistent with the existing entries so the filters, links, thumbnails, and detail views continue to work.
 
+## Voice-driven updates through Codex
+
+Use voice input in a supported ChatGPT/Codex client, or your device’s dictation, to describe updates to this repository in natural language. With the direct GitHub integration connected to `Bsenzio/portfolio`, Codex can translate those instructions into changes to content nodes such as entries, page sections, and embedded demos. This workflow works directly on the repository files without requiring micro actions.
+
+Voice capture takes place in the client or device. Codex then edits the HTML, CSS, JavaScript, story files, and assets that make up the static site. This authoring workflow is separate from the behavior of individual nodes or components.
+
+1. Connect the GitHub integration with access to this repository and permission to push branches and open pull requests.
+2. Dictate what to add or change, where it belongs, and any text, language, images, or interactions it should include. Name the target page or blog slug when possible.
+3. Codex reviews the latest base branch, makes the targeted changes on a new branch, and checks the affected links, assets, and behavior.
+4. Review the resulting pull request on GitHub. Merge it when approved; GitHub Pages publishes from its configured source branch.
+
+For example:
+
+> Add a new Japanese game concept at the bottom of the RetroArcDo article. Include two illustrations, keep the current content, and open a pull request for review.
+
+For a new blog entry, keep the records in `js/blog.js` and `js/index.js` consistent. For a playable demo, keep its code and resources in a separate directory under `assets/games/` and register the target article in `js/blog.js`; keep the story TXT focused on the article text. These conventions let voice-requested additions reuse the existing site structure.
+
 ## Formatting
 
 The HTML, CSS, and JavaScript use [Prettier](https://prettier.io/) formatting. The repository includes `.prettierrc.json` with the formatting preferences used for these files.
