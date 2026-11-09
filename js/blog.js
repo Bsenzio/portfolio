@@ -775,6 +775,7 @@
                 }
             }
             async function route() {
+                document.getElementById('storyDemo')?.remove();
                 const request = ++version;
                 translationController?.abort();
                 activePost = null;
@@ -803,6 +804,26 @@
                     return;
                 }
                 activePost = post;
+                // Trusted demos are registered here, independently of translated TXT content.
+                const demos = {
+                    'retroarcdo-four-game-ideas': {
+                        src: 'assets/games/patisserie/index.html',
+                        title: 'Pâtisserie Puzzle — playable sweets puzzle',
+                    },
+                };
+                if (demos[post.slug]) {
+                    const demo = element('section');
+                    demo.id = 'storyDemo';
+                    demo.setAttribute('aria-label', demos[post.slug].title);
+                    const frame = document.createElement('iframe');
+                    frame.src = demos[post.slug].src;
+                    frame.title = demos[post.slug].title;
+                    frame.loading = 'lazy';
+                    frame.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+                    frame.style.cssText = 'display:block;width:100%;height:1020px;border:0;margin-top:32px;border-radius:20px;';
+                    demo.append(frame);
+                    content.after(demo);
+                }
                 const readerCover = document.getElementById('storyReaderCover');
                 if (readerCover) {
                     readerCover.replaceChildren();

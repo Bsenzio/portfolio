@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ja">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pâtisserie Puzzle</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<main class="salon">
+ <header><p class="eyebrow">RETROARCDO · PETIT ARCADE</p><nav aria-label="Language"><button data-lang="ja" aria-pressed="true">日本語</button><button data-lang="es" aria-pressed="false">ES</button><button data-lang="en" aria-pressed="false">EN</button></nav><h1>Pâtisserie Puzzle</h1><p id="intro"></p></header>
+ <div class="game-layout">
+  <div class="board-wrap"><canvas id="board" width="320" height="576" tabindex="0" aria-label="Cake falling-block puzzle"></canvas><div id="veil" class="veil"><p id="message" role="status"></p><button id="start"></button></div></div>
+  <aside><div class="stat"><span data-copy="score"></span><strong id="score">0</strong></div><div class="stat"><span data-copy="lines"></span><strong id="lines">0</strong></div><div class="stat"><span data-copy="level"></span><strong id="level">1</strong></div><div class="next"><span data-copy="next"></span><canvas id="next" width="144" height="96" aria-label="Next piece"></canvas></div><button id="pause" disabled></button><button id="restart"></button></aside>
+ </div>
+ <div class="controls" aria-label="Game controls"><button data-action="left" aria-label="Move left">◀︎</button><button data-action="rotate" aria-label="Rotate">↻</button><button data-action="right" aria-label="Move right">▶︎</button><button data-action="down" aria-label="Move down">▼</button><button data-action="drop" id="drop"></button></div>
+ <p id="help" class="help"></p><p class="foot" id="foot"></p>
+</main>
+<script type="module" src="game.js"></script>
+</body></html>
