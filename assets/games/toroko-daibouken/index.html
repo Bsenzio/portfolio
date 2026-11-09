@@ -14,7 +14,7 @@
   #notice[hidden], button[hidden] { display: none; }
   progress { width: min(60vw, 24rem); accent-color: #ffc759; }
   button { color: #fff3d2; background: #2c1c43; border: 1px solid #ffc759; border-radius: .35rem; padding: .35rem .65rem; cursor: pointer; }
-  #fullscreen { position: absolute; top: .6rem; right: .6rem; opacity: .88; }
+  #fullscreen { position: absolute; top: .6rem; left: 50%; transform: translateX(-50%); opacity: .88; }
 </style>
 </head>
 <body>
@@ -33,7 +33,7 @@
   const progress = document.getElementById('progress');
   const fullscreen = document.getElementById('fullscreen');
   const retry = document.getElementById('retry');
-  const config = {"dataUrl":"Build/Toroko11.data.unityweb","frameworkUrl":"Build/Toroko11.framework.js.unityweb","codeUrl":"Build/Toroko11.wasm.unityweb","streamingAssetsUrl":"StreamingAssets","companyName":"RetroArcDo","productName":"トロッコ大冒険","productVersion":"1.1.0"};
+  const config = {"dataUrl":"Build/Toroko12.data.unityweb","frameworkUrl":"Build/Toroko12.framework.js.unityweb","codeUrl":"Build/Toroko12.wasm.unityweb","streamingAssetsUrl":"StreamingAssets","companyName":"RetroArcDo","productName":"トロッコ大冒険","productVersion":"1.2.0"};
   const script = document.createElement('script');
   const fail = () => {
     document.documentElement.dataset.gameState = 'error';
@@ -42,7 +42,7 @@
     retry.hidden = false;
   };
   config.showBanner = (_, type) => { if (type === 'error') fail(); };
-  script.src = "Build/Toroko11.loader.js";
+  script.src = "Build/Toroko12.loader.js";
   script.onerror = fail;
   script.onload = () => {
     createUnityInstance(canvas, config, value => { progress.value = value; })

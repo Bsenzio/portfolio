@@ -821,7 +821,7 @@
                 // Trusted demos are registered here, independently of translated TXT content.
                 const demos = {
                     'toroko-daibouken-mcp': {
-                        src: 'assets/games/toroko-daibouken/index.html',
+                        src: 'assets/games/toroko-daibouken/index.html?v=1.2.0',
                         title: 'トロッコ大冒険 — ブラウザー版',
                         aspectRatio: '16 / 9',
                         allowFullscreen: true,
