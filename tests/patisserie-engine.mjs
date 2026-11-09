@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {Puzzle,COLS,ROWS} from '../assets/games/patisserie/engine.mjs';
+const g=new Puzzle(()=>.4);
+assert.equal(g.board.length,ROWS);assert.equal(g.board[0].length,COLS);
+const types=[g.piece.color,g.next.color];for(let i=0;i<5;i++)types.push(g.take().color);assert.equal(new Set(types).size,7);
+g.reset();g.piece={cells:[[1,1],[1,1]],color:1,x:0,y:0};assert.equal(g.move(-1,0),false);assert.equal(g.piece.x,0);
+g.board[ROWS-1]=Array(COLS).fill(2);g.board[ROWS-1][0]=0;g.board[ROWS-1][1]=0;
+g.piece={cells:[[1,1]],color:1,x:0,y:0};assert.equal(g.drop(),1);assert.equal(g.lines,1);assert.equal(g.score,100+2*(ROWS-1));assert.ok(g.board[ROWS-1].every(v=>v===0));
+g.reset();for(let i=ROWS-4;i<ROWS;i++)g.board[i]=Array(COLS).fill(1);assert.equal(g.clearLines(),4);assert.equal(g.score,800);assert.equal(g.lines,4);
+g.reset();g.lines=9;g.board[ROWS-1].fill(1);g.clearLines();assert.equal(g.level,2);assert.ok(g.delay<850);
+g.reset();g.piece={cells:[[1],[1],[1],[1]],color:1,x:9,y:0};assert.equal(g.rotate(),true);assert.ok(g.fits(g.piece.cells,g.piece.x,g.piece.y));
+g.reset();g.board[0].fill(1);g.spawn();assert.equal(g.over,true);const score=g.score;g.drop();assert.equal(g.score,score);g.reset();assert.equal(g.over,false);assert.equal(g.lines,0);
+console.log('PASS: seven-piece bag, boundaries, wall rotation, hard drop, line clear, four-line scoring, level progression, game over, restart.');
