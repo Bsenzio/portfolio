@@ -19,6 +19,20 @@
     // Existing content arrays and JSON contentUrl files remain supported.
     const blogPosts = [
         {
+            id: 7,
+            slug: 'toroko-daibouken-mcp',
+            defaultLanguage: 'ja',
+            created: '2026-11-08',
+            featured: true,
+            title: 'トロッコ大冒険を作ってみた｜妻のスケッチから生まれたゲーム・第2回',
+            image: 'toroko-daibouken.webp',
+            topic: 'ゲーム開発',
+            keywords: ['RetroArcDo', 'Unity', 'Meshy', 'MCP', 'ゲーム開発'],
+            excerpt: '妻が描いたトロッコのアイデアを、MeshyとUnityをつないで遊べる試作品にしました。記事の下でブラウザー版を試せます。',
+            url: 'blog.html#toroko-daibouken-mcp',
+            contentUrl: 'assets/blog/stories/toroko-daibouken-mcp.txt',
+        },
+        {
             id: 6,
             slug: 'retroarcdo-four-game-ideas',
             defaultLanguage: 'ja',
@@ -806,6 +820,12 @@
                 activePost = post;
                 // Trusted demos are registered here, independently of translated TXT content.
                 const demos = {
+                    'toroko-daibouken-mcp': {
+                        src: 'assets/games/toroko-daibouken/index.html',
+                        title: 'トロッコ大冒険 — ブラウザー版',
+                        aspectRatio: '16 / 9',
+                        allowFullscreen: true,
+                    },
                     'retroarcdo-four-game-ideas': {
                         src: 'assets/games/patisserie/index.html',
                         title: 'Pâtisserie Puzzle — playable sweets puzzle',
@@ -821,6 +841,14 @@
                     frame.loading = 'lazy';
                     frame.setAttribute('sandbox', 'allow-scripts allow-same-origin');
                     frame.style.cssText = 'display:block;width:100%;height:1020px;border:0;margin-top:32px;border-radius:20px;';
+                    if (demos[post.slug].aspectRatio) {
+                        frame.style.height = 'auto';
+                        frame.style.aspectRatio = demos[post.slug].aspectRatio;
+                    }
+                    if (demos[post.slug].allowFullscreen) {
+                        frame.allow = 'fullscreen; gamepad';
+                        frame.allowFullscreen = true;
+                    }
                     demo.append(frame);
                     content.after(demo);
                 }

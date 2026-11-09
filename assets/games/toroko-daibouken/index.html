@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>トロッコ大冒険</title>
+<style>
+  :root { color-scheme: dark; background: #161027; color: #fff3d2; font-family: system-ui, sans-serif; }
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  main { position: relative; width: 100%; height: 100dvh; min-height: 160px; overflow: hidden; background: #161027; }
+  canvas { display: block; width: 100%; height: 100%; outline: none; touch-action: none; }
+  #notice { position: absolute; inset: 0; display: grid; place-content: center; gap: .75rem; text-align: center; background: #161027; }
+  #notice[hidden], button[hidden] { display: none; }
+  progress { width: min(60vw, 24rem); accent-color: #ffc759; }
+  button { color: #fff3d2; background: #2c1c43; border: 1px solid #ffc759; border-radius: .35rem; padding: .35rem .65rem; cursor: pointer; }
+  #fullscreen { position: absolute; top: .6rem; right: .6rem; opacity: .88; }
+</style>
+</head>
+<body>
+<main>
+  <canvas id="game" width="1280" height="720" tabindex="0" aria-label="トロッコ大冒険のゲーム画面"></canvas>
+  <div id="notice" role="status">
+    <div id="message">洞窟を読み込んでいます…</div>
+    <progress id="progress" max="1" value="0" aria-label="読み込みの進み具合"></progress>
+    <button id="retry" type="button" hidden>再読み込み</button>
+  </div>
+  <button id="fullscreen" type="button" hidden>全画面</button>
+</main>
+<script>
+  const canvas = document.getElementById('game');
+  const notice = document.getElementById('notice');
+  const progress = document.getElementById('progress');
+  const fullscreen = document.getElementById('fullscreen');
+  const retry = document.getElementById('retry');
+  const config = {"dataUrl":"Build/WebGL.data.unityweb","frameworkUrl":"Build/WebGL.framework.js.unityweb","codeUrl":"Build/WebGL.wasm.unityweb","streamingAssetsUrl":"StreamingAssets","companyName":"RetroArcDo","productName":"トロッコ大冒険","productVersion":"1.0"};
+  const script = document.createElement('script');
+  const fail = () => {
+    document.documentElement.dataset.gameState = 'error';
+    document.getElementById('message').textContent = 'ゲームを起動できませんでした。';
+    progress.hidden = true;
+    retry.hidden = false;
+  };
+  config.showBanner = (_, type) => { if (type === 'error') fail(); };
+  script.src = "Build/WebGL.loader.js";
+  script.onerror = fail;
+  script.onload = () => {
+    createUnityInstance(canvas, config, value => { progress.value = value; })
+      .then(game => {
+        window.torokoPlayer = game;
+        document.documentElement.dataset.gameState = 'ready';
+        notice.hidden = true;
+        fullscreen.hidden = !document.fullscreenEnabled;
+        fullscreen.addEventListener('click', () => {
+          game.SetFullscreen(1);
+          canvas.focus();
+        });
+      })
+      .catch(fail);
+  };
+  retry.addEventListener('click', () => location.reload());
+  canvas.addEventListener('pointerdown', () => canvas.focus());
+  document.body.append(script);
+</script>
+</body>
+</html>
