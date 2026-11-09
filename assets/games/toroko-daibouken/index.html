@@ -33,7 +33,7 @@
   const progress = document.getElementById('progress');
   const fullscreen = document.getElementById('fullscreen');
   const retry = document.getElementById('retry');
-  const config = {"dataUrl":"Build/WebGL.data.unityweb","frameworkUrl":"Build/WebGL.framework.js.unityweb","codeUrl":"Build/WebGL.wasm.unityweb","streamingAssetsUrl":"StreamingAssets","companyName":"RetroArcDo","productName":"トロッコ大冒険","productVersion":"1.0"};
+  const config = {"dataUrl":"Build/Toroko11.data.unityweb","frameworkUrl":"Build/Toroko11.framework.js.unityweb","codeUrl":"Build/Toroko11.wasm.unityweb","streamingAssetsUrl":"StreamingAssets","companyName":"RetroArcDo","productName":"トロッコ大冒険","productVersion":"1.1.0"};
   const script = document.createElement('script');
   const fail = () => {
     document.documentElement.dataset.gameState = 'error';
@@ -42,7 +42,7 @@
     retry.hidden = false;
   };
   config.showBanner = (_, type) => { if (type === 'error') fail(); };
-  script.src = "Build/WebGL.loader.js";
+  script.src = "Build/Toroko11.loader.js";
   script.onerror = fail;
   script.onload = () => {
     createUnityInstance(canvas, config, value => { progress.value = value; })
