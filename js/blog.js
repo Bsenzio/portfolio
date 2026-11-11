@@ -19,6 +19,20 @@
     // Existing content arrays and JSON contentUrl files remain supported.
     const blogPosts = [
         {
+            id: 8,
+            slug: 'redt-renewable-energy-digital-twins',
+            defaultLanguage: 'en',
+            created: '2026-11-10',
+            featured: true,
+            title: 'REDT — Digital Twins for Renewable Energy Systems',
+            image: 'redt-solar-simulator.webp',
+            topic: 'Research',
+            keywords: ['REDT', 'Digital Twins', 'Renewable Energy', 'Solar Panels', 'Unity', 'Yamagata University'],
+            excerpt: 'Connecting physical solar-panel measurements with climate scenarios and simulation at Asharif Laboratory, Yamagata University.',
+            url: 'blog.html#redt-renewable-energy-digital-twins',
+            contentUrl: 'assets/blog/stories/redt-renewable-energy-digital-twins.txt',
+        },
+        {
             id: 7,
             slug: 'toroko-daibouken-mcp',
             defaultLanguage: 'ja',
@@ -414,6 +428,9 @@
                             alt: image[1],
                             caption: image[4] || '',
                         });
+                    } else if (/^https?:\/\/\S+$/.test(trimmed) && safeUrl(trimmed)) {
+                        flush();
+                        blocks.push({ type: 'link', href: trimmed, text: trimmed });
                     } else if (/^#{1,3}\s+/.test(line)) {
                         flush();
                         blocks.push({ type: 'heading', text: line.replace(/^#{1,3}\s+/, '') });

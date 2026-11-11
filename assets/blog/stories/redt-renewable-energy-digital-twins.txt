@@ -1,0 +1,46 @@
+## Connecting experiments with digital models
+
+I am developing REDT (Renewable Energy Digital Twins), a project that connects measurements from physical devices with tools for analysis and simulation. The work is part of Asharif Laboratory (アシャリフ研究室) at Yamagata University, and the current focus is a digital twin for solar panels.
+
+The aim is to reproduce climatic conditions through data-driven scenarios and models, then study how those conditions affect physical solar-panel systems. By comparing simulated responses with experimental measurements, I want to understand where the models agree with the hardware and where they need refinement.
+
+![The virtual solar test site in REDT](assets/blog/titleimg/redt-solar-simulator.webp "The REDT solar simulator: a virtual environment for comparing models with physical measurements.")
+
+## From measurements to simulation
+
+The workflow connects four elements.
+
+Physical twin. A device equipped with a solar panel and sensors collects environmental and electrical measurements.
+
+REDT Data Logger. A local computer receives the measurements and provides tools to record, visualize, and replay them.
+
+REDT Signal Studio. Measured time series can be analyzed, models fitted, and observed or synthetic scenarios prepared for simulation.
+
+Virtual twin. A simulator developed in Unity recreates conditions so that the virtual response can be compared with measurements from the physical device.
+
+The comparison closes the loop: differences between measured and simulated behavior help guide the next model adjustment or experiment.
+
+## A solar environment for experimentation
+
+The solar simulator lets users adjust panel layout and tilt, modify environmental conditions, and inspect variables through graphs and heatmaps. It also provides views of the physical twin and the simulated solar field.
+
+My intended use is to replay measured conditions and explore climatic scenarios under controlled settings. This provides a way to investigate solar-panel behavior and contrast model predictions with experimental results as the project develops.
+
+The project website and main controls are available in English and Japanese. The browser version supports sample data and local files; live UDP reception is available in the desktop version.
+
+## Expanding beyond solar energy
+
+REDT is still in development. Planned modules will extend the environment to small wind turbines and thermoelectric generators based on the Seebeck effect.
+
+The longer-term goal is to study several renewable energy sources within the same measurement, analysis, and simulation workflow, and to keep testing the models against physical experiments.
+
+## Explore REDT
+
+Project website:
+https://bsenzio.github.io/redt_simulator/
+
+Open the solar simulator:
+https://bsenzio.github.io/redt_simulator/play.html
+
+Repository and downloads:
+https://github.com/Bsenzio/redt_simulator
